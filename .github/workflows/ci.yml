@@ -63,5 +63,5 @@ jobs:
         if: ${{ github.event_name == 'push' }}
         uses: JamesIves/github-pages-deploy-action@4.6.0
         with:
-        branch: gh-pages
-        folder: gh-pages     
+          branch: gh-pages
+          folder: gh-pages     

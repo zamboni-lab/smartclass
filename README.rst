@@ -132,7 +132,7 @@ TODO show the most useful thing the CLI does! The CLI will have documentation au
 👐 Contributing
 ---------------
 Contributions, whether filing an issue, making a pull request, or forking, are appreciated.
-See `CONTRIBUTING.md <https://gitlab.ethz.ch/zambonilab/smartclass/blob/main/.github/CONTRIBUTING.md>`_ for more information on getting involved.
+See `CONTRIBUTING.md <https://github.com/zamboni-lab/smartclass/blob/main/.github/CONTRIBUTING.md>`_ for more information on getting involved.
 
 👋 Attribution
 --------------
@@ -172,7 +172,7 @@ To install in development mode, use the following:
 
 .. code-block:: sh
 
-    git clone git+https://gitlab.ethz.ch/zambonilab/smartclass.git
+    git clone git+https://github.com/zamboni-lab/smartclass.git
     cd smartclass
     pip install -e .
 
@@ -185,7 +185,7 @@ run reproducibly with:
 
     tox
 
-Additionally, these tests are automatically re-run with each commit in a `GitHub Action <https://gitlab.ethz.ch/zambonilab/smartclass/actions?query=workflow%3ATests>`_.
+Additionally, these tests are automatically re-run with each commit in a `GitHub Action <https://github.com/zamboni-lab/smartclass/actions?query=workflow%3ATests>`_.
 
 📖 Building the Documentation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

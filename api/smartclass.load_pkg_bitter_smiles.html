@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>convert_list_of_dict &mdash; smartclass 0.0.1-dev documentation</title>
+  <title>load_pkg_bitter_smiles &mdash; smartclass 0.0.1-dev documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
@@ -23,8 +23,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="export_results" href="smartclass.export_results.html" />
-    <link rel="prev" title="combine_csv_files" href="smartclass.combine_csv_files.html" /> 
+    <link rel="next" title="load_pkg_chemical_hierarchy" href="smartclass.load_pkg_chemical_hierarchy.html" />
+    <link rel="prev" title="load_external_classes_file" href="smartclass.load_external_classes_file.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -57,13 +57,13 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../reference.html">Reference</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../reference.html#functions">Functions</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="smartclass.combine_csv_files.html">combine_csv_files</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">convert_list_of_dict</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#smartclass.convert_list_of_dict"><code class="docutils literal notranslate"><span class="pre">convert_list_of_dict()</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.convert_list_of_dict.html">convert_list_of_dict</a></li>
 <li class="toctree-l3"><a class="reference internal" href="smartclass.export_results.html">export_results</a></li>
 <li class="toctree-l3"><a class="reference internal" href="smartclass.load_external_classes_file.html">load_external_classes_file</a></li>
-<li class="toctree-l3"><a class="reference internal" href="smartclass.load_pkg_bitter_smiles.html">load_pkg_bitter_smiles</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">load_pkg_bitter_smiles</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#smartclass.load_pkg_bitter_smiles"><code class="docutils literal notranslate"><span class="pre">load_pkg_bitter_smiles()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="smartclass.load_pkg_chemical_hierarchy.html">load_pkg_chemical_hierarchy</a></li>
 <li class="toctree-l3"><a class="reference internal" href="smartclass.load_pkg_classes.html">load_pkg_classes</a></li>
 <li class="toctree-l3"><a class="reference internal" href="smartclass.load_pkg_data.html">load_pkg_data</a></li>
@@ -91,9 +91,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../reference.html">Reference</a></li>
-      <li class="breadcrumb-item active">convert_list_of_dict</li>
+      <li class="breadcrumb-item active">load_pkg_bitter_smiles</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/api/smartclass.convert_list_of_dict.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/api/smartclass.load_pkg_bitter_smiles.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -101,26 +101,18 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="convert-list-of-dict">
-<h1>convert_list_of_dict<a class="headerlink" href="#convert-list-of-dict" title="Link to this heading"></a></h1>
+  <section id="load-pkg-bitter-smiles">
+<h1>load_pkg_bitter_smiles<a class="headerlink" href="#load-pkg-bitter-smiles" title="Link to this heading"></a></h1>
 <dl class="py function">
-<dt class="sig sig-object py" id="smartclass.convert_list_of_dict">
-<span class="sig-name descname"><span class="pre">convert_list_of_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list_of_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><span class="pre">list</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">invert</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><span class="pre">dict</span></a></span></span><a class="reference internal" href="../_modules/smartclass/helpers/convert_list_of_dict.html#convert_list_of_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#smartclass.convert_list_of_dict" title="Link to this definition"></a></dt>
-<dd><p>Convert a list of dictionaries to a dictionary with possible inversion.</p>
+<dt class="sig sig-object py" id="smartclass.load_pkg_bitter_smiles">
+<span class="sig-name descname"><span class="pre">load_pkg_bitter_smiles</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="../_modules/smartclass/io/load_pkg_bitter_smiles.html#load_pkg_bitter_smiles"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#smartclass.load_pkg_bitter_smiles" title="Link to this definition"></a></dt>
+<dd><p>Load bitter SMILES data from the package file into a Polars DataFrame.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>list_of_dict</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><em>list</em></a>) – The list of dictionaries to convert.</p></li>
-<li><p><strong>key</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – The key.</p></li>
-<li><p><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – The value.</p></li>
-<li><p><strong>invert</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><em>bool</em></a>) – Flag to indicate whether to invert key and value.</p></li>
-</ul>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>DataFrame containing bitter SMILES.</p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A dictionary with given keys and values.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)">dict</a></p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>DataFrame</p>
 </dd>
 </dl>
 </dd></dl>
@@ -131,8 +123,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="smartclass.combine_csv_files.html" class="btn btn-neutral float-left" title="combine_csv_files" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="smartclass.export_results.html" class="btn btn-neutral float-right" title="export_results" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="smartclass.load_external_classes_file.html" class="btn btn-neutral float-left" title="load_external_classes_file" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="smartclass.load_pkg_chemical_hierarchy.html" class="btn btn-neutral float-right" title="load_pkg_chemical_hierarchy" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

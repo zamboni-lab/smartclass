@@ -116,19 +116,15 @@
         <span class="n">df</span> <span class="o">=</span> <span class="n">polars</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="n">separator</span><span class="p">)</span>
         <span class="n">dfs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
 
-    <span class="c1"># Merge all DataFrames using a common set of columns</span>
-    <span class="n">common_columns</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">dfs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+    <span class="c1"># Create a merged DataFrame</span>
+    <span class="n">concatenated_df</span> <span class="o">=</span> <span class="n">dfs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
+    <span class="c1"># Iterate over the remaining DataFrames and concatenate them row-wise</span>
     <span class="k">for</span> <span class="n">df</span> <span class="ow">in</span> <span class="n">dfs</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
-        <span class="n">common_columns</span> <span class="o">&amp;=</span> <span class="nb">set</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
-
-    <span class="c1"># Create a merged DataFrame by joining on common columns</span>
-    <span class="n">merged_df</span> <span class="o">=</span> <span class="n">dfs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="k">for</span> <span class="n">df</span> <span class="ow">in</span> <span class="n">dfs</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
-        <span class="n">merged_df</span> <span class="o">=</span> <span class="n">merged_df</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">common_columns</span><span class="p">),</span> <span class="n">how</span><span class="o">=</span><span class="s2">&quot;outer&quot;</span><span class="p">)</span>
+        <span class="n">concatenated_df</span> <span class="o">=</span> <span class="n">concatenated_df</span><span class="o">.</span><span class="n">vstack</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
 
     <span class="c1"># Export the merged DataFrame as a CSV file</span>
-    <span class="n">merged_df</span><span class="o">.</span><span class="n">write_csv</span><span class="p">(</span><span class="n">output_file</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="n">separator</span><span class="p">)</span></div>
+    <span class="n">concatenated_df</span><span class="o">.</span><span class="n">write_csv</span><span class="p">(</span><span class="n">output_file</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="n">separator</span><span class="p">)</span></div>
 
 
 
@@ -140,9 +136,8 @@
     <span class="n">input_files</span> <span class="o">=</span> <span class="p">[</span>
         <span class="s2">&quot;scratch/wikidata_classes_cxsmiles.tsv&quot;</span><span class="p">,</span>
         <span class="s2">&quot;scratch/wikidata_classes_smarts.tsv&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;scratch/wikidata_classes_smiles.tsv&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;scratch/wikidata_classes_smiles_canonical.tsv&quot;</span><span class="p">,</span>
         <span class="s2">&quot;scratch/wikidata_classes_smiles_isomeric.tsv&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;scratch/wikidata_classes_taxonomy.tsv&quot;</span><span class="p">,</span>
     <span class="p">]</span>
     <span class="n">output_file</span> <span class="o">=</span> <span class="s2">&quot;scratch/wikidata_classes_full.tsv&quot;</span>
 

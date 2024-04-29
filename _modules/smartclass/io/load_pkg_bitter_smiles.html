@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>smartclass.io.load_external_classes_file &mdash; smartclass 0.0.1-dev documentation</title>
+  <title>smartclass.io.load_pkg_bitter_smiles &mdash; smartclass 0.0.1-dev documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
@@ -69,7 +69,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
-      <li class="breadcrumb-item active">smartclass.io.load_external_classes_file</li>
+      <li class="breadcrumb-item active">smartclass.io.load_pkg_bitter_smiles</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -78,48 +78,42 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <h1>Source code for smartclass.io.load_external_classes_file</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Load a Polars DataFrame from an external tsv file with chemical classes.&quot;&quot;&quot;</span>
+  <h1>Source code for smartclass.io.load_pkg_bitter_smiles</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Load bitter SMILES data from the package file into a Polars DataFrame.&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">import</span> <span class="nn">polars</span>
-<span class="kn">from</span> <span class="nn">polars</span> <span class="kn">import</span> <span class="n">DataFrame</span>  <span class="c1"># Because of type</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TYPE_CHECKING</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;load_external_classes_file&quot;</span><span class="p">]</span>
+<span class="kn">from</span> <span class="nn">smartclass.io.load_pkg_file</span> <span class="kn">import</span> <span class="n">load_pkg_file</span>
+
+<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">polars</span> <span class="kn">import</span> <span class="n">DataFrame</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;load_pkg_classes&quot;</span><span class="p">]</span>
 
 
-<div class="viewcode-block" id="load_external_classes_file">
-<a class="viewcode-back" href="../../../api/smartclass.load_external_classes_file.html#smartclass.load_external_classes_file">[docs]</a>
-<span class="k">def</span> <span class="nf">load_external_classes_file</span><span class="p">(</span>
-    <span class="n">file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">id_name</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;class&quot;</span><span class="p">,</span> <span class="n">smarts_name</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;structure&quot;</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
+<div class="viewcode-block" id="load_pkg_bitter_smiles">
+<a class="viewcode-back" href="../../../api/smartclass.load_pkg_bitter_smiles.html#smartclass.load_pkg_bitter_smiles">[docs]</a>
+<span class="k">def</span> <span class="nf">load_pkg_bitter_smiles</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Load a Polars DataFrame from an external tsv file with chemical classes.</span>
+<span class="sd">    Load bitter SMILES data from the package file into a Polars DataFrame.</span>
 
-<span class="sd">    :param file: The name of the file to load.</span>
-<span class="sd">    :type file: str</span>
-
-<span class="sd">    :param id_name: The name of the column containing ids.</span>
-<span class="sd">    :type id_name: str</span>
-
-<span class="sd">    :param smarts_name: The name of the column containing SMARTS.</span>
-<span class="sd">    :type smarts_name: str</span>
-
-<span class="sd">    :returns: A Polars DataFrame containing the loaded data.</span>
+<span class="sd">    :returns: DataFrame containing bitter SMILES.</span>
 <span class="sd">    :rtype: DataFrame</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">polars</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">truncate_ragged_lines</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">(</span>
-        <span class="p">{</span>
-            <span class="n">id_name</span><span class="p">:</span> <span class="s2">&quot;class_id&quot;</span><span class="p">,</span>
-            <span class="n">smarts_name</span><span class="p">:</span> <span class="s2">&quot;class_smarts&quot;</span><span class="p">,</span>
-        <span class="p">}</span>
-    <span class="p">)</span></div>
+    <span class="c1"># Was obtained using</span>
+    <span class="c1"># SELECT ?smiles WHERE {</span>
+    <span class="c1">#   ?structure wdt:P2017 ?smiles;</span>
+    <span class="c1">#     wdt:P1552 wd:Q1517187.</span>
+    <span class="c1"># }</span>
+    <span class="c1"># LIMIT 100</span>
+    <span class="k">return</span> <span class="n">load_pkg_file</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="s2">&quot;bitter_smiles.tsv&quot;</span><span class="p">)</span></div>
 
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">load_external_classes_file</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="s2">&quot;scratch/wikidata_classes_smarts.tsv&quot;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">load_pkg_classes</span><span class="p">()</span>
 </pre></div>
 
            </div>

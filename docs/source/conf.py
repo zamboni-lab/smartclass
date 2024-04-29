@@ -67,7 +67,7 @@ extensions = [
     "sphinx_click.ext",
     "sphinx_automodapi.automodapi",
     "sphinx_automodapi.smart_resolver",
-    #"sphinxcontrib.autodoc_pydantic",
+    "sphinxcontrib.autodoc_pydantic",
     # 'texext',
 ]
 numpydoc_show_class_members = False

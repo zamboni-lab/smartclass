@@ -1,3 +1,6 @@
+autodoc_pydantic
 sphinx
 sphinx_click
 sphinx_automodapi
+sphinx-rtd-theme
+sphinxcontrib-napoleon

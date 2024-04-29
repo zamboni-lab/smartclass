@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Command Line Interface &mdash; smartclass 0.0.1-dev documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="_static/autodoc_pydantic.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=03180e26"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Reference" href="reference.html" />
+    <link rel="prev" title="Usage" href="usage.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            smartclass
+          </a>
+              <div class="version">
+                0.0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Command Line Interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#smartclass">smartclass</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#smartclass-combinecsvfiles">combinecsvfiles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#smartclass-getlatestchembl">getlatestchembl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#smartclass-loadpkgdata">loadpkgdata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#smartclass-querywikidata">querywikidata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#smartclass-searchclasses">searchclasses</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="reference.html">Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">smartclass</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Command Line Interface</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/cli.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="command-line-interface">
+<h1>Command Line Interface<a class="headerlink" href="#command-line-interface" title="Link to this heading"></a></h1>
+<p>smartclass automatically installs the command <code class="code docutils literal notranslate"><span class="pre">smartclass</span></code>.
+See <code class="code docutils literal notranslate"><span class="pre">smartclass</span> <span class="pre">--help</span></code> for usage details.</p>
+<section id="smartclass">
+<h2>smartclass<a class="headerlink" href="#smartclass" title="Link to this heading"></a></h2>
+<p>CLI for smartclass.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>smartclass<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span><span class="w"> </span>COMMAND<span class="w"> </span><span class="o">[</span>ARGS<span class="o">]</span>...
+</pre></div>
+</div>
+<p class="rubric">Options</p>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-smartclass-version">
+<span class="sig-name descname"><span class="pre">--version</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-smartclass-version" title="Link to this definition"></a></dt>
+<dd><p>Show the version and exit.</p>
+</dd></dl>
+
+<section id="smartclass-combinecsvfiles">
+<h3>combinecsvfiles<a class="headerlink" href="#smartclass-combinecsvfiles" title="Link to this heading"></a></h3>
+<p>CLI command that calls combine_csv_files function.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>smartclass<span class="w"> </span>combinecsvfiles<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span>
+</pre></div>
+</div>
+<p class="rubric">Options</p>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-smartclass-combinecsvfiles-i">
+<span id="cmdoption-smartclass-combinecsvfiles-input-file"></span><span class="sig-name descname"><span class="pre">-i</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--input-file</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;input_file&gt;</span></span><a class="headerlink" href="#cmdoption-smartclass-combinecsvfiles-i" title="Link to this definition"></a></dt>
+<dd><p><strong>Required</strong> Input file.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-smartclass-combinecsvfiles-o">
+<span id="cmdoption-smartclass-combinecsvfiles-output"></span><span class="sig-name descname"><span class="pre">-o</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--output</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;output&gt;</span></span><a class="headerlink" href="#cmdoption-smartclass-combinecsvfiles-o" title="Link to this definition"></a></dt>
+<dd><p><strong>Required</strong> Output file.</p>
+</dd></dl>
+
+</section>
+<section id="smartclass-getlatestchembl">
+<h3>getlatestchembl<a class="headerlink" href="#smartclass-getlatestchembl" title="Link to this heading"></a></h3>
+<p>CLI command that calls get_latest_chembl function.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>smartclass<span class="w"> </span>getlatestchembl<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span>
+</pre></div>
+</div>
+</section>
+<section id="smartclass-loadpkgdata">
+<h3>loadpkgdata<a class="headerlink" href="#smartclass-loadpkgdata" title="Link to this heading"></a></h3>
+<p>CLI command that calls load_pkg_data function.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>smartclass<span class="w"> </span>loadpkgdata<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span>
+</pre></div>
+</div>
+</section>
+<section id="smartclass-querywikidata">
+<h3>querywikidata<a class="headerlink" href="#smartclass-querywikidata" title="Link to this heading"></a></h3>
+<p>CLI command that calls query_wikidata function.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>smartclass<span class="w"> </span>querywikidata<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span>
+</pre></div>
+</div>
+<p class="rubric">Options</p>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-smartclass-querywikidata-q">
+<span id="cmdoption-smartclass-querywikidata-query"></span><span class="sig-name descname"><span class="pre">-q</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--query</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;query&gt;</span></span><a class="headerlink" href="#cmdoption-smartclass-querywikidata-q" title="Link to this definition"></a></dt>
+<dd><p><strong>Required</strong> Query file.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-smartclass-querywikidata-o">
+<span id="cmdoption-smartclass-querywikidata-output"></span><span class="sig-name descname"><span class="pre">-o</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--output</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;output&gt;</span></span><a class="headerlink" href="#cmdoption-smartclass-querywikidata-o" title="Link to this definition"></a></dt>
+<dd><p><strong>Required</strong> Output file.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-smartclass-querywikidata-r">
+<span id="cmdoption-smartclass-querywikidata-remove_prefix"></span><span class="sig-name descname"><span class="pre">-r</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--remove_prefix</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;remove_prefix&gt;</span></span><a class="headerlink" href="#cmdoption-smartclass-querywikidata-r" title="Link to this definition"></a></dt>
+<dd><p>Remove prefix.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-smartclass-querywikidata-t">
+<span id="cmdoption-smartclass-querywikidata-transform"></span><span class="sig-name descname"><span class="pre">-t</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--transform</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;transform&gt;</span></span><a class="headerlink" href="#cmdoption-smartclass-querywikidata-t" title="Link to this definition"></a></dt>
+<dd><p>Transform to apply.</p>
+</dd></dl>
+
+</section>
+<section id="smartclass-searchclasses">
+<h3>searchclasses<a class="headerlink" href="#smartclass-searchclasses" title="Link to this heading"></a></h3>
+<p>CLI command that calls search_classes function.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>smartclass<span class="w"> </span>searchclasses<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span>
+</pre></div>
+</div>
+<p class="rubric">Options</p>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-smartclass-searchclasses-c">
+<span id="cmdoption-smartclass-searchclasses-classes-file"></span><span class="sig-name descname"><span class="pre">-c</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--classes-file</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;classes_file&gt;</span></span><a class="headerlink" href="#cmdoption-smartclass-searchclasses-c" title="Link to this definition"></a></dt>
+<dd><p>Input file (classes).</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-smartclass-searchclasses-d">
+<span id="cmdoption-smartclass-searchclasses-classes-name-id"></span><span class="sig-name descname"><span class="pre">-d</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--classes-name-id</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;classes_name_id&gt;</span></span><a class="headerlink" href="#cmdoption-smartclass-searchclasses-d" title="Link to this definition"></a></dt>
+<dd><p>Name of the ID column in the classes file.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-smartclass-searchclasses-e">
+<span id="cmdoption-smartclass-searchclasses-classes-name-smarts"></span><span class="sig-name descname"><span class="pre">-e</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--classes-name-smarts</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;classes_name_smarts&gt;</span></span><a class="headerlink" href="#cmdoption-smartclass-searchclasses-e" title="Link to this definition"></a></dt>
+<dd><p>Name of the SMARTS column in the classes file.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-smartclass-searchclasses-f">
+<span id="cmdoption-smartclass-searchclasses-include-hierarchy"></span><span class="sig-name descname"><span class="pre">-f</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--include-hierarchy</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;include_hierarchy&gt;</span></span><a class="headerlink" href="#cmdoption-smartclass-searchclasses-f" title="Link to this definition"></a></dt>
+<dd><p>Use a chemical hierarchy to go faster.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-smartclass-searchclasses-i">
+<span id="cmdoption-smartclass-searchclasses-input-smiles"></span><span class="sig-name descname"><span class="pre">-i</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--input-smiles</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;input_smiles&gt;</span></span><a class="headerlink" href="#cmdoption-smartclass-searchclasses-i" title="Link to this definition"></a></dt>
+<dd><p>Input file (SMILES).</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-smartclass-searchclasses-s">
+<span id="cmdoption-smartclass-searchclasses-smiles"></span><span class="sig-name descname"><span class="pre">-s</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--smiles</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;smiles&gt;</span></span><a class="headerlink" href="#cmdoption-smartclass-searchclasses-s" title="Link to this definition"></a></dt>
+<dd><p>(List of) SMILES string(s)</p>
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="usage.html" class="btn btn-neutral float-left" title="Usage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="reference.html" class="btn btn-neutral float-right" title="Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Adriano Rutz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

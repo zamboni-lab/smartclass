@@ -56,7 +56,7 @@ jobs:
           poetry run coverage report
       - name: Build documentation
         run: |
-          poetry install --extras docs
+          poetry run sphinx-quickstart
           mkdir gh-pages
           touch gh-pages/.nojekyll
           cd docs/source

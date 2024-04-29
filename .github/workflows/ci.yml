@@ -56,7 +56,7 @@ jobs:
           poetry run coverage report
       - name: Build documentation
         run: |
-          poetry run python3 -m pip install sphinx
+          poetry run python3 -m pip install -r docs/requirements.in
           mkdir gh-pages
           touch gh-pages/.nojekyll
           cd docs/source

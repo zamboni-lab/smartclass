@@ -1,0 +1,14 @@
+#+ summary: Chemicals with isomeric SMILES
+#+ description: Chemicals with isomeric SMILES
+#+ endpoint: https://query.wikidata.org/bigdata/namespace/wdq/sparql
+#+ pagination: 100
+#+ method: GET
+#+ tags:
+#+   - Chemicals
+
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX hint: <http://www.bigdata.com/queryHints#>
+#title: Chemicals with isomeric SMILES
+SELECT * WHERE {
+    ?structure wdt:P2017 ?smiles_isomeric. hint:Prior hint:rangeSafe TRUE.
+}

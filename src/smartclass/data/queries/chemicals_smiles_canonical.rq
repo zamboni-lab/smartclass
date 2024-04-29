@@ -1,0 +1,14 @@
+#+ summary: Chemicals with canonical SMILES
+#+ description: Chemicals with canonical SMILES
+#+ endpoint: https://query.wikidata.org/bigdata/namespace/wdq/sparql
+#+ pagination: 100
+#+ method: GET
+#+ tags:
+#+   - Chemicals
+
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX hint: <http://www.bigdata.com/queryHints#>
+#title: Chemicals with canonical SMILES
+SELECT * WHERE {
+    ?structure wdt:P233 ?smiles_canonical. hint:Prior hint:rangeSafe TRUE.
+}

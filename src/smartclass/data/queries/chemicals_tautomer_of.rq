@@ -1,0 +1,14 @@
+#+ summary: Which pairs of tautomers are present on Wikidata?
+#+ description: Which pairs of tautomers are present on Wikidata?
+#+ endpoint: https://query.wikidata.org/bigdata/namespace/wdq/sparql
+#+ pagination: 100
+#+ method: GET
+#+ tags:
+#+   - Chemicals
+
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX hint: <http://www.bigdata.com/queryHints#>
+#title: Which pairs of tautomers are present on Wikidata?
+SELECT ?structure_1 ?structure_2 WHERE {
+  ?structure_1 wdt:P6185 ?structure_2. hint:Prior hint:rangeSafe TRUE.
+}

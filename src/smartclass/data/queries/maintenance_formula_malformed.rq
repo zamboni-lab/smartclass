@@ -1,0 +1,25 @@
+#+ summary: Chemicals with malformed chemical formula
+#+ description: Chemicals with malformed chemical formula
+#+ endpoint: https://query.wikidata.org/bigdata/namespace/wdq/sparql
+#+ pagination: 100
+#+ method: GET
+#+ tags:
+#+   - Chemicals
+#+   - Chemical formula
+#+   - Constraint
+
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX hint: <http://www.bigdata.com/queryHints#>
+#title: Chemicals with malformed chemical formula
+SELECT ?structure ?formula ?smiles WHERE {
+    VALUES ?classes {
+        wd:Q113145171
+        wd:Q59199015
+    }
+    ?structure wdt:P274 ?formula. hint:Prior hint:rangeSafe TRUE.
+    ?structure wdt:P233 ?smiles. hint:Prior hint:rangeSafe TRUE.
+    ?structure wdt:P31 ?classes. hint:Prior hint:runFirst TRUE.
+    wd:P274 wdt:P1793 ?constraint. hint:Prior hint:rangeSafe TRUE.
+    FILTER(REGEX(?constraint, ?formula))
+}

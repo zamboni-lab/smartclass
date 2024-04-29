@@ -1,0 +1,7 @@
+# TODO
+
+version: "3.8"
+services:
+  smartclass:
+    build:
+      context: .

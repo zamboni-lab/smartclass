@@ -1,0 +1,20 @@
+#+ summary: Which structures have an isomeric SMILES (P2017) but do not have an InChI stereo (or isotope) layer?
+#+ description: Which structures have an isomeric SMILES (P2017) but do not have an InChI stereo (or isotope) layer?
+#+ endpoint: https://query.wikidata.org/bigdata/namespace/wdq/sparql
+#+ pagination: 100
+#+ method: GET
+#+ tags:
+#+   - Maintenance
+
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX hint: <http://www.bigdata.com/queryHints#>
+#title: Which structures have an isomeric SMILES (P2017) but do not have an InChI stereo (or isotope) layer?
+SELECT ?structure ?smiles ?inchi WHERE {
+    ?structure wdt:P2017 ?smiles. hint:Prior hint:rangeSafe TRUE.
+    ?structure wdt:P234 ?inchi. hint:Prior hint:rangeSafe TRUE.
+    FILTER(!REGEX(STR(?inchi), "/b"))
+    FILTER(!REGEX(STR(?inchi), "/t"))
+    FILTER(!REGEX(STR(?inchi), "/m"))
+    FILTER(!REGEX(STR(?inchi), "/s"))
+    FILTER(!REGEX(STR(?inchi), "/i"))
+}

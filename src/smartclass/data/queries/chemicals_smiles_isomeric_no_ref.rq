@@ -1,0 +1,27 @@
+#+ summary: Chemicals with isomeric SMILES without ref
+#+ description: Chemicals with isomeric SMILES without ref
+#+ endpoint: https://query.wikidata.org/bigdata/namespace/wdq/sparql
+#+ pagination: 100
+#+ method: GET
+#+ tags:
+#+   - Chemicals
+
+# PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
+# PREFIX pr: <http://www.wikidata.org/prop/reference/>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX hint: <http://www.bigdata.com/queryHints#>
+#title: Chemicals with isomeric SMILES without ref
+SELECT * WHERE {
+    ?structure p:P2017 ?stmt. hint:Prior hint:runFirst TRUE.
+    OPTIONAL { ?stmt prov:wasDerivedFrom ?ref. }
+    FILTER(!(BOUND(?ref)))
+    ?stmt ps:P2017 ?smiles_isomeric. hint:Prior hint:rangeSafe TRUE.
+}
+
+# SELECT * WHERE {
+#   ?structure p:P2017 ?stmt.
+#   ?stmt ps:P2017 ?smiles_isomeric.
+#   ?stmt (prov:wasDerivedFrom/pr:P887) wd:Q123137214.
+# }

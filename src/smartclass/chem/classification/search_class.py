@@ -51,7 +51,6 @@ def search_class(
     mols = sorted(tmols, key=lambda x: x[1].GetNumAtoms())
 
     for _, mol in mols[:max_results]:
-        smiles = Chem.MolToSmiles(mol)
         queries = enumerate_structures(
             structure=class_structure, tautomer_insensitive=tautomer_insensitive
         )
@@ -87,7 +86,7 @@ def search_class(
             {
                 "class_id": class_id,
                 "class_structure": class_structure,
-                "smiles": smiles,
+                "inchikey": Chem.inchi.MolToInchiKey(mol),
                 # "similarity": max_sim,
                 # "similarity": min_sim,
                 "matched_ab": num_ab,

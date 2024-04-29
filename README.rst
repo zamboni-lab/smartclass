@@ -185,7 +185,7 @@ run reproducibly with:
 
     tox
 
-Additionally, these tests are automatically re-run with each commit in a `GitHub Action <https://github.com/zamboni-lab/smartclass/actions?query=workflow%3ATests>`_.
+Additionally, these tests are automatically re-run with each commit in a `GitHub Action <https://github.com/zamboni-lab/smartclass/actions?query=workflow%3ACI>`_.
 
 📖 Building the Documentation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

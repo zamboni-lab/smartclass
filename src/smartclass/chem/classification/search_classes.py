@@ -124,10 +124,14 @@ def search_classes(
         for result in results:
             inchikey = result["inchikey"]
             matched_ab = result["matched_ab"]
-        
+
             if inchikey not in max_ab_per_inchikey or matched_ab > max_ab_per_inchikey[inchikey]:
                 max_ab_per_inchikey[inchikey] = matched_ab
-        results = [result for result in results if result["matched_ab"] == max_ab_per_inchikey[result["inchikey"]]]
+        results = [
+            result
+            for result in results
+            if result["matched_ab"] == max_ab_per_inchikey[result["inchikey"]]
+        ]
 
     # Export
     key = "class_id"

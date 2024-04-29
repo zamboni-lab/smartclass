@@ -58,6 +58,9 @@ rdkit = "^2023.9.6"
 requests = "^2.31.0"
 snakefmt = "^0.10.0"
 
+[tool.poetry.extras]
+docs = ["Sphinx", "sphinx-rtd-theme", "sphinxcontrib-napoleon"]
+
 [tool.poetry.group.dev.dependencies]
 black = "^24.4.2"
 coverage = "^7.5.0"

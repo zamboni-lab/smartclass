@@ -52,5 +52,16 @@ jobs:
         if: github.event_name != 'pull_request'
         run: |
           poetry run coverage report
-      - name: Sphinx docs to GitHub Pages
-        uses: uibcdf/action-sphinx-docs-to-gh-pages@v2.1.0            
+      - name: Build documentation
+        run: |
+          mkdir gh-pages
+          touch gh-pages/.nojekyll
+          cd docs/
+          poetry run sphinx-build -b html . _build
+          cp -r _build/* ../gh-pages/        
+      - name: Deploy documentation
+        if: ${{ github.event_name == 'push' }}
+        uses: JamesIves/github-pages-deploy-action@4.6.0
+        with:
+        branch: gh-pages
+        folder: gh-pages     

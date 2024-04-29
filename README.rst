@@ -201,8 +201,8 @@ extra specified in the `setup.cfg <setup.cfg>`_. ``sphinx`` plugins
 like ``texext`` can be added there. Additionally, they need to be added to the
 ``extensions`` list in `docs/source/conf.py <docs/source/conf.py>`_.
 
-### 📦 Making a Release
-
+📦 Making a Release
+~~~~~~~~~~~~~~~~~~~
 After installing the package in development mode and installing
 ``tox`` with ``pip install tox``, the commands for making a new release are contained within the ``finish`` environment
 in ``tox.ini``. Run the following from the shell:

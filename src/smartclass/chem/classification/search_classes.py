@@ -120,7 +120,7 @@ def search_classes(
 
     # Filter the results to keep only the result with the closest class for each unique InChIKey
     if closest_only:
-        max_ab_per_inchikey = {}
+        max_ab_per_inchikey: dict = {}
         for result in results:
             inchikey = result["inchikey"]
             matched_ab = result["matched_ab"]

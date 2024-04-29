@@ -1,0 +1,18 @@
+#+ summary: Stereoisomers with canonical SMILES
+#+ description: Stereoisomers with canonical SMILES
+#+ endpoint: https://query.wikidata.org/bigdata/namespace/wdq/sparql
+#+ pagination: 100
+#+ method: GET
+#+ tags:
+#+   - Stereoisomers
+
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX hint: <http://www.bigdata.com/queryHints#>
+#title: Stereoisomers with canonical SMILES
+SELECT ?structure ?smiles WHERE {
+    ?structure wdt:P31 wd:Q59199015. hint:Prior hint:runFirst TRUE.
+    ?structure wdt:P233 ?smiles. hint:Prior hint:rangeSafe TRUE.
+    OPTIONAL { ?structure wdt:P2017 ?isomeric. }
+    FILTER(!(BOUND(?isomeric)))
+}

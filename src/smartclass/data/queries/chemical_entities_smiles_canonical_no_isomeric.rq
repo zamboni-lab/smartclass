@@ -1,0 +1,18 @@
+#+ summary: Type of chemical entities with canonical SMILES
+#+ description: Type of chemical entities with canonical SMILES
+#+ endpoint: https://query.wikidata.org/bigdata/namespace/wdq/sparql
+#+ pagination: 100
+#+ method: GET
+#+ tags:
+#+   - Chemicals
+
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX hint: <http://www.bigdata.com/queryHints#>
+#title: Type of chemical entities with canonical SMILES
+SELECT ?structure ?smiles WHERE {
+    ?structure wdt:P31 wd:Q113145171. hint:Prior hint:runFirst TRUE.
+    ?structure wdt:P233 ?smiles. hint:Prior hint:rangeSafe TRUE.
+    OPTIONAL { ?structure wdt:P2017 ?isomeric. }
+    FILTER(!(BOUND(?isomeric)))
+}

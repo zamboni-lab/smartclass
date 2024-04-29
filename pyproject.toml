@@ -1,0 +1,167 @@
+[tool.poetry]
+name = "smartclass"
+version = "0.0.1"
+description = "Short Description TODO"
+authors = ["Adriano Rutz <rutz@imsb.biol.ethz.ch>"]
+license = "LICENSE"
+readme = "README.rst"
+homepage = "https://gitlab.ethz.ch/zambonilab/smartclass"
+repository = "https://gitlab.ethz.ch/zambonilab/smartclass"
+documentation = "https://smartclass.readthedocs.io"
+keywords = ["cheminformatics", "openData", "classification"]
+classifiers = [
+    "Development Status :: 1 - Planning",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Framework :: Pytest",
+    "Framework :: tox",
+    "Framework :: Sphinx",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3 :: Only"
+]
+exclude = [
+    ".bumpversion.cfg",
+    ".coveragerc",
+    ".flake8",
+    ".readthedocs.yml",
+    "CITATION.cff",
+    "docker-compose.yml",
+    "Dockerfile",
+    "poetry.lock",
+    "tox.ini"
+]
+include = [
+    "docs/source/*.py",
+    "docs/source/*.rst",
+    "docs/source/*.png",
+    "AUTHORS.rst",
+    "CHANGELOG.rst",
+    "LICENSE",
+    "README.rst",
+    "Snakefile"
+]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+chembl_downloader = "^0.4.5"
+click = "^8.1.7"
+importlib_resources = "^6.4.0"
+more_click = "^0.1.2"
+more_itertools = "^10.2.0"
+myopic-mces = "^1.0.0"
+polars = "^0.20.22"
+pystow = "^0.5.3"
+rdkit = "^2023.9.6"
+requests = "^2.31.0"
+snakefmt = "^0.10.0"
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.4.2"
+coverage = "^7.5.0"
+flake8 = "^7.0.0"
+importlib-metadata = "^7.1.0" 
+isort = "^5.13.2"
+pytest = "^8.2.0"
+pytest-asyncio = "^0.23.5"
+pytest-cov = "^5.0.0"
+pytest-mock = "^3.14.0"
+pytest-xdist = "^3.6.1"
+requests-mock = "^1.12.1"
+tox = "^4.15.0"
+
+[tool.poetry.scripts]
+smartclass = "smartclass.cli:main"
+
+
+[tool.black]
+line-length = 100
+target-version = ["py312"]
+
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 100
+include_trailing_comma = true
+reverse_relative = true
+
+
+[tool.pytest.ini_options]
+filterwarnings = [
+    "ignore:The module rdkit.Chem.MolStandardize:DeprecationWarning"
+]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+]
+
+
+[tool.doc8]
+max-line-length = 120
+
+
+[tool.flake8]
+# check  .flake8
+
+
+[tool.ruff]
+unfixable = [
+    # do not autoremove commented out code
+    "ERA",
+]
+target-version = "py312"
+line-length = 88
+extend-select = [
+    # flake8-bugbear
+    "B",
+    # flake8-comprehensions
+    "C4",
+    # flake8-eradicate/eradicate
+    "ERA",
+    # isort
+    "I",
+    # pep8-naming
+    "N",
+    # flake8-pie
+    "PIE",
+    # pygrep
+    "PGH",
+    # ruff checks
+    "RUF",
+    # flake8-simplify
+    "SIM",
+    # flake8-type-checking
+    "TCH",
+    # flake8-tidy-imports
+    "TID",
+    # pyupgrade
+    "UP",
+]
+
+[tool.ruff.flake8-tidy-imports]
+ban-relative-imports = "all"
+
+[tool.ruff.isort]
+force-single-line = true
+lines-between-types = 1
+lines-after-imports = 2
+known-first-party = ["poetry_plugin_export"]
+required-imports = ["from __future__ import annotations"]
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[options.entry_points]
+console_scripts = "smartclass = smartclass.cli:main"
+
+[options.packages.find]
+where = "src"
+
+[options.package_data]
+smartclass = "data/.*"
+
+[tool.setuptools_scm]

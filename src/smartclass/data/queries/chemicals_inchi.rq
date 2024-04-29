@@ -1,0 +1,14 @@
+#+ summary: Chemicals with InChI
+#+ description: Chemicals with InChI
+#+ endpoint: https://query.wikidata.org/bigdata/namespace/wdq/sparql
+#+ pagination: 100
+#+ method: GET
+#+ tags:
+#+   - Chemicals
+
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX hint: <http://www.bigdata.com/queryHints#>
+#title: Chemicals with InChI
+SELECT * WHERE {
+    ?structure wdt:P234 ?inchi. hint:Prior hint:rangeSafe TRUE.
+}

@@ -117,8 +117,17 @@ def search_classes(
     #         max_results=max_results,
     #     )
     # )
+
+    # Filter the results to keep only the result with the closest class for each unique InChIKey
     if closest_only:
-        results = [max(results, key=lambda x: x["matched_ab"])] if results else []
+        max_ab_per_inchikey = {}
+        for result in results:
+            inchikey = result["inchikey"]
+            matched_ab = result["matched_ab"]
+        
+            if inchikey not in max_ab_per_inchikey or matched_ab > max_ab_per_inchikey[inchikey]:
+                max_ab_per_inchikey[inchikey] = matched_ab
+        results = [result for result in results if result["matched_ab"] == max_ab_per_inchikey[result["inchikey"]]]
 
     # Export
     key = "class_id"

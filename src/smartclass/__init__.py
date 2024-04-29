@@ -21,6 +21,7 @@ from smartclass.helpers import convert_list_of_dict  # noqa:F401
 # from smartclass.helpers import get_request
 from smartclass.io import export_results  # noqa:F401
 from smartclass.io import load_external_classes_file  # noqa:F401
+from smartclass.io import load_pkg_bitter_smiles  # noqa:F401
 from smartclass.io import load_pkg_chemical_hierarchy  # noqa:F401
 from smartclass.io import load_pkg_classes  # noqa:F401
 from smartclass.io import load_pkg_data  # noqa:F401

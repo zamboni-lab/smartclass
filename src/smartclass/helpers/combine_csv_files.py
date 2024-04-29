@@ -33,19 +33,15 @@ def combine_csv_files(input_files: list[str] | str, output_file: str, separator=
         df = polars.read_csv(file_path, separator=separator)
         dfs.append(df)
 
-    # Merge all DataFrames using a common set of columns
-    common_columns = set(dfs[0].columns)
+    # Create a merged DataFrame
+    concatenated_df = dfs[0]
 
+    # Iterate over the remaining DataFrames and concatenate them row-wise
     for df in dfs[1:]:
-        common_columns &= set(df.columns)
-
-    # Create a merged DataFrame by joining on common columns
-    merged_df = dfs[0]
-    for df in dfs[1:]:
-        merged_df = merged_df.join(df, on=list(common_columns), how="outer")
+        concatenated_df = concatenated_df.vstack(df)
 
     # Export the merged DataFrame as a CSV file
-    merged_df.write_csv(output_file, separator=separator)
+    concatenated_df.write_csv(output_file, separator=separator)
 
 
 if __name__ == "__main__":
@@ -56,9 +52,8 @@ if __name__ == "__main__":
     input_files = [
         "scratch/wikidata_classes_cxsmiles.tsv",
         "scratch/wikidata_classes_smarts.tsv",
-        "scratch/wikidata_classes_smiles.tsv",
+        "scratch/wikidata_classes_smiles_canonical.tsv",
         "scratch/wikidata_classes_smiles_isomeric.tsv",
-        "scratch/wikidata_classes_taxonomy.tsv",
     ]
     output_file = "scratch/wikidata_classes_full.tsv"
 

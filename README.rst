@@ -37,7 +37,7 @@ Combine them
 ~~~~~~~~~~~~
 .. code-block:: sh
 
-    poetry run smartclass combinecsvfiles -i scratch/wikidata_classes_taxonomy.tsv -i scratch/wikidata_classes_smiles_canonical.tsv -i scratch/wikidata_classes_smiles_isomeric.tsv -i scratch/wikidata_classes_smarts.tsv -i scratch/wikidata_classes_cxsmiles.tsv -o scratch/wikidata_classes_full.tsv
+    poetry run smartclass combinecsvfiles -i scratch/wikidata_classes_smiles_canonical.tsv -i scratch/wikidata_classes_smiles_isomeric.tsv -i scratch/wikidata_classes_smarts.tsv -i scratch/wikidata_classes_cxsmiles.tsv -o scratch/wikidata_classes_full.tsv
 
 Get some structures
 ~~~~~~~~~~~~~~~~~~~
@@ -58,8 +58,7 @@ Classify compounds
 
     poetry run smartclass searchclasses --help
     # poetry run smartclass searchclasses
-    # TODO only SMARTS for now
-    poetry run smartclass searchclasses -s "O=C1OC2CC3C(C=C(OC)C(=O)C3(C)C4C(=O)C(OC)=C(C)C(C1)C24C)C" -c scratch/wikidata_classes_smarts.tsv
+    poetry run smartclass searchclasses -s "O=C1OC2CC3C(C=C(OC)C(=O)C3(C)C4C(=O)C(OC)=C(C)C(C1)C24C)C" -c scratch/wikidata_classes_full.tsv
 
 Measure substructures distances
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

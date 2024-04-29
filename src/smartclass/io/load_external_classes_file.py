@@ -9,7 +9,7 @@ __all__ = ["load_external_classes_file"]
 
 
 def load_external_classes_file(
-    file: str, id_name: None | str = "class", smarts_name: None | str = "smarts"
+    file: str, id_name: None | str = "class", smarts_name: None | str = "structure"
 ) -> DataFrame:
     """
     Load a Polars DataFrame from an external tsv file with chemical classes.

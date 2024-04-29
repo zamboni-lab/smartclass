@@ -32,7 +32,14 @@ def main():
 
 
 @main.command()
-@click.option("-i", "--input-file", type=click.Path(exists=True), help="Input file.", required=True)
+@click.option(
+    "-i",
+    "--input-file",
+    type=click.Path(exists=True),
+    help="Input file.",
+    multiple=True,
+    required=True,
+)
 @click.option("-o", "--output", type=click.Path(), help="Output file.", required=True)
 def combinecsvfiles(input_file, output):
     """CLI command that calls combine_csv_files function."""
@@ -97,7 +104,7 @@ def searchclasses(
     if not classes_name_id:
         classes_name_id = "class"
     if not classes_name_smarts:
-        classes_name_smarts = "smarts"
+        classes_name_smarts = "structure"
 
     search_classes(
         classes_file, classes_name_id, classes_name_smarts, include_hierarchy, input_smiles, smiles

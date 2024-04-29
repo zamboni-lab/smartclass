@@ -95,8 +95,15 @@ def querywikidata(query, output, remove_prefix, transform):
 @click.option("-f", "--include-hierarchy", type=bool, help="Use a chemical hierarchy to go faster.")
 @click.option("-i", "--input-smiles", type=click.Path(exists=True), help="Input file (SMILES).")
 @click.option("-s", "--smiles", type=str, multiple=True, help="(List of) SMILES string(s)")
+@click.option("-z", "--closest-only", type=bool, default=True, help="Return closest only.")
 def searchclasses(
-    classes_file, classes_name_id, classes_name_smarts, include_hierarchy, input_smiles, smiles
+    classes_file,
+    classes_name_id,
+    classes_name_smarts,
+    closest_only,
+    include_hierarchy,
+    input_smiles,
+    smiles,
 ):
     """CLI command that calls search_classes function."""
     from smartclass.chem.classification import search_classes
@@ -107,7 +114,13 @@ def searchclasses(
         classes_name_smarts = "structure"
 
     search_classes(
-        classes_file, classes_name_id, classes_name_smarts, include_hierarchy, input_smiles, smiles
+        classes_file,
+        classes_name_id,
+        classes_name_smarts,
+        closest_only,
+        include_hierarchy,
+        input_smiles,
+        smiles,
     )
     click.echo("Done")
 

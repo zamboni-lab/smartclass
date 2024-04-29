@@ -26,10 +26,10 @@ def enumerate_structures(
     except Exception as e:
         bndl = []
         logging.error(e)
-    
+
     # Check if enumeration was successful
     if len(bndl) == 0:
-    # If enumeration failed, use the original query as a fallback
+        # If enumeration failed, use the original query as a fallback
         bndl = [query]
 
     # Create queries list

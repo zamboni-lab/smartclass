@@ -25,6 +25,7 @@ def search_classes(
     classes_file: None | str = None,
     classes_name_id: None | str = None,
     classes_name_smarts: None | str = None,
+    closest_only: bool = True,
     include_hierarchy: bool = False,
     input_smiles: None | str = None,
     smiles: None | (str | list[str]) = None,
@@ -40,6 +41,9 @@ def search_classes(
 
     :param classes_name_smarts: Name of the SMARTS column in the classes file.
     :type classes_name_smarts: Union[None,str]
+
+    :param closest_only: Flag to return only the closest class.
+    :type closest_only: bool
 
     :param include_hierarchy: Flag to include hierarchy search (default is False).
     :type include_hierarchy: bool
@@ -113,10 +117,12 @@ def search_classes(
     #         max_results=max_results,
     #     )
     # )
+    if closest_only:
+        results = [max(results, key=lambda x: x["matched_ab"])] if results else []
 
     # Export
     key = "class_id"
-    value = "smiles"
+    value = "inchikey"
     results_kv = convert_list_of_dict(results, key, value)
     # Export results to JSON as key_value
     with open("scratch/results_kv.json", "w") as file:
@@ -124,7 +130,9 @@ def search_classes(
     # Export results to CSV
     with open("scratch/results.tsv", "w", newline="") as file:
         writer = csv.DictWriter(
-            file, fieldnames=["class_id", "class_structure", "smiles", "matched_ab"], delimiter="\t"
+            file,
+            fieldnames=["class_id", "class_structure", "inchikey", "matched_ab"],
+            delimiter="\t",
         )
         writer.writeheader()
         writer.writerows(results)

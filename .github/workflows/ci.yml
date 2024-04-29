@@ -1,4 +1,4 @@
-name: Tests
+name: CI
 
 on:
   push:
@@ -52,3 +52,5 @@ jobs:
         if: github.event_name != 'pull_request'
         run: |
           poetry run coverage report
+      - name: Sphinx docs to GitHub Pages
+        uses: uibcdf/action-sphinx-docs-to-gh-pages@v2.1.0            

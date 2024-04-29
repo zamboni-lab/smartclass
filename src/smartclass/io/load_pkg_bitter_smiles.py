@@ -9,7 +9,7 @@ from smartclass.io.load_pkg_file import load_pkg_file
 if TYPE_CHECKING:
     from polars import DataFrame
 
-__all__ = ["load_pkg_classes"]
+__all__ = ["load_pkg_bitter_smiles"]
 
 
 def load_pkg_bitter_smiles() -> DataFrame:
@@ -29,4 +29,4 @@ def load_pkg_bitter_smiles() -> DataFrame:
 
 
 if __name__ == "__main__":
-    df = load_pkg_classes()
+    df = load_pkg_bitter_smiles()

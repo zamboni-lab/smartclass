@@ -34,11 +34,13 @@ jobs:
         with:
           virtualenvs-create: true
           virtualenvs-in-project: true
+      - name: Setup dependencies
+        run: |
+          poetry install --extras docs
       - name: Run tests for PR
         env:
           PYTHONDONTWRITEBYTECODE: 1
         run: |
-          poetry install --extras docs
           poetry run pytest --cov-config=.coveragerc --cov=.
           poetry run coverage xml
       - name: Get Cover

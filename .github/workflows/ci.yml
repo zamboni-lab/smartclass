@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  tests:
+  ci:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -38,7 +38,7 @@ jobs:
         env:
           PYTHONDONTWRITEBYTECODE: 1
         run: |
-          poetry install
+          poetry install --extras docs
           poetry run pytest --cov-config=.coveragerc --cov=.
           poetry run coverage xml
       - name: Get Cover

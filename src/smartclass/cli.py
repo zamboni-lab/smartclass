@@ -113,7 +113,7 @@ def searchclasses(
     if not classes_name_smarts:
         classes_name_smarts = "structure"
 
-    search_classes(
+    results = search_classes(
         classes_file,
         classes_name_id,
         classes_name_smarts,
@@ -123,6 +123,7 @@ def searchclasses(
         smiles,
     )
     click.echo("Done")
+    click.echo(f"{results}")
 
 
 if __name__ == "__main__":

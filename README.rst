@@ -59,6 +59,7 @@ Classify compounds
     poetry run smartclass searchclasses --help
     # poetry run smartclass searchclasses
     poetry run smartclass searchclasses -s "O=C1OC2CC3C(C=C(OC)C(=O)C3(C)C4C(=O)C(OC)=C(C)C(C1)C24C)C" -c scratch/wikidata_classes_full.tsv
+    poetry run smartclass searchclasses -s "O=C1OC2CC3C(C=C(OC)C(=O)C3(C)C4C(=O)C(OC)=C(C)C(C1)C24C)C" -c scratch/wikidata_classes_full.tsv --closest-only False
     poetry run smartclass searchclasses -i src/smartclass/data/bitter_smiles.tsv -c scratch/wikidata_classes_full.tsv
 
 Measure substructures distances

@@ -29,7 +29,7 @@ def search_classes(
     include_hierarchy: bool = False,
     input_smiles: None | str = None,
     smiles: None | (str | list[str]) = None,
-) -> None:
+) -> list[dict]:
     """
     Substructure search for chemical classes.
 
@@ -53,6 +53,9 @@ def search_classes(
 
     :param smiles: (List of) structure(s) to classify.
     :type smiles: Union[None,str,list[str]]
+
+    :returns: A list of matched classes.
+    :rtype: list[dict]
     """
     # Load structures
     s: set[str] = set()
@@ -156,6 +159,8 @@ def search_classes(
         json.dump(results_vk, file, indent=4)
     logging.basicConfig(level=logging.INFO)
     logging.info("Done")
+
+    return results
 
 
 if __name__ == "__main__":

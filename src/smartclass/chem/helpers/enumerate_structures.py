@@ -36,6 +36,7 @@ def enumerate_structures(
     queries = []
     for q in bndl:
         try:
+            # TODO see if needed q = Chem.AdjustQueryProperties(q)
             query = rdTautomerQuery.TautomerQuery(q) if tautomer_insensitive else q
             queries.append(query)
         except Exception as e:

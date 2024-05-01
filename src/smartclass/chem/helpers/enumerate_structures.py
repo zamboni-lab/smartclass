@@ -18,6 +18,8 @@ def enumerate_structures(
 ) -> rdTautomerQuery:
     """Enumerate structures."""
     query = Chem.MolFromSmarts(structure)
+    # TODO looks important
+    Chem.Kekulize(query)
     Chem.SetGenericQueriesFromProperties(query)
 
     # Enumerate the query molecules
@@ -36,7 +38,9 @@ def enumerate_structures(
     queries = []
     for q in bndl:
         try:
-            # TODO see if needed q = Chem.AdjustQueryProperties(q)
+            # TODO see if needed
+            # Seems more like it is not for now
+            # q = Chem.AdjustQueryProperties(q)
             query = rdTautomerQuery.TautomerQuery(q) if tautomer_insensitive else q
             queries.append(query)
         except Exception as e:

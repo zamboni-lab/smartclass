@@ -32,65 +32,36 @@ def search_class(
     )
 
     try:
-        matches = [
-            match
-            for q in queries
-            for match in structures.GetMatches(
-                q,
+        for query in queries:
+            sub = query.GetTemplateMolecule()
+            matches = structures.GetMatches(
+                query,
                 params,
                 maxResults=max_results,
             )
-        ]
+            for match in matches:
+                mol = structures.GetMol(match)
+                mols = [mol, sub]
+                mcs = rdFMCS.FindMCS(
+                    mols,
+                    atomCompare=rdFMCS.AtomCompare.CompareAny,
+                    bondCompare=rdFMCS.BondCompare.CompareAny,
+                )
+                num_ab = mcs.numAtoms + mcs.numBonds
+                results.append(
+                    {
+                        "class_id": class_id,
+                        "class_structure": class_structure,
+                        "inchikey": Chem.inchi.MolToInchiKey(mol),
+                        "matched_ab": num_ab,
+                    }
+                )
+                if len(results) >= max_results:
+                    break
+            if len(results) >= max_results:
+                break
     except Exception as e:
         logging.error(e)
         logging.error(f"Error while searching for class_id {class_id}: {class_structure}")
-        return results
-
-    # Sort matches and yield results
-    tmols = [(x, structures.GetMol(x)) for x in matches]
-    mols = sorted(tmols, key=lambda x: x[1].GetNumAtoms())
-
-    for _, mol in mols[:max_results]:
-        queries = enumerate_structures(
-            structure=class_structure, tautomer_insensitive=tautomer_insensitive
-        )
-        # max_sim = 0
-        # min_sim = 666
-        num_ab = 0
-        for q in queries:
-            # sim = calculate_structural_similarity(
-            #     mol_1=q.GetTemplateMolecule(), mol_2=Chem.MolFromSmiles(smiles, sanitize=False)
-            # )
-            # try:
-            #     sim = sim[0].similarity
-            #     print(f"sim:{sim}")
-            # except IndexError:
-            #     sim = None
-            # if sim > max_sim:
-            #     max_sim = sim
-            # sim = float(calculate_myopic_mces(
-            #     s_1=smiles, s_2=Chem.MolToSmiles(q.GetTemplateMolecule()))[2])
-            # print(sim)
-            # if sim < min_sim:
-            #     min_sim = sim
-            mols = [mol, q.GetTemplateMolecule()]
-            mcs = rdFMCS.FindMCS(
-                mols,
-                atomCompare=rdFMCS.AtomCompare.CompareAny,
-                bondCompare=rdFMCS.BondCompare.CompareAny,
-            )
-            sim = mcs.numAtoms + mcs.numBonds
-            if sim > num_ab:
-                num_ab = sim
-        results.append(
-            {
-                "class_id": class_id,
-                "class_structure": class_structure,
-                "inchikey": Chem.inchi.MolToInchiKey(mol),
-                # "similarity": max_sim,
-                # "similarity": min_sim,
-                "matched_ab": num_ab,
-            }
-        )
 
     return results

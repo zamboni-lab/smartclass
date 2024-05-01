@@ -144,7 +144,8 @@ def search_classes(
     with open("scratch/results_kv.json", "w") as file:
         json.dump(results_kv, file, indent=4)
     # Export results to CSV
-    with open("scratch/results.tsv", "w", newline="") as file:
+    results_sorted = sorted(results, key=lambda x: x["matched_ab"], reverse=True)
+    with open("scratch/results_kv.tsv", "w", newline="") as file:
         writer = csv.DictWriter(
             file,
             fieldnames=["class_id", "class_structure", "inchikey", "matched_ab"],
@@ -152,6 +153,16 @@ def search_classes(
         )
         writer.writeheader()
         writer.writerows(results)
+    results_sorted = sorted(results_sorted, key=lambda x: x["inchikey"])
+    with open("scratch/results_vk.tsv", "w", newline="") as file:
+        writer = csv.DictWriter(
+            file,
+            fieldnames=["class_id", "class_structure", "inchikey", "matched_ab"],
+            delimiter="\t",
+        )
+        writer.writeheader()
+        writer.writerows(results_sorted)
+
     # Revert dict
     results_vk = convert_list_of_dict(results, key, value, invert=True)
     # Export results to JSON as value_key

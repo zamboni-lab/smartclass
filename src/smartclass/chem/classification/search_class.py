@@ -5,7 +5,7 @@ from __future__ import annotations
 import logging
 
 from rdkit import Chem
-from rdkit.Chem import rdFMCS
+from rdkit.Chem import rdFMCS, rdTautomerQuery
 
 from smartclass.chem.helpers.enumerate_structures import enumerate_structures
 
@@ -26,14 +26,13 @@ def search_class(
     results: list = []
 
     # Create queries list
-    queries = enumerate_structures(
-        structure=class_structure, tautomer_insensitive=tautomer_insensitive
-    )
-
-    try:
-        for structure in structures:
+    queries = []
+    q = enumerate_structures(structure=class_structure, tautomer_insensitive=tautomer_insensitive)
+    queries.extend(q)
+    for structure in structures:
+        try:
             for query in queries:
-                if tautomer_insensitive:
+                if type(query) is rdTautomerQuery.TautomerQuery:
                     matches = query.GetSubstructMatchesWithTautomers(
                         structure,
                         params,
@@ -57,8 +56,8 @@ def search_class(
                             )
                 else:
                     if structure.HasSubstructMatch(
-                    query,
-                    params,
+                        query,
+                        params,
                     ):
                         mols = [structure, query]
                         mcs = rdFMCS.FindMCS(
@@ -75,9 +74,9 @@ def search_class(
                                 "matched_ab": num_ab,
                             }
                         )
-    except Exception as e:
-        logging.error(e)
-        logging.error(f"Error while searching for class_id {class_id}: {class_structure}")
+        except Exception as e:
+            logging.error(e)
+            logging.error(f"Error while searching for class_id {class_id}: {class_structure}")
 
     # TODO this is not optimal, see later
     return [dict(t) for t in set([tuple(sorted(d.items())) for d in results])]

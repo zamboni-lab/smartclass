@@ -11,3 +11,4 @@ from smartclass.io.load_pkg_data import load_pkg_data  # noqa:F401
 from smartclass.io.load_pkg_file import load_pkg_file  # noqa:F401
 from smartclass.io.load_pkg_mappings import load_pkg_mappings  # noqa:F401
 from smartclass.io.load_pkg_mia import load_pkg_mia  # noqa:F401
+from smartclass.io.load_smiles import load_smiles  # noqa:F401

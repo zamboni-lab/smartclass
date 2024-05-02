@@ -96,6 +96,7 @@ def querywikidata(query, output, remove_prefix, transform):
 @click.option("-i", "--input-smiles", type=click.Path(exists=True), help="Input file (SMILES).")
 @click.option("-s", "--smiles", type=str, multiple=True, help="(List of) SMILES string(s)")
 @click.option("-z", "--closest-only", type=bool, default=True, help="Return closest only.")
+@click.option("-v", "--verbose", count=True)
 def searchclasses(
     classes_file,
     classes_name_id,
@@ -104,6 +105,7 @@ def searchclasses(
     include_hierarchy,
     input_smiles,
     smiles,
+    verbose,
 ):
     """CLI command that calls search_classes function."""
     from smartclass.chem.classification import search_classes
@@ -123,7 +125,8 @@ def searchclasses(
         smiles,
     )
     click.echo("Done")
-    click.echo(f"{results}")
+    if verbose:
+        click.echo(f"{results}")
 
 
 if __name__ == "__main__":

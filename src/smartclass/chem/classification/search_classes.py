@@ -8,11 +8,16 @@ import logging
 
 from rdkit import Chem
 
-from smartclass.chem.classification.bfs_search_classes_generator import (  # dfs_search_classes_generator
-    bfs_search_classes_generator,
+from smartclass.chem.classification.bfs_search_classes_generator import (
+    tqdm_bfs_search_classes_generator,
 )
 from smartclass.helpers import convert_list_of_dict
-from smartclass.io import load_external_classes_file, load_pkg_chemical_hierarchy, load_pkg_classes
+from smartclass.io import (
+    load_external_classes_file,
+    load_pkg_chemical_hierarchy,
+    load_pkg_classes,
+    load_smiles,
+)
 from smartclass.resources.chembl import load_latest_chembl
 
 __all__ = [
@@ -58,10 +63,8 @@ def search_classes(
     """
     # Load structures
     s: set[str] = set()
-    # TODO io load SMILES
     if input_smiles:
-        with open(input_smiles) as f:
-            s.update(f.read().splitlines())
+        s.update(load_smiles(input=input_smiles))
     if smiles:
         s.update(smiles)
 
@@ -72,10 +75,12 @@ def search_classes(
             mol = Chem.MolFromSmiles(smi)
             # TODO looks important
             # Chem.Kekulize(mol)
-            structures.append(mol)
+            if mol is not None:
+                structures.append(mol)
 
     # TODO change this
     if not structures:
+        logging.basicConfig(level=logging.INFO)
         logging.info("No structures given, loading ChEMBL library instead.")
         structures = load_latest_chembl()
 
@@ -86,10 +91,11 @@ def search_classes(
             file=classes_file, id_name=classes_name_id, smarts_name=classes_name_smarts
         )
     else:
+        logging.basicConfig(level=logging.INFO)
         logging.info("No classes given, loading default package classes instead.")
         c = load_pkg_classes()
     classes = []
-    classes_dict = {}
+    classes_dict: dict[str, list[str]] = {}
     for row in c.iter_rows():
         key = row[0]
         value = row[1]
@@ -110,8 +116,13 @@ def search_classes(
 
     tautomer_insensitive = False
 
+    logging.basicConfig(level=logging.INFO)
+    logging.info(f"Classifying {len(structures)} structures...")
+    logging.basicConfig(level=logging.INFO)
+    logging.info(f"...against {len(classes[0])} chemical classes...")
+
     results = list(
-        bfs_search_classes_generator(
+        tqdm_bfs_search_classes_generator(
             classes=classes,
             class_hierarchy=class_hierarchy,
             structures=structures,

@@ -25,7 +25,12 @@ def load_smiles(input: str, column: str = "smiles") -> list[str]:
     :rtype: list[str]
     """
     # Read the CSV file and extract the "smiles" column
-    df = polars.read_csv(input, columns=[column])
+    if input.endswith(".tsv"):
+        df = polars.read_csv(input, separator="\t", columns=[column])
+    else:
+        # Read the CSV file with default separator
+        df = polars.read_csv(input, columns=[column])
+
     # Filter empty values
     df = df.filter(df[column].is_not_null())
 

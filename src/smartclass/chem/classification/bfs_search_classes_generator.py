@@ -7,6 +7,7 @@ from collections.abc import Generator
 from typing import TYPE_CHECKING
 
 from rdkit.Chem import SubstructMatchParameters
+from tqdm import tqdm
 
 from smartclass.chem.classification.get_class_structures import get_class_structures
 from smartclass.chem.classification.search_class import search_class
@@ -17,11 +18,12 @@ if TYPE_CHECKING:
 __all__ = [
     "bfs_search_classes_generator",
     # "dfs_search_classes_generator"
+    "tqdm_bfs_search_classes_generator",
 ]
 
 
 def bfs_search_classes_generator(
-    classes: list[dict[str, str]],
+    classes: list[dict[str, list[str]]],
     structures: rdSubstructLibrary,
     params: SubstructMatchParameters,
     tautomer_insensitive: bool,
@@ -53,16 +55,17 @@ def bfs_search_classes_generator(
                 logging.error(f"No class structure found for class_id {current_class_id}")
                 continue
 
-            results = search_class(
-                current_class_id,
-                class_structure,
-                structures,
-                params,
-                tautomer_insensitive,
-            )
+            for class_s in class_structure:
+                results = search_class(
+                    current_class_id,
+                    class_s,
+                    structures,
+                    params,
+                    tautomer_insensitive,
+                )
 
-            for result in results:
-                yield result
+                for result in results:
+                    yield result
 
             searched_classes.add(current_class_id)
 
@@ -86,6 +89,44 @@ def bfs_search_classes_generator(
 
                 for result in results:
                     yield result
+
+            # results = search_class(
+            #     class_id,
+            #     class_structure,
+            #     structures,
+            #     params,
+            #     tautomer_insensitive,
+            # )
+
+            # for result in results:
+            #     yield result
+
+
+def tqdm_bfs_search_classes_generator(
+    classes: list[dict[str, list[str]]],
+    structures: rdSubstructLibrary,
+    params: SubstructMatchParameters,
+    tautomer_insensitive: bool,
+    class_hierarchy: dict[str, list[str]] | None = None,
+) -> Generator:
+    """
+    Perform substructure search for chemical classes using Breadth-First Search (BFS) and yield results with tqdm.
+
+    :param classes: List of chemical classes to search.
+    :param structures: RDKit substructure library for searching.
+    :param params: Parameters for substructure search.
+    :param tautomer_insensitive: Flag indicating whether tautomer-insensitive search is required.
+    :param class_hierarchy: Dictionary representing hierarchy between classes (optional).
+    :yields: A dictionary containing class_id, result_id, and smiles for each match.
+    """
+    with tqdm(
+        desc="Searching classes",
+    ) as pbar:
+        for result in bfs_search_classes_generator(
+            classes, structures, params, tautomer_insensitive, class_hierarchy
+        ):
+            yield result
+            pbar.update(1)
 
 
 # def dfs_search_classes_generator(

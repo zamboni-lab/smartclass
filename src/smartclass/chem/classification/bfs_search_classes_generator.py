@@ -75,16 +75,17 @@ def bfs_search_classes_generator(
         if class_id not in searched_classes and (
             class_hierarchy is None or class_id not in class_hierarchy
         ):
-            results = search_class(
-                class_id,
-                class_structure,
-                structures,
-                params,
-                tautomer_insensitive,
-            )
+            for class_s in class_structure:
+                results = search_class(
+                    class_id,
+                    class_s,
+                    structures,
+                    params,
+                    tautomer_insensitive,
+                )
 
-            for result in results:
-                yield result
+                for result in results:
+                    yield result
 
 
 # def dfs_search_classes_generator(

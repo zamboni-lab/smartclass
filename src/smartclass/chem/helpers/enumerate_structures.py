@@ -37,15 +37,15 @@ def enumerate_structures(
     # Create queries list
     queries = []
     for q in bndl:
-        try:
-            # TODO see if needed
-            # Seems more like it is not for now
-            # q = Chem.AdjustQueryProperties(q)
-            if tautomer_insensitive:
+        if tautomer_insensitive:
+            try:
                 q = rdTautomerQuery.TautomerQuery(q)
-            queries.append(q)
-        except Exception as e:
-            logging.error(e)
+            except Exception as e:
+                logging.error(e)
+        # TODO see if needed
+        # Seems more like it is not for now
+        # q = Chem.AdjustQueryProperties(q)
+        queries.append(q)
 
     # TODO See https://github.com/rdkit/rdkit/commit/908e47cc03607b86eb58cd5512555b741356f15e
 

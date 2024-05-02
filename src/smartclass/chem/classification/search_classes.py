@@ -88,7 +88,16 @@ def search_classes(
     else:
         logging.info("No classes given, loading default package classes instead.")
         c = load_pkg_classes()
-    classes: list = [dict(c.iter_rows())]
+    classes = []
+    classes_dict = {}
+    for row in c.iter_rows():
+        key = row[0]
+        value = row[1]
+        if key in classes_dict:
+            classes_dict[key].append(value)
+        else:
+            classes_dict[key] = [value]
+    classes.append(classes_dict)
 
     # Load class hierarchy
     class_hierarchy: dict = {}
@@ -99,7 +108,7 @@ def search_classes(
     params = Chem.SubstructMatchParameters()
     params.useGenericMatchers = True
 
-    tautomer_insensitive = True
+    tautomer_insensitive = False
 
     results = list(
         bfs_search_classes_generator(

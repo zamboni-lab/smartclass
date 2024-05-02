@@ -33,13 +33,34 @@ def search_class(
     try:
         for structure in structures:
             for query in queries:
-                matches = query.GetSubstructMatchesWithTautomers(
-                    structure,
+                if tautomer_insensitive:
+                    matches = query.GetSubstructMatchesWithTautomers(
+                        structure,
+                        params,
+                    )
+                    for _, match in matches:
+                        if match:
+                            mols = [structure, match]
+                            mcs = rdFMCS.FindMCS(
+                                mols,
+                                atomCompare=rdFMCS.AtomCompare.CompareAny,
+                                bondCompare=rdFMCS.BondCompare.CompareAny,
+                            )
+                            num_ab = mcs.numAtoms + mcs.numBonds
+                            results.append(
+                                {
+                                    "class_id": class_id,
+                                    "class_structure": class_structure,
+                                    "inchikey": Chem.inchi.MolToInchiKey(structure),
+                                    "matched_ab": num_ab,
+                                }
+                            )
+                else:
+                    if structure.HasSubstructMatch(
+                    query,
                     params,
-                )
-                for _, match in matches:
-                    if match:
-                        mols = [structure, match]
+                    ):
+                        mols = [structure, query]
                         mcs = rdFMCS.FindMCS(
                             mols,
                             atomCompare=rdFMCS.AtomCompare.CompareAny,

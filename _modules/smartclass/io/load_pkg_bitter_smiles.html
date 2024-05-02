@@ -103,11 +103,11 @@
 <span class="sd">    :rtype: DataFrame</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Was obtained using</span>
-    <span class="c1"># SELECT ?smiles WHERE {</span>
+    <span class="c1"># SELECT DISTINCT ?smiles WHERE {</span>
     <span class="c1">#   ?structure wdt:P2017 ?smiles;</span>
     <span class="c1">#     wdt:P1552 wd:Q1517187.</span>
     <span class="c1"># }</span>
-    <span class="c1"># LIMIT 100</span>
+    <span class="c1"># LIMIT 256</span>
     <span class="k">return</span> <span class="n">load_pkg_file</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="s2">&quot;bitter_smiles.tsv&quot;</span><span class="p">)</span></div>
 
 

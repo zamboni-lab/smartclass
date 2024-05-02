@@ -20,11 +20,11 @@ def load_pkg_bitter_smiles() -> DataFrame:
     :rtype: DataFrame
     """
     # Was obtained using
-    # SELECT ?smiles WHERE {
+    # SELECT DISTINCT ?smiles WHERE {
     #   ?structure wdt:P2017 ?smiles;
     #     wdt:P1552 wd:Q1517187.
     # }
-    # LIMIT 100
+    # LIMIT 256
     return load_pkg_file(file="bitter_smiles.tsv")
 
 

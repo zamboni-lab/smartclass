@@ -25,7 +25,6 @@ def bfs_search_classes_generator(
     structures: rdSubstructLibrary,
     params: SubstructMatchParameters,
     tautomer_insensitive: bool,
-    max_results: int,
     class_hierarchy: dict[str, list[str]] | None = None,
 ) -> Generator:
     """
@@ -35,7 +34,6 @@ def bfs_search_classes_generator(
     :param structures: RDKit substructure library for searching.
     :param params: Parameters for substructure search.
     :param tautomer_insensitive: Flag indicating whether tautomer-insensitive search is required.
-    :param max_results: Maximum number of results to yield.
     :param class_hierarchy: Dictionary representing hierarchy between classes (optional).
     :yields: A dictionary containing class_id, result_id, and smiles for each match.
     """
@@ -61,7 +59,6 @@ def bfs_search_classes_generator(
                 structures,
                 params,
                 tautomer_insensitive,
-                max_results,
             )
 
             for result in results:
@@ -84,7 +81,6 @@ def bfs_search_classes_generator(
                 structures,
                 params,
                 tautomer_insensitive,
-                max_results,
             )
 
             for result in results:
@@ -96,7 +92,6 @@ def bfs_search_classes_generator(
 #         structures: rdSubstructLibrary,
 #         params: SubstructMatchParameters,
 #         tautomer_insensitive: bool,
-#         max_results: int,
 #         class_hierarchy: Optional[Dict[str, List[str]]] = None,
 # ) -> Generator:
 #     """
@@ -106,7 +101,6 @@ def bfs_search_classes_generator(
 #     :param structures: RDKit substructure library for searching.
 #     :param params: Parameters for substructure search.
 #     :param tautomer_insensitive: Flag indicating whether tautomer-insensitive search is required.
-#     :param max_results: Maximum number of results to yield.
 #     :param class_hierarchy: Dictionary representing hierarchy between classes (optional).
 #     :yields: A dictionary containing class_id, result_id, and smiles for each match.
 #     """
@@ -128,7 +122,6 @@ def bfs_search_classes_generator(
 #             structures,
 #             params,
 #             tautomer_insensitive,
-#             max_results,
 #         )
 
 #         for result in results:
@@ -160,10 +153,10 @@ if __name__ == "__main__":
 
     # Use generic matches
     params = SubstructMatchParameters()
+    params.maxMatches = 100
     params.useGenericMatchers = True
 
     tautomer_insensitive = True
-    max_results = 100
 
     # Perform BFS search
     results_bfs = list(
@@ -173,7 +166,6 @@ if __name__ == "__main__":
             structures=structures,
             params=params,
             tautomer_insensitive=tautomer_insensitive,
-            max_results=max_results,
         )
     )
 
@@ -185,6 +177,5 @@ if __name__ == "__main__":
     #         structures=structures,
     #         params=params,
     #         tautomer_insensitive=tautomer_insensitive,
-    #         max_results=max_results,
     #     )
     # )

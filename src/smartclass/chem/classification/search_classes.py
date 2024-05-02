@@ -7,7 +7,6 @@ import json
 import logging
 
 from rdkit import Chem
-from rdkit.Chem import rdSubstructLibrary
 
 from smartclass.chem.classification.bfs_search_classes_generator import (  # dfs_search_classes_generator
     bfs_search_classes_generator,
@@ -67,12 +66,15 @@ def search_classes(
         s.update(smiles)
 
     # TODO redundant with get_latest_chembl
-    mols = rdSubstructLibrary.CachedTrustedSmilesMolHolder()
+    structures: list = list()
     for smi in s:
         if smi != "smiles":
-            mols.AddSmiles(smi)
-    structures = rdSubstructLibrary.SubstructLibrary(mols)
+            mol = Chem.MolFromSmiles(smi)
+            # TODO looks important
+            # Chem.Kekulize(mol)
+            structures.append(mol)
 
+    # TODO change this
     if not structures:
         logging.info("No structures given, loading ChEMBL library instead.")
         structures = load_latest_chembl()
@@ -98,7 +100,6 @@ def search_classes(
     params.useGenericMatchers = True
 
     tautomer_insensitive = True
-    max_results = 100
 
     results = list(
         bfs_search_classes_generator(
@@ -107,7 +108,6 @@ def search_classes(
             structures=structures,
             params=params,
             tautomer_insensitive=tautomer_insensitive,
-            max_results=max_results,
         )
     )
     # results = list(
@@ -117,7 +117,6 @@ def search_classes(
     #         structures=structures,
     #         params=params,
     #         tautomer_insensitive=tautomer_insensitive,
-    #         max_results=max_results,
     #     )
     # )
 

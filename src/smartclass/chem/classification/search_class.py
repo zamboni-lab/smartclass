@@ -5,7 +5,7 @@ from __future__ import annotations
 import logging
 
 from rdkit import Chem
-from rdkit.Chem import rdFMCS, rdSubstructLibrary
+from rdkit.Chem import rdFMCS
 
 from smartclass.chem.helpers.enumerate_structures import enumerate_structures
 
@@ -18,10 +18,9 @@ from smartclass.chem.helpers.enumerate_structures import enumerate_structures
 def search_class(
     class_id: str,
     class_structure: str,
-    structures: rdSubstructLibrary,
+    structures: list,
     params: Chem.SubstructMatchParameters,
     tautomer_insensitive: bool,
-    max_results: int,
 ) -> list[dict[str, str]]:
     """Search for a single class and return the results as a list of dictionaries."""
     results: list = []
@@ -32,36 +31,32 @@ def search_class(
     )
 
     try:
-        for query in queries:
-            sub = query.GetTemplateMolecule()
-            matches = structures.GetMatches(
-                query,
-                params,
-                maxResults=max_results,
-            )
-            for match in matches:
-                mol = structures.GetMol(match)
-                mols = [mol, sub]
-                mcs = rdFMCS.FindMCS(
-                    mols,
-                    atomCompare=rdFMCS.AtomCompare.CompareAny,
-                    bondCompare=rdFMCS.BondCompare.CompareAny,
+        for structure in structures:
+            for query in queries:
+                matches = query.GetSubstructMatchesWithTautomers(
+                    structure,
+                    params,
                 )
-                num_ab = mcs.numAtoms + mcs.numBonds
-                results.append(
-                    {
-                        "class_id": class_id,
-                        "class_structure": class_structure,
-                        "inchikey": Chem.inchi.MolToInchiKey(mol),
-                        "matched_ab": num_ab,
-                    }
-                )
-                if len(results) >= max_results:
-                    break
-            if len(results) >= max_results:
-                break
+                for _, match in matches:
+                    if match:
+                        mols = [structure, match]
+                        mcs = rdFMCS.FindMCS(
+                            mols,
+                            atomCompare=rdFMCS.AtomCompare.CompareAny,
+                            bondCompare=rdFMCS.BondCompare.CompareAny,
+                        )
+                        num_ab = mcs.numAtoms + mcs.numBonds
+                        results.append(
+                            {
+                                "class_id": class_id,
+                                "class_structure": class_structure,
+                                "inchikey": Chem.inchi.MolToInchiKey(structure),
+                                "matched_ab": num_ab,
+                            }
+                        )
     except Exception as e:
         logging.error(e)
         logging.error(f"Error while searching for class_id {class_id}: {class_structure}")
 
-    return results
+    # TODO this is not optimal, see later
+    return [dict(t) for t in set([tuple(sorted(d.items())) for d in results])]

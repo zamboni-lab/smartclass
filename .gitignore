@@ -901,3 +901,5 @@ FodyWeavers.xsd
 scratch/
 .idea/
 /*.iml
+/.quarto/
+/_output/

@@ -2,32 +2,24 @@ Smartclass |zenodo| |build| |coverage| |documentation| |black|
 =======================================================================
 Short Description TODO
 
-To get a (very) small overview
-
- .. code-block:: sh
-
-    poetry run quarto render notebooks/smartclass.qmd
-
 🚀 Installation
 ---------------
-..
- Uncomment this section after your first ``tox -e finish``
- The most recent release can be installed from
- `PyPI <https://pypi.org/project/smartclass/>`_ with:
-
- .. code-block:: sh
-
-    pip install smartclass
-
-The most recent code and data can be installed directly using poetry:
 
 .. code-block:: sh
 
     poetry install
 
+
 💪 Getting Started
 ------------------
-For now:
+
+To get started quickly:
+
+ .. code-block:: sh
+
+    poetry run quarto render notebooks/smartclass.qmd
+
+For the rest:
 
 Get defined chemical classes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~

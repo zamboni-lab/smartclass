@@ -2,6 +2,12 @@ Smartclass |zenodo| |build| |coverage| |documentation| |black|
 =======================================================================
 Short Description TODO
 
+To get a (very) small overview
+
+ .. code-block:: sh
+
+    poetry run quarto render notebooks/smartclass.qmd
+
 🚀 Installation
 ---------------
 ..

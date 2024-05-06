@@ -64,7 +64,7 @@ docs = ["Sphinx", "sphinx-rtd-theme", "sphinxcontrib-napoleon"]
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.4.2"
-coverage = "^7.5.0"
+coverage = "^7.5.1"
 flake8 = "^7.0.0"
 importlib-metadata = "^7.1.0" 
 isort = "^5.13.2"

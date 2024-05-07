@@ -14,6 +14,7 @@ from smartclass.chem.conversion import inchi_to_inchikey  # noqa:F401
 from smartclass.chem.conversion import inchi_to_mol  # noqa:F401
 from smartclass.chem.conversion import inchi_to_smiles  # noqa:F401
 from smartclass.chem.conversion import mol_to_inchi  # noqa:F401
+from smartclass.chem.conversion import mol_to_inchikey  # noqa:F401
 from smartclass.chem.conversion import mol_to_smiles  # noqa:F401
 from smartclass.chem.conversion import smiles_to_canonical_smiles  # noqa:F401
 from smartclass.chem.conversion import smiles_to_formula  # noqa:F401
@@ -24,6 +25,7 @@ from smartclass.chem.helpers import calculate_descriptors  # noqa:F401
 from smartclass.chem.helpers import check_missing_stereochemistry  # noqa:F401
 from smartclass.chem.helpers import enumerate_structures  # noqa:F401
 from smartclass.chem.helpers import fix_inchi_tautomerization  # noqa:F401
+from smartclass.chem.helpers import get_num_matched_atoms_bonds  # noqa:F401
 from smartclass.chem.helpers import standardize  # noqa:F401
 
 # from smartclass.chem.similarity import calculate_myopic_mces  # noqa:F401

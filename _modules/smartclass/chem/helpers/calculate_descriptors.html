@@ -85,7 +85,7 @@
 
 <span class="kn">from</span> <span class="nn">rdkit.Chem.Descriptors</span> <span class="kn">import</span> <span class="n">CalcMolDescriptors</span>
 
-<span class="kn">from</span> <span class="nn">smartclass.chem.conversion.smiles_to_mol</span> <span class="kn">import</span> <span class="n">smiles_to_mol</span>
+<span class="kn">from</span> <span class="nn">smartclass.chem.conversion.convert_smiles_to_mol</span> <span class="kn">import</span> <span class="n">convert_smiles_to_mol</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s2">&quot;calculate_descriptors&quot;</span><span class="p">,</span>
@@ -104,7 +104,7 @@
 <span class="sd">    :returns: SMILES.</span>
 <span class="sd">    :rtype: Union[str, None]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">mol</span> <span class="o">=</span> <span class="n">smiles_to_mol</span><span class="p">(</span><span class="n">smiles</span><span class="p">)</span>
+    <span class="n">mol</span> <span class="o">=</span> <span class="n">convert_smiles_to_mol</span><span class="p">(</span><span class="n">smiles</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">mol</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">CalcMolDescriptors</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
@@ -114,13 +114,13 @@
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="n">smiles_to_test</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">convert_smiles_to_test</span> <span class="o">=</span> <span class="p">[</span>
         <span class="s2">&quot;CC(C)C1=CC[C@H]2C(=C1)CC[C@@H]3[C@@]2(CCC[C@@]3(C)C(=O)O)C&quot;</span><span class="p">,</span>
         <span class="s2">&quot;O=C(O)CCC(N=C(O)C(N=C(O)C(N=C(O)C(N)CC=1C=CC=CC1)CC(C)C)CC2=CN=CN2)C(O)=NC(C(O)=NC3C(O)=NCCCC3)C(C)CC&quot;</span><span class="p">,</span>
         <span class="s2">&quot;CC[C@H](C)C(N=C(O)[C@@H](CCC(=O)O)N=C(O)[C@H](Cc1cnc[nH]1)N=C(O)[C@H](CC(C)C)N=C(O)[C@H](N)Cc1ccccc1)C(O)=N[C@H]1CCCCN=C1O&quot;</span><span class="p">,</span>  <span class="c1"># noqa:E501</span>
     <span class="p">]</span>
 
-    <span class="k">for</span> <span class="n">smiles</span> <span class="ow">in</span> <span class="n">smiles_to_test</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">smiles</span> <span class="ow">in</span> <span class="n">convert_smiles_to_test</span><span class="p">:</span>
         <span class="n">calculate_descriptors</span><span class="p">(</span><span class="n">smiles</span><span class="p">)</span>
 </pre></div>
 

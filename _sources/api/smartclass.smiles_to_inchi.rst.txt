@@ -1,6 +1,0 @@
-smiles_to_inchi
-===============
-
-.. currentmodule:: smartclass
-
-.. autofunction:: smiles_to_inchi

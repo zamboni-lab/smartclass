@@ -1,6 +1,0 @@
-mol_to_inchikey
-===============
-
-.. currentmodule:: smartclass
-
-.. autofunction:: mol_to_inchikey

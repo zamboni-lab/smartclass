@@ -1,6 +1,0 @@
-smiles_to_canonical_smiles
-==========================
-
-.. currentmodule:: smartclass
-
-.. autofunction:: smiles_to_canonical_smiles

@@ -1,6 +1,0 @@
-smiles_to_formula
-=================
-
-.. currentmodule:: smartclass
-
-.. autofunction:: smiles_to_formula

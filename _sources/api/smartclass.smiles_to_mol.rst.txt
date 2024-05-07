@@ -1,6 +1,0 @@
-smiles_to_mol
-=============
-
-.. currentmodule:: smartclass
-
-.. autofunction:: smiles_to_mol

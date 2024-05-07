@@ -1,6 +1,0 @@
-inchi_to_inchikey
-=================
-
-.. currentmodule:: smartclass
-
-.. autofunction:: inchi_to_inchikey

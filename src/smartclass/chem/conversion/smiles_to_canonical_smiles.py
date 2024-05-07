@@ -14,12 +14,12 @@ __all__ = [
 
 def smiles_to_canonical_smiles(smiles: str) -> str | None:
     """
-    Convert a structure SMILES to InChI.
+    Convert a structure SMILES to canonical SMILES.
 
     :param smiles: A SMILES.
     :type smiles: str
 
-    :returns: An InChI.
+    :returns: A canonical SMILES.
     :rtype: Union[str, None]
     """
     mol = smiles_to_mol(smiles)

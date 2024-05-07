@@ -1,4 +1,4 @@
-"""Convert a structure SMILES to InChI."""
+"""Convert a structure SMILES to an exact mass."""
 
 from __future__ import annotations
 
@@ -11,15 +11,15 @@ __all__ = [
 ]
 
 
-def smiles_to_mass(smiles: str) -> str | None:
+def smiles_to_mass(smiles: str) -> float | None:
     """
-    Convert a structure SMILES to InChI.
+    Convert a structure SMILES to an exact mass.
 
     :param smiles: A SMILES.
     :type smiles: str
 
-    :returns: An InChI.
-    :rtype: Union[str, None]
+    :returns: An exact mass.
+    :rtype: Union[float, None]
     """
     mol = smiles_to_mol(smiles)
     if mol is not None:

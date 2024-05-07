@@ -1,4 +1,4 @@
-"""Convert a structure SMILES to InChI."""
+"""Convert a structure SMILES to a molecular formula."""
 
 from __future__ import annotations
 
@@ -13,12 +13,12 @@ __all__ = [
 
 def smiles_to_formula(smiles: str) -> str | None:
     """
-    Convert a structure SMILES to InChI.
+    Convert a structure SMILES to a molecular formula.
 
     :param smiles: A SMILES.
     :type smiles: str
 
-    :returns: An InChI.
+    :returns: A molecular formula.
     :rtype: Union[str, None]
     """
     mol = smiles_to_mol(smiles)

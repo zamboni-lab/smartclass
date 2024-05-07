@@ -2,19 +2,23 @@
 
 from __future__ import annotations
 
-from smartclass.chem.conversion.inchi_to_inchikey import inchi_to_inchikey  # noqa:F401
-from smartclass.chem.conversion.inchi_to_mass import inchi_to_mass  # noqa:F401
-from smartclass.chem.conversion.inchi_to_mol import inchi_to_mol  # noqa:F401
-from smartclass.chem.conversion.inchi_to_smiles import inchi_to_smiles  # noqa:F401
-
-# from smartclass.chem.conversion.mol_to_cxsmiles import mol_to_cxsmiles  # noqa:F401
-from smartclass.chem.conversion.mol_to_inchi import mol_to_inchi  # noqa:F401
-from smartclass.chem.conversion.mol_to_inchikey import mol_to_inchikey  # noqa:F401
-from smartclass.chem.conversion.mol_to_smiles import mol_to_smiles  # noqa:F401
-from smartclass.chem.conversion.smiles_to_canonical_smiles import (  # noqa:F401
-    smiles_to_canonical_smiles,
+from smartclass.chem.conversion.convert_inchi_to_inchikey import (  # noqa:F401
+    convert_inchi_to_inchikey,
 )
-from smartclass.chem.conversion.smiles_to_formula import smiles_to_formula  # noqa:F401
-from smartclass.chem.conversion.smiles_to_inchi import smiles_to_inchi  # noqa:F401
-from smartclass.chem.conversion.smiles_to_mass import smiles_to_mass  # noqa:F401
-from smartclass.chem.conversion.smiles_to_mol import smiles_to_mol  # noqa:F401
+from smartclass.chem.conversion.convert_inchi_to_mass import convert_inchi_to_mass  # noqa:F401
+from smartclass.chem.conversion.convert_inchi_to_mol import convert_inchi_to_mol  # noqa:F401
+from smartclass.chem.conversion.convert_inchi_to_smiles import convert_inchi_to_smiles  # noqa:F401
+
+# from smartclass.chem.conversion.convert_mol_to_cxsmiles import convert_mol_to_cxsmiles  # noqa:F401
+from smartclass.chem.conversion.convert_mol_to_inchi import convert_mol_to_inchi  # noqa:F401
+from smartclass.chem.conversion.convert_mol_to_inchikey import convert_mol_to_inchikey  # noqa:F401
+from smartclass.chem.conversion.convert_mol_to_smiles import convert_mol_to_smiles  # noqa:F401
+from smartclass.chem.conversion.convert_smiles_to_canonical_smiles import (  # noqa:F401
+    convert_smiles_to_canonical_smiles,
+)
+from smartclass.chem.conversion.convert_smiles_to_formula import (  # noqa:F401
+    convert_smiles_to_formula,
+)
+from smartclass.chem.conversion.convert_smiles_to_inchi import convert_smiles_to_inchi  # noqa:F401
+from smartclass.chem.conversion.convert_smiles_to_mass import convert_smiles_to_mass  # noqa:F401
+from smartclass.chem.conversion.convert_smiles_to_mol import convert_smiles_to_mol  # noqa:F401

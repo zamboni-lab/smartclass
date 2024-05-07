@@ -4,9 +4,9 @@ from __future__ import annotations
 
 from rdkit.Chem import MultithreadedSDMolSupplier
 
-from smartclass.chem.conversion.mol_to_smiles import mol_to_smiles
-from smartclass.chem.conversion.smiles_to_formula import smiles_to_formula
-from smartclass.chem.conversion.smiles_to_mass import smiles_to_mass
+from smartclass.chem.conversion.convert_mol_to_smiles import convert_mol_to_smiles
+from smartclass.chem.conversion.convert_smiles_to_formula import convert_smiles_to_formula
+from smartclass.chem.conversion.convert_smiles_to_mass import convert_smiles_to_mass
 from smartclass.chem.helpers.standardize import standardize
 from smartclass.io.export_results import export_results
 
@@ -25,7 +25,7 @@ def standardize_sdf(input: str, output: str) -> None:
     :rtype: Union[str, None]
     """
     s = [
-        (mol_to_smiles(m), m.GetProp("CompoundName"))
+        (convert_mol_to_smiles(m), m.GetProp("CompoundName"))
         for m in MultithreadedSDMolSupplier(input)
         if m is not None
     ]
@@ -34,8 +34,8 @@ def standardize_sdf(input: str, output: str) -> None:
     for smiles, CompoundName in s:
         result = {
             "name": CompoundName,
-            "formula": smiles_to_formula(smiles),
-            "exact_mass": smiles_to_mass(smiles),
+            "formula": convert_smiles_to_formula(smiles),
+            "exact_mass": convert_smiles_to_mass(smiles),
             "smiles": smiles,
             "new_smiles": standardize(smiles),
         }

@@ -5,11 +5,11 @@ from __future__ import annotations
 from rdkit.Chem import MolToInchi
 
 __all__ = [
-    "mol_to_inchi",
+    "convert_mol_to_inchi",
 ]
 
 
-def mol_to_inchi(mol: str) -> str:
+def convert_mol_to_inchi(mol: str) -> str:
     """
     Convert a structure MOL to InChI.
 

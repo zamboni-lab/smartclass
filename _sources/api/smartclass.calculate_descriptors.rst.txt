@@ -1,0 +1,6 @@
+calculate_descriptors
+=====================
+
+.. currentmodule:: smartclass
+
+.. autofunction:: calculate_descriptors

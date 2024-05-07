@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>smartclass.chem.classification.bfs_search_classes_generator &mdash; smartclass 0.0.1-dev documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/autodoc_pydantic.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../_static/documentation_options.js?v=03180e26"></script>
+        <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            smartclass
+          </a>
+              <div class="version">
+                0.0.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../cli.html">Command Line Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../reference.html">Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">smartclass</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">smartclass.chem.classification.bfs_search_classes_generator</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for smartclass.chem.classification.bfs_search_classes_generator</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Perform substructure search for chemical classes and yield results.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Generator</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TYPE_CHECKING</span>
+
+<span class="kn">from</span> <span class="nn">rdkit.Chem</span> <span class="kn">import</span> <span class="n">SubstructMatchParameters</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+
+<span class="kn">from</span> <span class="nn">smartclass.chem.classification.get_class_structures</span> <span class="kn">import</span> <span class="n">get_class_structures</span>
+<span class="kn">from</span> <span class="nn">smartclass.chem.classification.search_class</span> <span class="kn">import</span> <span class="n">search_class</span>
+
+<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">rdkit.Chem</span> <span class="kn">import</span> <span class="n">rdSubstructLibrary</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;bfs_search_classes_generator&quot;</span><span class="p">,</span>
+    <span class="c1"># &quot;dfs_search_classes_generator&quot;</span>
+    <span class="s2">&quot;tqdm_bfs_search_classes_generator&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<div class="viewcode-block" id="bfs_search_classes_generator">
+<a class="viewcode-back" href="../../../../api/smartclass.bfs_search_classes_generator.html#smartclass.bfs_search_classes_generator">[docs]</a>
+<span class="k">def</span> <span class="nf">bfs_search_classes_generator</span><span class="p">(</span>
+    <span class="n">classes</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]],</span>
+    <span class="n">structures</span><span class="p">:</span> <span class="n">rdSubstructLibrary</span><span class="p">,</span>
+    <span class="n">params</span><span class="p">:</span> <span class="n">SubstructMatchParameters</span><span class="p">,</span>
+    <span class="n">tautomer_insensitive</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="n">class_hierarchy</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Generator</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Perform substructure search for chemical classes using Breadth-First Search (BFS) and yield results.</span>
+
+<span class="sd">    :param classes: List of chemical classes to search.</span>
+<span class="sd">    :param structures: RDKit substructure library for searching.</span>
+<span class="sd">    :param params: Parameters for substructure search.</span>
+<span class="sd">    :param tautomer_insensitive: Flag indicating whether tautomer-insensitive search is required.</span>
+<span class="sd">    :param class_hierarchy: Dictionary representing hierarchy between classes (optional).</span>
+<span class="sd">    :yields: A dictionary containing class_id, result_id, and smiles for each match.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">class_structures</span> <span class="o">=</span> <span class="n">get_class_structures</span><span class="p">(</span><span class="n">classes</span><span class="p">)</span>
+    <span class="n">searched_classes</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">class_hierarchy</span><span class="p">:</span>
+        <span class="n">queue</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">class_hierarchy</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="n">visited</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+        <span class="k">while</span> <span class="n">queue</span><span class="p">:</span>
+            <span class="n">current_class_id</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">visited</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">current_class_id</span><span class="p">)</span>
+
+            <span class="n">class_structure</span> <span class="o">=</span> <span class="n">class_structures</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">current_class_id</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">class_structure</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No class structure found for class_id </span><span class="si">{</span><span class="n">current_class_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">continue</span>
+
+            <span class="k">for</span> <span class="n">class_s</span> <span class="ow">in</span> <span class="n">class_structure</span><span class="p">:</span>
+                <span class="n">results</span> <span class="o">=</span> <span class="n">search_class</span><span class="p">(</span>
+                    <span class="n">current_class_id</span><span class="p">,</span>
+                    <span class="n">class_s</span><span class="p">,</span>
+                    <span class="n">structures</span><span class="p">,</span>
+                    <span class="n">params</span><span class="p">,</span>
+                    <span class="n">tautomer_insensitive</span><span class="p">,</span>
+                <span class="p">)</span>
+
+                <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+                    <span class="k">yield</span> <span class="n">result</span>
+
+            <span class="n">searched_classes</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">current_class_id</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">current_class_id</span> <span class="ow">in</span> <span class="n">class_hierarchy</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">child_class</span> <span class="ow">in</span> <span class="n">class_hierarchy</span><span class="p">[</span><span class="n">current_class_id</span><span class="p">]:</span>
+                    <span class="k">if</span> <span class="n">child_class</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">visited</span> <span class="ow">and</span> <span class="n">child_class</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">searched_classes</span><span class="p">:</span>
+                        <span class="n">queue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">child_class</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">class_id</span><span class="p">,</span> <span class="n">class_structure</span> <span class="ow">in</span> <span class="n">class_structures</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">class_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">searched_classes</span> <span class="ow">and</span> <span class="p">(</span>
+            <span class="n">class_hierarchy</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">class_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">class_hierarchy</span>
+        <span class="p">):</span>
+            <span class="k">for</span> <span class="n">class_s</span> <span class="ow">in</span> <span class="n">class_structure</span><span class="p">:</span>
+                <span class="n">results</span> <span class="o">=</span> <span class="n">search_class</span><span class="p">(</span>
+                    <span class="n">class_id</span><span class="p">,</span>
+                    <span class="n">class_s</span><span class="p">,</span>
+                    <span class="n">structures</span><span class="p">,</span>
+                    <span class="n">params</span><span class="p">,</span>
+                    <span class="n">tautomer_insensitive</span><span class="p">,</span>
+                <span class="p">)</span>
+
+                <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+                    <span class="k">yield</span> <span class="n">result</span></div>
+
+
+            <span class="c1"># results = search_class(</span>
+            <span class="c1">#     class_id,</span>
+            <span class="c1">#     class_structure,</span>
+            <span class="c1">#     structures,</span>
+            <span class="c1">#     params,</span>
+            <span class="c1">#     tautomer_insensitive,</span>
+            <span class="c1"># )</span>
+
+            <span class="c1"># for result in results:</span>
+            <span class="c1">#     yield result</span>
+
+
+<span class="k">def</span> <span class="nf">tqdm_bfs_search_classes_generator</span><span class="p">(</span>
+    <span class="n">classes</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]],</span>
+    <span class="n">structures</span><span class="p">:</span> <span class="n">rdSubstructLibrary</span><span class="p">,</span>
+    <span class="n">params</span><span class="p">:</span> <span class="n">SubstructMatchParameters</span><span class="p">,</span>
+    <span class="n">tautomer_insensitive</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="n">class_hierarchy</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Generator</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Perform substructure search for chemical classes using Breadth-First Search (BFS) and yield results with tqdm.</span>
+
+<span class="sd">    :param classes: List of chemical classes to search.</span>
+<span class="sd">    :param structures: RDKit substructure library for searching.</span>
+<span class="sd">    :param params: Parameters for substructure search.</span>
+<span class="sd">    :param tautomer_insensitive: Flag indicating whether tautomer-insensitive search is required.</span>
+<span class="sd">    :param class_hierarchy: Dictionary representing hierarchy between classes (optional).</span>
+<span class="sd">    :yields: A dictionary containing class_id, result_id, and smiles for each match.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="n">tqdm</span><span class="p">(</span>
+        <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;Searching classes&quot;</span><span class="p">,</span>
+    <span class="p">)</span> <span class="k">as</span> <span class="n">pbar</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">bfs_search_classes_generator</span><span class="p">(</span>
+            <span class="n">classes</span><span class="p">,</span> <span class="n">structures</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">tautomer_insensitive</span><span class="p">,</span> <span class="n">class_hierarchy</span>
+        <span class="p">):</span>
+            <span class="k">yield</span> <span class="n">result</span>
+            <span class="n">pbar</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+
+<span class="c1"># def dfs_search_classes_generator(</span>
+<span class="c1">#         classes: List[Dict[str, str]],</span>
+<span class="c1">#         structures: rdSubstructLibrary,</span>
+<span class="c1">#         params: SubstructMatchParameters,</span>
+<span class="c1">#         tautomer_insensitive: bool,</span>
+<span class="c1">#         class_hierarchy: Optional[Dict[str, List[str]]] = None,</span>
+<span class="c1"># ) -&gt; Generator:</span>
+<span class="c1">#     &quot;&quot;&quot;</span>
+<span class="c1">#     Perform substructure search for chemical classes using Depth-First Search (DFS) and yield results.</span>
+
+<span class="c1">#     :param classes: List of chemical classes to search.</span>
+<span class="c1">#     :param structures: RDKit substructure library for searching.</span>
+<span class="c1">#     :param params: Parameters for substructure search.</span>
+<span class="c1">#     :param tautomer_insensitive: Flag indicating whether tautomer-insensitive search is required.</span>
+<span class="c1">#     :param class_hierarchy: Dictionary representing hierarchy between classes (optional).</span>
+<span class="c1">#     :yields: A dictionary containing class_id, result_id, and smiles for each match.</span>
+<span class="c1">#     &quot;&quot;&quot;</span>
+<span class="c1">#     class_structures = get_class_structures(classes)</span>
+<span class="c1">#     searched_classes = set()</span>
+
+<span class="c1">#     def dfs(class_id):</span>
+<span class="c1">#         if class_id in searched_classes:</span>
+<span class="c1">#             return</span>
+
+<span class="c1">#         class_structure = class_structures.get(class_id)</span>
+<span class="c1">#         if class_structure is None:</span>
+<span class="c1">#             logging.error(f&quot;No class structure found for class_id {class_id}&quot;)</span>
+<span class="c1">#             return</span>
+
+<span class="c1">#         results = search_class(</span>
+<span class="c1">#             class_id,</span>
+<span class="c1">#             class_structure,</span>
+<span class="c1">#             structures,</span>
+<span class="c1">#             params,</span>
+<span class="c1">#             tautomer_insensitive,</span>
+<span class="c1">#         )</span>
+
+<span class="c1">#         for result in results:</span>
+<span class="c1">#             yield result</span>
+
+<span class="c1">#         searched_classes.add(class_id)</span>
+
+<span class="c1">#         if class_hierarchy and class_id in class_hierarchy:</span>
+<span class="c1">#             for child_class in class_hierarchy[class_id]:</span>
+<span class="c1">#                 dfs(child_class)</span>
+
+<span class="c1">#     for class_id in class_structures.keys():</span>
+<span class="c1">#         if class_id not in searched_classes and (not class_hierarchy or class_id not in class_hierarchy):</span>
+<span class="c1">#             dfs(class_id)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">smartclass.io</span> <span class="kn">import</span> <span class="n">load_pkg_chemical_hierarchy</span><span class="p">,</span> <span class="n">load_pkg_classes</span>
+    <span class="kn">from</span> <span class="nn">smartclass.resources.chembl</span> <span class="kn">import</span> <span class="n">load_latest_chembl</span>
+
+    <span class="c1"># Load classes</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">load_pkg_classes</span><span class="p">()</span>
+    <span class="n">classes</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="p">[</span><span class="nb">dict</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">iter_rows</span><span class="p">())]</span>
+
+    <span class="c1"># Load class hierarchy</span>
+    <span class="n">class_hierarchy</span> <span class="o">=</span> <span class="n">load_pkg_chemical_hierarchy</span><span class="p">()</span>
+
+    <span class="c1"># Load the ChEMBL library</span>
+    <span class="n">structures</span> <span class="o">=</span> <span class="n">load_latest_chembl</span><span class="p">()</span>
+
+    <span class="c1"># Use generic matches</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="n">SubstructMatchParameters</span><span class="p">()</span>
+    <span class="n">params</span><span class="o">.</span><span class="n">maxMatches</span> <span class="o">=</span> <span class="mi">100</span>
+    <span class="n">params</span><span class="o">.</span><span class="n">useGenericMatchers</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="n">tautomer_insensitive</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="c1"># Perform BFS search</span>
+    <span class="n">results_bfs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
+        <span class="n">bfs_search_classes_generator</span><span class="p">(</span>
+            <span class="n">classes</span><span class="o">=</span><span class="n">classes</span><span class="p">,</span>
+            <span class="n">class_hierarchy</span><span class="o">=</span><span class="n">class_hierarchy</span><span class="p">,</span>
+            <span class="n">structures</span><span class="o">=</span><span class="n">structures</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
+            <span class="n">tautomer_insensitive</span><span class="o">=</span><span class="n">tautomer_insensitive</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Perform DFS search</span>
+    <span class="c1"># results_dfs = list(</span>
+    <span class="c1">#     dfs_search_classes_generator(</span>
+    <span class="c1">#         classes=classes,</span>
+    <span class="c1">#         class_hierarchy=class_hierarchy,</span>
+    <span class="c1">#         structures=structures,</span>
+    <span class="c1">#         params=params,</span>
+    <span class="c1">#         tautomer_insensitive=tautomer_insensitive,</span>
+    <span class="c1">#     )</span>
+    <span class="c1"># )</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Adriano Rutz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

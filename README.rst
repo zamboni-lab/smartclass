@@ -1,5 +1,6 @@
-Smartclass |zenodo| |build| |coverage| |documentation| |black|
-=======================================================================
+Smartclass
+==========
+
 Short Description TODO
 
 🚀 Installation
@@ -15,7 +16,7 @@ Short Description TODO
 
 To get started quickly:
 
- .. code-block:: sh
+.. code-block:: sh
 
     poetry run quarto render notebooks/smartclass.qmd
 
@@ -220,42 +221,3 @@ This script does the following:
 4. Push to GitHub. You'll need to make a release going with the commit where the version was bumped.
 5. Bump the version to the next patch. If you made big changes and want to bump the version by minor, you can
    use ``tox -e bumpversion -- minor`` after.
-
-Logo
-~~~~
-The smartclass `logo <https://github.com/smartclass/smartclass-art>`_ was designed by `TODO <https://github.com/TODO>`_.
-
-.. |build| image:: https://github.com/smartclass/smartclass/workflows/Tests/badge.svg
-    :target: https://github.com/smartclass/smartclass/actions
-    :alt: Build Status
-
-.. |coverage| image:: https://codecov.io/gh/smartclass/smartclass/coverage.svg?branch=develop
-    :target: https://codecov.io/gh/smartclass/smartclass/branch/develop
-    :alt: Development Coverage Status
-
-.. |documentation| image:: https://readthedocs.org/projects/smartclass/badge/?version=latest
-    :target: http://smartclass.readthedocs.io/en/latest/
-    :alt: Development Documentation Status
-
-.. |climate| image:: https://codeclimate.com/github/smartclass/smartclass/badges/gpa.svg
-    :target: https://codeclimate.com/github/smartclass/smartclass
-    :alt: Code Climate
-
-.. |python_versions| image:: https://img.shields.io/pypi/pyversions/smartclass.svg
-    :target: https://pypi.python.org/pypi/smartclass
-    :alt: Stable Supported Python Versions
-
-.. |pypi_version| image:: https://img.shields.io/pypi/v/smartclass.svg
-    :target: https://pypi.python.org/pypi/smartclass
-    :alt: Current version on PyPI
-
-.. |pypi_license| image:: https://img.shields.io/pypi/l/smartclass.svg
-    :target: https://github.com/smartclass/smartclass/blob/main/LICENSE
-    :alt: MIT License
-
-.. |zenodo| image:: https://zenodo.org/badge/TODO.svg
-    :target: https://zenodo.org/badge/latestdoi/TODO
-
-.. |black| image:: https://img.shields.io/badge/code%20style-black-000000.svg
-    :target: https://github.com/psf/black
-    :alt: Code style: black

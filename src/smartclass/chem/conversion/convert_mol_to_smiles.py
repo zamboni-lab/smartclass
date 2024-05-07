@@ -5,11 +5,11 @@ from __future__ import annotations
 from rdkit.Chem import MolToSmiles
 
 __all__ = [
-    "mol_to_smiles",
+    "convert_mol_to_smiles",
 ]
 
 
-def mol_to_smiles(mol: str) -> str:
+def convert_mol_to_smiles(mol: str) -> str:
     """
     Convert a structure MOL to SMILES.
 

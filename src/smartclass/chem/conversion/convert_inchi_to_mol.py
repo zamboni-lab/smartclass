@@ -5,11 +5,11 @@ from __future__ import annotations
 from rdkit.Chem import MolFromInchi
 
 __all__ = [
-    "inchi_to_mol",
+    "convert_inchi_to_mol",
 ]
 
 
-def inchi_to_mol(inchi: str) -> str | None:
+def convert_inchi_to_mol(inchi: str) -> str | None:
     """
     Convert a structure InChI to MOL.
 
@@ -26,4 +26,4 @@ if __name__ == "__main__":
     inchis_to_test = ["InChI=1S/C3H8/c1-3-2/h3H2,1-2H3"]
 
     for inchi in inchis_to_test:
-        inchi_to_mol(inchi)
+        convert_inchi_to_mol(inchi)

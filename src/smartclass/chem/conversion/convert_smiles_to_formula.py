@@ -4,14 +4,14 @@ from __future__ import annotations
 
 from rdkit.Chem.rdMolDescriptors import CalcMolFormula
 
-from smartclass.chem.conversion.smiles_to_mol import smiles_to_mol
+from smartclass.chem.conversion.convert_smiles_to_mol import convert_smiles_to_mol
 
 __all__ = [
-    "smiles_to_formula",
+    "convert_smiles_to_formula",
 ]
 
 
-def smiles_to_formula(smiles: str) -> str | None:
+def convert_smiles_to_formula(smiles: str) -> str | None:
     """
     Convert a structure SMILES to a molecular formula.
 
@@ -21,7 +21,7 @@ def smiles_to_formula(smiles: str) -> str | None:
     :returns: A molecular formula.
     :rtype: Union[str, None]
     """
-    mol = smiles_to_mol(smiles)
+    mol = convert_smiles_to_mol(smiles)
     if mol is not None:
         return CalcMolFormula(mol)
     else:
@@ -32,4 +32,4 @@ if __name__ == "__main__":
     smiles_to_test = ["N[C@@H](CCCNC(N)=N)C(O)=O"]
 
     for smiles in smiles_to_test:
-        smiles_to_formula(smiles)
+        convert_smiles_to_formula(smiles)

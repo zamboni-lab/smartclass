@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from smartclass.chem.conversion.smiles_to_mass import smiles_to_mass
+from smartclass.chem.conversion.convert_smiles_to_mass import convert_smiles_to_mass
 
 
 def transform_smiles_to_mass(result: dict) -> dict | None:
@@ -15,7 +15,7 @@ def transform_smiles_to_mass(result: dict) -> dict | None:
     :returns: Transformed query result.
     :rtype: Union[dict, None]
     """
-    mass = smiles_to_mass(result.get("smiles", ""))
+    mass = convert_smiles_to_mass(result.get("smiles", ""))
     if mass is not None:
         transformed_result = {
             "qid": result.get("structure", "").replace("http://www.wikidata.org/entity/", ""),

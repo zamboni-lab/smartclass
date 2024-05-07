@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from smartclass.chem.conversion.inchi_to_smiles import inchi_to_smiles
+from smartclass.chem.conversion.convert_inchi_to_smiles import convert_inchi_to_smiles
 from smartclass.chem.helpers.fix_inchi_tautomerization import fix_inchi_tautomerization
 
 
@@ -16,7 +16,7 @@ def transform_inchi_to_smiles_canonical(result: dict) -> dict | None:
     :returns: Transformed query result.
     :rtype: Union[dict, None]
     """
-    smiles = inchi_to_smiles(result.get("inchi", ""))
+    smiles = convert_inchi_to_smiles(result.get("inchi", ""))
     if smiles is not None:
         smiles = fix_inchi_tautomerization(smiles)
         if "@" not in smiles:

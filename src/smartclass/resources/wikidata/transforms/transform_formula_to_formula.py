@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from smartclass.chem.conversion.smiles_to_formula import smiles_to_formula
+from smartclass.chem.conversion.convert_smiles_to_formula import convert_smiles_to_formula
 from smartclass.helpers.convert_chemical_formula import convert_chemical_formula
 
 
@@ -17,7 +17,7 @@ def transform_formula_to_formula(result: dict) -> dict | None:
     :rtype: Union[dict, None]
     """
     formula = result.get("formula", "")
-    nf = smiles_to_formula(result.get("smiles", ""))
+    nf = convert_smiles_to_formula(result.get("smiles", ""))
 
     if nf is not None:
         new_formula = convert_chemical_formula(nf)

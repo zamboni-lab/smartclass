@@ -2,17 +2,17 @@
 
 from __future__ import annotations
 
-from smartclass.chem.conversion.mol_to_inchi import mol_to_inchi
-from smartclass.chem.conversion.smiles_to_mol import smiles_to_mol
+from smartclass.chem.conversion.convert_mol_to_inchi import convert_mol_to_inchi
+from smartclass.chem.conversion.convert_smiles_to_mol import convert_smiles_to_mol
 
-smiles_to_mol
+convert_smiles_to_mol
 
 __all__ = [
-    "smiles_to_inchi",
+    "convert_smiles_to_inchi",
 ]
 
 
-def smiles_to_inchi(smiles: str) -> str | None:
+def convert_smiles_to_inchi(smiles: str) -> str | None:
     """
     Convert a structure SMILES to InChI.
 
@@ -22,9 +22,9 @@ def smiles_to_inchi(smiles: str) -> str | None:
     :returns: An InChI.
     :rtype: Union[str, None]
     """
-    mol = smiles_to_mol(smiles)
+    mol = convert_smiles_to_mol(smiles)
     if mol is not None:
-        return mol_to_inchi(mol)
+        return convert_mol_to_inchi(mol)
     else:
         return None
 
@@ -33,4 +33,4 @@ if __name__ == "__main__":
     smiles_to_test = ["N[C@@H](CCCNC(N)=N)C(O)=O"]
 
     for smiles in smiles_to_test:
-        smiles_to_inchi(smiles)
+        convert_smiles_to_inchi(smiles)

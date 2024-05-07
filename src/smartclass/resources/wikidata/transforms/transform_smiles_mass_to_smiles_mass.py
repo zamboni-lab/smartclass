@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from smartclass.chem.conversion.smiles_to_mass import smiles_to_mass
+from smartclass.chem.conversion.convert_smiles_to_mass import convert_smiles_to_mass
 
 
 def transform_smiles_mass_to_smiles_mass(result: dict, tol: float = 0.001) -> dict | None:
@@ -18,7 +18,7 @@ def transform_smiles_mass_to_smiles_mass(result: dict, tol: float = 0.001) -> di
     :returns: Transformed query result.
     :rtype: Union[dict, None]
     """
-    mass = smiles_to_mass(result.get("smiles", ""))
+    mass = convert_smiles_to_mass(result.get("smiles", ""))
     mass_wd = float(result.get("mass", "").split("±")[0])
     if mass is not None:
         if abs(float(mass) - mass_wd) > tol:

@@ -7,11 +7,11 @@ import logging
 from rdkit import Chem
 
 __all__ = [
-    "mol_to_cxsmiles",
+    "convert_mol_to_cxsmiles",
 ]
 
 
-def mol_to_cxsmiles(args: tuple[str, str]) -> tuple[str, str]:
+def convert_mol_to_cxsmiles(args: tuple[str, str]) -> tuple[str, str]:
     """
     Convert a structure MOL to CXSMILES.
 
@@ -53,4 +53,4 @@ if __name__ == "__main__":
     0.5000   -0.8660    0.0000 H   0  0  0  0  0  0
 M  END
 """
-    result = mol_to_cxsmiles((structure_name, structure_mol))
+    result = convert_mol_to_cxsmiles((structure_name, structure_mol))

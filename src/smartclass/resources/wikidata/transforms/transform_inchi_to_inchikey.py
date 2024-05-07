@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from smartclass.chem.conversion.inchi_to_inchikey import inchi_to_inchikey
+from smartclass.chem.conversion.convert_inchi_to_inchikey import convert_inchi_to_inchikey
 
 
 def transform_inchi_to_inchikey(result: dict) -> dict | None:
@@ -15,7 +15,7 @@ def transform_inchi_to_inchikey(result: dict) -> dict | None:
     :returns: Transformed query result.
     :rtype: Union[dict, None]
     """
-    inchikey = inchi_to_inchikey(result.get("inchi", ""))
+    inchikey = convert_inchi_to_inchikey(result.get("inchi", ""))
     if inchikey is not None:
         transformed_result = {
             "qid": result.get("structure", "").replace("http://www.wikidata.org/entity/", ""),

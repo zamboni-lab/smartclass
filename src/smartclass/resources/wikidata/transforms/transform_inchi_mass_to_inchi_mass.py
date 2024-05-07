@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from smartclass.chem.conversion.inchi_to_mass import inchi_to_mass
+from smartclass.chem.conversion.convert_inchi_to_mass import convert_inchi_to_mass
 
 
 def transform_inchi_mass_to_inchi_mass(result: dict, tol: float = 0.001) -> dict | None:
@@ -18,7 +18,7 @@ def transform_inchi_mass_to_inchi_mass(result: dict, tol: float = 0.001) -> dict
     :returns: Transformed query result.
     :rtype: Union[dict, None]
     """
-    mass = inchi_to_mass(result.get("inchi", ""))
+    mass = convert_inchi_to_mass(result.get("inchi", ""))
     mass_wd = float(result.get("mass", "").split("±")[0])
     if mass is not None:
         if abs(float(mass) - mass_wd) > tol:

@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from smartclass.chem.conversion.inchi_to_mass import inchi_to_mass
+from smartclass.chem.conversion.convert_inchi_to_mass import convert_inchi_to_mass
 
 
 def transform_inchi_to_mass(result: dict) -> dict | None:
@@ -15,7 +15,7 @@ def transform_inchi_to_mass(result: dict) -> dict | None:
     :returns: Transformed query result.
     :rtype: Union[dict, None]
     """
-    mass = inchi_to_mass(result.get("inchi", ""))
+    mass = convert_inchi_to_mass(result.get("inchi", ""))
     if mass is not None:
         transformed_result = {
             "qid": result.get("structure", "").replace("http://www.wikidata.org/entity/", ""),

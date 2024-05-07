@@ -6,7 +6,7 @@ import logging
 
 from rdkit.Chem import SubstructMatchParameters, rdTautomerQuery
 
-from smartclass.chem.conversion.mol_to_inchikey import mol_to_inchikey
+from smartclass.chem.conversion.convert_mol_to_inchikey import convert_mol_to_inchikey
 from smartclass.chem.helpers.enumerate_structures import enumerate_structures
 from smartclass.chem.helpers.get_num_matched_atoms_bonds import get_num_matched_atoms_bonds
 
@@ -44,7 +44,7 @@ def search_class(
                                 {
                                     "class_id": class_id,
                                     "class_structure": class_structure,
-                                    "inchikey": mol_to_inchikey(structure),
+                                    "inchikey": convert_mol_to_inchikey(structure),
                                     "matched_ab": get_num_matched_atoms_bonds(
                                         mol_1=structure, mol_2=match
                                     ),
@@ -59,7 +59,7 @@ def search_class(
                             {
                                 "class_id": class_id,
                                 "class_structure": class_structure,
-                                "inchikey": mol_to_inchikey(structure),
+                                "inchikey": convert_mol_to_inchikey(structure),
                                 "matched_ab": get_num_matched_atoms_bonds(
                                     mol_1=structure, mol_2=query
                                 ),

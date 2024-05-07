@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from smartclass.chem.conversion.smiles_to_inchi import smiles_to_inchi
+from smartclass.chem.conversion.convert_smiles_to_inchi import convert_smiles_to_inchi
 
 
 def transform_smiles_to_inchi(result: dict) -> dict | None:
@@ -15,7 +15,7 @@ def transform_smiles_to_inchi(result: dict) -> dict | None:
     :returns: Transformed query result.
     :rtype: Union[dict, None]
     """
-    inchi = smiles_to_inchi(result.get("smiles", ""))
+    inchi = convert_smiles_to_inchi(result.get("smiles", ""))
     inchi_wd = result.get("inchi", None)
     if inchi is not None:
         if inchi_wd is None:

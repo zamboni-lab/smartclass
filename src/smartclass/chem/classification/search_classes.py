@@ -114,8 +114,6 @@ def search_classes(
     params = Chem.SubstructMatchParameters()
     params.useGenericMatchers = True
 
-    tautomer_insensitive = False
-
     logging.basicConfig(level=logging.INFO)
     logging.info(f"Classifying {len(structures)} structures...")
     logging.basicConfig(level=logging.INFO)
@@ -127,7 +125,6 @@ def search_classes(
             class_hierarchy=class_hierarchy,
             structures=structures,
             params=params,
-            tautomer_insensitive=tautomer_insensitive,
         )
     )
     # results = list(
@@ -136,7 +133,6 @@ def search_classes(
     #         class_hierarchy=class_hierarchy,
     #         structures=structures,
     #         params=params,
-    #         tautomer_insensitive=tautomer_insensitive,
     #     )
     # )
 

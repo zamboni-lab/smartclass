@@ -22,7 +22,6 @@ def bfs_search_classes_generator(
     classes: list[dict[str, list[str]]],
     structures: list,
     params: SubstructMatchParameters,
-    tautomer_insensitive: bool,
     class_hierarchy: dict[str, list[str]] | None = None,
 ) -> Generator:
     """
@@ -36,9 +35,6 @@ def bfs_search_classes_generator(
 
     :param params: Parameters for matching.
     :type params: SubstructMatchParameters
-
-    :param tautomer_insensitive: Flag indicating whether tautomer-insensitive search is required.
-    :type tautomer_insensitive: bool
 
     :param class_hierarchy: Dictionary representing hierarchy between classes (optional).
     :param class_hierarchy: Union[None,dict[str, list[str]]].
@@ -65,7 +61,6 @@ def bfs_search_classes_generator(
                 class_dict={current_class_id: class_structure},
                 structures=structures,
                 params=params,
-                tautomer_insensitive=tautomer_insensitive,
             )
             for result in results:
                 yield result
@@ -86,7 +81,6 @@ def bfs_search_classes_generator(
                     class_dict={class_id: class_structure_list},
                     structures=structures,
                     params=params,
-                    tautomer_insensitive=tautomer_insensitive,
                 )
                 for result in results:
                     yield result
@@ -96,7 +90,6 @@ def tqdm_bfs_search_classes_generator(
     classes: list[dict[str, list[str]]],
     structures: list,
     params: SubstructMatchParameters,
-    tautomer_insensitive: bool,
     class_hierarchy: dict[str, list[str]] | None = None,
 ) -> Generator:
     """
@@ -111,9 +104,6 @@ def tqdm_bfs_search_classes_generator(
     :param params: Parameters for matching.
     :type params: SubstructMatchParameters
 
-    :param tautomer_insensitive: Flag indicating whether tautomer-insensitive search is required.
-    :type tautomer_insensitive: bool
-
     :param class_hierarchy: Dictionary representing hierarchy between classes (optional).
     :param class_hierarchy: Union[None,dict[str, list[str]]].
 
@@ -122,9 +112,7 @@ def tqdm_bfs_search_classes_generator(
     with tqdm(
         desc="Searching classes",
     ) as pbar:
-        for result in bfs_search_classes_generator(
-            classes, structures, params, tautomer_insensitive, class_hierarchy
-        ):
+        for result in bfs_search_classes_generator(classes, structures, params, class_hierarchy):
             yield result
             pbar.update(1)
 
@@ -133,7 +121,6 @@ def tqdm_bfs_search_classes_generator(
 #         classes: List[Dict[str, str]],
 #         structures: list,
 #         params: SubstructMatchParameters,
-#         tautomer_insensitive: bool,
 #         class_hierarchy: Optional[Dict[str, List[str]]] = None,
 # ) -> Generator:
 #     """
@@ -147,9 +134,6 @@ def tqdm_bfs_search_classes_generator(
 #
 #    :param params: Parameters for matching.
 #    :type params: SubstructMatchParameters
-#
-#    :param tautomer_insensitive: Flag indicating whether tautomer-insensitive search is required.
-#    :type tautomer_insensitive: bool
 #
 #    :param class_hierarchy: Dictionary representing hierarchy between classes (optional).
 #    :param class_hierarchy: Union[None,dict[str, list[str]]].
@@ -173,7 +157,6 @@ def tqdm_bfs_search_classes_generator(
 #             class_structure,
 #             structures,
 #             params,
-#             tautomer_insensitive,
 #         )
 
 #         for result in results:
@@ -208,8 +191,6 @@ if __name__ == "__main__":
     params.maxMatches = 100
     params.useGenericMatchers = True
 
-    tautomer_insensitive = True
-
     # Perform BFS search
     results_bfs = list(
         bfs_search_classes_generator(
@@ -217,7 +198,6 @@ if __name__ == "__main__":
             class_hierarchy=class_hierarchy,
             structures=structures,
             params=params,
-            tautomer_insensitive=tautomer_insensitive,
         )
     )
 
@@ -228,6 +208,5 @@ if __name__ == "__main__":
     #         class_hierarchy=class_hierarchy,
     #         structures=structures,
     #         params=params,
-    #         tautomer_insensitive=tautomer_insensitive,
     #     )
     # )

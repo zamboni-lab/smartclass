@@ -2,8 +2,7 @@
 
 from __future__ import annotations
 
-from rdkit.Chem.Descriptors import ExactMolWt
-
+from smartclass.chem.conversion.convert_mol_to_mass import convert_mol_to_mass
 from smartclass.chem.conversion.convert_smiles_to_mol import convert_smiles_to_mol
 
 __all__ = [
@@ -23,7 +22,7 @@ def convert_smiles_to_mass(smiles: str) -> float | None:
     """
     mol = convert_smiles_to_mol(smiles)
     if mol is not None:
-        return ExactMolWt(mol)
+        return convert_mol_to_mass(mol)
     else:
         return None
 

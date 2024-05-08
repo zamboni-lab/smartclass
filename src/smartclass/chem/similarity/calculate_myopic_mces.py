@@ -3,7 +3,7 @@
 from myopic_mces.myopic_mces import MCES
 
 
-def calculate_myopic_mces(s_1: str, s_2: str, thr: int = -1):
+def calculate_myopic_mces(s_1: str, s_2: str, thr: int = -1) -> tuple[int, float, float, int]:
     """
     Calculate myopic MCES.
 
@@ -16,7 +16,10 @@ def calculate_myopic_mces(s_1: str, s_2: str, thr: int = -1):
     :param thr: Threshold.
     :type thr: int
 
-    :returns: TODO.
-    :rtype: TODO
+    :returns: Index, Distance between the molecules, Time taken for the calculation, Type of Distance:
+            - 1 : Exact Distance
+            - 2 : Lower bound (if the exact distance is above the threshold; bound chosen dynamically)
+            - 4 : Lower bound (second lower bound was used)
+    :rtype: int, float, float, int
     """
     return MCES(ind=0, s1=s_1, s2=s_2, threshold=thr, solver="default")

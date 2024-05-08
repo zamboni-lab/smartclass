@@ -2,14 +2,14 @@
 
 from __future__ import annotations
 
-from rdkit.Chem import MolFromSmarts
+from rdkit.Chem import Mol, MolFromSmarts
 
 __all__ = [
     "convert_smarts_to_mol",
 ]
 
 
-def convert_smarts_to_mol(smarts: str) -> str | None:
+def convert_smarts_to_mol(smarts: str) -> Mol | None:
     """
     Convert a structure SMARTS to MOL.
 
@@ -17,7 +17,7 @@ def convert_smarts_to_mol(smarts: str) -> str | None:
     :type smarts: str
 
     :returns: A MOL.
-    :rtype: Union[str, None]
+    :rtype: Union[Mol, None]
     """
     return MolFromSmarts(smarts)
 

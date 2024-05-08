@@ -2,16 +2,15 @@
 
 from __future__ import annotations
 
-from rdkit.Chem.Descriptors import ExactMolWt
-
 from smartclass.chem.conversion.convert_inchi_to_mol import convert_inchi_to_mol
+from smartclass.chem.conversion.convert_mol_to_mass import convert_mol_to_mass
 
 __all__ = [
     "convert_inchi_to_mass",
 ]
 
 
-def convert_inchi_to_mass(inchi: str) -> str | None:
+def convert_inchi_to_mass(inchi: str) -> float | None:
     """
     Convert a structure InChI to mass.
 
@@ -19,11 +18,11 @@ def convert_inchi_to_mass(inchi: str) -> str | None:
     :type inchi: str
 
     :returns: A mass.
-    :rtype: Union[str, None]
+    :rtype: Union[float, None]
     """
     mol = convert_inchi_to_mol(inchi)
     if mol is not None:
-        return ExactMolWt(mol)
+        return convert_mol_to_mass(mol)
     else:
         return None
 

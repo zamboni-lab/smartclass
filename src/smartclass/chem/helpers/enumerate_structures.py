@@ -17,7 +17,7 @@ def enumerate_structures(
     """
     Enumerate structures.
 
-    :param mol: A mol.
+    :param mol: A structure MOL.
     :type mol: Mol
 
 

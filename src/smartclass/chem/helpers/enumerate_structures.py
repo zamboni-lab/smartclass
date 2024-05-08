@@ -15,7 +15,7 @@ __all__ = [
 def enumerate_structures(
     structure: str,
     tautomer_insensitive: bool,
-) -> dict[str, rdTautomerQuery.TautomerQuery | Mol]:
+) -> list[rdTautomerQuery.TautomerQuery | Mol]:
     """Enumerate structures."""
     query = Chem.MolFromSmarts(structure)
     # TODO looks important
@@ -49,4 +49,4 @@ def enumerate_structures(
 
     # TODO See https://github.com/rdkit/rdkit/commit/908e47cc03607b86eb58cd5512555b741356f15e
 
-    return {structure: queries}
+    return queries

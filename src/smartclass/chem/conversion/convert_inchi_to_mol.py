@@ -2,14 +2,14 @@
 
 from __future__ import annotations
 
-from rdkit.Chem import MolFromInchi
+from rdkit.Chem import Mol, MolFromInchi
 
 __all__ = [
     "convert_inchi_to_mol",
 ]
 
 
-def convert_inchi_to_mol(inchi: str) -> str | None:
+def convert_inchi_to_mol(inchi: str) -> Mol | None:
     """
     Convert a structure InChI to MOL.
 
@@ -17,7 +17,7 @@ def convert_inchi_to_mol(inchi: str) -> str | None:
     :type inchi: str
 
     :returns: A MOL.
-    :rtype: Union[str, None]
+    :rtype: Union[Mol, None]
     """
     return MolFromInchi(inchi)
 

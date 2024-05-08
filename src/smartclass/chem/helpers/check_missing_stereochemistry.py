@@ -5,6 +5,7 @@ from __future__ import annotations
 import logging
 
 from rdkit import Chem
+from rdkit.Chem import Mol
 from rdkit.Chem.EnumerateStereoisomers import GetStereoisomerCount, StereoEnumerationOptions
 
 __all__ = [
@@ -66,13 +67,13 @@ def check_missing_stereochemistry(smiles: str, use_legacy: bool = False) -> bool
 
 
 def count_multiple_stereoisomers(
-    mol,
-):
+    mol: Mol,
+) -> bool:
     """
     Count multiple stereoisomers.
 
-    :param mol: Mol.
-    :type mol: TODO
+    :param mol: A structure MOL.
+    :type mol: Mol
 
     :returns: flag.
     :rtype: bool

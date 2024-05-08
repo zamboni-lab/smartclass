@@ -28,7 +28,6 @@ from smartclass.chem.conversion.convert_smiles_to_formula import (  # noqa:F401
 from smartclass.chem.conversion.convert_smiles_to_inchi import convert_smiles_to_inchi  # noqa:F401
 from smartclass.chem.conversion.convert_smiles_to_mass import convert_smiles_to_mass  # noqa:F401
 from smartclass.chem.conversion.convert_smiles_to_mol import convert_smiles_to_mol  # noqa:F401
-from smartclass.chem.helpers import calculate_descriptors  # noqa:F401
 from smartclass.chem.helpers import check_missing_stereochemistry  # noqa:F401
 from smartclass.chem.helpers import enumerate_structures  # noqa:F401
 from smartclass.chem.helpers import fix_inchi_tautomerization  # noqa:F401

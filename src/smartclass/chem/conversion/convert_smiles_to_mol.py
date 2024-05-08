@@ -2,14 +2,14 @@
 
 from __future__ import annotations
 
-from rdkit.Chem import MolFromSmiles
+from rdkit.Chem import Mol, MolFromSmiles
 
 __all__ = [
     "convert_smiles_to_mol",
 ]
 
 
-def convert_smiles_to_mol(smiles: str) -> str | None:
+def convert_smiles_to_mol(smiles: str) -> Mol | None:
     """
     Convert a structure SMILES to MOL.
 
@@ -17,7 +17,7 @@ def convert_smiles_to_mol(smiles: str) -> str | None:
     :type smiles: str
 
     :returns: A MOL.
-    :rtype: Union[str, None]
+    :rtype: Union[Mol, None]
     """
     return MolFromSmiles(smiles)
 

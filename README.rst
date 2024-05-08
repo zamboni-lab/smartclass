@@ -1,7 +1,7 @@
 Smartclass
 ==========
 
-Short Description TODO
+Smartclass classifies structures from SMARTS.
 
 🚀 Installation
 ---------------
@@ -14,7 +14,7 @@ Short Description TODO
 💪 Getting Started
 ------------------
 
-To get started quickly:
+A mini notebook is available.
 
 .. code-block:: sh
 
@@ -116,7 +116,7 @@ See `CONTRIBUTING.md <https://github.com/zamboni-lab/smartclass/blob/main/.githu
 
 ⚖️ License
 ~~~~~~~~~~
-The code in this package is licensed under the MIT License.
+See `LICENSE <https://github.com/zamboni-lab/smartclass/blob/main/LICENSE>`_
 
 ..
  📖 Citation
@@ -127,74 +127,16 @@ The code in this package is licensed under the MIT License.
  🎁 Support
  ~~~~~~~~~~
  This project has been supported by the following organizations (in alphabetical order):
- - [Harvard Program in Therapeutic Science - Laboratory of Systems Pharmacology](https://hits.harvard.edu/the-program/laboratory-of-systems-pharmacology/)
+ - [TODO](TODO)
 
 ..
  💰 Funding
  ~~~~~~~~~~
  This project has been supported by the following grants:
- - [Harvard Program in Therapeutic Science - Laboratory of Systems Pharmacology](https://hits.harvard.edu/the-program/laboratory-of-systems-pharmacology/)
+ - [TODO](TODO)
 
 🍪 Cookiecutter
 ~~~~~~~~~~~~~~~
 This package was created with `@audreyfeldroy <https://github.com/audreyfeldroy>`_'s
 `cookiecutter <https://github.com/cookiecutter/cookiecutter>`_ package using `@cthoyt <https://github.com/cthoyt>`_'s
 `cookiecutter-snekpack <https://github.com/cthoyt/cookiecutter-snekpack>`_ template.
-
-🛠️ For Developers
------------------
-Development Installation
-~~~~~~~~~~~~~~~~~~~~~~~~
-To install in development mode, use the following:
-
-.. code-block:: sh
-
-    git clone git+https://github.com/zamboni-lab/smartclass.git
-    cd smartclass
-    pip install -e .
-
-🥼 Testing
-~~~~~~~~~~
-After cloning the repository and installing ``tox`` with ``pip install tox``, the unit tests in the ``tests/`` folder can be
-run reproducibly with:
-
-.. code-block:: sh
-
-    tox
-
-Additionally, these tests are automatically re-run with each commit in a `GitHub Action <https://github.com/zamboni-lab/smartclass/actions?query=workflow%3ACI>`_.
-
-📖 Building the Documentation
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-The documentation can be built locally using the following:
-
-.. code-block:: sh
-
-    tox -e docs
-    open docs/build/html/index.html
-
-The documentation automatically installs the package as well as the ``docs``
-extra specified in the `setup.cfg <setup.cfg>`_. ``sphinx`` plugins
-like ``texext`` can be added there. Additionally, they need to be added to the
-``extensions`` list in `docs/source/conf.py <docs/source/conf.py>`_.
-
-📦 Making a Release
-~~~~~~~~~~~~~~~~~~~
-After installing the package in development mode and installing
-``tox`` with ``pip install tox``, the commands for making a new release are contained within the ``finish`` environment
-in ``tox.ini``. Run the following from the shell:
-
-.. code-block:: sh
-
-    tox -e finish
-
-This script does the following:
-
-1. Uses `Bump2Version <https://github.com/c4urself/bump2version>`_ to switch the version number in the ``setup.cfg``,
-   ``src/smartclass/version.py``, and `docs/source/conf.py <docs/source/conf.py>`_ to not have the ``-dev`` suffix
-2. Packages the code in both a tar archive and a wheel using `build <https://github.com/pypa/build>`_
-3. Uploads to PyPI using `twine <https://github.com/pypa/twine>`_. Be sure to have a ``.pypirc`` file configured to avoid the need for manual input at this
-   step
-4. Push to GitHub. You'll need to make a release going with the commit where the version was bumped.
-5. Bump the version to the next patch. If you made big changes and want to bump the version by minor, you can
-   use ``tox -e bumpversion -- minor`` after.

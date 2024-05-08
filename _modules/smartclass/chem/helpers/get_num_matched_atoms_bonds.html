@@ -83,7 +83,7 @@
 
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">from</span> <span class="nn">rdkit.Chem</span> <span class="kn">import</span> <span class="n">rdFMCS</span>
+<span class="kn">from</span> <span class="nn">rdkit.Chem</span> <span class="kn">import</span> <span class="n">Mol</span><span class="p">,</span> <span class="n">rdFMCS</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s2">&quot;get_num_matched_atoms_bonds&quot;</span><span class="p">,</span>
@@ -93,17 +93,17 @@
 <div class="viewcode-block" id="get_num_matched_atoms_bonds">
 <a class="viewcode-back" href="../../../../api/smartclass.get_num_matched_atoms_bonds.html#smartclass.get_num_matched_atoms_bonds">[docs]</a>
 <span class="k">def</span> <span class="nf">get_num_matched_atoms_bonds</span><span class="p">(</span>
-    <span class="n">mol_1</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">mol_2</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">mol_1</span><span class="p">:</span> <span class="n">Mol</span><span class="p">,</span>
+    <span class="n">mol_2</span><span class="p">:</span> <span class="n">Mol</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Get number of matched atoms and bonds.</span>
 
 <span class="sd">    :param mol_1: A structure MOL.</span>
-<span class="sd">    :type mol_1: str</span>
+<span class="sd">    :type mol_1: Mol</span>
 
 <span class="sd">    :param mol_2: A structure MOL.</span>
-<span class="sd">    :type mol_2: str</span>
+<span class="sd">    :type mol_2: Mol</span>
 
 <span class="sd">    :returns: Number of matched atoms and bonds.</span>
 <span class="sd">    :rtype: int</span>

@@ -83,7 +83,7 @@
 
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">from</span> <span class="nn">rdkit.Chem</span> <span class="kn">import</span> <span class="n">MolFromInchi</span>
+<span class="kn">from</span> <span class="nn">rdkit.Chem</span> <span class="kn">import</span> <span class="n">Mol</span><span class="p">,</span> <span class="n">MolFromInchi</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s2">&quot;convert_inchi_to_mol&quot;</span><span class="p">,</span>
@@ -92,7 +92,7 @@
 
 <div class="viewcode-block" id="convert_inchi_to_mol">
 <a class="viewcode-back" href="../../../../api/smartclass.convert_inchi_to_mol.html#smartclass.convert_inchi_to_mol">[docs]</a>
-<span class="k">def</span> <span class="nf">convert_inchi_to_mol</span><span class="p">(</span><span class="n">inchi</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">convert_inchi_to_mol</span><span class="p">(</span><span class="n">inchi</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Mol</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Convert a structure InChI to MOL.</span>
 
@@ -100,7 +100,7 @@
 <span class="sd">    :type inchi: str</span>
 
 <span class="sd">    :returns: A MOL.</span>
-<span class="sd">    :rtype: Union[str, None]</span>
+<span class="sd">    :rtype: Union[Mol, None]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">MolFromInchi</span><span class="p">(</span><span class="n">inchi</span><span class="p">)</span></div>
 

@@ -57,7 +57,6 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../reference.html">Reference</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../reference.html#functions">Functions</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="smartclass.bfs_search_classes_generator.html">bfs_search_classes_generator</a></li>
-<li class="toctree-l3"><a class="reference internal" href="smartclass.calculate_descriptors.html">calculate_descriptors</a></li>
 <li class="toctree-l3"><a class="reference internal" href="smartclass.check_missing_stereochemistry.html">check_missing_stereochemistry</a></li>
 <li class="toctree-l3"><a class="reference internal" href="smartclass.check_smiles_isomeric.html">check_smiles_isomeric</a></li>
 <li class="toctree-l3"><a class="reference internal" href="smartclass.combine_csv_files.html">combine_csv_files</a></li>
@@ -132,13 +131,13 @@
 <h1>get_num_matched_atoms_bonds<a class="headerlink" href="#get-num-matched-atoms-bonds" title="Link to this heading"></a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="smartclass.get_num_matched_atoms_bonds">
-<span class="sig-name descname"><span class="pre">get_num_matched_atoms_bonds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mol_1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">mol_2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></span><a class="reference internal" href="../_modules/smartclass/chem/helpers/get_num_matched_atoms_bonds.html#get_num_matched_atoms_bonds"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#smartclass.get_num_matched_atoms_bonds" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_num_matched_atoms_bonds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mol_1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Mol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mol_2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Mol</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></span><a class="reference internal" href="../_modules/smartclass/chem/helpers/get_num_matched_atoms_bonds.html#get_num_matched_atoms_bonds"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#smartclass.get_num_matched_atoms_bonds" title="Link to this definition"></a></dt>
 <dd><p>Get number of matched atoms and bonds.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>mol_1</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – A structure MOL.</p></li>
-<li><p><strong>mol_2</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – A structure MOL.</p></li>
+<li><p><strong>mol_1</strong> (<em>Mol</em>) – A structure MOL.</p></li>
+<li><p><strong>mol_2</strong> (<em>Mol</em>) – A structure MOL.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>

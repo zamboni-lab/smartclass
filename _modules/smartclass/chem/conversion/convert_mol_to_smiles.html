@@ -83,7 +83,7 @@
 
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">from</span> <span class="nn">rdkit.Chem</span> <span class="kn">import</span> <span class="n">MolToSmiles</span>
+<span class="kn">from</span> <span class="nn">rdkit.Chem</span> <span class="kn">import</span> <span class="n">Mol</span><span class="p">,</span> <span class="n">MolToSmiles</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s2">&quot;convert_mol_to_smiles&quot;</span><span class="p">,</span>
@@ -92,12 +92,12 @@
 
 <div class="viewcode-block" id="convert_mol_to_smiles">
 <a class="viewcode-back" href="../../../../api/smartclass.convert_mol_to_smiles.html#smartclass.convert_mol_to_smiles">[docs]</a>
-<span class="k">def</span> <span class="nf">convert_mol_to_smiles</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">convert_mol_to_smiles</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Convert a structure MOL to SMILES.</span>
 
 <span class="sd">    :param mol: A structure MOL.</span>
-<span class="sd">    :type mol: str</span>
+<span class="sd">    :type mol: Mol</span>
 
 <span class="sd">    :returns: A SMILES.</span>
 <span class="sd">    :rtype: str</span>

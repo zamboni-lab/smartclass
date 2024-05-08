@@ -86,6 +86,7 @@
 <span class="kn">import</span> <span class="nn">logging</span>
 
 <span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">requests.exceptions</span> <span class="kn">import</span> <span class="n">RequestException</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s2">&quot;get_request&quot;</span><span class="p">,</span>
@@ -104,7 +105,7 @@
 <span class="sd">    :param query: The query string to include in the request.</span>
 <span class="sd">    :type query: str</span>
 
-<span class="sd">    :raises requests.exceptions.RequestException: If there is an error.</span>
+<span class="sd">    :raises RequestException: If there is an error.</span>
 
 <span class="sd">    :returns: A list of dictionaries containing the retrieved JSON data.</span>
 <span class="sd">    :rtype: list[dict]</span>
@@ -123,7 +124,7 @@
             <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">results</span>
-    <span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">RequestException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="k">except</span> <span class="n">RequestException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
         <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error making the GET request: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">raise</span></div>
 
@@ -135,7 +136,7 @@
         <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://example.com/sparql-endpoint&quot;</span>
         <span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;SELECT * WHERE {?s ?p ?o}&quot;</span>
         <span class="n">results</span> <span class="o">=</span> <span class="n">get_request</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">query</span><span class="p">)</span>
-    <span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">RequestException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="k">except</span> <span class="n">RequestException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
         <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Request error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 

@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 # import logging
-from rdkit.Chem import MolFromSmarts, SubstructMatchParameters
+from rdkit.Chem import FilterCatalog, MolFromSmarts, SubstructMatchParameters
 
 from smartclass.chem.conversion.convert_mol_to_inchikey import convert_mol_to_inchikey
 
@@ -89,11 +89,28 @@ def search_class(
     #                 logging.error(e)
     #                 logging.error(f"Error while searching for class_id {class_id, class_structure}")
 
+    # for class_id, class_structures in class_dict.items():
+    #     for class_structure in class_structures:
+    #         pattern = MolFromSmarts(class_structure)
+    #         for structure in structures:
+    #             if structure.HasSubstructMatch(pattern, params):
+    #                 result = {
+    #                     "class_id": class_id,
+    #                     "class_structure": class_structure,
+    #                     "inchikey": convert_mol_to_inchikey(structure),
+    #                     "matched_ab": get_num_matched_atoms_bonds(mol_1=structure, mol_2=pattern),
+    #                 }
+    #                 results.append(result)
+
     for class_id, class_structures in class_dict.items():
         for class_structure in class_structures:
+            catalog = FilterCatalog.FilterCatalog()
             pattern = MolFromSmarts(class_structure)
+            catalog.AddEntry(
+                FilterCatalog.FilterCatalogEntry(class_id, FilterCatalog.SmartsMatcher(pattern))
+            )
             for structure in structures:
-                if structure.HasSubstructMatch(pattern, params):
+                if catalog.HasMatch(structure):
                     result = {
                         "class_id": class_id,
                         "class_structure": class_structure,

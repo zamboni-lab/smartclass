@@ -100,7 +100,6 @@ final_merged_df = merged_df.join(classes_df, left_on="structure", right_on="stru
 )
 print(final_merged_df)
 
-
 # Filter rows where classes match
 matched_classes_df = final_merged_df.filter(pl.col("class_right") == pl.col("class")).filter(
     pl.col("structure") != pl.col("structure_right")

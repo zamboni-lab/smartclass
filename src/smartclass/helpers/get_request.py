@@ -5,6 +5,7 @@ from __future__ import annotations
 import logging
 
 import requests
+from requests.exceptions import RequestException
 
 __all__ = [
     "get_request",
@@ -21,7 +22,7 @@ def get_request(url: str, query: str) -> list[dict]:
     :param query: The query string to include in the request.
     :type query: str
 
-    :raises requests.exceptions.RequestException: If there is an error.
+    :raises RequestException: If there is an error.
 
     :returns: A list of dictionaries containing the retrieved JSON data.
     :rtype: list[dict]
@@ -40,7 +41,7 @@ def get_request(url: str, query: str) -> list[dict]:
             results.append(result)
 
         return results
-    except requests.exceptions.RequestException as e:
+    except RequestException as e:
         logging.error(f"Error making the GET request: {e}")
         raise
 
@@ -51,5 +52,5 @@ if __name__ == "__main__":
         url = "https://example.com/sparql-endpoint"
         query = "SELECT * WHERE {?s ?p ?o}"
         results = get_request(url, query)
-    except requests.exceptions.RequestException as e:
+    except RequestException as e:
         logging.error(f"Request error: {e}")

@@ -4,16 +4,12 @@ from __future__ import annotations
 
 import logging
 from collections.abc import Generator
-from typing import TYPE_CHECKING
 
 from rdkit.Chem import SubstructMatchParameters
 from tqdm import tqdm
 
 from smartclass.chem.classification.get_class_structures import get_class_structures
 from smartclass.chem.classification.search_class import search_class
-
-if TYPE_CHECKING:
-    from rdkit.Chem import rdSubstructLibrary
 
 __all__ = [
     "bfs_search_classes_generator",
@@ -24,7 +20,7 @@ __all__ = [
 
 def bfs_search_classes_generator(
     classes: list[dict[str, list[str]]],
-    structures: rdSubstructLibrary,
+    structures: list,
     params: SubstructMatchParameters,
     tautomer_insensitive: bool,
     class_hierarchy: dict[str, list[str]] | None = None,
@@ -32,12 +28,22 @@ def bfs_search_classes_generator(
     """
     Perform substructure search for chemical classes using Breadth-First Search (BFS) and yield results.
 
-    :param classes: List of chemical classes to search.
-    :param structures: RDKit substructure library for searching.
-    :param params: Parameters for substructure search.
+    :param classes: List of chemical classe.
+    :type classes: list[dict[str, list[str]]]
+
+    :param structures: List of structures.
+    :type structures: list
+
+    :param params: Parameters for matching.
+    :type params: SubstructMatchParameters
+
     :param tautomer_insensitive: Flag indicating whether tautomer-insensitive search is required.
+    :type tautomer_insensitive: bool
+
     :param class_hierarchy: Dictionary representing hierarchy between classes (optional).
-    :yields: A dictionary containing class_id, result_id, and smiles for each match.
+    :param class_hierarchy: Union[None,dict[str, list[str]]].
+
+    :yields: A dictionary containing matches.
     """
     class_structures = get_class_structures(classes)
     searched_classes = set()
@@ -55,17 +61,14 @@ def bfs_search_classes_generator(
                 logging.error(f"No class structure found for class_id {current_class_id}")
                 continue
 
-            for class_s in class_structure:
-                results = search_class(
-                    current_class_id,
-                    class_s,
-                    structures,
-                    params,
-                    tautomer_insensitive,
-                )
-
-                for result in results:
-                    yield result
+            results = search_class(
+                class_dict={current_class_id: class_structure},
+                structures=structures,
+                params=params,
+                tautomer_insensitive=tautomer_insensitive,
+            )
+            for result in results:
+                yield result
 
             searched_classes.add(current_class_id)
 
@@ -74,37 +77,24 @@ def bfs_search_classes_generator(
                     if child_class not in visited and child_class not in searched_classes:
                         queue.append(child_class)
 
-    for class_id, class_structure in class_structures.items():
-        if class_id not in searched_classes and (
-            class_hierarchy is None or class_id not in class_hierarchy
-        ):
-            for class_s in class_structure:
+    for class_dict in classes:
+        for class_id, class_structure_list in class_dict.items():
+            if class_id not in searched_classes and (
+                class_hierarchy is None or class_id not in class_hierarchy
+            ):
                 results = search_class(
-                    class_id,
-                    class_s,
-                    structures,
-                    params,
-                    tautomer_insensitive,
+                    class_dict={class_id: class_structure_list},
+                    structures=structures,
+                    params=params,
+                    tautomer_insensitive=tautomer_insensitive,
                 )
-
                 for result in results:
                     yield result
-
-            # results = search_class(
-            #     class_id,
-            #     class_structure,
-            #     structures,
-            #     params,
-            #     tautomer_insensitive,
-            # )
-
-            # for result in results:
-            #     yield result
 
 
 def tqdm_bfs_search_classes_generator(
     classes: list[dict[str, list[str]]],
-    structures: rdSubstructLibrary,
+    structures: list,
     params: SubstructMatchParameters,
     tautomer_insensitive: bool,
     class_hierarchy: dict[str, list[str]] | None = None,
@@ -112,11 +102,21 @@ def tqdm_bfs_search_classes_generator(
     """
     Perform substructure search for chemical classes using Breadth-First Search (BFS) and yield results with tqdm.
 
-    :param classes: List of chemical classes to search.
-    :param structures: RDKit substructure library for searching.
-    :param params: Parameters for substructure search.
+    :param classes: List of chemical classe.
+    :type classes: list[dict[str, list[str]]]
+
+    :param structures: List of structures.
+    :type structures: list
+
+    :param params: Parameters for matching.
+    :type params: SubstructMatchParameters
+
     :param tautomer_insensitive: Flag indicating whether tautomer-insensitive search is required.
+    :type tautomer_insensitive: bool
+
     :param class_hierarchy: Dictionary representing hierarchy between classes (optional).
+    :param class_hierarchy: Union[None,dict[str, list[str]]].
+
     :yields: A dictionary containing class_id, result_id, and smiles for each match.
     """
     with tqdm(
@@ -131,20 +131,30 @@ def tqdm_bfs_search_classes_generator(
 
 # def dfs_search_classes_generator(
 #         classes: List[Dict[str, str]],
-#         structures: rdSubstructLibrary,
+#         structures: list,
 #         params: SubstructMatchParameters,
 #         tautomer_insensitive: bool,
 #         class_hierarchy: Optional[Dict[str, List[str]]] = None,
 # ) -> Generator:
 #     """
 #     Perform substructure search for chemical classes using Depth-First Search (DFS) and yield results.
-
-#     :param classes: List of chemical classes to search.
-#     :param structures: RDKit substructure library for searching.
-#     :param params: Parameters for substructure search.
-#     :param tautomer_insensitive: Flag indicating whether tautomer-insensitive search is required.
-#     :param class_hierarchy: Dictionary representing hierarchy between classes (optional).
-#     :yields: A dictionary containing class_id, result_id, and smiles for each match.
+#
+#    :param classes: List of chemical classe.
+#    :type classes: list[dict[str, list[str]]]
+#
+#    :param structures: List of structures.
+#    :type structures: list
+#
+#    :param params: Parameters for matching.
+#    :type params: SubstructMatchParameters
+#
+#    :param tautomer_insensitive: Flag indicating whether tautomer-insensitive search is required.
+#    :type tautomer_insensitive: bool
+#
+#    :param class_hierarchy: Dictionary representing hierarchy between classes (optional).
+#    :param class_hierarchy: Union[None,dict[str, list[str]]].
+#
+#    :yields: A dictionary containing class_id, result_id, and smiles for each match.
 #     """
 #     class_structures = get_class_structures(classes)
 #     searched_classes = set()

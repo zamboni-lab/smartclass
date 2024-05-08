@@ -26,30 +26,7 @@ Get defined chemical classes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 .. code-block:: sh
 
-    poetry run smartclass querywikidata -q src/smartclass/data/queries/classes_cxsmiles.rq -o scratch/wikidata_classes_cxsmiles.tsv
     poetry run smartclass querywikidata -q src/smartclass/data/queries/classes_smarts.rq -o scratch/wikidata_classes_smarts.tsv
-    poetry run smartclass querywikidata -q src/smartclass/data/queries/classes_smiles_canonical.rq -o scratch/wikidata_classes_smiles_canonical.tsv
-    poetry run smartclass querywikidata -q src/smartclass/data/queries/classes_smiles_isomeric.rq -o scratch/wikidata_classes_smiles_isomeric.tsv
-    poetry run smartclass querywikidata -q src/smartclass/data/queries/classes_taxonomy.rq -o scratch/wikidata_classes_taxonomy.tsv
-
-Combine them
-~~~~~~~~~~~~
-.. code-block:: sh
-
-    poetry run smartclass combinecsvfiles -i scratch/wikidata_classes_smiles_canonical.tsv -i scratch/wikidata_classes_smiles_isomeric.tsv -i scratch/wikidata_classes_smarts.tsv -i scratch/wikidata_classes_cxsmiles.tsv -o scratch/wikidata_classes_full.tsv
-
-Get some structures
-~~~~~~~~~~~~~~~~~~~
-.. code-block:: sh
-    
-    poetry run smartclass getlatestchembl
-    # poetry run python3 smartclass/extract_smiles_lotus.py
-
-Load package data
-~~~~~~~~~~~~~~~~~~~
-.. code-block:: sh
-    
-    poetry run smartclass loadpkgdata
 
 Classify compounds
 ~~~~~~~~~~~~~~~~~~~

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>smartclass.chem.helpers.enumerate_structures &mdash; smartclass 0.0.1-dev documentation</title>
+  <title>smartclass.chem.conversion.convert_smarts_to_mol &mdash; smartclass 0.0.1-dev documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=fd3f3429" />
@@ -69,7 +69,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
-      <li class="breadcrumb-item active">smartclass.chem.helpers.enumerate_structures</li>
+      <li class="breadcrumb-item active">smartclass.chem.conversion.convert_smarts_to_mol</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -78,48 +78,39 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <h1>Source code for smartclass.chem.helpers.enumerate_structures</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Enumerate structures.&quot;&quot;&quot;</span>
+  <h1>Source code for smartclass.chem.conversion.convert_smarts_to_mol</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Convert a structure SMARTS to MOL.&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">import</span> <span class="nn">logging</span>
-
-<span class="kn">from</span> <span class="nn">rdkit.Chem</span> <span class="kn">import</span> <span class="n">Mol</span><span class="p">,</span> <span class="n">rdMolEnumerator</span>
+<span class="kn">from</span> <span class="nn">rdkit.Chem</span> <span class="kn">import</span> <span class="n">MolFromSmarts</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;enumerate_structures&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;convert_smarts_to_mol&quot;</span><span class="p">,</span>
 <span class="p">]</span>
 
 
-<div class="viewcode-block" id="enumerate_structures">
-<a class="viewcode-back" href="../../../../api/smartclass.enumerate_structures.html#smartclass.enumerate_structures">[docs]</a>
-<span class="k">def</span> <span class="nf">enumerate_structures</span><span class="p">(</span>
-    <span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Mol</span><span class="p">]:</span>
+<div class="viewcode-block" id="convert_smarts_to_mol">
+<a class="viewcode-back" href="../../../../api/smartclass.convert_smarts_to_mol.html#smartclass.convert_smarts_to_mol">[docs]</a>
+<span class="k">def</span> <span class="nf">convert_smarts_to_mol</span><span class="p">(</span><span class="n">smarts</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Enumerate structures.</span>
+<span class="sd">    Convert a structure SMARTS to MOL.</span>
 
-<span class="sd">    :param mol: A mol.</span>
-<span class="sd">    :type mol: Mol</span>
+<span class="sd">    :param smarts: A SMARTS.</span>
+<span class="sd">    :type smarts: str</span>
 
-
-<span class="sd">    :returns: A list of enumerated molecules.</span>
-<span class="sd">    :rtype: list[Mol]</span>
+<span class="sd">    :returns: A MOL.</span>
+<span class="sd">    :rtype: Union[str, None]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">enumerated_mols</span> <span class="o">=</span> <span class="n">rdMolEnumerator</span><span class="o">.</span><span class="n">Enumerate</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
-    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Enumeration failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="n">enumerated_mols</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">return</span> <span class="n">MolFromSmarts</span><span class="p">(</span><span class="n">smarts</span><span class="p">)</span></div>
 
-    <span class="c1"># Check if enumeration was successful</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">enumerated_mols</span><span class="p">:</span>
-        <span class="c1"># If enumeration failed, use the original mol as a fallback</span>
-        <span class="n">enumerated_mols</span> <span class="o">=</span> <span class="p">[</span><span class="n">mol</span><span class="p">]</span>
 
-    <span class="k">return</span> <span class="n">enumerated_mols</span></div>
 
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">smarts_to_test</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;TODO&quot;</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">smarts</span> <span class="ow">in</span> <span class="n">smarts_to_test</span><span class="p">:</span>
+        <span class="n">convert_smarts_to_mol</span><span class="p">(</span><span class="n">smarts</span><span class="p">)</span>
 </pre></div>
 
            </div>

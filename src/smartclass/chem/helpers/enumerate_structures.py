@@ -4,8 +4,7 @@ from __future__ import annotations
 
 import logging
 
-from rdkit import Chem
-from rdkit.Chem import Mol, rdMolEnumerator, rdTautomerQuery
+from rdkit.Chem import Mol, rdMolEnumerator
 
 __all__ = [
     "enumerate_structures",
@@ -13,40 +12,27 @@ __all__ = [
 
 
 def enumerate_structures(
-    structure: str,
-    tautomer_insensitive: bool,
-) -> list[rdTautomerQuery.TautomerQuery | Mol]:
-    """Enumerate structures."""
-    query = Chem.MolFromSmarts(structure)
-    # TODO looks important
-    # Chem.Kekulize(query)
-    Chem.SetGenericQueriesFromProperties(query)
+    mol: Mol,
+) -> list[Mol]:
+    """
+    Enumerate structures.
 
-    # Enumerate the query molecules
+    :param mol: A mol.
+    :type mol: Mol
+
+
+    :returns: A list of enumerated molecules.
+    :rtype: list[Mol]
+    """
     try:
-        bndl = rdMolEnumerator.Enumerate(query)
+        enumerated_mols = rdMolEnumerator.Enumerate(mol)
     except Exception as e:
-        bndl = []
-        logging.error(e)
+        logging.error(f"Enumeration failed: {e}")
+        enumerated_mols = []
 
     # Check if enumeration was successful
-    if len(bndl) == 0:
-        # If enumeration failed, use the original query as a fallback
-        bndl = [query]
+    if not enumerated_mols:
+        # If enumeration failed, use the original mol as a fallback
+        enumerated_mols = [mol]
 
-    # Create queries list
-    queries = []
-    for q in bndl:
-        # TODO see if needed
-        # Seems more like it is not for now
-        q = Chem.AdjustQueryProperties(q)
-        if tautomer_insensitive:
-            try:
-                q = rdTautomerQuery.TautomerQuery(q)
-            except Exception as e:
-                logging.error(e)
-        queries.append(q)
-
-    # TODO See https://github.com/rdkit/rdkit/commit/908e47cc03607b86eb58cd5512555b741356f15e
-
-    return queries
+    return enumerated_mols

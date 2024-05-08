@@ -37,7 +37,7 @@ def search_classes(
     """
     Substructure search for chemical classes.
 
-    :param classes_file: File providing the chemical classes to classify.
+    :param classes_file: File providing the chemical classes.
     :type classes_file: Union[None,str]
 
     :param classes_name_id: Name of the ID column in the classes file.
@@ -106,7 +106,7 @@ def search_classes(
     classes.append(classes_dict)
 
     # Load class hierarchy
-    class_hierarchy: dict = {}
+    class_hierarchy: dict[str, list[str]] = {}
     if include_hierarchy:
         class_hierarchy = load_pkg_chemical_hierarchy()
 

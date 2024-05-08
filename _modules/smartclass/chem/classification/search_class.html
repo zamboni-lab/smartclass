@@ -127,6 +127,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">results</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="p">[]</span>
 
+    <span class="c1"># COMMENT: This was the first version with enumeration of tautomers and queries.</span>
     <span class="c1"># queries = {}</span>
     <span class="c1"># for key, value in class_dict.items():</span>
     <span class="c1">#     for s in value:</span>
@@ -172,6 +173,7 @@
     <span class="c1">#                 logging.error(e)</span>
     <span class="c1">#                 logging.error(f&quot;Error while searching for class_id {class_id, class_structure}&quot;)</span>
 
+    <span class="c1"># COMMENT: This was the second version.</span>
     <span class="c1"># for class_id, class_structures in class_dict.items():</span>
     <span class="c1">#     for class_structure in class_structures:</span>
     <span class="c1">#         pattern = MolFromSmarts(class_structure)</span>
@@ -185,6 +187,7 @@
     <span class="c1">#                 }</span>
     <span class="c1">#                 results.append(result)</span>
 
+    <span class="c1"># COMMENT: This is the actual version. TODO params could be removed</span>
     <span class="k">for</span> <span class="n">class_id</span><span class="p">,</span> <span class="n">class_structures</span> <span class="ow">in</span> <span class="n">class_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
         <span class="k">for</span> <span class="n">class_structure</span> <span class="ow">in</span> <span class="n">class_structures</span><span class="p">:</span>
             <span class="n">catalog</span> <span class="o">=</span> <span class="n">FilterCatalog</span><span class="o">.</span><span class="n">FilterCatalog</span><span class="p">()</span>

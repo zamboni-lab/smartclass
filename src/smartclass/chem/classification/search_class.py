@@ -44,6 +44,7 @@ def search_class(
     """
     results: list = []
 
+    # COMMENT: This was the first version with enumeration of tautomers and queries.
     # queries = {}
     # for key, value in class_dict.items():
     #     for s in value:
@@ -89,6 +90,7 @@ def search_class(
     #                 logging.error(e)
     #                 logging.error(f"Error while searching for class_id {class_id, class_structure}")
 
+    # COMMENT: This was the second version.
     # for class_id, class_structures in class_dict.items():
     #     for class_structure in class_structures:
     #         pattern = MolFromSmarts(class_structure)
@@ -102,6 +104,7 @@ def search_class(
     #                 }
     #                 results.append(result)
 
+    # COMMENT: This is the actual version. TODO params could be removed
     for class_id, class_structures in class_dict.items():
         for class_structure in class_structures:
             catalog = FilterCatalog.FilterCatalog()

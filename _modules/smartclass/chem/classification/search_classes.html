@@ -87,11 +87,12 @@
 <span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 
-<span class="kn">from</span> <span class="nn">rdkit</span> <span class="kn">import</span> <span class="n">Chem</span>
+<span class="kn">from</span> <span class="nn">rdkit.Chem</span> <span class="kn">import</span> <span class="n">SubstructMatchParameters</span>
 
 <span class="kn">from</span> <span class="nn">smartclass.chem.classification.bfs_search_classes_generator</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">tqdm_bfs_search_classes_generator</span><span class="p">,</span>
 <span class="p">)</span>
+<span class="kn">from</span> <span class="nn">smartclass.chem.conversion.convert_smiles_to_mol</span> <span class="kn">import</span> <span class="n">convert_smiles_to_mol</span>
 <span class="kn">from</span> <span class="nn">smartclass.helpers</span> <span class="kn">import</span> <span class="n">convert_list_of_dict</span>
 <span class="kn">from</span> <span class="nn">smartclass.io</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">load_external_classes_file</span><span class="p">,</span>
@@ -155,9 +156,9 @@
     <span class="n">structures</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
     <span class="k">for</span> <span class="n">smi</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">smi</span> <span class="o">!=</span> <span class="s2">&quot;smiles&quot;</span><span class="p">:</span>
-            <span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="n">smi</span><span class="p">)</span>
+            <span class="n">mol</span> <span class="o">=</span> <span class="n">convert_smiles_to_mol</span><span class="p">(</span><span class="n">smi</span><span class="p">)</span>
             <span class="c1"># TODO looks important</span>
-            <span class="c1"># Chem.Kekulize(mol)</span>
+            <span class="c1"># Kekulize(mol)</span>
             <span class="k">if</span> <span class="n">mol</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">structures</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
 
@@ -193,7 +194,7 @@
         <span class="n">class_hierarchy</span> <span class="o">=</span> <span class="n">load_pkg_chemical_hierarchy</span><span class="p">()</span>
 
     <span class="c1"># Use generic matches</span>
-    <span class="n">params</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">SubstructMatchParameters</span><span class="p">()</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="n">SubstructMatchParameters</span><span class="p">()</span>
     <span class="n">params</span><span class="o">.</span><span class="n">useGenericMatchers</span> <span class="o">=</span> <span class="kc">True</span>
 
     <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>convert_smiles_to_formula &mdash; smartclass 0.0.1-dev documentation</title>
+  <title>convert_molblock_to_mol &mdash; smartclass 0.0.1-dev documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
@@ -23,8 +23,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="convert_smiles_to_inchi" href="smartclass.convert_smiles_to_inchi.html" />
-    <link rel="prev" title="convert_smiles_to_canonical_smiles" href="smartclass.convert_smiles_to_canonical_smiles.html" /> 
+    <link rel="next" title="convert_smarts_to_mol" href="smartclass.convert_smarts_to_mol.html" />
+    <link rel="prev" title="convert_mol_to_smiles" href="smartclass.convert_mol_to_smiles.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -74,13 +74,13 @@
 <li class="toctree-l3"><a class="reference internal" href="smartclass.convert_mol_to_inchi.html">convert_mol_to_inchi</a></li>
 <li class="toctree-l3"><a class="reference internal" href="smartclass.convert_mol_to_inchikey.html">convert_mol_to_inchikey</a></li>
 <li class="toctree-l3"><a class="reference internal" href="smartclass.convert_mol_to_smiles.html">convert_mol_to_smiles</a></li>
-<li class="toctree-l3"><a class="reference internal" href="smartclass.convert_molblock_to_mol.html">convert_molblock_to_mol</a></li>
-<li class="toctree-l3"><a class="reference internal" href="smartclass.convert_smarts_to_mol.html">convert_smarts_to_mol</a></li>
-<li class="toctree-l3"><a class="reference internal" href="smartclass.convert_smiles_to_canonical_smiles.html">convert_smiles_to_canonical_smiles</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">convert_smiles_to_formula</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#smartclass.convert_smiles_to_formula"><code class="docutils literal notranslate"><span class="pre">convert_smiles_to_formula()</span></code></a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">convert_molblock_to_mol</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#smartclass.convert_molblock_to_mol"><code class="docutils literal notranslate"><span class="pre">convert_molblock_to_mol()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.convert_smarts_to_mol.html">convert_smarts_to_mol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.convert_smiles_to_canonical_smiles.html">convert_smiles_to_canonical_smiles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.convert_smiles_to_formula.html">convert_smiles_to_formula</a></li>
 <li class="toctree-l3"><a class="reference internal" href="smartclass.convert_smiles_to_inchi.html">convert_smiles_to_inchi</a></li>
 <li class="toctree-l3"><a class="reference internal" href="smartclass.convert_smiles_to_mass.html">convert_smiles_to_mass</a></li>
 <li class="toctree-l3"><a class="reference internal" href="smartclass.convert_smiles_to_mol.html">convert_smiles_to_mol</a></li>
@@ -123,9 +123,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../reference.html">Reference</a></li>
-      <li class="breadcrumb-item active">convert_smiles_to_formula</li>
+      <li class="breadcrumb-item active">convert_molblock_to_mol</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/api/smartclass.convert_smiles_to_formula.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/api/smartclass.convert_molblock_to_mol.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -133,21 +133,21 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="convert-smiles-to-formula">
-<h1>convert_smiles_to_formula<a class="headerlink" href="#convert-smiles-to-formula" title="Link to this heading"></a></h1>
+  <section id="convert-molblock-to-mol">
+<h1>convert_molblock_to_mol<a class="headerlink" href="#convert-molblock-to-mol" title="Link to this heading"></a></h1>
 <dl class="py function">
-<dt class="sig sig-object py" id="smartclass.convert_smiles_to_formula">
-<span class="sig-name descname"><span class="pre">convert_smiles_to_formula</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">smiles</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/smartclass/chem/conversion/convert_smiles_to_formula.html#convert_smiles_to_formula"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#smartclass.convert_smiles_to_formula" title="Link to this definition"></a></dt>
-<dd><p>Convert a structure SMILES to a molecular formula.</p>
+<dt class="sig sig-object py" id="smartclass.convert_molblock_to_mol">
+<span class="sig-name descname"><span class="pre">convert_molblock_to_mol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">molblock</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Mol</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/smartclass/chem/conversion/convert_molblock_to_mol.html#convert_molblock_to_mol"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#smartclass.convert_molblock_to_mol" title="Link to this definition"></a></dt>
+<dd><p>Convert a structure MOLBlock to MOL.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>smiles</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – A SMILES.</p>
+<dd class="field-odd"><p><strong>molblock</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – A MOLBlock.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A molecular formula.</p>
+<dd class="field-even"><p>A MOL.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Union[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a>, None]</p>
+<dd class="field-odd"><p>Union[Mol, None]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -158,8 +158,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="smartclass.convert_smiles_to_canonical_smiles.html" class="btn btn-neutral float-left" title="convert_smiles_to_canonical_smiles" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="smartclass.convert_smiles_to_inchi.html" class="btn btn-neutral float-right" title="convert_smiles_to_inchi" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="smartclass.convert_mol_to_smiles.html" class="btn btn-neutral float-left" title="convert_mol_to_smiles" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="smartclass.convert_smarts_to_mol.html" class="btn btn-neutral float-right" title="convert_smarts_to_mol" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

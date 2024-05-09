@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>smartclass.chem.conversion.convert_smiles_to_inchi &mdash; smartclass 0.0.1-dev documentation</title>
+  <title>smartclass.chem.similarity.calculate_mcs &mdash; smartclass 0.0.1-dev documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=fd3f3429" />
@@ -69,7 +69,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
-      <li class="breadcrumb-item active">smartclass.chem.conversion.convert_smiles_to_inchi</li>
+      <li class="breadcrumb-item active">smartclass.chem.similarity.calculate_mcs</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -78,44 +78,43 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <h1>Source code for smartclass.chem.conversion.convert_smiles_to_inchi</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Convert a structure SMILES to InChI.&quot;&quot;&quot;</span>
+  <h1>Source code for smartclass.chem.similarity.calculate_mcs</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Calculate MCS.&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">from</span> <span class="nn">smartclass.chem.conversion.convert_mol_to_inchi</span> <span class="kn">import</span> <span class="n">convert_mol_to_inchi</span>
-<span class="kn">from</span> <span class="nn">smartclass.chem.conversion.convert_smiles_to_mol</span> <span class="kn">import</span> <span class="n">convert_smiles_to_mol</span>
+<span class="kn">from</span> <span class="nn">rdkit.Chem</span> <span class="kn">import</span> <span class="n">rdFMCS</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;convert_smiles_to_inchi&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;calculate_mcs&quot;</span><span class="p">,</span>
 <span class="p">]</span>
 
 
-<div class="viewcode-block" id="convert_smiles_to_inchi">
-<a class="viewcode-back" href="../../../../api/smartclass.convert_smiles_to_inchi.html#smartclass.convert_smiles_to_inchi">[docs]</a>
-<span class="k">def</span> <span class="nf">convert_smiles_to_inchi</span><span class="p">(</span><span class="n">smiles</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<div class="viewcode-block" id="calculate_mcs">
+<a class="viewcode-back" href="../../../../api/smartclass.calculate_mcs.html#smartclass.calculate_mcs">[docs]</a>
+<span class="k">def</span> <span class="nf">calculate_mcs</span><span class="p">(</span>
+    <span class="n">mols</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.7</span><span class="p">,</span> <span class="n">ring_matches_ring_only</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">rdFMCS</span><span class="o">.</span><span class="n">MCSResult</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Convert a structure SMILES to InChI.</span>
+<span class="sd">    Calculate MCS.</span>
 
-<span class="sd">    :param smiles: A SMILES.</span>
-<span class="sd">    :type smiles: str</span>
+<span class="sd">    :param mols: List of mols.</span>
+<span class="sd">    :type mols: list</span>
 
-<span class="sd">    :returns: An InChI.</span>
-<span class="sd">    :rtype: Union[str, None]</span>
+<span class="sd">    :param threshold: Threshold.</span>
+<span class="sd">    :type threshold: float</span>
+
+<span class="sd">    :param ring_matches_ring_only: Flag to indicate if ring matches ring only.</span>
+<span class="sd">    :type ring_matches_ring_only: bool</span>
+
+<span class="sd">    :returns: A MCS result object.</span>
+<span class="sd">    :rtype: rdFMCS.MCSResult</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">mol</span> <span class="o">=</span> <span class="n">convert_smiles_to_mol</span><span class="p">(</span><span class="n">smiles</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">mol</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">convert_mol_to_inchi</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="kc">None</span></div>
+    <span class="c1"># Implement check to see if result ended up too early</span>
+    <span class="k">return</span> <span class="n">rdFMCS</span><span class="o">.</span><span class="n">FindMCS</span><span class="p">(</span>
+        <span class="n">mols</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="n">threshold</span><span class="p">,</span> <span class="n">ring_matches_ring_only</span><span class="o">=</span><span class="n">ring_matches_ring_only</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">60</span>
+    <span class="p">)</span></div>
 
-
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="n">smiles_to_test</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;N[C@@H](CCCNC(N)=N)C(O)=O&quot;</span><span class="p">]</span>
-
-    <span class="k">for</span> <span class="n">smiles</span> <span class="ow">in</span> <span class="n">smiles_to_test</span><span class="p">:</span>
-        <span class="n">convert_smiles_to_inchi</span><span class="p">(</span><span class="n">smiles</span><span class="p">)</span>
 </pre></div>
 
            </div>

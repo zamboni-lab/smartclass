@@ -124,6 +124,13 @@
 </li>
       </ul></li>
       <li>
+    --fp-len
+
+      <ul>
+        <li><a href="cli.html#cmdoption-smartclass-getlatestchembl-f">smartclass-getlatestchembl command line option</a>
+</li>
+      </ul></li>
+      <li>
     --include-hierarchy
 
       <ul>
@@ -142,6 +149,13 @@
 
       <ul>
         <li><a href="cli.html#cmdoption-smartclass-searchclasses-i">smartclass-searchclasses command line option</a>
+</li>
+      </ul></li>
+      <li>
+    --max-atoms
+
+      <ul>
+        <li><a href="cli.html#cmdoption-smartclass-getlatestchembl-m">smartclass-getlatestchembl command line option</a>
 </li>
       </ul></li>
       <li>
@@ -168,10 +182,24 @@
 </li>
       </ul></li>
       <li>
+    --report-interval
+
+      <ul>
+        <li><a href="cli.html#cmdoption-smartclass-getlatestchembl-r">smartclass-getlatestchembl command line option</a>
+</li>
+      </ul></li>
+      <li>
     --smiles
 
       <ul>
         <li><a href="cli.html#cmdoption-smartclass-searchclasses-s">smartclass-searchclasses command line option</a>
+</li>
+      </ul></li>
+      <li>
+    --tautomer-fingerprints
+
+      <ul>
+        <li><a href="cli.html#cmdoption-smartclass-getlatestchembl-t">smartclass-getlatestchembl command line option</a>
 </li>
       </ul></li>
       <li>
@@ -222,6 +250,8 @@
     -f
 
       <ul>
+        <li><a href="cli.html#cmdoption-smartclass-getlatestchembl-f">smartclass-getlatestchembl command line option</a>
+</li>
         <li><a href="cli.html#cmdoption-smartclass-searchclasses-f">smartclass-searchclasses command line option</a>
 </li>
       </ul></li>
@@ -232,6 +262,13 @@
         <li><a href="cli.html#cmdoption-smartclass-combinecsvfiles-i">smartclass-combinecsvfiles command line option</a>
 </li>
         <li><a href="cli.html#cmdoption-smartclass-searchclasses-i">smartclass-searchclasses command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -m
+
+      <ul>
+        <li><a href="cli.html#cmdoption-smartclass-getlatestchembl-m">smartclass-getlatestchembl command line option</a>
 </li>
       </ul></li>
       <li>
@@ -254,6 +291,8 @@
     -r
 
       <ul>
+        <li><a href="cli.html#cmdoption-smartclass-getlatestchembl-r">smartclass-getlatestchembl command line option</a>
+</li>
         <li><a href="cli.html#cmdoption-smartclass-querywikidata-r">smartclass-querywikidata command line option</a>
 </li>
       </ul></li>
@@ -268,6 +307,8 @@
     -t
 
       <ul>
+        <li><a href="cli.html#cmdoption-smartclass-getlatestchembl-t">smartclass-getlatestchembl command line option</a>
+</li>
         <li><a href="cli.html#cmdoption-smartclass-querywikidata-t">smartclass-querywikidata command line option</a>
 </li>
       </ul></li>
@@ -301,11 +342,17 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/smartclass.check_missing_stereochemistry.html#smartclass.check_missing_stereochemistry">check_missing_stereochemistry() (in module smartclass)</a>
 </li>
+      <li><a href="api/smartclass.check_smiles_contains_no_dot.html#smartclass.check_smiles_contains_no_dot">check_smiles_contains_no_dot() (in module smartclass)</a>
+</li>
+      <li><a href="api/smartclass.check_smiles_contains_no_isotope.html#smartclass.check_smiles_contains_no_isotope">check_smiles_contains_no_isotope() (in module smartclass)</a>
+</li>
       <li><a href="api/smartclass.check_smiles_isomeric.html#smartclass.check_smiles_isomeric">check_smiles_isomeric() (in module smartclass)</a>
 </li>
       <li><a href="api/smartclass.combine_csv_files.html#smartclass.combine_csv_files">combine_csv_files() (in module smartclass)</a>
 </li>
       <li><a href="api/smartclass.convert_chemical_formula.html#smartclass.convert_chemical_formula">convert_chemical_formula() (in module smartclass)</a>
+</li>
+      <li><a href="api/smartclass.convert_classyfire_dict.html#smartclass.convert_classyfire_dict">convert_classyfire_dict() (in module smartclass)</a>
 </li>
       <li><a href="api/smartclass.convert_inchi_to_inchikey.html#smartclass.convert_inchi_to_inchikey">convert_inchi_to_inchikey() (in module smartclass)</a>
 </li>
@@ -313,12 +360,12 @@
 </li>
       <li><a href="api/smartclass.convert_inchi_to_mol.html#smartclass.convert_inchi_to_mol">convert_inchi_to_mol() (in module smartclass)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/smartclass.convert_inchi_to_smiles.html#smartclass.convert_inchi_to_smiles">convert_inchi_to_smiles() (in module smartclass)</a>
 </li>
       <li><a href="api/smartclass.convert_list_of_dict.html#smartclass.convert_list_of_dict">convert_list_of_dict() (in module smartclass)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/smartclass.convert_mol_to_inchi.html#smartclass.convert_mol_to_inchi">convert_mol_to_inchi() (in module smartclass)</a>
 </li>
       <li><a href="api/smartclass.convert_mol_to_inchikey.html#smartclass.convert_mol_to_inchikey">convert_mol_to_inchikey() (in module smartclass)</a>
@@ -439,6 +486,27 @@
 </li>
       </ul></li>
       <li>
+    smartclass-getlatestchembl command line option
+
+      <ul>
+        <li><a href="cli.html#cmdoption-smartclass-getlatestchembl-f">--fp-len</a>
+</li>
+        <li><a href="cli.html#cmdoption-smartclass-getlatestchembl-m">--max-atoms</a>
+</li>
+        <li><a href="cli.html#cmdoption-smartclass-getlatestchembl-r">--report-interval</a>
+</li>
+        <li><a href="cli.html#cmdoption-smartclass-getlatestchembl-t">--tautomer-fingerprints</a>
+</li>
+        <li><a href="cli.html#cmdoption-smartclass-getlatestchembl-f">-f</a>
+</li>
+        <li><a href="cli.html#cmdoption-smartclass-getlatestchembl-m">-m</a>
+</li>
+        <li><a href="cli.html#cmdoption-smartclass-getlatestchembl-r">-r</a>
+</li>
+        <li><a href="cli.html#cmdoption-smartclass-getlatestchembl-t">-t</a>
+</li>
+      </ul></li>
+      <li>
     smartclass-querywikidata command line option
 
       <ul>
@@ -459,6 +527,8 @@
         <li><a href="cli.html#cmdoption-smartclass-querywikidata-t">-t</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     smartclass-searchclasses command line option
 
@@ -496,8 +566,6 @@
         <li><a href="cli.html#cmdoption-smartclass-searchclasses-z">-z</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     smartclass.api
 

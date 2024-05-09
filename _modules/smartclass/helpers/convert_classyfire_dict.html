@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>smartclass.helpers.check_smiles_isomeric &mdash; smartclass 0.0.1-dev documentation</title>
+  <title>smartclass.helpers.convert_classyfire_dict &mdash; smartclass 0.0.1-dev documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
@@ -69,7 +69,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
-      <li class="breadcrumb-item active">smartclass.helpers.check_smiles_isomeric</li>
+      <li class="breadcrumb-item active">smartclass.helpers.convert_classyfire_dict</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -78,61 +78,44 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <h1>Source code for smartclass.helpers.check_smiles_isomeric</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Check isomeric smiles.&quot;&quot;&quot;</span>
+  <h1>Source code for smartclass.helpers.convert_classyfire_dict</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Converts the classyfire json into a CHEMONTID dictionary.&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">import</span> <span class="nn">re</span>
-
-<span class="kn">from</span> <span class="nn">smartclass.chem.conversion.convert_smiles_to_canonical_smiles</span> <span class="kn">import</span> <span class="p">(</span>
-    <span class="n">convert_smiles_to_canonical_smiles</span><span class="p">,</span>
-<span class="p">)</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">logging</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;check_smiles_isomeric&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;convert_classyfire_dict&quot;</span><span class="p">,</span>
 <span class="p">]</span>
 
 
-<div class="viewcode-block" id="check_smiles_isomeric">
-<a class="viewcode-back" href="../../../api/smartclass.check_smiles_isomeric.html#smartclass.check_smiles_isomeric">[docs]</a>
-<span class="k">def</span> <span class="nf">check_smiles_isomeric</span><span class="p">(</span><span class="n">smiles_isomeric</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">transform_to_canonical</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<div class="viewcode-block" id="convert_classyfire_dict">
+<a class="viewcode-back" href="../../../api/smartclass.convert_classyfire_dict.html#smartclass.convert_classyfire_dict">[docs]</a>
+<span class="k">def</span> <span class="nf">convert_classyfire_dict</span><span class="p">(</span>
+    <span class="n">classyfire_json</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;scratch/classyfire.json&quot;</span><span class="p">,</span> <span class="n">output</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;scratch/chemontids.txt&quot;</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Check isomeric smiles.</span>
+<span class="sd">    Converts the classyfire json into a CHEMONTID dictionary.</span>
 
-<span class="sd">    :param smiles_isomeric: SMILES.</span>
-<span class="sd">    :type smiles_isomeric: str</span>
+<span class="sd">    :param classyfire_json: Path of the classyfire json.</span>
+<span class="sd">    :type classyfire_json: str</span>
 
-<span class="sd">    :param transform_to_canonical: Flag indicating whether to generate canonical.</span>
-<span class="sd">    :type transform_to_canonical: bool</span>
-
-<span class="sd">    :returns: SMILES.</span>
-<span class="sd">    :rtype: Union[str,None]</span>
+<span class="sd">    :param output: Output.</span>
+<span class="sd">    :type output: str</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># COMMMENT this could be updated live using</span>
-    <span class="c1"># &quot;&quot;&quot;SELECT * WHERE { wd:P2017 wdt:P1793 ?reg. }&quot;&quot;&quot;</span>
-    <span class="n">pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
-        <span class="sa">r</span><span class="s2">&quot;^[A-Za-z0-9+\-\*=#$:().&gt;</span><span class="se">\\</span><span class="s2">[\]%]*([@\/]|\[\d)[A-Za-z0-9+\-\*=#$:().&gt;@\/</span><span class="se">\\</span><span class="s2">[\]%]+&quot;</span>
-    <span class="p">)</span>
-    <span class="c1"># Use re.match to check if the molecular formula matches the pattern</span>
-    <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">smiles_isomeric</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">transform_to_canonical</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">convert_smiles_to_canonical_smiles</span><span class="p">(</span><span class="n">smiles_isomeric</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">pass</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="c1"># Avoid unknown value</span>
-        <span class="k">if</span> <span class="s2">&quot;http&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">smiles_isomeric</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">smiles_isomeric</span>
-    <span class="k">return</span> <span class="kc">None</span></div>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">classyfire_json</span><span class="p">)</span> <span class="k">as</span> <span class="n">json_file</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">json_file</span><span class="p">)</span>
 
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">txt_file</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+            <span class="n">chemont_id</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;chemont_id&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">chemont_id</span><span class="p">:</span>
+                <span class="n">txt_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">chemont_id</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 
+    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;CHEMONTIDs have been written to </span><span class="si">{</span><span class="n">output</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="n">convert_smiles_to_test</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;N[C@@H](CCCNC(N)=N)C(O)=O&quot;</span><span class="p">]</span>
-
-    <span class="k">for</span> <span class="n">smiles</span> <span class="ow">in</span> <span class="n">convert_smiles_to_test</span><span class="p">:</span>
-        <span class="n">check_smiles_isomeric</span><span class="p">(</span><span class="n">smiles</span><span class="p">)</span>
 </pre></div>
 
            </div>

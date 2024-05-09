@@ -86,6 +86,9 @@
 <span class="kn">from</span> <span class="nn">rdkit</span> <span class="kn">import</span> <span class="n">Chem</span>
 <span class="kn">from</span> <span class="nn">rdkit.Chem</span> <span class="kn">import</span> <span class="n">AllChem</span>
 
+<span class="kn">from</span> <span class="nn">smartclass.helpers.check_smiles_contains_no_dot</span> <span class="kn">import</span> <span class="n">check_smiles_contains_no_dot</span>
+<span class="kn">from</span> <span class="nn">smartclass.helpers.check_smiles_contains_no_isotope</span> <span class="kn">import</span> <span class="n">check_smiles_contains_no_isotope</span>
+
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s2">&quot;fix_inchi_tautomerization&quot;</span><span class="p">,</span>
 <span class="p">]</span>
@@ -141,11 +144,9 @@
     <span class="p">}</span>
     <span class="c1">####################################################</span>
 
-    <span class="c1"># TODO fix this later</span>
-    <span class="k">if</span> <span class="s2">&quot;.&quot;</span> <span class="ow">in</span> <span class="n">smiles</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">check_smiles_contains_no_dot</span><span class="p">(</span><span class="n">smiles</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">smiles</span>
-    <span class="c1"># TODO deuterated compounds</span>
-    <span class="k">if</span> <span class="s2">&quot;2H&quot;</span> <span class="ow">in</span> <span class="n">smiles</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">check_smiles_contains_no_isotope</span><span class="p">(</span><span class="n">smiles</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">smiles</span>
 
     <span class="k">else</span><span class="p">:</span>

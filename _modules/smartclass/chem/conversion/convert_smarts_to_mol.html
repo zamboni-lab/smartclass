@@ -107,7 +107,9 @@
 
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="n">smarts_to_test</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;TODO&quot;</span><span class="p">]</span>
+    <span class="n">smarts_to_test</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">&quot;[#8]-[#6]-[#6@H]-1-[#8]-[#6@@H](-[#8]-[#6@@H]-2-[#8]-[#6]=[#6]-3-[#6@@H](-[#6]-[#6]-[#8]-[#6]-3=O)-[#6@H]-2-[#6]=[#6])-[#6@H](-[#8])-[#6@@H](-[#8])-[#6@@H]-1-[#8]&quot;</span><span class="p">,</span>  <span class="c1"># noqa:E501</span>
+    <span class="p">]</span>
 
     <span class="k">for</span> <span class="n">smarts</span> <span class="ow">in</span> <span class="n">smarts_to_test</span><span class="p">:</span>
         <span class="n">convert_smarts_to_mol</span><span class="p">(</span><span class="n">smarts</span><span class="p">)</span>

@@ -59,8 +59,3 @@ def load_smiles(input: str, column: str = "smiles") -> list[str]:
 
     # Return the unique structure SMILES as a list
     return df[column].unique().to_list()
-
-
-# Example usage:
-if __name__ == "__main__":
-    logging.debug("TODO")

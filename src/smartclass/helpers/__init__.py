@@ -2,6 +2,12 @@
 
 from __future__ import annotations
 
+from smartclass.helpers.check_smiles_contains_no_dot import (  # noqa:F401
+    check_smiles_contains_no_dot,
+)
+from smartclass.helpers.check_smiles_contains_no_isotope import (  # noqa:F401
+    check_smiles_contains_no_isotope,
+)
 from smartclass.helpers.check_smiles_isomeric import check_smiles_isomeric  # noqa:F401
 from smartclass.helpers.combine_csv_files import combine_csv_files  # noqa:F401
 from smartclass.helpers.convert_chemical_formula import convert_chemical_formula  # noqa:F401

@@ -28,11 +28,21 @@ from smartclass.chem.conversion.convert_smiles_to_formula import (  # noqa:F401
 from smartclass.chem.conversion.convert_smiles_to_inchi import convert_smiles_to_inchi  # noqa:F401
 from smartclass.chem.conversion.convert_smiles_to_mass import convert_smiles_to_mass  # noqa:F401
 from smartclass.chem.conversion.convert_smiles_to_mol import convert_smiles_to_mol  # noqa:F401
-from smartclass.chem.helpers import check_missing_stereochemistry  # noqa:F401
-from smartclass.chem.helpers import enumerate_structures  # noqa:F401
-from smartclass.chem.helpers import fix_inchi_tautomerization  # noqa:F401
-from smartclass.chem.helpers import get_num_matched_atoms_bonds  # noqa:F401
-from smartclass.chem.helpers import standardize  # noqa:F401
+from smartclass.chem.helpers.check_missing_stereochemistry import (  # noqa:F401
+    check_missing_stereochemistry,
+)
+from smartclass.chem.helpers.enumerate_structures import enumerate_structures  # noqa:F401
+from smartclass.chem.helpers.fix_inchi_tautomerization import fix_inchi_tautomerization  # noqa:F401
+from smartclass.chem.helpers.get_num_matched_atoms_bonds import (  # noqa:F401
+    get_num_matched_atoms_bonds,
+)
+from smartclass.chem.helpers.standardize import standardize  # noqa:F401
+from smartclass.helpers.check_smiles_contains_no_dot import (  # noqa:F401
+    check_smiles_contains_no_dot,
+)
+from smartclass.helpers.check_smiles_contains_no_isotope import (  # noqa:F401
+    check_smiles_contains_no_isotope,
+)
 from smartclass.helpers.check_smiles_isomeric import check_smiles_isomeric  # noqa:F401
 from smartclass.helpers.combine_csv_files import combine_csv_files  # noqa:F401
 from smartclass.helpers.convert_chemical_formula import convert_chemical_formula  # noqa:F401

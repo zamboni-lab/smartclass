@@ -49,13 +49,18 @@ def combinecsvfiles(input_file, output):
     click.echo(output)
 
 
-# TODO add parameters
 @main.command()
-def getlatestchembl():
+@click.option("-f", "--fp-len", type=int, default=2048, help="Fingerprints length.")
+@click.option("-m", "--max-atoms", type=int, default=50, help="Maximum number of atoms.")
+@click.option("-r", "--report-interval", type=int, default=50000, help="Reporting interval.")
+@click.option(
+    "-t", "--tautomer-fingerprints", type=bool, default=True, help="Tautomers fingerprints."
+)
+def getlatestchembl(fp_len, max_atoms, report_interval, tautomer_fingerprints):
     """CLI command that calls get_latest_chembl function."""
     from smartclass.resources.chembl import get_latest_chembl
 
-    get_latest_chembl()
+    get_latest_chembl(fp_len, max_atoms, report_interval, tautomer_fingerprints)
 
 
 @main.command()

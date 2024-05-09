@@ -1,4 +1,4 @@
-"""Short Description TODO."""
+"""Smartclass classifies structures using SMARTS.chem.classification."""
 
 # from .check_classification import check_classification
 from __future__ import annotations

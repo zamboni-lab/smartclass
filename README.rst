@@ -1,7 +1,7 @@
 Smartclass
 ==========
 
-Smartclass classifies structures from SMARTS.
+Smartclass classifies structures using SMARTS.
 
 🚀 Installation
 ---------------

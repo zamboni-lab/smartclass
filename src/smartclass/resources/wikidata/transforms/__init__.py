@@ -1,4 +1,4 @@
-"""Smartclass classifies structures using SMARTS.resources.wikidata.transforms"""
+"""Smartclass classifies structures using SMARTS.resources.wikidata.transforms."""
 
 from __future__ import annotations
 

@@ -1,14 +1,11 @@
 """Smartclass classifies structures using SMARTS.helpers."""
 
-# from .classyfire_to_dict import classyfire_to_dict
-# from .get_exact_relationships import get_exact_relationships
 from __future__ import annotations
 
 from smartclass.helpers.check_smiles_isomeric import check_smiles_isomeric  # noqa:F401
-
-# from smartclass.helpers.classyfire_to_dict import classyfire_to_dict  # noqa:F401
 from smartclass.helpers.combine_csv_files import combine_csv_files  # noqa:F401
 from smartclass.helpers.convert_chemical_formula import convert_chemical_formula  # noqa:F401
+from smartclass.helpers.convert_classyfire_dict import convert_classyfire_dict  # noqa:F401
 from smartclass.helpers.convert_list_of_dict import convert_list_of_dict  # noqa:F401
 
 # from smartclass.helpers.get_exact_relationships import get_exact_relationships  # noqa:F401

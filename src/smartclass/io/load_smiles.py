@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-import logging
-
 import polars
 
 __all__ = [

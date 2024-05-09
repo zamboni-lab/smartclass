@@ -10,38 +10,15 @@ import logging
 import random
 
 import polars
-from rdkit import Chem
-from rdkit.Chem import rdFMCS
 
-__all__ = ["compute_mcs", "sample_structures"]
+from smartclass.chem.conversion.convert_smiles_to_mol import convert_smiles_to_mol
+from smartclass.chem.similarity.calculate_mcs import calculate_mcs
+
+__all__ = ["sample_structures"]
 
 # Load data from a CSV file with "ParentName" and "SMILES" columns
 csv_file = "matched_molecules.csv"  # Replace with the path to your CSV file
 df = polars.read_csv(csv_file)
-
-
-def compute_mcs(
-    mols: Chem.Mol, threshold: float = 0.7, ring_matches_ring_only: bool = False
-) -> rdFMCS.MCSResult:
-    """
-    Description.
-
-    :param mols: Description.
-    :type mols: Chem.Mol
-
-    :param threshold: Description.
-    :type threshold: float
-
-    :param ring_matches_ring_only: Description.
-    :type ring_matches_ring_only: bool
-
-    :returns: Description.
-    :rtype: rdFMCS.MCSResult
-    """
-    # Implement check to see if result ended up too early
-    return rdFMCS.FindMCS(
-        mols, threshold=threshold, ring_matches_ring_only=ring_matches_ring_only, timeout=60
-    )
 
 
 def sample_structures(smiles_list: list, max_samples: int = 1000) -> list:
@@ -80,13 +57,13 @@ for classification in target_classifications:
         if 6 <= num_sampled_structures <= 1000:
             # take this out and pre-compute uniquely
             mols = [
-                Chem.MolFromSmiles(smiles)
+                convert_smiles_to_mol(smiles)
                 for smiles in smiles_list
-                if Chem.MolFromSmiles(smiles) is not None
+                if convert_smiles_to_mol(smiles) is not None
             ]
             if mols:
                 # WAYYYYY TOOOOOO SLOOOOOW
-                mcs = compute_mcs(mols).smartsString
+                mcs = calculate_mcs(mols).smartsString
                 # mcs = rdFMCS.FindMCS(mols).smartsString
                 # Note: Implement the following:
                 # compute MCS with no threshold,

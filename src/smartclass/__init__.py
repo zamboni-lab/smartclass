@@ -37,6 +37,7 @@ from smartclass.chem.helpers.get_num_matched_atoms_bonds import (  # noqa:F401
     get_num_matched_atoms_bonds,
 )
 from smartclass.chem.helpers.standardize import standardize  # noqa:F401
+from smartclass.chem.similarity.calculate_mcs import calculate_mcs  # noqa:F401
 from smartclass.helpers.check_smiles_contains_no_dot import (  # noqa:F401
     check_smiles_contains_no_dot,
 )

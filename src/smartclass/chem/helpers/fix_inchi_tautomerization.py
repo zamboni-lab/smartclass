@@ -5,6 +5,9 @@ from __future__ import annotations
 from rdkit import Chem
 from rdkit.Chem import AllChem
 
+from smartclass.helpers.check_smiles_contains_no_dot import check_smiles_contains_no_dot
+from smartclass.helpers.check_smiles_contains_no_isotope import check_smiles_contains_no_isotope
+
 __all__ = [
     "fix_inchi_tautomerization",
 ]
@@ -58,11 +61,9 @@ def fix_inchi_tautomerization(smiles: str) -> str:
     }
     ####################################################
 
-    # TODO fix this later
-    if "." in smiles:
+    if not check_smiles_contains_no_dot(smiles):
         return smiles
-    # TODO deuterated compounds
-    if "2H" in smiles:
+    if not check_smiles_contains_no_isotope(smiles):
         return smiles
 
     else:

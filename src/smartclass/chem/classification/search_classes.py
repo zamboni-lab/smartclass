@@ -86,7 +86,6 @@ def search_classes(
 
     # Load classes
     if classes_file:
-        # TODO
         c = load_external_classes_file(
             file=classes_file, id_name=classes_name_id, smarts_name=classes_name_smarts
         )

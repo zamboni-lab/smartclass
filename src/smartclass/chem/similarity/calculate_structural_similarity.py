@@ -6,6 +6,7 @@ opts = rdRascalMCES.RascalOptions()
 opts.returnEmptyMCES = True
 opts.similarityThreshold = -1
 opts.timeout = 0
+# TODO check
 
 
 def calculate_structural_similarity(

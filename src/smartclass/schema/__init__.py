@@ -1,3 +1,3 @@
-"""Short Description TODO."""
+"""Smartclass classifies structures using SMARTS.schema."""
 
 # from smartclass.schema import *

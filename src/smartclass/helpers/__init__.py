@@ -1,4 +1,4 @@
-"""Short Description TODO."""
+"""Smartclass classifies structures using SMARTS.helpers."""
 
 # from .classyfire_to_dict import classyfire_to_dict
 # from .get_exact_relationships import get_exact_relationships

@@ -1,4 +1,4 @@
-"""Short Description TODO."""
+"""Smartclass classifies structures using SMARTS.resources."""
 
 from __future__ import annotations
 

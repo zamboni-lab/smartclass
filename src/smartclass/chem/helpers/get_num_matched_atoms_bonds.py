@@ -26,6 +26,7 @@ def get_num_matched_atoms_bonds(
     :rtype: int
 
     """
+    # TODO See if using the RASCAL MCES
     mcs = rdFMCS.FindMCS(
         [mol_1, mol_2],
         atomCompare=rdFMCS.AtomCompare.CompareAny,

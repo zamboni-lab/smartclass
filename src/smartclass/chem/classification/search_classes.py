@@ -6,11 +6,12 @@ import csv
 import json
 import logging
 
-from rdkit import Chem
+from rdkit.Chem import SubstructMatchParameters
 
 from smartclass.chem.classification.bfs_search_classes_generator import (
     tqdm_bfs_search_classes_generator,
 )
+from smartclass.chem.conversion.convert_smiles_to_mol import convert_smiles_to_mol
 from smartclass.helpers import convert_list_of_dict
 from smartclass.io import (
     load_external_classes_file,
@@ -72,9 +73,9 @@ def search_classes(
     structures: list = list()
     for smi in s:
         if smi != "smiles":
-            mol = Chem.MolFromSmiles(smi)
+            mol = convert_smiles_to_mol(smi)
             # TODO looks important
-            # Chem.Kekulize(mol)
+            # Kekulize(mol)
             if mol is not None:
                 structures.append(mol)
 
@@ -110,7 +111,7 @@ def search_classes(
         class_hierarchy = load_pkg_chemical_hierarchy()
 
     # Use generic matches
-    params = Chem.SubstructMatchParameters()
+    params = SubstructMatchParameters()
     params.useGenericMatchers = True
 
     logging.basicConfig(level=logging.INFO)

@@ -33,6 +33,7 @@ from smartclass.chem.helpers import enumerate_structures  # noqa:F401
 from smartclass.chem.helpers import fix_inchi_tautomerization  # noqa:F401
 from smartclass.chem.helpers import get_num_matched_atoms_bonds  # noqa:F401
 from smartclass.chem.helpers import standardize  # noqa:F401
+from smartclass.chem.similarity.calculate_mcs import calculate_mcs  # noqa:F401
 
 # from smartclass.chem.complexity import *  # noqa:F401
 

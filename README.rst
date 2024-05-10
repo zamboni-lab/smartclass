@@ -1,11 +1,9 @@
 Smartclass
 ==========
-
 Smartclass classifies structures using SMARTS.
 
 🚀 Installation
 ---------------
-
 .. code-block:: sh
 
     poetry install
@@ -13,7 +11,6 @@ Smartclass classifies structures using SMARTS.
 
 💪 Getting Started
 ------------------
-
 A mini notebook is available.
 
 .. code-block:: sh
@@ -27,14 +24,12 @@ The main steps are briefly shown below.
 
 Get defined chemical classes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 .. code-block:: sh
 
     poetry run smartclass querywikidata -q src/smartclass/data/queries/classes_smarts.rq -o scratch/wikidata_classes_smarts.tsv
 
 Classify compounds
 ~~~~~~~~~~~~~~~~~~~
-
 .. code-block:: sh
 
     poetry run smartclass searchclasses --help
@@ -48,7 +43,6 @@ Classify compounds
 
 Measure substructures distances
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 .. code-block:: sh
 
     poetry run python3 smartclass/measure_mhfp.py -i scratch/wikidata_classes_smarts.tsv -o scratch/distances_wikidata.tsv
@@ -59,7 +53,6 @@ Measure substructures distances
 
 Generic maintenance
 ~~~~~~~~~~~~~~~~~~~
-
 .. code-block:: sh
 
     poetry run smartclass querywikidata -q src/smartclass/data/queries/maintenance_smiles_canonical_no_formula.rq -t transform_smiles_to_formula -o scratch/formulas_canonical.csv
@@ -122,6 +115,7 @@ See `CONTRIBUTING.md <https://github.com/zamboni-lab/smartclass/blob/main/.githu
 
 👋 Attribution
 --------------
+A lot of inspiration and initial data has been taken by the huge work done by `@rwst <https://github.com/rwst>`_ with `YACCL <https://github.com/rwst/yaccl>`_.
 
 ⚖️ License
 ~~~~~~~~~~

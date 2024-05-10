@@ -8,6 +8,7 @@ from smartclass.chem.helpers.check_missing_stereochemistry import (  # noqa:F401
 )
 from smartclass.chem.helpers.enumerate_structures import enumerate_structures  # noqa:F401
 from smartclass.chem.helpers.fix_inchi_tautomerization import fix_inchi_tautomerization  # noqa:F401
+from smartclass.chem.helpers.get_num_atoms_bonds import get_num_atoms_bonds  # noqa:F401
 from smartclass.chem.helpers.get_num_matched_atoms_bonds import (  # noqa:F401
     get_num_matched_atoms_bonds,
 )

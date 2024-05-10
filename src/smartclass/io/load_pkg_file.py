@@ -6,6 +6,8 @@ import importlib_resources
 import polars
 from polars import DataFrame  # Because of type
 
+from smartclass.io.load_json_from_path import load_json_from_path  # noqa:F401
+
 __all__ = ["load_pkg_file"]
 
 
@@ -24,7 +26,11 @@ def load_pkg_file(file: str) -> DataFrame:
     try:
         ref = importlib_resources.files("smartclass.data") / file
         with importlib_resources.as_file(ref) as path:
-            return polars.read_csv(path, separator="\t")
+            if file.endswith(".tsv"):
+                return polars.read_csv(path, separator="\t")
+            elif file.endswith(".json"):
+                return load_json_from_path(path)
+
     except Exception as e:
         raise ValueError(f"Failed to load '{file}': {e!s}")
 

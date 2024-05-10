@@ -140,7 +140,7 @@ def search_classes(
     if closest_only:
         max_ab_per_inchikey: dict = {}
         for result in results:
-            inchikey = result["inchikey"]
+            inchikey = result["structure_inchikey"]
             matched_ab = result["matched_ab"]
 
             if inchikey not in max_ab_per_inchikey or matched_ab > max_ab_per_inchikey[inchikey]:
@@ -148,12 +148,13 @@ def search_classes(
         results = [
             result
             for result in results
-            if result["matched_ab"] == max_ab_per_inchikey[result["inchikey"]]
+            if result["matched_ab"] == max_ab_per_inchikey[result["structure_inchikey"]]
         ]
 
     # Export
     key = "class_id"
-    value = "inchikey"
+    value = "structure_inchikey"
+    fields = ["class_id", "class_structure", "structure_inchikey", "structure_ab", "matched_ab"]
     results_kv = convert_list_of_dict(results, key, value)
     # Export results to JSON as key_value
     with open("scratch/results_kv.json", "w") as file:
@@ -163,16 +164,16 @@ def search_classes(
     with open("scratch/results_kv.tsv", "w", newline="") as file:
         writer = csv.DictWriter(
             file,
-            fieldnames=["class_id", "class_structure", "inchikey", "matched_ab"],
+            fieldnames=fields,
             delimiter="\t",
         )
         writer.writeheader()
         writer.writerows(results)
-    results_sorted = sorted(results_sorted, key=lambda x: x["inchikey"])
+    results_sorted = sorted(results_sorted, key=lambda x: x["structure_inchikey"])
     with open("scratch/results_vk.tsv", "w", newline="") as file:
         writer = csv.DictWriter(
             file,
-            fieldnames=["class_id", "class_structure", "inchikey", "matched_ab"],
+            fieldnames=fields,
             delimiter="\t",
         )
         writer.writeheader()

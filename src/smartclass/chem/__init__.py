@@ -30,11 +30,16 @@ from smartclass.chem.conversion.convert_smiles_to_formula import (  # noqa:F401
 from smartclass.chem.conversion.convert_smiles_to_inchi import convert_smiles_to_inchi  # noqa:F401
 from smartclass.chem.conversion.convert_smiles_to_mass import convert_smiles_to_mass  # noqa:F401
 from smartclass.chem.conversion.convert_smiles_to_mol import convert_smiles_to_mol  # noqa:F401
-from smartclass.chem.helpers import check_missing_stereochemistry  # noqa:F401
-from smartclass.chem.helpers import enumerate_structures  # noqa:F401
-from smartclass.chem.helpers import fix_inchi_tautomerization  # noqa:F401
-from smartclass.chem.helpers import get_num_matched_atoms_bonds  # noqa:F401
-from smartclass.chem.helpers import standardize  # noqa:F401
+from smartclass.chem.helpers.check_missing_stereochemistry import (  # noqa:F401
+    check_missing_stereochemistry,
+)
+from smartclass.chem.helpers.enumerate_structures import enumerate_structures  # noqa:F401
+from smartclass.chem.helpers.fix_inchi_tautomerization import fix_inchi_tautomerization  # noqa:F401
+from smartclass.chem.helpers.get_num_atoms_bonds import get_num_atoms_bonds  # noqa:F401
+from smartclass.chem.helpers.get_num_matched_atoms_bonds import (  # noqa:F401
+    get_num_matched_atoms_bonds,
+)
+from smartclass.chem.helpers.standardize import standardize  # noqa:F401
 from smartclass.chem.similarity.calculate_mcs import calculate_mcs  # noqa:F401
 
 # from smartclass.chem.complexity import *  # noqa:F401

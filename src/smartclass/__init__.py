@@ -37,6 +37,7 @@ from smartclass.chem.helpers.check_missing_stereochemistry import (  # noqa:F401
 )
 from smartclass.chem.helpers.enumerate_structures import enumerate_structures  # noqa:F401
 from smartclass.chem.helpers.fix_inchi_tautomerization import fix_inchi_tautomerization  # noqa:F401
+from smartclass.chem.helpers.get_num_atoms_bonds import get_num_atoms_bonds  # noqa:F401
 from smartclass.chem.helpers.get_num_matched_atoms_bonds import (  # noqa:F401
     get_num_matched_atoms_bonds,
 )
@@ -55,8 +56,12 @@ from smartclass.helpers.convert_classyfire_dict import convert_classyfire_dict  
 from smartclass.helpers.convert_list_of_dict import convert_list_of_dict  # noqa:F401
 from smartclass.helpers.get_request import get_request  # noqa:F401
 from smartclass.helpers.split_csv import split_csv  # noqa:F401
+from smartclass.io.export_dict_to_json import export_dict_to_json  # noqa:F401
 from smartclass.io.export_results import export_results  # noqa:F401
 from smartclass.io.load_external_classes_file import load_external_classes_file  # noqa:F401
+from smartclass.io.load_json_from_path import load_json_from_path  # noqa:F401
+from smartclass.io.load_json_from_url import load_json_from_url  # noqa:F401
+from smartclass.io.load_json_from_url_or_path import load_json_from_url_or_path  # noqa:F401
 from smartclass.io.load_pkg_bitter_smiles import load_pkg_bitter_smiles  # noqa:F401
 from smartclass.io.load_pkg_chemical_hierarchy import load_pkg_chemical_hierarchy  # noqa:F401
 from smartclass.io.load_pkg_classes import load_pkg_classes  # noqa:F401

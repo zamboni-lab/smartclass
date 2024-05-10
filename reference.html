@@ -82,12 +82,17 @@
 <li class="toctree-l3"><a class="reference internal" href="api/smartclass.convert_smiles_to_mass.html">convert_smiles_to_mass</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/smartclass.convert_smiles_to_mol.html">convert_smiles_to_mol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/smartclass.enumerate_structures.html">enumerate_structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/smartclass.export_dict_to_json.html">export_dict_to_json</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/smartclass.export_results.html">export_results</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/smartclass.fix_inchi_tautomerization.html">fix_inchi_tautomerization</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/smartclass.get_class_structures.html">get_class_structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/smartclass.get_num_atoms_bonds.html">get_num_atoms_bonds</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/smartclass.get_num_matched_atoms_bonds.html">get_num_matched_atoms_bonds</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/smartclass.get_request.html">get_request</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/smartclass.load_external_classes_file.html">load_external_classes_file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/smartclass.load_json_from_path.html">load_json_from_path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/smartclass.load_json_from_url.html">load_json_from_url</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/smartclass.load_json_from_url_or_path.html">load_json_from_url_or_path</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/smartclass.load_pkg_bitter_smiles.html">load_pkg_bitter_smiles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/smartclass.load_pkg_chemical_hierarchy.html">load_pkg_chemical_hierarchy</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/smartclass.load_pkg_classes.html">load_pkg_classes</a></li>
@@ -215,14 +220,20 @@ user-facing code from the Smartclass Python package.</p>
 <tr class="row-even"><td><p><a class="reference internal" href="api/smartclass.enumerate_structures.html#smartclass.enumerate_structures" title="smartclass.enumerate_structures"><code class="xref py py-obj docutils literal notranslate"><span class="pre">enumerate_structures</span></code></a>(mol)</p></td>
 <td><p>Enumerate structures.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/smartclass.export_results.html#smartclass.export_results" title="smartclass.export_results"><code class="xref py py-obj docutils literal notranslate"><span class="pre">export_results</span></code></a>(output, results)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/smartclass.export_dict_to_json.html#smartclass.export_dict_to_json" title="smartclass.export_dict_to_json"><code class="xref py py-obj docutils literal notranslate"><span class="pre">export_dict_to_json</span></code></a>(dic, output)</p></td>
+<td><p>Export dict to json.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/smartclass.export_results.html#smartclass.export_results" title="smartclass.export_results"><code class="xref py py-obj docutils literal notranslate"><span class="pre">export_results</span></code></a>(output, results)</p></td>
 <td><p>Export a list of dictionaries to a CSV file.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/smartclass.fix_inchi_tautomerization.html#smartclass.fix_inchi_tautomerization" title="smartclass.fix_inchi_tautomerization"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fix_inchi_tautomerization</span></code></a>(smiles)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/smartclass.fix_inchi_tautomerization.html#smartclass.fix_inchi_tautomerization" title="smartclass.fix_inchi_tautomerization"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fix_inchi_tautomerization</span></code></a>(smiles)</p></td>
 <td><p>Fix InChI tautomerization.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/smartclass.get_class_structures.html#smartclass.get_class_structures" title="smartclass.get_class_structures"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_class_structures</span></code></a>(classes)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="api/smartclass.get_class_structures.html#smartclass.get_class_structures" title="smartclass.get_class_structures"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_class_structures</span></code></a>(classes)</p></td>
 <td><p>Build a dictionary of class_id to class_structure from the provided classes list.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/smartclass.get_num_atoms_bonds.html#smartclass.get_num_atoms_bonds" title="smartclass.get_num_atoms_bonds"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_num_atoms_bonds</span></code></a>(mol)</p></td>
+<td><p>Get number of atoms and bonds.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="api/smartclass.get_num_matched_atoms_bonds.html#smartclass.get_num_matched_atoms_bonds" title="smartclass.get_num_matched_atoms_bonds"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_num_matched_atoms_bonds</span></code></a>(mol_1, mol_2)</p></td>
 <td><p>Get number of matched atoms and bonds.</p></td>
@@ -233,37 +244,46 @@ user-facing code from the Smartclass Python package.</p>
 <tr class="row-even"><td><p><a class="reference internal" href="api/smartclass.load_external_classes_file.html#smartclass.load_external_classes_file" title="smartclass.load_external_classes_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_external_classes_file</span></code></a>(file[, id_name, ...])</p></td>
 <td><p>Load a Polars DataFrame from an external tsv file with chemical classes.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/smartclass.load_pkg_bitter_smiles.html#smartclass.load_pkg_bitter_smiles" title="smartclass.load_pkg_bitter_smiles"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_pkg_bitter_smiles</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/smartclass.load_json_from_path.html#smartclass.load_json_from_path" title="smartclass.load_json_from_path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_json_from_path</span></code></a>(path)</p></td>
+<td><p>Load json from path.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/smartclass.load_json_from_url.html#smartclass.load_json_from_url" title="smartclass.load_json_from_url"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_json_from_url</span></code></a>(url)</p></td>
+<td><p>Load json from url.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/smartclass.load_json_from_url_or_path.html#smartclass.load_json_from_url_or_path" title="smartclass.load_json_from_url_or_path"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_json_from_url_or_path</span></code></a>(url, name)</p></td>
+<td><p>Load json from URL or path.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="api/smartclass.load_pkg_bitter_smiles.html#smartclass.load_pkg_bitter_smiles" title="smartclass.load_pkg_bitter_smiles"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_pkg_bitter_smiles</span></code></a>()</p></td>
 <td><p>Load bitter SMILES data from the package file into a Polars DataFrame.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/smartclass.load_pkg_chemical_hierarchy.html#smartclass.load_pkg_chemical_hierarchy" title="smartclass.load_pkg_chemical_hierarchy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_pkg_chemical_hierarchy</span></code></a>([file_path])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/smartclass.load_pkg_chemical_hierarchy.html#smartclass.load_pkg_chemical_hierarchy" title="smartclass.load_pkg_chemical_hierarchy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_pkg_chemical_hierarchy</span></code></a>([file_path])</p></td>
 <td><p>Load package chemical classes hierarchy.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/smartclass.load_pkg_classes.html#smartclass.load_pkg_classes" title="smartclass.load_pkg_classes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_pkg_classes</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="api/smartclass.load_pkg_classes.html#smartclass.load_pkg_classes" title="smartclass.load_pkg_classes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_pkg_classes</span></code></a>()</p></td>
 <td><p>Load chemical classes data from the package file into a Polars DataFrame.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/smartclass.load_pkg_data.html#smartclass.load_pkg_data" title="smartclass.load_pkg_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_pkg_data</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/smartclass.load_pkg_data.html#smartclass.load_pkg_data" title="smartclass.load_pkg_data"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_pkg_data</span></code></a>()</p></td>
 <td><p>Load the package data.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/smartclass.load_pkg_file.html#smartclass.load_pkg_file" title="smartclass.load_pkg_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_pkg_file</span></code></a>(file)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="api/smartclass.load_pkg_file.html#smartclass.load_pkg_file" title="smartclass.load_pkg_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_pkg_file</span></code></a>(file)</p></td>
 <td><p>Load data from a package file into a Polars DataFrame.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/smartclass.load_pkg_mappings.html#smartclass.load_pkg_mappings" title="smartclass.load_pkg_mappings"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_pkg_mappings</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/smartclass.load_pkg_mappings.html#smartclass.load_pkg_mappings" title="smartclass.load_pkg_mappings"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_pkg_mappings</span></code></a>()</p></td>
 <td><p>Load chemont__wd mappings data from the package file into a Polars DataFrame.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/smartclass.load_pkg_mia.html#smartclass.load_pkg_mia" title="smartclass.load_pkg_mia"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_pkg_mia</span></code></a>()</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="api/smartclass.load_pkg_mia.html#smartclass.load_pkg_mia" title="smartclass.load_pkg_mia"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_pkg_mia</span></code></a>()</p></td>
 <td><p>Load Mono Indole Alkaloids (MIA) data from the package file into a Polars DataFrame.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/smartclass.search_class.html#smartclass.search_class" title="smartclass.search_class"><code class="xref py py-obj docutils literal notranslate"><span class="pre">search_class</span></code></a>(class_dict, structures, params)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/smartclass.search_class.html#smartclass.search_class" title="smartclass.search_class"><code class="xref py py-obj docutils literal notranslate"><span class="pre">search_class</span></code></a>(class_dict, structures, params)</p></td>
 <td><p>Search for a single class and return the results as a list of dictionaries.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/smartclass.search_classes.html#smartclass.search_classes" title="smartclass.search_classes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">search_classes</span></code></a>([classes_file, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="api/smartclass.search_classes.html#smartclass.search_classes" title="smartclass.search_classes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">search_classes</span></code></a>([classes_file, ...])</p></td>
 <td><p>Substructure search for chemical classes.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="api/smartclass.split_csv.html#smartclass.split_csv" title="smartclass.split_csv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">split_csv</span></code></a>(input_file, output_dir[, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="api/smartclass.split_csv.html#smartclass.split_csv" title="smartclass.split_csv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">split_csv</span></code></a>(input_file, output_dir[, ...])</p></td>
 <td><p>Split a CSV file into multiple smaller CSV files.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="api/smartclass.standardize.html#smartclass.standardize" title="smartclass.standardize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">standardize</span></code></a>(smiles)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="api/smartclass.standardize.html#smartclass.standardize" title="smartclass.standardize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">standardize</span></code></a>(smiles)</p></td>
 <td><p>Standardize.</p></td>
 </tr>
 </tbody>

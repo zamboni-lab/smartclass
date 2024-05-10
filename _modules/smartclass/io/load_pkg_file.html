@@ -87,6 +87,8 @@
 <span class="kn">import</span> <span class="nn">polars</span>
 <span class="kn">from</span> <span class="nn">polars</span> <span class="kn">import</span> <span class="n">DataFrame</span>  <span class="c1"># Because of type</span>
 
+<span class="kn">from</span> <span class="nn">smartclass.io.load_json_from_path</span> <span class="kn">import</span> <span class="n">load_json_from_path</span>  <span class="c1"># noqa:F401</span>
+
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;load_pkg_file&quot;</span><span class="p">]</span>
 
 
@@ -107,7 +109,11 @@
     <span class="k">try</span><span class="p">:</span>
         <span class="n">ref</span> <span class="o">=</span> <span class="n">importlib_resources</span><span class="o">.</span><span class="n">files</span><span class="p">(</span><span class="s2">&quot;smartclass.data&quot;</span><span class="p">)</span> <span class="o">/</span> <span class="n">file</span>
         <span class="k">with</span> <span class="n">importlib_resources</span><span class="o">.</span><span class="n">as_file</span><span class="p">(</span><span class="n">ref</span><span class="p">)</span> <span class="k">as</span> <span class="n">path</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">polars</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.tsv&quot;</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">polars</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.json&quot;</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">load_json_from_path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to load &#39;</span><span class="si">{</span><span class="n">file</span><span class="si">}</span><span class="s2">&#39;: </span><span class="si">{</span><span class="n">e</span><span class="si">!s}</span><span class="s2">&quot;</span><span class="p">)</span></div>
 

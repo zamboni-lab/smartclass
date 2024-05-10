@@ -223,7 +223,7 @@
     <span class="k">if</span> <span class="n">closest_only</span><span class="p">:</span>
         <span class="n">max_ab_per_inchikey</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
-            <span class="n">inchikey</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;inchikey&quot;</span><span class="p">]</span>
+            <span class="n">inchikey</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;structure_inchikey&quot;</span><span class="p">]</span>
             <span class="n">matched_ab</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;matched_ab&quot;</span><span class="p">]</span>
 
             <span class="k">if</span> <span class="n">inchikey</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">max_ab_per_inchikey</span> <span class="ow">or</span> <span class="n">matched_ab</span> <span class="o">&gt;</span> <span class="n">max_ab_per_inchikey</span><span class="p">[</span><span class="n">inchikey</span><span class="p">]:</span>
@@ -231,12 +231,13 @@
         <span class="n">results</span> <span class="o">=</span> <span class="p">[</span>
             <span class="n">result</span>
             <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span>
-            <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;matched_ab&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">max_ab_per_inchikey</span><span class="p">[</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;inchikey&quot;</span><span class="p">]]</span>
+            <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;matched_ab&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">max_ab_per_inchikey</span><span class="p">[</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;structure_inchikey&quot;</span><span class="p">]]</span>
         <span class="p">]</span>
 
     <span class="c1"># Export</span>
     <span class="n">key</span> <span class="o">=</span> <span class="s2">&quot;class_id&quot;</span>
-    <span class="n">value</span> <span class="o">=</span> <span class="s2">&quot;inchikey&quot;</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="s2">&quot;structure_inchikey&quot;</span>
+    <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;class_id&quot;</span><span class="p">,</span> <span class="s2">&quot;class_structure&quot;</span><span class="p">,</span> <span class="s2">&quot;structure_inchikey&quot;</span><span class="p">,</span> <span class="s2">&quot;structure_ab&quot;</span><span class="p">,</span> <span class="s2">&quot;matched_ab&quot;</span><span class="p">]</span>
     <span class="n">results_kv</span> <span class="o">=</span> <span class="n">convert_list_of_dict</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
     <span class="c1"># Export results to JSON as key_value</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;scratch/results_kv.json&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
@@ -246,16 +247,16 @@
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;scratch/results_kv.tsv&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
         <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictWriter</span><span class="p">(</span>
             <span class="n">file</span><span class="p">,</span>
-            <span class="n">fieldnames</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;class_id&quot;</span><span class="p">,</span> <span class="s2">&quot;class_structure&quot;</span><span class="p">,</span> <span class="s2">&quot;inchikey&quot;</span><span class="p">,</span> <span class="s2">&quot;matched_ab&quot;</span><span class="p">],</span>
+            <span class="n">fieldnames</span><span class="o">=</span><span class="n">fields</span><span class="p">,</span>
             <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="n">writer</span><span class="o">.</span><span class="n">writeheader</span><span class="p">()</span>
         <span class="n">writer</span><span class="o">.</span><span class="n">writerows</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
-    <span class="n">results_sorted</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">results_sorted</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;inchikey&quot;</span><span class="p">])</span>
+    <span class="n">results_sorted</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">results_sorted</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;structure_inchikey&quot;</span><span class="p">])</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;scratch/results_vk.tsv&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
         <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictWriter</span><span class="p">(</span>
             <span class="n">file</span><span class="p">,</span>
-            <span class="n">fieldnames</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;class_id&quot;</span><span class="p">,</span> <span class="s2">&quot;class_structure&quot;</span><span class="p">,</span> <span class="s2">&quot;inchikey&quot;</span><span class="p">,</span> <span class="s2">&quot;matched_ab&quot;</span><span class="p">],</span>
+            <span class="n">fieldnames</span><span class="o">=</span><span class="n">fields</span><span class="p">,</span>
             <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="n">writer</span><span class="o">.</span><span class="n">writeheader</span><span class="p">()</span>

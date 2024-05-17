@@ -3,20 +3,24 @@
 from __future__ import annotations
 
 import importlib_resources
-import polars
 from polars import DataFrame  # Because of type
 
+from smartclass.io.load_csv_from_path import load_csv_from_path  # noqa:F401
 from smartclass.io.load_json_from_path import load_json_from_path  # noqa:F401
+from smartclass.io.load_tsv_from_path import load_tsv_from_path  # noqa:F401
 
 __all__ = ["load_pkg_file"]
 
 
-def load_pkg_file(file: str) -> DataFrame:
+def load_pkg_file(file: str, directory: str = "smartclass.data") -> DataFrame:
     """
     Load data from a package file into a Polars DataFrame.
 
     :param file: The name of the file to load.
     :type file: str
+
+    :param directory: The directory of the file to load. Default to `smartclass.data`
+    :type directory: str
 
     :raises ValueError: If the loading of the file failed.
 
@@ -24,12 +28,14 @@ def load_pkg_file(file: str) -> DataFrame:
     :rtype: DataFrame
     """
     try:
-        ref = importlib_resources.files("smartclass.data") / file
+        ref = importlib_resources.files(directory) / file
         with importlib_resources.as_file(ref) as path:
-            if file.endswith(".tsv"):
-                return polars.read_csv(path, separator="\t")
-            elif file.endswith(".json"):
-                return load_json_from_path(path)
+            if ".tsv" in file:
+                return load_tsv_from_path(path)
+            elif ".csv" in file:
+                return load_csv_from_path(path)
+            elif ".json" in file:
+                return DataFrame(load_json_from_path(path))
 
     except Exception as e:
         raise ValueError(f"Failed to load '{file}': {e!s}")

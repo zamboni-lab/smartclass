@@ -1,0 +1,6 @@
+{
+  "hmdb_classyfire": "http://classyfire.wishartlab.com/system/downloads/1_0/datasets/HMDB_36_classyfire_21_annotations.csv.zip",
+  "t3db_classyfire": "http://classyfire.wishartlab.com/system/downloads/1_0/datasets/T3DB_06292016_classyfire_21_annotations.csv.gz",
+  "chebi_classyfire": "http://classyfire.wishartlab.com/system/downloads/1_0/datasets/ChEBI_126_classyfire_21_annotations.csv.zip",
+  "drugbank_classyfire": "http://classyfire.wishartlab.com/system/downloads/1_0/datasets/DrugBank_5_classyfire_21_annotations.csv.zip"
+}

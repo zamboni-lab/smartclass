@@ -7,7 +7,9 @@ import re
 from smartclass.io import export_results
 
 
-def extract_chebi(file_path: str = "scratch/chebi.obo", output: str = "scratch/test.tsv"):
+def extract_chebi(
+    file_path: str = "scratch/chebi.obo", output: str = "scratch/chebi_extracted.tsv"
+):
     """
     Extract CHEBI.
 
@@ -64,3 +66,7 @@ def extract_chebi(file_path: str = "scratch/chebi.obo", output: str = "scratch/t
 
     # Export the list of dictionaries
     export_results(output=output, results=term_data_list)
+
+
+if __name__ == "__main__":
+    extract_chebi()

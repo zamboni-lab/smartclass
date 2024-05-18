@@ -13,6 +13,7 @@ from smartclass.helpers.combine_csv_files import combine_csv_files  # noqa:F401
 from smartclass.helpers.convert_chemical_formula import convert_chemical_formula  # noqa:F401
 from smartclass.helpers.convert_classyfire_dict import convert_classyfire_dict  # noqa:F401
 from smartclass.helpers.convert_list_of_dict import convert_list_of_dict  # noqa:F401
+from smartclass.helpers.download_file_if_not_exists import download_file_if_not_exists  # noqa:F401
 
 # from smartclass.helpers.get_exact_relationships import get_exact_relationships  # noqa:F401
 from smartclass.helpers.get_request import get_request  # noqa:F401

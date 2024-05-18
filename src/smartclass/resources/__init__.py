@@ -9,6 +9,9 @@ from smartclass.resources.chembl import latest_chembl_paths  # noqa:F401
 from smartclass.resources.chembl import load_latest_chembl  # noqa:F401
 from smartclass.resources.chemont import get_chemont  # noqa:F401
 from smartclass.resources.get_existing_classes import get_existing_classes  # noqa:F401
+from smartclass.resources.get_existing_classified_datasets import (  # noqa:F401
+    get_existing_classified_datasets,
+)
 
 # from .lotus import extract_smiles_lotus
 from smartclass.resources.wikidata import query_wikidata  # noqa:F401

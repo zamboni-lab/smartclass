@@ -75,4 +75,5 @@ from smartclass.io.load_smiles import load_smiles  # noqa:F401
 from smartclass.io.load_tsv_from_path import load_tsv_from_path  # noqa:F401
 from smartclass.resources import chebi  # noqa:F401
 from smartclass.resources import chembl  # noqa:F401
+from smartclass.resources import chemont  # noqa:F401
 from smartclass.resources import wikidata  # noqa:F401

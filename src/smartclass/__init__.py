@@ -54,6 +54,7 @@ from smartclass.helpers.combine_csv_files import combine_csv_files  # noqa:F401
 from smartclass.helpers.convert_chemical_formula import convert_chemical_formula  # noqa:F401
 from smartclass.helpers.convert_classyfire_dict import convert_classyfire_dict  # noqa:F401
 from smartclass.helpers.convert_list_of_dict import convert_list_of_dict  # noqa:F401
+from smartclass.helpers.download_file_if_not_exists import download_file_if_not_exists  # noqa:F401
 from smartclass.helpers.get_request import get_request  # noqa:F401
 from smartclass.helpers.split_csv import split_csv  # noqa:F401
 from smartclass.io.export_dict_to_json import export_dict_to_json  # noqa:F401
@@ -72,5 +73,6 @@ from smartclass.io.load_pkg_mappings import load_pkg_mappings  # noqa:F401
 from smartclass.io.load_pkg_mia import load_pkg_mia  # noqa:F401
 from smartclass.io.load_smiles import load_smiles  # noqa:F401
 from smartclass.io.load_tsv_from_path import load_tsv_from_path  # noqa:F401
+from smartclass.resources import chebi  # noqa:F401
 from smartclass.resources import chembl  # noqa:F401
 from smartclass.resources import wikidata  # noqa:F401

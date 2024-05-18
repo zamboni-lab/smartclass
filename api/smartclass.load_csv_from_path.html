@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>check_smiles_contains_no_isotope &mdash; smartclass 0.0.1-dev documentation</title>
+  <title>load_csv_from_path &mdash; smartclass 0.0.1-dev documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
@@ -23,8 +23,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="check_smiles_isomeric" href="smartclass.check_smiles_isomeric.html" />
-    <link rel="prev" title="check_smiles_contains_no_dot" href="smartclass.check_smiles_contains_no_dot.html" /> 
+    <link rel="next" title="load_external_classes_file" href="smartclass.load_external_classes_file.html" />
+    <link rel="prev" title="get_request" href="smartclass.get_request.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -60,10 +60,7 @@
 <li class="toctree-l3"><a class="reference internal" href="smartclass.calculate_mcs.html">calculate_mcs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="smartclass.check_missing_stereochemistry.html">check_missing_stereochemistry</a></li>
 <li class="toctree-l3"><a class="reference internal" href="smartclass.check_smiles_contains_no_dot.html">check_smiles_contains_no_dot</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">check_smiles_contains_no_isotope</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#smartclass.check_smiles_contains_no_isotope"><code class="docutils literal notranslate"><span class="pre">check_smiles_contains_no_isotope()</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.check_smiles_contains_no_isotope.html">check_smiles_contains_no_isotope</a></li>
 <li class="toctree-l3"><a class="reference internal" href="smartclass.check_smiles_isomeric.html">check_smiles_isomeric</a></li>
 <li class="toctree-l3"><a class="reference internal" href="smartclass.combine_csv_files.html">combine_csv_files</a></li>
 <li class="toctree-l3"><a class="reference internal" href="smartclass.convert_chemical_formula.html">convert_chemical_formula</a></li>
@@ -93,7 +90,10 @@
 <li class="toctree-l3"><a class="reference internal" href="smartclass.get_num_atoms_bonds.html">get_num_atoms_bonds</a></li>
 <li class="toctree-l3"><a class="reference internal" href="smartclass.get_num_matched_atoms_bonds.html">get_num_matched_atoms_bonds</a></li>
 <li class="toctree-l3"><a class="reference internal" href="smartclass.get_request.html">get_request</a></li>
-<li class="toctree-l3"><a class="reference internal" href="smartclass.load_csv_from_path.html">load_csv_from_path</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">load_csv_from_path</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#smartclass.load_csv_from_path"><code class="docutils literal notranslate"><span class="pre">load_csv_from_path()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="smartclass.load_external_classes_file.html">load_external_classes_file</a></li>
 <li class="toctree-l3"><a class="reference internal" href="smartclass.load_json_from_path.html">load_json_from_path</a></li>
 <li class="toctree-l3"><a class="reference internal" href="smartclass.load_json_from_url.html">load_json_from_url</a></li>
@@ -132,9 +132,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../reference.html">Reference</a></li>
-      <li class="breadcrumb-item active">check_smiles_contains_no_isotope</li>
+      <li class="breadcrumb-item active">load_csv_from_path</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/api/smartclass.check_smiles_contains_no_isotope.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/api/smartclass.load_csv_from_path.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -142,21 +142,21 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="check-smiles-contains-no-isotope">
-<h1>check_smiles_contains_no_isotope<a class="headerlink" href="#check-smiles-contains-no-isotope" title="Link to this heading"></a></h1>
+  <section id="load-csv-from-path">
+<h1>load_csv_from_path<a class="headerlink" href="#load-csv-from-path" title="Link to this heading"></a></h1>
 <dl class="py function">
-<dt class="sig sig-object py" id="smartclass.check_smiles_contains_no_isotope">
-<span class="sig-name descname"><span class="pre">check_smiles_contains_no_isotope</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">smiles</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></span></span><a class="reference internal" href="../_modules/smartclass/helpers/check_smiles_contains_no_isotope.html#check_smiles_contains_no_isotope"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#smartclass.check_smiles_contains_no_isotope" title="Link to this definition"></a></dt>
-<dd><p>Checks if SMILES contains no isotope.</p>
+<dt class="sig sig-object py" id="smartclass.load_csv_from_path">
+<span class="sig-name descname"><span class="pre">load_csv_from_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><span class="pre">dict</span></a></span></span><a class="reference internal" href="../_modules/smartclass/io/load_csv_from_path.html#load_csv_from_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#smartclass.load_csv_from_path" title="Link to this definition"></a></dt>
+<dd><p>Load csv from path.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>smiles</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – The SMILES.</p>
+<dd class="field-odd"><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – Path of the file.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A boolean if the SMILES meets the given criteria.</p>
+<dd class="field-even"><p>A dictionary.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)">bool</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)">dict</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -167,8 +167,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="smartclass.check_smiles_contains_no_dot.html" class="btn btn-neutral float-left" title="check_smiles_contains_no_dot" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="smartclass.check_smiles_isomeric.html" class="btn btn-neutral float-right" title="check_smiles_isomeric" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="smartclass.get_request.html" class="btn btn-neutral float-left" title="get_request" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="smartclass.load_external_classes_file.html" class="btn btn-neutral float-right" title="load_external_classes_file" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

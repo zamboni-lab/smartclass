@@ -6,6 +6,8 @@ import re
 
 from smartclass.io import export_results
 
+__all__ = ["extract_chebi"]
+
 
 def extract_chebi(
     file_path: str = "scratch/chebi.obo", output: str = "scratch/chebi_extracted.tsv"

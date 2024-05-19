@@ -29,5 +29,5 @@ def calculate_mcs(
     """
     # Implement check to see if result ended up too early
     return rdFMCS.FindMCS(
-        mols, threshold=threshold, ring_matches_ring_only=ring_matches_ring_only, timeout=60
+        mols=mols, threshold=threshold, ringMatchesRingOnly=ring_matches_ring_only, timeout=60
     )

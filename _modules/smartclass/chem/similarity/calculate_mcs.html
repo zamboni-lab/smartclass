@@ -101,10 +101,10 @@
 <span class="sd">    :param mols: List of mols.</span>
 <span class="sd">    :type mols: list</span>
 
-<span class="sd">    :param threshold: Threshold.</span>
+<span class="sd">    :param threshold: Threshold. Default to 0.7.</span>
 <span class="sd">    :type threshold: float</span>
 
-<span class="sd">    :param ring_matches_ring_only: Flag to indicate if ring matches ring only.</span>
+<span class="sd">    :param ring_matches_ring_only: Flag to indicate if ring matches ring only. Default to False.</span>
 <span class="sd">    :type ring_matches_ring_only: bool</span>
 
 <span class="sd">    :returns: A MCS result object.</span>
@@ -112,7 +112,12 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Implement check to see if result ended up too early</span>
     <span class="k">return</span> <span class="n">rdFMCS</span><span class="o">.</span><span class="n">FindMCS</span><span class="p">(</span>
-        <span class="n">mols</span><span class="o">=</span><span class="n">mols</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="n">threshold</span><span class="p">,</span> <span class="n">ringMatchesRingOnly</span><span class="o">=</span><span class="n">ring_matches_ring_only</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">60</span>
+        <span class="n">mols</span><span class="o">=</span><span class="n">mols</span><span class="p">,</span>
+        <span class="n">threshold</span><span class="o">=</span><span class="n">threshold</span><span class="p">,</span>
+        <span class="n">ringMatchesRingOnly</span><span class="o">=</span><span class="n">ring_matches_ring_only</span><span class="p">,</span>
+        <span class="n">timeout</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span>
+        <span class="n">atomCompare</span><span class="o">=</span><span class="n">rdFMCS</span><span class="o">.</span><span class="n">AtomCompare</span><span class="o">.</span><span class="n">CompareAny</span><span class="p">,</span>
+        <span class="n">bondCompare</span><span class="o">=</span><span class="n">rdFMCS</span><span class="o">.</span><span class="n">BondCompare</span><span class="o">.</span><span class="n">CompareAny</span><span class="p">,</span>
     <span class="p">)</span></div>
 
 </pre></div>

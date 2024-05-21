@@ -54,13 +54,16 @@ def search_class(
                 )
             for structure in structures:
                 if catalog.HasMatch(structure):
-                    result = {
-                        "class_id": class_id,
-                        "class_structure": class_structure,
-                        "structure_inchikey": convert_mol_to_inchikey(structure),
-                        "structure_ab": get_num_atoms_bonds(structure),
-                        "matched_ab": get_num_matched_atoms_bonds(mol_1=structure, mol_2=pattern),
-                    }
-                    results.append(result)
+                    results.append(
+                        {
+                            "class_id": class_id,
+                            "class_structure": class_structure,
+                            "structure_inchikey": convert_mol_to_inchikey(structure),
+                            "structure_ab": get_num_atoms_bonds(structure),
+                            "matched_ab": get_num_matched_atoms_bonds(
+                                mol_1=structure, mol_2=pattern
+                            ),
+                        }
+                    )
 
     return results

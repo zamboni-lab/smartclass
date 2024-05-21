@@ -17,4 +17,5 @@ from smartclass.helpers.download_file_if_not_exists import download_file_if_not_
 
 # from smartclass.helpers.get_exact_relationships import get_exact_relationships  # noqa:F401
 from smartclass.helpers.get_request import get_request  # noqa:F401
+from smartclass.helpers.sample_list import sample_list  # noqa:F401
 from smartclass.helpers.split_csv import split_csv  # noqa:F401

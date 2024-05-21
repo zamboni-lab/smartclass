@@ -18,10 +18,10 @@ def calculate_mcs(
     :param mols: List of mols.
     :type mols: list
 
-    :param threshold: Threshold.
+    :param threshold: Threshold. Default to 0.7.
     :type threshold: float
 
-    :param ring_matches_ring_only: Flag to indicate if ring matches ring only.
+    :param ring_matches_ring_only: Flag to indicate if ring matches ring only. Default to False.
     :type ring_matches_ring_only: bool
 
     :returns: A MCS result object.
@@ -29,5 +29,10 @@ def calculate_mcs(
     """
     # Implement check to see if result ended up too early
     return rdFMCS.FindMCS(
-        mols=mols, threshold=threshold, ringMatchesRingOnly=ring_matches_ring_only, timeout=60
+        mols=mols,
+        threshold=threshold,
+        ringMatchesRingOnly=ring_matches_ring_only,
+        timeout=60,
+        atomCompare=rdFMCS.AtomCompare.CompareAny,
+        bondCompare=rdFMCS.BondCompare.CompareAny,
     )

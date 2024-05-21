@@ -6,7 +6,7 @@ import csv
 import gzip
 from zipfile import ZipFile
 
-import polars
+from polars import DataFrame
 from rdkit.Chem import ForwardSDMolSupplier
 
 from smartclass.chem.conversion.convert_mol_to_smiles import convert_mol_to_smiles
@@ -44,7 +44,7 @@ def match_chebi(
             csv_content = csv_file.read().decode("utf-8")
     csv_reader = csv.DictReader(csv_content.splitlines())
     ids_df = (
-        polars.DataFrame(list(csv_reader))
+        DataFrame(list(csv_reader))
         .rename({"Smiles": "ChemOntID", "ChemOntID": "ParentName", "ParentName": "drop"})
         .drop("drop")
     )
@@ -57,7 +57,7 @@ def match_chebi(
             if mol is not None
         ]
 
-    matched_df = polars.DataFrame(chebi_molecules, schema=["CompoundID", "smiles"])
+    matched_df = DataFrame(chebi_molecules, schema=["CompoundID", "smiles"])
     matched_df = matched_df.with_columns(matched_df["CompoundID"].cast(ids_df["CompoundID"].dtype))
     merged_df = ids_df.join(matched_df, on="CompoundID", how="inner")
 

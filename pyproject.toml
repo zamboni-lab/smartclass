@@ -55,7 +55,7 @@ myopic-mces = "^1.0.0"
 polars = "^0.20.22"
 pystow = "^0.5.3"
 rdkit = "^2023.9.6"
-requests = "^2.31.0"
+requests = "^2.32.0"
 snakefmt = "^0.10.0"
 
 [tool.poetry.extras]

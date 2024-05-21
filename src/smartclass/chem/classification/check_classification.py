@@ -1,41 +1,26 @@
-"""TODO.
+"""Check classification."""
 
-TODO.
-"""
-
-# MISSING DEF
 from __future__ import annotations
 
 import logging
-import random
 
-import polars
+from polars import DataFrame, col
 
 from smartclass.chem.conversion.convert_smiles_to_mol import convert_smiles_to_mol
 from smartclass.chem.similarity.calculate_mcs import calculate_mcs
+from smartclass.helpers.sample_list import sample_list
+from smartclass.io.load_tsv_from_path import load_tsv_from_path
 
-__all__ = ["sample_structures"]
-
-logging.basicConfig(level=logging.INFO)  # Set logging level
-
-
-def sample_structures(smiles_list: list, max_samples: int = 1000) -> list:
-    """
-    Sample structures from a list of SMILES strings.
-
-    :param smiles_list: List of SMILES strings.
-    :type smiles_list: list
-
-    :param max_samples: Maximum number of samples to return.
-    :type max_samples: int
-
-    :returns: Sampled SMILES strings.
-    :rtype: list
-    """
-    return random.sample(smiles_list, min(len(smiles_list), max_samples))
+__all__ = ["check_classification"]
 
 
-def process_classification(classification: str, group: polars.DataFrame):
+def process_classification(
+    classification: str,
+    group: DataFrame,
+    samples_min: int = 6,
+    samples_max: int = 1000,
+    threshold: float = 0.7,
+) -> tuple:
     """
     Processes a chemical classification group.
 
@@ -43,63 +28,96 @@ def process_classification(classification: str, group: polars.DataFrame):
     :type classification: str
 
     :param group: DataFrame group containing structures.
-    :type group: polars.DataFrame
+    :type group: DataFrame
+
+    :param samples_min: Minimum number of samples to check. Default to 1.
+    :type samples_min: int
+
+    :param samples_max: Minimum number of samples to check. Default to 1000.
+    :type samples_max: int
+
+    :param threshold: Threshold. Default to 0.7.
+    :type threshold: float
+
+    :returns: A SMARTS.
+    :rtype: tuple
     """
+    logging.info(f"Processing {classification}")
     smiles_list = group["smiles"].to_list()
 
-    # Sample structures
-    sampled_smiles = sample_structures(smiles_list, max_samples=1000)
-    num_sampled_structures = len(sampled_smiles)
+    mols = [mol for smiles in smiles_list if (mol := convert_smiles_to_mol(smiles)) is not None]
 
-    if num_sampled_structures < 6:
-        logging.warning(f"Not enough structures ({num_sampled_structures}) for {classification}.")
-        return
+    if len(mols) > samples_max:
+        logging.warning(f"Too many structures of this class. Sampling {samples_max}...")
+        mols = sample_list(mols, samples_max=samples_max)
 
-    if num_sampled_structures > 1000:
-        logging.warning(f"Too many structures ({num_sampled_structures}) for {classification}.")
-        return
+    mcs = calculate_mcs(mols=mols, threshold=threshold)
 
-    # Convert SMILES to molecular objects
-    mols = [
-        convert_smiles_to_mol(smiles)
-        for smiles in sampled_smiles
-        if convert_smiles_to_mol(smiles) is not None
-    ]
-
-    if not mols:
-        logging.warning(f"No valid molecular objects for {classification}.")
-        return
-
-    # Calculate MCS
-    mcs = calculate_mcs(mols=mols).smartsString
-    logging.info(f"Chemical Classification: {classification}")
-    logging.info(f"Maximal Common Substructure: {mcs}")
-    logging.info(f"Based on {len(mols)} Substructures")
+    return (mcs, len(mols))
 
 
-def main():
-    """TODO."""
-    # Load data from a CSV file with "ParentName" and "SMILES" columns
-    csv_file = "scratch/chebi_matched_molecules.tsv"  # Replace with the path to your CSV file
+def check_classification(
+    classes: tuple = ("Quassinoids", "4'-hydroxyflavonoids"),
+    classified_mols: str = "scratch/chebi_matched_molecules.tsv",
+    threshold: float = 0.7,
+) -> list[dict]:
+    """
+    Check classification.
+
+    :param classes: Tuple of classes to check.
+    :type classes: tuple
+
+    :param classified_mols: TSV file containing classified molecules.
+    :type classified_mols: str
+
+    :param threshold: Threshold. Default to 0.7.
+    :type threshold: float
+
+    :returns: A list (of dictionaries).
+    :rtype: list[dict]
+    """
     try:
-        df = polars.read_csv(csv_file, separator="\t")
+        classifications = DataFrame(load_tsv_from_path(classified_mols))
     except Exception as e:
-        logging.error(f"Error loading data from CSV file: {e}")
-        return
+        logging.error(f"Error loading classified mols: {e}")
+        return []
 
-    # Define the chemical classifications you want to process
-    target_classifications = ["Quassinoids", "4'-hydroxyflavonoids"]
-
+    mcses = []
     # Iterate through the specified chemical classifications
-    for classification in target_classifications:
-        filtered_df = df.filter(polars.col("ParentName") == classification)
-        if len(filtered_df) > 0:
-            process_classification(classification, filtered_df)
+    for c in classes:
+        group = classifications.filter(col("ParentName") == c)
+        if len(group) > 0:
+            results = process_classification(c, group)
+            mcs = results[0]
+            n = results[1]
+            mcses.append(
+                {
+                    "class": c,
+                    "class_structure": mcs.smartsString,
+                    "structure_ab": mcs.numAtoms + mcs.numBonds,
+                    "threshold": threshold,
+                    "n": n,
+                }
+            )
         else:
-            logging.warning(f"Chemical Classification {classification} not found in the data.")
-    else:
-        logging.warning(f"Chemical Classification {classification} not found in the data.")
+            logging.warning(f"Chemical Classification {c} not found in the data.")
+            mcses.append(
+                {
+                    "class": c,
+                    "class_structure": "",
+                    "structure_ab": 0,
+                    "threshold": threshold,
+                    "n": 0,
+                }
+            )
+    return mcses
 
 
 if __name__ == "__main__":
-    main()
+    from smartclass.io.export_results import export_results
+
+    logging.basicConfig(level=logging.INFO)  # Set logging level
+    logging.info("This is slow for now...")
+    results = check_classification()
+    logging.info(results)
+    export_results(output="scratch/classes_checked.tsv", results=results)

@@ -56,6 +56,7 @@ from smartclass.helpers.convert_classyfire_dict import convert_classyfire_dict  
 from smartclass.helpers.convert_list_of_dict import convert_list_of_dict  # noqa:F401
 from smartclass.helpers.download_file_if_not_exists import download_file_if_not_exists  # noqa:F401
 from smartclass.helpers.get_request import get_request  # noqa:F401
+from smartclass.helpers.sample_list import sample_list  # noqa:F401
 from smartclass.helpers.split_csv import split_csv  # noqa:F401
 from smartclass.io.export_dict_to_json import export_dict_to_json  # noqa:F401
 from smartclass.io.export_results import export_results  # noqa:F401

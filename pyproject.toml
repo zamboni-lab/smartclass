@@ -55,7 +55,7 @@ myopic-mces = "^1.0.0"
 polars = "^0.20.22"
 pystow = "^0.5.3"
 rdkit = "^2023.9.6"
-requests = "^2.32.1"
+requests = "^2.32.2"
 snakefmt = "^0.10.0"
 
 [tool.poetry.extras]
@@ -63,7 +63,7 @@ docs = ["Sphinx", "sphinx-rtd-theme", "sphinxcontrib-napoleon"]
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.4.2"
-coverage = "^7.5.1"
+coverage = "^7.5.2"
 flake8 = "^7.0.0"
 importlib-metadata = "^7.1.0" 
 isort = "^5.13.2"

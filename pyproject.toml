@@ -55,7 +55,7 @@ myopic-mces = "^1.0.0"
 polars = "^0.20.22"
 pystow = "^0.5.3"
 rdkit = "^2023.9.6"
-requests = "^2.32.2"
+requests = "^2.32.3"
 snakefmt = "^0.10.0"
 
 [tool.poetry.extras]
@@ -63,17 +63,17 @@ docs = ["Sphinx", "sphinx-rtd-theme", "sphinxcontrib-napoleon"]
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.4.2"
-coverage = "^7.5.2"
+coverage = "^7.5.3"
 flake8 = "^7.0.0"
 importlib-metadata = "^7.1.0" 
 isort = "^5.13.2"
-pytest = "^8.2.1"
+pytest = "^8.2.2"
 pytest-asyncio = "^0.23.5"
 pytest-cov = "^5.0.0"
 pytest-mock = "^3.14.0"
 pytest-xdist = "^3.6.1"
 requests-mock = "^1.12.1"
-tox = "^4.15.0"
+tox = "^4.15.1"
 
 [tool.poetry.scripts]
 smartclass = "smartclass.cli:main"

@@ -15,7 +15,7 @@ def transform_smiles_i_to_smiles_i(result: dict) -> dict | None:
     :returns: Transformed query result.
     :rtype: Union[dict, None]
     """
-    s = result.get("smiles_isomeric", "")
+    s = result.get("smiles", "")
     smiles = check_smiles_isomeric(s)
     if smiles is not None:
         transformed_result = {

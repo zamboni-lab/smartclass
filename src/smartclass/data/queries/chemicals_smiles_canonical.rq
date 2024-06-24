@@ -10,5 +10,5 @@ PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX hint: <http://www.bigdata.com/queryHints#>
 #title: Chemicals with canonical SMILES
 SELECT * WHERE {
-    ?structure wdt:P233 ?smiles_canonical. hint:Prior hint:rangeSafe TRUE.
+    ?structure wdt:P233 ?smiles. hint:Prior hint:rangeSafe TRUE.
 }

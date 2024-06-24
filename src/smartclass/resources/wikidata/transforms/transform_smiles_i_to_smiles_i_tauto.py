@@ -15,7 +15,7 @@ def transform_smiles_i_to_smiles_i_tauto(result: dict) -> dict | None:
     :returns: Transformed query result.
     :rtype: Union[dict, None]
     """
-    s = result.get("smiles_isomeric", "")
+    s = result.get("smiles", "")
     smiles = fix_inchi_tautomerization(s)
     if smiles is not s:
         transformed_result = {

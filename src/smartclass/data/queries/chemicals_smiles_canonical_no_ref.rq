@@ -22,6 +22,6 @@ SELECT * WHERE {
 
 # SELECT * WHERE {
 #   ?structure p:P233 ?stmt.
-#   ?stmt ps:P233 ?smiles_canonical.
+#   ?stmt ps:P233 ?smiles.
 #   ?stmt (prov:wasDerivedFrom/pr:P887) wd:Q123137214.
 # }

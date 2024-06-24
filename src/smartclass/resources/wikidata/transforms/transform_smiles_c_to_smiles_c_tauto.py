@@ -15,7 +15,7 @@ def transform_smiles_c_to_smiles_c_tauto(result: dict) -> dict | None:
     :returns: Transformed query result.
     :rtype: Union[dict, None]
     """
-    s = result.get("smiles_canonical", "")
+    s = result.get("smiles", "")
     smiles = fix_inchi_tautomerization(s)
     if smiles is not s:
         transformed_result = {

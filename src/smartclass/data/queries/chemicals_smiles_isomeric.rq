@@ -10,5 +10,5 @@ PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX hint: <http://www.bigdata.com/queryHints#>
 #title: Chemicals with isomeric SMILES
 SELECT * WHERE {
-    ?structure wdt:P2017 ?smiles_isomeric. hint:Prior hint:rangeSafe TRUE.
+    ?structure wdt:P2017 ?smiles. hint:Prior hint:rangeSafe TRUE.
 }

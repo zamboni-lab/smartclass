@@ -31,6 +31,7 @@ def get_num_matched_atoms_bonds(
         [mol_1, mol_2],
         atomCompare=rdFMCS.AtomCompare.CompareAny,
         bondCompare=rdFMCS.BondCompare.CompareAny,
+        # ringCompare=rdFMCS.ringCompare.IgnoreRingFusion,
     )
 
     return mcs.numAtoms + mcs.numBonds

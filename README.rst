@@ -34,6 +34,7 @@ Get some SMILES to classify
 .. code-block:: sh
 
     poetry run smartclass querywikidata -q src/smartclass/data/queries/chemicals_smiles_canonical.rq -o scratch/wikidata_chemicals_smiles.tsv
+    poetry run smartclass querywikidata -q src/smartclass/data/queries/classes_fake_smiles.rq -o scratch/wikidata_classes_smiles.tsv
 
 Classify compounds
 ~~~~~~~~~~~~~~~~~~~
@@ -45,6 +46,8 @@ Classify compounds
     poetry run smartclass searchclasses -s "O=C1OC2CC3C(C=C(OC)C(=O)C3(C)C4C(=O)C(OC)=C(C)C(C1)C24C)C" -c scratch/wikidata_classes_smarts.tsv --closest-only False --verbose
     poetry run smartclass searchclasses -i src/smartclass/data/bitter_smiles.tsv -c scratch/wikidata_classes_smarts.tsv
     # poetry run smartclass searchclasses -i scratch/wikidata_chemicals_smiles.tsv -c scratch/wikidata_classes_smarts.tsv --closest-only False
+    # TODO Improve classes taxonomy
+    # poetry run smartclass searchclasses -i scratch/wikidata_classes_smiles.tsv -c scratch/wikidata_classes_smarts.tsv --closest-only False
 
 🤯 Future steps (not fully available now)
 -----------------------------------------

@@ -11,6 +11,7 @@ from smartclass.chem.conversion.convert_inchi_to_smiles import convert_inchi_to_
 from smartclass.chem.conversion.convert_mol_to_cxsmiles import convert_mol_to_cxsmiles  # noqa:F401
 from smartclass.chem.conversion.convert_mol_to_inchi import convert_mol_to_inchi  # noqa:F401
 from smartclass.chem.conversion.convert_mol_to_inchikey import convert_mol_to_inchikey  # noqa:F401
+from smartclass.chem.conversion.convert_mol_to_smarts import convert_mol_to_smarts  # noqa:F401
 from smartclass.chem.conversion.convert_mol_to_smiles import convert_mol_to_smiles  # noqa:F401
 from smartclass.chem.conversion.convert_molblock_to_mol import convert_molblock_to_mol  # noqa:F401
 

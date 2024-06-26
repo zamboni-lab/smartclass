@@ -154,7 +154,7 @@ def search_classes(
     # Export
     key = "class_id"
     value = "structure_inchikey"
-    fields = ["class_id", "class_structure", "structure_inchikey", "structure_ab", "matched_ab"]
+    fields = ["class_id", "class_structure", "structure_inchikey", "structure_smarts", "structure_ab", "matched_ab"]
     results_kv = convert_list_of_dict(results, key, value)
     # Export results to JSON as key_value
     with open("scratch/results_kv.json", "w") as file:

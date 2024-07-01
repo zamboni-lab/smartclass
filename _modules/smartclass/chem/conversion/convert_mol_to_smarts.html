@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>smartclass.chem.helpers.get_num_matched_atoms_bonds &mdash; smartclass 0.0.1-dev documentation</title>
+  <title>smartclass.chem.conversion.convert_mol_to_smarts &mdash; smartclass 0.0.1-dev documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=fd3f3429" />
@@ -69,7 +69,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
-      <li class="breadcrumb-item active">smartclass.chem.helpers.get_num_matched_atoms_bonds</li>
+      <li class="breadcrumb-item active">smartclass.chem.conversion.convert_mol_to_smarts</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -78,46 +78,31 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <h1>Source code for smartclass.chem.helpers.get_num_matched_atoms_bonds</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Get number of matched atoms and bonds.&quot;&quot;&quot;</span>
+  <h1>Source code for smartclass.chem.conversion.convert_mol_to_smarts</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Convert a structure MOL to SMILES.&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">from</span> <span class="nn">rdkit.Chem</span> <span class="kn">import</span> <span class="n">Mol</span><span class="p">,</span> <span class="n">rdFMCS</span>
+<span class="kn">from</span> <span class="nn">rdkit.Chem</span> <span class="kn">import</span> <span class="n">Mol</span><span class="p">,</span> <span class="n">MolToSmarts</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;get_num_matched_atoms_bonds&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;convert_mol_to_smarts&quot;</span><span class="p">,</span>
 <span class="p">]</span>
 
 
-<div class="viewcode-block" id="get_num_matched_atoms_bonds">
-<a class="viewcode-back" href="../../../../api/smartclass.get_num_matched_atoms_bonds.html#smartclass.get_num_matched_atoms_bonds">[docs]</a>
-<span class="k">def</span> <span class="nf">get_num_matched_atoms_bonds</span><span class="p">(</span>
-    <span class="n">mol_1</span><span class="p">:</span> <span class="n">Mol</span><span class="p">,</span>
-    <span class="n">mol_2</span><span class="p">:</span> <span class="n">Mol</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<div class="viewcode-block" id="convert_mol_to_smarts">
+<a class="viewcode-back" href="../../../../api/smartclass.convert_mol_to_smarts.html#smartclass.convert_mol_to_smarts">[docs]</a>
+<span class="k">def</span> <span class="nf">convert_mol_to_smarts</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Get number of matched atoms and bonds.</span>
+<span class="sd">    Convert a structure MOL to SMARTS.</span>
 
-<span class="sd">    :param mol_1: A structure MOL.</span>
-<span class="sd">    :type mol_1: Mol</span>
+<span class="sd">    :param mol: A structure MOL.</span>
+<span class="sd">    :type mol: Mol</span>
 
-<span class="sd">    :param mol_2: A structure MOL.</span>
-<span class="sd">    :type mol_2: Mol</span>
-
-<span class="sd">    :returns: Number of matched atoms and bonds.</span>
-<span class="sd">    :rtype: int</span>
-
+<span class="sd">    :returns: A SMARTS.</span>
+<span class="sd">    :rtype: str</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># TODO See if using the RASCAL MCES</span>
-    <span class="n">mcs</span> <span class="o">=</span> <span class="n">rdFMCS</span><span class="o">.</span><span class="n">FindMCS</span><span class="p">(</span>
-        <span class="p">[</span><span class="n">mol_1</span><span class="p">,</span> <span class="n">mol_2</span><span class="p">],</span>
-        <span class="n">atomCompare</span><span class="o">=</span><span class="n">rdFMCS</span><span class="o">.</span><span class="n">AtomCompare</span><span class="o">.</span><span class="n">CompareAny</span><span class="p">,</span>
-        <span class="n">bondCompare</span><span class="o">=</span><span class="n">rdFMCS</span><span class="o">.</span><span class="n">BondCompare</span><span class="o">.</span><span class="n">CompareAny</span><span class="p">,</span>
-        <span class="c1"># ringCompare=rdFMCS.ringCompare.IgnoreRingFusion,</span>
-    <span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">mcs</span><span class="o">.</span><span class="n">numAtoms</span> <span class="o">+</span> <span class="n">mcs</span><span class="o">.</span><span class="n">numBonds</span></div>
+    <span class="k">return</span> <span class="n">MolToSmarts</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span></div>
 
 </pre></div>
 

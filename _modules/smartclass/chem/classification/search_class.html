@@ -86,6 +86,7 @@
 <span class="kn">from</span> <span class="nn">rdkit.Chem</span> <span class="kn">import</span> <span class="n">FilterCatalog</span><span class="p">,</span> <span class="n">SubstructMatchParameters</span>
 
 <span class="kn">from</span> <span class="nn">smartclass.chem.conversion.convert_mol_to_inchikey</span> <span class="kn">import</span> <span class="n">convert_mol_to_inchikey</span>
+<span class="kn">from</span> <span class="nn">smartclass.chem.conversion.convert_mol_to_smarts</span> <span class="kn">import</span> <span class="n">convert_mol_to_smarts</span>
 <span class="kn">from</span> <span class="nn">smartclass.chem.conversion.convert_smarts_to_mol</span> <span class="kn">import</span> <span class="n">convert_smarts_to_mol</span>
 <span class="kn">from</span> <span class="nn">smartclass.chem.helpers.enumerate_structures</span> <span class="kn">import</span> <span class="n">enumerate_structures</span>
 <span class="kn">from</span> <span class="nn">smartclass.chem.helpers.get_num_atoms_bonds</span> <span class="kn">import</span> <span class="n">get_num_atoms_bonds</span>
@@ -142,6 +143,7 @@
                             <span class="s2">&quot;class_id&quot;</span><span class="p">:</span> <span class="n">class_id</span><span class="p">,</span>
                             <span class="s2">&quot;class_structure&quot;</span><span class="p">:</span> <span class="n">class_structure</span><span class="p">,</span>
                             <span class="s2">&quot;structure_inchikey&quot;</span><span class="p">:</span> <span class="n">convert_mol_to_inchikey</span><span class="p">(</span><span class="n">structure</span><span class="p">),</span>
+                            <span class="s2">&quot;structure_smarts&quot;</span><span class="p">:</span> <span class="n">convert_mol_to_smarts</span><span class="p">(</span><span class="n">structure</span><span class="p">),</span>
                             <span class="s2">&quot;structure_ab&quot;</span><span class="p">:</span> <span class="n">get_num_atoms_bonds</span><span class="p">(</span><span class="n">structure</span><span class="p">),</span>
                             <span class="s2">&quot;matched_ab&quot;</span><span class="p">:</span> <span class="n">get_num_matched_atoms_bonds</span><span class="p">(</span>
                                 <span class="n">mol_1</span><span class="o">=</span><span class="n">structure</span><span class="p">,</span> <span class="n">mol_2</span><span class="o">=</span><span class="n">pattern</span>

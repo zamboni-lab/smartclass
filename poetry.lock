@@ -265,13 +265,13 @@ files = [
 
 [[package]]
 name = "certifi"
-version = "2024.6.2"
+version = "2024.7.4"
 description = "Python package for providing Mozilla's CA Bundle."
 optional = false
 python-versions = ">=3.6"
 files = [
-    {file = "certifi-2024.6.2-py3-none-any.whl", hash = "sha256:ddc6c8ce995e6987e7faf5e3f1b02b302836a0e5d98ece18392cb1a36c72ad56"},
-    {file = "certifi-2024.6.2.tar.gz", hash = "sha256:3cd43f1c6fa7dedc5899d69d3ad0398fd018ad1a17fba83ddaf78aa46c747516"},
+    {file = "certifi-2024.7.4-py3-none-any.whl", hash = "sha256:c198e21b1289c2ab85ee4e67bb4b4ef3ead0892059901a8d5b622f24a1101e90"},
+    {file = "certifi-2024.7.4.tar.gz", hash = "sha256:5a1e7645bc0ec61a09e26c36f6106dd4cf40c6db3a1fb6352b0244e7fb057c7b"},
 ]
 
 [[package]]
@@ -841,13 +841,13 @@ files = [
 
 [[package]]
 name = "ipykernel"
-version = "6.29.4"
+version = "6.29.5"
 description = "IPython Kernel for Jupyter"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "ipykernel-6.29.4-py3-none-any.whl", hash = "sha256:1181e653d95c6808039c509ef8e67c4126b3b3af7781496c7cbfb5ed938a27da"},
-    {file = "ipykernel-6.29.4.tar.gz", hash = "sha256:3d44070060f9475ac2092b760123fadf105d2e2493c24848b6691a7c4f42af5c"},
+    {file = "ipykernel-6.29.5-py3-none-any.whl", hash = "sha256:afdb66ba5aa354b09b91379bac28ae4afebbb30e8b39510c9690afb7a10421b5"},
+    {file = "ipykernel-6.29.5.tar.gz", hash = "sha256:f093a22c4a40f8828f8e330a9c297cb93dcab13bd9678ded6de8e5cf81c56215"},
 ]
 
 [package.dependencies]
@@ -2468,40 +2468,40 @@ test = ["pytest (>=6,!=7.0.0,!=7.0.1)", "pytest-cov (>=3.0.0)", "pytest-qt"]
 
 [[package]]
 name = "rdkit"
-version = "2024.3.1"
+version = "2024.3.3"
 description = "A collection of chemoinformatics and machine-learning software written in C++ and Python"
 optional = false
 python-versions = "*"
 files = [
-    {file = "rdkit-2024.3.1-cp310-cp310-macosx_10_13_x86_64.whl", hash = "sha256:e3486c23055da28e3ca8bd7b4cbbb285b7813c63ed733a11e57f9aa545cce1b9"},
-    {file = "rdkit-2024.3.1-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:85488ac652f55c7a99b3f2b272c41e78b6eb041d75f946716843261ce83436a7"},
-    {file = "rdkit-2024.3.1-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:a57f3ae5935139bfb42250cdbb395eb6b57e5d808b36020d17528b2b8b684ced"},
-    {file = "rdkit-2024.3.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:ce34548afca765f09608d5193943fa2fd268179499e67a9cf69df46334444f05"},
-    {file = "rdkit-2024.3.1-cp310-cp310-win_amd64.whl", hash = "sha256:dc3c8593989182c15d547ec7c75d0bccd1b0aa970827c2f93e1d7213017652be"},
-    {file = "rdkit-2024.3.1-cp311-cp311-macosx_10_13_x86_64.whl", hash = "sha256:0d1ef8c3e74ea9c18fc8f73770d865598137c830e570ac9dd703cd2561258922"},
-    {file = "rdkit-2024.3.1-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:7f8e61d474a6f01201106b4103b7f2da49e933711d58f6cad587bae96db15937"},
-    {file = "rdkit-2024.3.1-cp311-cp311-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:3cdff757417ff62bcd5be91a76396a67eb08d8824a0a2e48e403b2480e680216"},
-    {file = "rdkit-2024.3.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:cb1120263653879e1fd01c02c3966d42203aa1d321269b465884a4afcd083fb5"},
-    {file = "rdkit-2024.3.1-cp311-cp311-win_amd64.whl", hash = "sha256:2d823be3c8c8f043279cda6770867bdc95d32b54c3041cc1bc89ff8ba11b6a7d"},
-    {file = "rdkit-2024.3.1-cp312-cp312-macosx_10_13_x86_64.whl", hash = "sha256:90249fcf65b94d415223fbada86be7d99d9e667244b9963c9d9178b9c11dbd08"},
-    {file = "rdkit-2024.3.1-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:0cef477469f90c7523134bd6e9167934dc79782cee72b7b5b11b928221054f6d"},
-    {file = "rdkit-2024.3.1-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:1413486e95f0190b413e0d0b243d670f5666d148ea6df3d6dee742ac39f1bac9"},
-    {file = "rdkit-2024.3.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:cba519aa88683a0aff43486cb61625c735a696931180c0edd2f676bc5b86e7bd"},
-    {file = "rdkit-2024.3.1-cp312-cp312-win_amd64.whl", hash = "sha256:18afd3c6fed40f44eb5ac1fb92ffb0507784cca3cdf4f1e6d1bcc42b51536a51"},
-    {file = "rdkit-2024.3.1-cp38-cp38-macosx_10_13_x86_64.whl", hash = "sha256:35207bbdc6ea0538e59e8a41ace4c377fe998223cac23766d11750993f03abf1"},
-    {file = "rdkit-2024.3.1-cp38-cp38-macosx_11_0_arm64.whl", hash = "sha256:97a274411ea1a53b5a0d8dcdb8934faa432e5223bfda4cc75dcdfeb5002ec547"},
-    {file = "rdkit-2024.3.1-cp38-cp38-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:fafd2e7338fc435f5539927a8d7bcc789b04ba4adda38bbeec4f11ab13479908"},
-    {file = "rdkit-2024.3.1-cp38-cp38-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:d77bd45b5bfcaded53bbf2cab060e49ac21f5f57f89cddc378301231efbff267"},
-    {file = "rdkit-2024.3.1-cp38-cp38-win_amd64.whl", hash = "sha256:8d5b24f3841e21215aca37dfbfee823c21a93caf9e21fe27b8a669288933afc9"},
-    {file = "rdkit-2024.3.1-cp39-cp39-macosx_10_13_x86_64.whl", hash = "sha256:b19969e1c3fefbddc2d0ef199c65e23f13b76e60bf92d59a0d85e6bcdee50db3"},
-    {file = "rdkit-2024.3.1-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:d9e1620a9bcf614b916321b8ec99c88f1e18ff2f16d336500466a839b5962a46"},
-    {file = "rdkit-2024.3.1-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:525f98d749fccc76d05256ecbf6fb81d82eba5abc54813ce0d1e4c4e69492e78"},
-    {file = "rdkit-2024.3.1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:0883c3e7b5a85bab57c785a31a7e2cc8fc3369460fb1fe4eb740b74b98ec18e2"},
-    {file = "rdkit-2024.3.1-cp39-cp39-win_amd64.whl", hash = "sha256:974078ee9787411b433cbe6fa5c3e12526efdbce23315b2e85c871bd4c746725"},
+    {file = "rdkit-2024.3.3-cp310-cp310-macosx_10_13_x86_64.whl", hash = "sha256:c400fac6bf8b4e88bdb9b5629b0bb2e037ea53ab7767bc0e92eff80d06b9cc50"},
+    {file = "rdkit-2024.3.3-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:d7d11b9a8c5df2a3bfa7046548d7adc2c80c315618b1ae3b260119cb483d1b80"},
+    {file = "rdkit-2024.3.3-cp310-cp310-manylinux_2_28_aarch64.whl", hash = "sha256:78b5e18249e762a4f888a373cdac237db335ac7cdb909e7f0032426a396056a0"},
+    {file = "rdkit-2024.3.3-cp310-cp310-manylinux_2_28_x86_64.whl", hash = "sha256:1a82473fe4d7f1576a6ba76ab23efa4955c511f2c29ac300189e935c908c521e"},
+    {file = "rdkit-2024.3.3-cp310-cp310-win_amd64.whl", hash = "sha256:29a3b2145026bd970f198b58b42aceecaaa7aab8b8695f45c93682e14a0b5ba9"},
+    {file = "rdkit-2024.3.3-cp311-cp311-macosx_10_13_x86_64.whl", hash = "sha256:db9b781281f944cfd96a57eff28051204b4a0b0a7203ee67ee7ad5727ed99196"},
+    {file = "rdkit-2024.3.3-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:5ad37d86d06136885db8666d75d95637f52cb1e1a942085c5b939c4c9f7faf6b"},
+    {file = "rdkit-2024.3.3-cp311-cp311-manylinux_2_28_aarch64.whl", hash = "sha256:dff149fa0644b9d05e4bf5d6e3afded585fe76745e8944fee65e5911a7ba77dc"},
+    {file = "rdkit-2024.3.3-cp311-cp311-manylinux_2_28_x86_64.whl", hash = "sha256:ed60f59181a5e88af83e9b4fbce4eed8d46d7d61ae40c657ae2a697ac2fd29d3"},
+    {file = "rdkit-2024.3.3-cp311-cp311-win_amd64.whl", hash = "sha256:8b35ca47813a140cccb4d86d570d42d0b47b82e96a3be5e9ffb1b7aa021a9752"},
+    {file = "rdkit-2024.3.3-cp312-cp312-macosx_10_13_x86_64.whl", hash = "sha256:cce32d64bf73dbfc6e6ccb11066dd64758f134c4662ac71c0bf1c87cbe2a0546"},
+    {file = "rdkit-2024.3.3-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:62ad8d702d11c9c92d1a5d7392f1dc70ca4ce47214ca43364dde9f047e5e4566"},
+    {file = "rdkit-2024.3.3-cp312-cp312-manylinux_2_28_aarch64.whl", hash = "sha256:00e39f4e889eac8e7d6c1fe8e200d6cd1d1903bcfd64e62a097bb64c3ddfc57f"},
+    {file = "rdkit-2024.3.3-cp312-cp312-manylinux_2_28_x86_64.whl", hash = "sha256:f3da8bfded992be8375261aabfcabc4b5b1187b53c15ff2b148c3ea789be997d"},
+    {file = "rdkit-2024.3.3-cp312-cp312-win_amd64.whl", hash = "sha256:fe9a76b4be41a0232457273d5a6c042ff8342260e9017e1c94b30e5c0a57e202"},
+    {file = "rdkit-2024.3.3-cp38-cp38-macosx_10_13_x86_64.whl", hash = "sha256:876b10af661082527a2b6795678c2505e850ae860386feb7de9b493f78b6fedf"},
+    {file = "rdkit-2024.3.3-cp38-cp38-macosx_11_0_arm64.whl", hash = "sha256:839e4eb26ec08bc5e4debd3497e5fd2b75d6400c0e1b870b335af7ea5b78474e"},
+    {file = "rdkit-2024.3.3-cp38-cp38-manylinux_2_28_aarch64.whl", hash = "sha256:b969eabf2d0ebecff9b82aebecb30914c3af9c250d098d8c85e9bf1bbdd802c9"},
+    {file = "rdkit-2024.3.3-cp38-cp38-manylinux_2_28_x86_64.whl", hash = "sha256:561d9744cf5ce66e793846ef3f0a1584bd8be4e02b0f57eb9c692432e641a2f2"},
+    {file = "rdkit-2024.3.3-cp38-cp38-win_amd64.whl", hash = "sha256:74ff36901f586ba881b0b8fc9a7379177db9138ecd585437fbb9929ba0a7cd8c"},
+    {file = "rdkit-2024.3.3-cp39-cp39-macosx_10_13_x86_64.whl", hash = "sha256:4e08357c7f0797d95f4ade280b0cc0a8f3d1f294f4f9f46fff0f67920114dd35"},
+    {file = "rdkit-2024.3.3-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:d46c43a2bd1df95b7108bebe38b3e64a45b98c761e136b370302633a88e6be76"},
+    {file = "rdkit-2024.3.3-cp39-cp39-manylinux_2_28_aarch64.whl", hash = "sha256:95fb4e11452519c78c2b2d5f726969f111a53fe69f411f29fcd5d36d22f65521"},
+    {file = "rdkit-2024.3.3-cp39-cp39-manylinux_2_28_x86_64.whl", hash = "sha256:67493fae4f01c35b8a8f6328aeb4e4f28d9ecf268edde2765179a0d31cd68a26"},
+    {file = "rdkit-2024.3.3-cp39-cp39-win_amd64.whl", hash = "sha256:4b96da6c5be666288d5cc32238734c595f5f562c3f8905e69b1fe84ee8b0e4f5"},
 ]
 
 [package.dependencies]
-numpy = "*"
+numpy = "<2.0"
 Pillow = "*"
 
 [[package]]
@@ -2750,18 +2750,18 @@ win32 = ["pywin32"]
 
 [[package]]
 name = "setuptools"
-version = "70.1.1"
+version = "70.2.0"
 description = "Easily download, build, install, upgrade, and uninstall Python packages"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "setuptools-70.1.1-py3-none-any.whl", hash = "sha256:a58a8fde0541dab0419750bcc521fbdf8585f6e5cb41909df3a472ef7b81ca95"},
-    {file = "setuptools-70.1.1.tar.gz", hash = "sha256:937a48c7cdb7a21eb53cd7f9b59e525503aa8abaf3584c730dc5f7a5bec3a650"},
+    {file = "setuptools-70.2.0-py3-none-any.whl", hash = "sha256:b8b8060bb426838fbe942479c90296ce976249451118ef566a5a0b7d8b78fb05"},
+    {file = "setuptools-70.2.0.tar.gz", hash = "sha256:bd63e505105011b25c3c11f753f7e3b8465ea739efddaccef8f0efac2137bac1"},
 ]
 
 [package.extras]
-docs = ["furo", "jaraco.packaging (>=9.3)", "jaraco.tidelift (>=1.4)", "pygments-github-lexers (==0.0.5)", "pyproject-hooks (!=1.1)", "rst.linker (>=1.9)", "sphinx (>=3.5)", "sphinx-favicon", "sphinx-inline-tabs", "sphinx-lint", "sphinx-notfound-page (>=1,<2)", "sphinx-reredirects", "sphinxcontrib-towncrier"]
-testing = ["build[virtualenv] (>=1.0.3)", "filelock (>=3.4.0)", "importlib-metadata", "ini2toml[lite] (>=0.14)", "jaraco.develop (>=7.21)", "jaraco.envs (>=2.2)", "jaraco.path (>=3.2.0)", "jaraco.test", "mypy (==1.10.0)", "packaging (>=23.2)", "pip (>=19.1)", "pyproject-hooks (!=1.1)", "pytest (>=6,!=8.1.1)", "pytest-checkdocs (>=2.4)", "pytest-cov", "pytest-enabler (>=2.2)", "pytest-home (>=0.5)", "pytest-mypy", "pytest-perf", "pytest-ruff (>=0.3.2)", "pytest-subprocess", "pytest-timeout", "pytest-xdist (>=3)", "tomli", "tomli-w (>=1.0.0)", "virtualenv (>=13.0.0)", "wheel"]
+doc = ["furo", "jaraco.packaging (>=9.3)", "jaraco.tidelift (>=1.4)", "pygments-github-lexers (==0.0.5)", "pyproject-hooks (!=1.1)", "rst.linker (>=1.9)", "sphinx (>=3.5)", "sphinx-favicon", "sphinx-inline-tabs", "sphinx-lint", "sphinx-notfound-page (>=1,<2)", "sphinx-reredirects", "sphinxcontrib-towncrier"]
+test = ["build[virtualenv] (>=1.0.3)", "filelock (>=3.4.0)", "importlib-metadata", "ini2toml[lite] (>=0.14)", "jaraco.develop (>=7.21)", "jaraco.envs (>=2.2)", "jaraco.path (>=3.2.0)", "jaraco.test", "mypy (==1.10.0)", "packaging (>=23.2)", "pip (>=19.1)", "pyproject-hooks (!=1.1)", "pytest (>=6,!=8.1.*)", "pytest-checkdocs (>=2.4)", "pytest-cov", "pytest-enabler (>=2.2)", "pytest-home (>=0.5)", "pytest-mypy", "pytest-perf", "pytest-ruff (>=0.3.2)", "pytest-subprocess", "pytest-timeout", "pytest-xdist (>=3)", "tomli", "tomli-w (>=1.0.0)", "virtualenv (>=13.0.0)", "wheel"]
 
 [[package]]
 name = "six"
@@ -2903,29 +2903,29 @@ files = [
 
 [[package]]
 name = "tox"
-version = "4.15.1"
+version = "4.16.0"
 description = "tox is a generic virtualenv management and test command line tool"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "tox-4.15.1-py3-none-any.whl", hash = "sha256:f00a5dc4222b358e69694e47e3da0227ac41253509bca9f45aa8f012053e8d9d"},
-    {file = "tox-4.15.1.tar.gz", hash = "sha256:53a092527d65e873e39213ebd4bd027a64623320b6b0326136384213f95b7076"},
+    {file = "tox-4.16.0-py3-none-any.whl", hash = "sha256:61e101061b977b46cf00093d4319438055290ad0009f84497a07bf2d2d7a06d0"},
+    {file = "tox-4.16.0.tar.gz", hash = "sha256:43499656f9949edb681c0f907f86fbfee98677af9919d8b11ae5ad77cb800748"},
 ]
 
 [package.dependencies]
-cachetools = ">=5.3.2"
+cachetools = ">=5.3.3"
 chardet = ">=5.2"
 colorama = ">=0.4.6"
-filelock = ">=3.13.1"
-packaging = ">=23.2"
-platformdirs = ">=4.1"
-pluggy = ">=1.3"
-pyproject-api = ">=1.6.1"
-virtualenv = ">=20.25"
+filelock = ">=3.15.4"
+packaging = ">=24.1"
+platformdirs = ">=4.2.2"
+pluggy = ">=1.5"
+pyproject-api = ">=1.7.1"
+virtualenv = ">=20.26.3"
 
 [package.extras]
-docs = ["furo (>=2023.9.10)", "sphinx (>=7.2.6)", "sphinx-argparse-cli (>=1.11.1)", "sphinx-autodoc-typehints (>=1.25.2)", "sphinx-copybutton (>=0.5.2)", "sphinx-inline-tabs (>=2023.4.21)", "sphinxcontrib-towncrier (>=0.2.1a0)", "towncrier (>=23.11)"]
-testing = ["build[virtualenv] (>=1.0.3)", "covdefaults (>=2.3)", "detect-test-pollution (>=1.2)", "devpi-process (>=1)", "diff-cover (>=8.0.2)", "distlib (>=0.3.8)", "flaky (>=3.7)", "hatch-vcs (>=0.4)", "hatchling (>=1.21)", "psutil (>=5.9.7)", "pytest (>=7.4.4)", "pytest-cov (>=4.1)", "pytest-mock (>=3.12)", "pytest-xdist (>=3.5)", "re-assert (>=1.1)", "time-machine (>=2.13)", "wheel (>=0.42)"]
+docs = ["furo (>=2024.5.6)", "sphinx (>=7.3.7)", "sphinx-argparse-cli (>=1.16)", "sphinx-autodoc-typehints (>=2.2.2)", "sphinx-copybutton (>=0.5.2)", "sphinx-inline-tabs (>=2023.4.21)", "sphinxcontrib-towncrier (>=0.2.1a0)", "towncrier (>=23.11)"]
+testing = ["build[virtualenv] (>=1.2.1)", "covdefaults (>=2.3)", "detect-test-pollution (>=1.2)", "devpi-process (>=1)", "diff-cover (>=9.1)", "distlib (>=0.3.8)", "flaky (>=3.8.1)", "hatch-vcs (>=0.4)", "hatchling (>=1.25)", "psutil (>=6)", "pytest (>=8.2.2)", "pytest-cov (>=5)", "pytest-mock (>=3.14)", "pytest-xdist (>=3.6.1)", "re-assert (>=1.1)", "setuptools (>=70.2)", "time-machine (>=2.14.2)", "wheel (>=0.43)"]
 
 [[package]]
 name = "tqdm"
@@ -3120,4 +3120,4 @@ docs = []
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "0196db50d811af2c3d03aaeb8d589dd5a7e305108dc0ce4f9907c07c98cdb607"
+content-hash = "72e41511054687d93211ceb9b352989d85ea1f5052afb5384bdd1bef691208b2"

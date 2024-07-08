@@ -74,7 +74,7 @@ print(merged_df)
 # Merge merged_df with tautomers_df to avoid tautomers
 merged_df = merged_df.join(
     tautomers_df, left_on="structure", right_on="structure_1", how="anti"
-).drop("structure_2")
+)
 print(merged_df)
 
 merged_df = (

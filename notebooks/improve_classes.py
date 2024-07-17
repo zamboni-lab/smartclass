@@ -72,9 +72,7 @@ merged_df = chemicals_df.join(
 print(merged_df)
 
 # Merge merged_df with tautomers_df to avoid tautomers
-merged_df = merged_df.join(
-    tautomers_df, left_on="structure", right_on="structure_1", how="anti"
-)
+merged_df = merged_df.join(tautomers_df, left_on="structure", right_on="structure_1", how="anti")
 print(merged_df)
 
 merged_df = (

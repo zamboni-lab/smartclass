@@ -55,7 +55,7 @@ myopic-mces = "^1.0.1"
 numpy = "<2" # because of rdkit
 polars = "^1.4.1"
 pystow = "^0.5.3"
-rdkit = "^2024.3.3"
+rdkit = "^2024.3.4"
 requests = "^2.32.3"
 snakefmt = "^0.10.0"
 

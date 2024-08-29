@@ -94,12 +94,14 @@ Improve current classes
 ~~~~~~~~~~~~~~~~~~~~~~~
 .. code-block:: sh
 
+    poetry run smartclass querywikidata -q src/smartclass/data/queries/chemicals_inchikey.rq -o scratch/wikidata_chemicals_inchikeys.tsv
     poetry run smartclass querywikidata -q src/smartclass/data/queries/chemicals_classes.rq -o scratch/wikidata_chemicals_classes.tsv
     poetry run smartclass querywikidata -q src/smartclass/data/queries/chemical_entities_smiles_isomeric_inchi.rq -o scratch/wikidata_chemical_entities_smiles_inchi.tsv
     poetry run smartclass querywikidata -q src/smartclass/data/queries/stereoisomers_smiles_isomeric_inchi.rq -o scratch/wikidata_stereoisomers_smiles_isomeric_inchi.tsv
     poetry run smartclass querywikidata -q src/smartclass/data/queries/stereoisomers_smiles_canonical_no_isomeric_inchi.rq -o scratch/wikidata_stereoisomers_smiles_canonical_inchi.tsv
     poetry run smartclass querywikidata -q src/smartclass/data/queries/chemicals_tautomer_of.rq -o scratch/wikidata_chemicals_tautomer_of.tsv
     poetry run python3 notebooks/improve_classes.py
+    poetry run python3 notebooks/improve_subclasses_inchikeys.py
     poetry run python3 src/smartclass/helpers/split_csv.py
 
 Add stereoisomers pairs

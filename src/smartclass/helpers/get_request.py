@@ -37,7 +37,9 @@ def get_request(url: str, query: str, max_retries: int = 3, retry_delay: int = 6
     :returns: A list of dictionaries containing the retrieved JSON data.
     :rtype: list[dict]
     """
-    for attempt in range(max_retries):
+    attempt = 0
+    response = None
+    while attempt < max_retries:
         try:
             params = {"format": "json", "query": query}
             response = requests.get(url, timeout=60, params=params)
@@ -51,9 +53,10 @@ def get_request(url: str, query: str, max_retries: int = 3, retry_delay: int = 6
             return results
 
         except RequestException as e:
-            if response.status_code == 429 and attempt < max_retries - 1:
+            if response and response.status_code == 429 and attempt < max_retries - 1:
                 logging.warning(f"Rate limit exceeded. Retrying after {retry_delay} seconds...")
                 time.sleep(retry_delay)
+                attempt += 1
             else:
                 logging.error(f"Error making the GET request: {e}")
                 raise

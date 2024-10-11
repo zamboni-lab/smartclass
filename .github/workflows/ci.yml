@@ -36,7 +36,7 @@ jobs:
           virtualenvs-in-project: true
       - name: Setup dependencies
         run: |
-          poetry lock [--no-update]
+          poetry lock --no-update
           poetry install --extras docs
       - name: Run tests for PR
         env:

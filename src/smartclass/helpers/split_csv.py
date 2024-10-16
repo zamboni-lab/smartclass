@@ -54,7 +54,9 @@ def split_csv(input_file: str, output_dir: str, lines_per_file: int = 5000) -> N
 
 # Example usage:
 if __name__ == "__main__":
-    input_file = "scratch/masses_incorrect_isomeric.csv"  # Replace with your input CSV file
+    input_file = (
+        "scratch/maintenance_improve_subclasses_inchikeys_2.csv"  # Replace with your input CSV file
+    )
     output_directory = "scratch/output"  # Replace with your output directory
     lines_per_file = 5000  # Replace with the number of lines per output file
 

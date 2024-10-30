@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import logging
 import time
-from typing import List, Dict
+from typing import Dict, List
 
 import requests
 from requests.exceptions import RequestException
@@ -16,7 +16,10 @@ __all__ = [
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 
-def get_request(url: str, query: str, max_retries: int = 3, retry_delay: int = 60) -> List[Dict[str, str]]:
+
+def get_request(
+    url: str, query: str, max_retries: int = 3, retry_delay: int = 60
+) -> List[Dict[str, str]]:
     """
     Send a GET request and retrieve JSON data with retry logic for handling rate limits.
 
@@ -48,7 +51,9 @@ def get_request(url: str, query: str, max_retries: int = 3, retry_delay: int = 6
             data = response.json()
             bindings = data.get("results", {}).get("bindings", [])
 
-            results = [{key: value["value"] for key, value in binding.items()} for binding in bindings]
+            results = [
+                {key: value["value"] for key, value in binding.items()} for binding in bindings
+            ]
 
             return results
 
@@ -60,6 +65,7 @@ def get_request(url: str, query: str, max_retries: int = 3, retry_delay: int = 6
             else:
                 logging.error(f"Error making the GET request: {e}")
                 raise
+
 
 # Example usage:
 if __name__ == "__main__":

@@ -4,6 +4,8 @@ from __future__ import annotations
 
 from rdkit.Chem.rdMolDescriptors import CalcMolFormula
 
+from smartclass.chem.conversion.convert_mol_to_formula import convert_mol_to_formula
+
 from smartclass.chem.conversion.convert_smiles_to_mol import convert_smiles_to_mol
 
 __all__ = [
@@ -23,7 +25,7 @@ def convert_smiles_to_formula(smiles: str) -> str | None:
     """
     mol = convert_smiles_to_mol(smiles)
     if mol is not None:
-        return CalcMolFormula(mol)
+        return convert_mol_to_formula(mol)
     else:
         return None
 

@@ -111,7 +111,7 @@ max-line-length = 120
 # check  .flake8
 
 [tool.pdm.build]
-includes = ["docs/source/*.py", "docs/source/*.rst", "docs/source/*.png", "AUTHORS.rst", "CHANGELOG.rst", "LICENSE", "README.rst", "Snakefile"]
+includes = ["docs/source/*.py", "docs/source/*.rst", "docs/source/*.png", "src/", "AUTHORS.rst", "CHANGELOG.rst", "LICENSE", "README.rst", "Snakefile"]
 excludes = [".bumpversion.cfg", ".coveragerc", ".flake8", ".readthedocs.yml", "CITATION.cff", "docker-compose.yml", "Dockerfile", "uv.lock", "tox.ini"]
 
 [tool.ruff]

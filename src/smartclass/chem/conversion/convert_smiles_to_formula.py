@@ -2,10 +2,7 @@
 
 from __future__ import annotations
 
-from rdkit.Chem.rdMolDescriptors import CalcMolFormula
-
 from smartclass.chem.conversion.convert_mol_to_formula import convert_mol_to_formula
-
 from smartclass.chem.conversion.convert_smiles_to_mol import convert_smiles_to_mol
 
 __all__ = [

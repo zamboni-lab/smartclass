@@ -99,6 +99,10 @@ filterwarnings = [
 markers = [
     "slow: marks tests as slow (deselect with '-m \"not slow\"')",
 ]
+pythonpath = [
+  ".", "src",
+]
+testpaths = "tests"
 
 [tool.doc8]
 max-line-length = 120

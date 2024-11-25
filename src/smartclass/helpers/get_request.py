@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import logging
 import time
-from typing import Dict, List
 
 import requests
 from requests.exceptions import RequestException
@@ -19,7 +18,7 @@ logging.basicConfig(level=logging.INFO)
 
 def get_request(
     url: str, query: str, max_retries: int = 3, retry_delay: int = 60
-) -> List[Dict[str, str]]:
+) -> list[dict[str, str]]:
     """
     Send a GET request and retrieve JSON data with retry logic for handling rate limits.
 
@@ -65,15 +64,17 @@ def get_request(
             else:
                 logging.error(f"Error making the GET request: {e}")
                 raise
+    # Return an empty list if all retries fail
+    return []
 
 
 # Example usage:
 if __name__ == "__main__":
     try:
         url = "https://query.wikidata.org/sparql"
-        query = "SELECT ?item ?itemLabel WHERE { ?item wdt:P31 wd:Q5. SERVICE wikibase:label { bd:serviceParam wikibase:language '[AUTO_LANGUAGE],en'. } } LIMIT 10"
+        query = "SELECT ?item ?itemLabel WHERE { ?item wdt:P31 wd:Q5. SERVICE wikibase:label { bd:serviceParam wikibase:language '[AUTO_LANGUAGE],en'. } } LIMIT 10"  # noqa:E501
         results = get_request(url, query)
         for result in results:
-            print(result)
+            logging.info(f"{result}")
     except RequestException as e:
         logging.error(f"Request error: {e}")

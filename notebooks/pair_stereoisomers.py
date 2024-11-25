@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import polars as pl
 
 from smartclass.chem.helpers.check_layers_from_inchi import check_layers_from_inchi
@@ -50,7 +52,7 @@ add_df = merged_df.join(
         "structure_right",
     ],
     how="anti",
-).filter((pl.col("structure") != pl.col("structure_right")))
+).filter(pl.col("structure") != pl.col("structure_right"))
 
 # Remove wrong pairs
 remove_df = stereo_df.join(
@@ -60,7 +62,7 @@ remove_df = stereo_df.join(
         "structure_right",
     ],
     how="anti",
-).filter((pl.col("structure") != pl.col("structure_right")))
+).filter(pl.col("structure") != pl.col("structure_right"))
 
 # Renaming
 add_df = (

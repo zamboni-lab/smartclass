@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import polars as pl
 from rdkit import Chem
 
@@ -85,7 +87,7 @@ merged_df = (
     )
     .filter(pl.col("smiles") != pl.col("smiles_right"))
     .drop("smiles", "smiles_right")
-    .filter((pl.col("match")))
+    .filter(pl.col("match"))
     .drop("match")
 )
 print(merged_df)
@@ -102,7 +104,7 @@ print(final_merged_df)
 matched_classes_df = final_merged_df.filter(pl.col("class_right") == pl.col("class")).filter(
     pl.col("structure") != pl.col("structure_right")
 )
-matched_classes_df_2 = final_merged_df.filter("Q11173" == pl.col("class")).filter(
+matched_classes_df_2 = final_merged_df.filter(pl.col("class") == "Q11173").filter(
     pl.col("structure") != pl.col("structure_right")
 )
 

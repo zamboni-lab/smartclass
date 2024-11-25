@@ -5,9 +5,9 @@ from __future__ import annotations
 import importlib_resources
 from polars import DataFrame  # Because of type
 
-from smartclass.io.load_csv_from_path import load_csv_from_path  # noqa:F401
-from smartclass.io.load_json_from_path import load_json_from_path  # noqa:F401
-from smartclass.io.load_tsv_from_path import load_tsv_from_path  # noqa:F401
+from smartclass.io.load_csv_from_path import load_csv_from_path
+from smartclass.io.load_json_from_path import load_json_from_path
+from smartclass.io.load_tsv_from_path import load_tsv_from_path
 
 __all__ = ["load_pkg_file"]
 

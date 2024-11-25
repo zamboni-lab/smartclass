@@ -23,7 +23,7 @@ def remove_layers_from_inchi(inchi: str, layers: list) -> str:
     :rtype: str
     """
     for layer in layers:
-        inchi = re.sub(r"/{0}.*?/".format(layer), "/", inchi)
+        inchi = re.sub(rf"/{layer}.*?/", "/", inchi)
     return inchi
 
 

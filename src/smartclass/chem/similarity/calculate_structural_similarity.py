@@ -1,5 +1,7 @@
 """Calculate structural similarity."""
 
+from __future__ import annotations
+
 from rdkit.Chem import Mol, rdRascalMCES
 
 opts = rdRascalMCES.RascalOptions()

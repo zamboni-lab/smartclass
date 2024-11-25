@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import polars as pl
 
 # Paths
@@ -55,7 +57,7 @@ df_1 = df_final.filter((pl.col("class") == "Q11173") & (pl.col("class_right") !=
 )
 
 df_2 = (
-    df_final.filter((pl.col("class_right") == "Q11173"))
+    df_final.filter(pl.col("class_right") == "Q11173")
     .select(
         [
             pl.col("structure_right").alias("qid"),

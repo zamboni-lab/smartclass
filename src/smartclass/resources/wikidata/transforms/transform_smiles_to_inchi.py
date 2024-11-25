@@ -16,7 +16,7 @@ def transform_smiles_to_inchi(result: dict) -> dict | None:
     :rtype: Union[dict, None]
     """
     inchi = convert_smiles_to_inchi(result.get("smiles", ""))
-    inchi_wd = result.get("inchi", None)
+    inchi_wd = result.get("inchi")
     if inchi is not None:
         if inchi_wd is None:
             transformed_result = {

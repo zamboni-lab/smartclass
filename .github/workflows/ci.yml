@@ -21,6 +21,10 @@ jobs:
         run: uv python install
       - name: Install dependencies
         run: uv sync --all-groups
+      - name: Ensure pip is installed
+        run: |
+          uv run python3 -m ensurepip --upgrade
+          uv run python3 -m pip install --upgrade pip
       - name: Run tests for PR
         env:
           PYTHONDONTWRITEBYTECODE: 1

@@ -12,38 +12,21 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Set up python
-        uses: actions/setup-python@v5
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
         with:
-          python-version: '3.12'
-      - name: Load cached Poetry installation
-        id: cached-poetry
-        uses: actions/cache@v4
-        with:
-          path: ~/.local
-          key: poetry-0
-      - name: Load cached env
-        id: cached-env
-        uses: actions/cache@v4
-        with:
-          path: /home/runner/.cache/pypoetry/virtualenvs
-          key: venv-0
-      - name: Install Poetry
-        if: steps.cached-poetry.outputs.cache-hit != 'true'
-        uses: snok/install-poetry@v1
-        with:
-          virtualenvs-create: true
-          virtualenvs-in-project: true
-      - name: Setup dependencies
-        run: |
-          poetry lock --no-update
-          poetry install --extras docs
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
+      - name: Set up Python
+        run: uv python install
+      - name: Install dependencies
+        run: uv sync --all-extras --dev --docs
       - name: Run tests for PR
         env:
           PYTHONDONTWRITEBYTECODE: 1
         run: |
-          poetry run pytest --cov-config=.coveragerc --cov=.
-          poetry run coverage xml
+          uv run pytest --cov-config=.coveragerc --cov=.
+          uv run coverage xml
       - name: Get Cover
         if: github.event_name == 'pull_request'
         uses: orgoro/coverage@v3.1
@@ -54,14 +37,14 @@ jobs:
       - name: Run tests
         if: github.event_name != 'pull_request'
         run: |
-          poetry run coverage report
+          uv run coverage report
       - name: Build documentation
         run: |
-          poetry run python3 -m pip install -r docs/requirements.in
+          uv run python3 -m pip install -r docs/requirements.in
           mkdir gh-pages
           touch gh-pages/.nojekyll
           cd docs/source
-          poetry run sphinx-build -b html . _build
+          uv run sphinx-build -b html . _build
           cp -r _build/* ../../gh-pages/        
       - name: Deploy documentation
         if: ${{ github.event_name == 'push' }}

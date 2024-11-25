@@ -1,5 +1,7 @@
 """Calculate myopic MCES."""
 
+from __future__ import annotations
+
 from myopic_mces.myopic_mces import MCES
 
 

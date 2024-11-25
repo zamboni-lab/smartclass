@@ -1,14 +1,20 @@
-[tool.poetry]
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+[project]
 name = "smartclass"
 version = "0.0.1"
 description = "Short Description TODO"
-authors = ["Adriano Rutz <rutz@imsb.biol.ethz.ch>"]
-license = "LICENSE"
-readme = "README.rst"
-homepage = "https://gitlab.ethz.ch/zambonilab/smartclass"
-repository = "https://gitlab.ethz.ch/zambonilab/smartclass"
-documentation = "https://smartclass.readthedocs.io"
-keywords = ["cheminformatics", "openData", "classification"]
+authors = [
+    {name = "Adriano Rutz", email = "rutz@imsb.biol.ethz.ch"},
+]
+requires-python = "<4.0,>=3.12"
+keywords = [
+    "cheminformatics",
+    "openData",
+    "classification",
+]
 classifiers = [
     "Development Status :: 1 - Planning",
     "Environment :: Console",
@@ -19,72 +25,65 @@ classifiers = [
     "Framework :: Sphinx",
     "Programming Language :: Python",
     "Programming Language :: Python :: 3.12",
-    "Programming Language :: Python :: 3 :: Only"
+    "Programming Language :: Python :: 3 :: Only",
 ]
-exclude = [
-    ".bumpversion.cfg",
-    ".coveragerc",
-    ".flake8",
-    ".readthedocs.yml",
-    "CITATION.cff",
-    "docker-compose.yml",
-    "Dockerfile",
-    "poetry.lock",
-    "tox.ini"
-]
-include = [
-    "docs/source/*.py",
-    "docs/source/*.rst",
-    "docs/source/*.png",
-    "AUTHORS.rst",
-    "CHANGELOG.rst",
-    "LICENSE",
-    "README.rst",
-    "Snakefile"
+license = {text = "LICENSE"}
+readme = "README.rst"
+
+dependencies = [
+    "chembl-downloader<1.0.0,>=0.4.5",
+    "click<9.0.0,>=8.1.7",
+    "importlib-resources<7.0.0,>=6.4.5",
+    "jupyter<2.0.0,>=1.1.1",
+    "more-click<1.0.0,>=0.1.2",
+    "more-itertools<11.0.0,>=10.5.0",
+    "myopic-mces<2.0.0,>=1.0.1",
+    "numpy<3.0.0,>=2.1.3",
+    "polars<2.0.0,>=1.14.0",
+    "pystow<1.0.0,>=0.5.3",
+    "rdkit<2025.0.0,>=2024.3.6",
+    "requests<3.0.0,>=2.32.3",
+    "snakefmt<1.0.0,>=0.10.0",
+    "treelib<2.0.0,>=1.7.0",
 ]
 
-[tool.poetry.dependencies]
-python = "^3.12"
-chembl_downloader = "^0.4.5"
-click = "^8.1.7"
-importlib_resources = "^6.4.5"
-jupyter = "^1.1.1"
-more_click = "^0.1.2"
-more_itertools = "^10.5.0"
-myopic-mces = "^1.0.1"
-numpy = "^2.1.3"
-polars = "^1.14.0"
-pystow = "^0.5.3"
-rdkit = "^2024.3.6"
-requests = "^2.32.3"
-snakefmt = "^0.10.0"
-treelib = "^1.7.0"
-
-[tool.poetry.extras]
+[dependency-groups]
+dev = [
+    "black<25.0.0,>=24.10.0",
+    "coverage<8.0.0,>=7.6.8",
+    "flake8<8.0.0,>=7.1.1",
+    "importlib-metadata<8.0.0,>=7.2.1",
+    "isort<6.0.0,>=5.13.2",
+    "pytest<9.0.0,>=8.3.3",
+    "pytest-asyncio<1.0.0,>=0.23.5",
+    "pytest-cov<7.0.0,>=6.0.0",
+    "pytest-mock<4.0.0,>=3.14.0",
+    "pytest-xdist<4.0.0,>=3.6.1",
+    "requests-mock<2.0.0,>=1.12.1",
+    "tox<5.0.0,>=4.23.2",
+]
 docs = ["Sphinx", "sphinx-rtd-theme", "sphinxcontrib-napoleon"]
 
-[tool.poetry.group.dev.dependencies]
-black = "^24.10.0"
-coverage = "^7.6.8"
-flake8 = "^7.1.1"
-importlib-metadata = "^7.2.1" 
-isort = "^5.13.2"
-pytest = "^8.3.3"
-pytest-asyncio = "^0.23.5"
-pytest-cov = "^6.0.0"
-pytest-mock = "^3.14.0"
-pytest-xdist = "^3.6.1"
-requests-mock = "^1.12.1"
-tox = "^4.23.2"
+[options.entry_points]
+console_scripts = "smartclass = smartclass.cli:main"
 
-[tool.poetry.scripts]
+[options.packages.find]
+where = "src"
+
+[options.package_data]
+smartclass = "data/.*"
+
+[project.scripts]
 smartclass = "smartclass.cli:main"
 
+[project.urls]
+homepage = "https://gitlab.ethz.ch/zambonilab/smartclass"
+repository = "https://gitlab.ethz.ch/zambonilab/smartclass"
+documentation = "https://smartclass.readthedocs.io"
 
 [tool.black]
 line-length = 100
 target-version = ["py312"]
-
 
 [tool.isort]
 profile = "black"
@@ -92,7 +91,6 @@ multi_line_output = 3
 line_length = 100
 include_trailing_comma = true
 reverse_relative = true
-
 
 [tool.pytest.ini_options]
 filterwarnings = [
@@ -102,14 +100,15 @@ markers = [
     "slow: marks tests as slow (deselect with '-m \"not slow\"')",
 ]
 
-
 [tool.doc8]
 max-line-length = 120
-
 
 [tool.flake8]
 # check  .flake8
 
+[tool.pdm.build]
+includes = ["docs/source/*.py", "docs/source/*.rst", "docs/source/*.png", "AUTHORS.rst", "CHANGELOG.rst", "LICENSE", "README.rst", "Snakefile"]
+excludes = [".bumpversion.cfg", ".coveragerc", ".flake8", ".readthedocs.yml", "CITATION.cff", "docker-compose.yml", "Dockerfile", "uv.lock", "tox.ini"]
 
 [tool.ruff]
 unfixable = [
@@ -154,19 +153,3 @@ lines-between-types = 1
 lines-after-imports = 2
 known-first-party = ["poetry_plugin_export"]
 required-imports = ["from __future__ import annotations"]
-
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
-
-[options.entry_points]
-console_scripts = "smartclass = smartclass.cli:main"
-
-[options.packages.find]
-where = "src"
-
-[options.package_data]
-smartclass = "data/.*"
-
-[tool.setuptools_scm]

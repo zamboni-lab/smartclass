@@ -9,7 +9,7 @@ description = "Short Description TODO"
 authors = [
     {name = "Adriano Rutz", email = "rutz@imsb.biol.ethz.ch"},
 ]
-requires-python = "<3.13,>=3.12"
+requires-python = "<3.14.0,>=3.13.0"
 keywords = [
     "cheminformatics",
     "openData",
@@ -24,7 +24,7 @@ classifiers = [
     "Framework :: tox",
     "Framework :: Sphinx",
     "Programming Language :: Python",
-    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
     "Programming Language :: Python :: 3 :: Only",
 ]
 license = {text = "LICENSE"}

@@ -4,29 +4,39 @@ from __future__ import annotations
 
 import json
 import logging
+from typing import Any, Optional
 
-import requests
+import pooch
 
 __all__ = [
     "load_json_from_url",
 ]
 
+# Create a pooch instance for JSON loading
+JSON_DOWNLOADER = pooch.create(
+    path=pooch.os_cache("json_cache"),
+    base_url="",
+    registry={},
+)
 
-def load_json_from_url(url: str) -> dict | None:
+def load_json_from_url(url: str) -> Optional[dict[str, Any]]:
     """
-    Load json from url.
+    Load JSON from URL.
 
-    :param url: url of the file.
-    :type url: str
+    Args:
+        url: URL of the JSON file.
 
-    :returns: A dictionary.
-    :rtype: Union[dict, None]
+    Returns:
+        Parsed JSON data as a dictionary or None if loading fails.
     """
-    response = requests.get(url, timeout=60)
-    if response.status_code == 200:
-        data = json.loads(response.text)
+    try:
+        fetcher = pooch.HTTPDownloader(timeout=60)
+        data_file = JSON_DOWNLOADER.fetch(url, downloader=fetcher)
+
+        with open(data_file, 'r') as f:
+            data = json.load(f)
         logging.debug(f"Got {url} successfully.")
-    else:
-        logging.debug(f"Failed to get {url}.")
-        data = None
-    return data
+        return data
+    except Exception as e:
+        logging.debug(f"Failed to get {url}: {e}")
+        return None

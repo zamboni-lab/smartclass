@@ -5,31 +5,40 @@ from __future__ import annotations
 import logging
 import os
 
-import requests
+import pooch
 
 __all__ = [
     "download_file_if_not_exists",
 ]
 
+# Create a pooch instance for file downloads
+FILE_DOWNLOADER = pooch.create(
+    path=pooch.os_cache("file_downloads"),
+    base_url="",
+    registry={},
+)
 
-def download_file_if_not_exists(url: str, output: str):
+def download_file_if_not_exists(url: str, output: str) -> None:
     """
-    Downloads a file from the specified URL if it does not already exist at the output path.
+    Downloads a file from the specified URL if it does not exist.
 
-    :param url: Input.
-    :type url: str
-
-    :param output: Output.
-    :type output: str
+    Args:
+        url: Input URL.
+        output: Output file path.
     """
     if os.path.exists(output):
         logging.info(f"File already exists at {output}")
         return
+
     try:
-        response = requests.get(url, timeout=60)
-        response.raise_for_status()
-        with open(output, "wb") as file:
-            file.write(response.content)
+        fetcher = pooch.HTTPDownloader(timeout=60)
+        downloaded_file = FILE_DOWNLOADER.fetch(url, downloader=fetcher)
+
+        # Copy the downloaded file to the desired output location
+        if downloaded_file != output:
+            with open(downloaded_file, "rb") as src, open(output, "wb") as dst:
+                dst.write(src.read())
+
         logging.info(f"File downloaded and saved to {output}")
-    except requests.RequestException as e:
+    except Exception as e:
         logging.error(f"Failed to download the file: {e}")

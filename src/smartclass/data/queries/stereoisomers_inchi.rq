@@ -11,6 +11,6 @@ PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX hint: <http://www.bigdata.com/queryHints#>
 #title: Stereoisomers with InChI
 SELECT * WHERE {
-    ?structure wdt:P31 wd:Q59199015. hint:Prior hint:runFirst TRUE.
-    ?structure wdt:P234 ?inchi. hint:Prior hint:rangeSafe TRUE.
+    ?structure wdt:P31 wd:Q59199015. hint:Prior hint:runFirst true.
+    ?structure wdt:P234 ?inchi. hint:Prior hint:rangeSafe true.
 }

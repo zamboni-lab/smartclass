@@ -11,7 +11,7 @@ PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX hint: <http://www.bigdata.com/queryHints#>
 #title: Type of chemical entities with isomeric SMILES
 SELECT * WHERE {
-    ?structure wdt:P31 wd:Q113145171. hint:Prior hint:runFirst TRUE.
-    ?structure wdt:P2017 ?smiles. hint:Prior hint:rangeSafe TRUE.
-    ?structure wdt:P234 ?inchi. hint:Prior hint:rangeSafe TRUE.
+    ?structure wdt:P31 wd:Q113145171. hint:Prior hint:runFirst true.
+    ?structure wdt:P2017 ?smiles. hint:Prior hint:rangeSafe true.
+    ?structure wdt:P234 ?inchi. hint:Prior hint:rangeSafe true.
 }

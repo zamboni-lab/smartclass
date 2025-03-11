@@ -25,7 +25,7 @@ SELECT * WHERE {
         wd:Q72070508 # group or class of chemical entities
         wd:Q74892521 # imprecise class of chemical entities
     }
-    ?class wdt:P31 ?instance. hint:Prior hint:runFirst TRUE.
+    ?class wdt:P31 ?instance. hint:Prior hint:runFirst true.
     OPTIONAL { ?class wdt:P279 ?parent. }
     SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
 }

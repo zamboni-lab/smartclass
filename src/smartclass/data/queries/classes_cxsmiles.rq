@@ -23,6 +23,6 @@ SELECT * WHERE {
         wd:Q72070508 # group or class of chemical entities
         wd:Q74892521 # imprecise class of chemical entities
     }
-    ?class wdt:P31 ?instance. hint:Prior hint:rangeSafe TRUE.
-    ?class wdt:P10718 ?structure. hint:Prior hint:rangeSafe TRUE.
+    ?class wdt:P31 ?instance. hint:Prior hint:rangeSafe true.
+    ?class wdt:P10718 ?structure. hint:Prior hint:rangeSafe true.
 }

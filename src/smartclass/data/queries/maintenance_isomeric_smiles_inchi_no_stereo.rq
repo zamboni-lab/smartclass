@@ -10,8 +10,8 @@ PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX hint: <http://www.bigdata.com/queryHints#>
 #title: Which structures have an isomeric SMILES (P2017) but do not have an InChI stereo (or isotope) layer?
 SELECT ?structure ?smiles ?inchi WHERE {
-    ?structure wdt:P2017 ?smiles. hint:Prior hint:rangeSafe TRUE.
-    ?structure wdt:P234 ?inchi. hint:Prior hint:rangeSafe TRUE.
+    ?structure wdt:P2017 ?smiles. hint:Prior hint:rangeSafe true.
+    ?structure wdt:P234 ?inchi. hint:Prior hint:rangeSafe true.
     FILTER(!REGEX(STR(?inchi), "/b"))
     FILTER(!REGEX(STR(?inchi), "/t"))
     FILTER(!REGEX(STR(?inchi), "/m"))

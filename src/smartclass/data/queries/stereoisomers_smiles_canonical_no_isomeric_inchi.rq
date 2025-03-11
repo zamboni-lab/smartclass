@@ -11,8 +11,8 @@ PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX hint: <http://www.bigdata.com/queryHints#>
 #title: Stereoisomers with isomeric SMILES
 SELECT * WHERE {
-    ?structure wdt:P31 wd:Q59199015. hint:Prior hint:runFirst TRUE.
-    ?structure wdt:P233 ?smiles. hint:Prior hint:rangeSafe TRUE.
+    ?structure wdt:P31 wd:Q59199015. hint:Prior hint:runFirst true.
+    ?structure wdt:P233 ?smiles. hint:Prior hint:rangeSafe true.
     OPTIONAL { ?structure wdt:P2017 ?isomeric. }
     FILTER(!(BOUND(?isomeric)))
     ?structure wdt:P234 ?inchi.

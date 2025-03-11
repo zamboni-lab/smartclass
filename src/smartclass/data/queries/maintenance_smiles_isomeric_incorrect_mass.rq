@@ -15,7 +15,7 @@ SELECT ?structure ?smiles ?mass WHERE {
         wd:Q113145171
         wd:Q59199015
     }
-    ?structure wdt:P2017 ?smiles. hint:Prior hint:rangeSafe TRUE.
-    ?structure wdt:P31 ?classes. hint:Prior hint:runFirst TRUE.
-    ?structure wdt:P2067 ?mass. hint:Prior hint:rangeSafe TRUE.
+    ?structure wdt:P2017 ?smiles. hint:Prior hint:rangeSafe true.
+    ?structure wdt:P31 ?classes. hint:Prior hint:runFirst true.
+    ?structure wdt:P2067 ?mass. hint:Prior hint:rangeSafe true.
 }

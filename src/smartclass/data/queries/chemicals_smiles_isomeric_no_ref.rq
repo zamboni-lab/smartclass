@@ -14,10 +14,10 @@ PREFIX prov: <http://www.w3.org/ns/prov#>
 PREFIX hint: <http://www.bigdata.com/queryHints#>
 #title: Chemicals with isomeric SMILES without ref
 SELECT * WHERE {
-    ?structure p:P2017 ?stmt. hint:Prior hint:runFirst TRUE.
+    ?structure p:P2017 ?stmt. hint:Prior hint:runFirst true.
     OPTIONAL { ?stmt prov:wasDerivedFrom ?ref. }
     FILTER(!(BOUND(?ref)))
-    ?stmt ps:P2017 ?smiles_isomeric. hint:Prior hint:rangeSafe TRUE.
+    ?stmt ps:P2017 ?smiles_isomeric. hint:Prior hint:rangeSafe true.
 }
 
 # SELECT * WHERE {

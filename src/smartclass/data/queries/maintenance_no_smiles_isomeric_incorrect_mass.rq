@@ -15,9 +15,9 @@ SELECT ?structure ?inchi ?mass WHERE {
         wd:Q113145171
         wd:Q59199015
     }
-    ?structure wdt:P234 ?inchi. hint:Prior hint:rangeSafe TRUE.
+    ?structure wdt:P234 ?inchi. hint:Prior hint:rangeSafe true.
     ?structure wdt:P31 ?classes.
-    ?structure wdt:P2067 ?mass. hint:Prior hint:rangeSafe TRUE.
+    ?structure wdt:P2067 ?mass. hint:Prior hint:rangeSafe true.
     OPTIONAL { ?structure wdt:P2017 ?smiles. }
     FILTER(!(BOUND(?smiles)))
 }

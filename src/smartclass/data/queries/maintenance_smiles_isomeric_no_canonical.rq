@@ -15,8 +15,8 @@ SELECT ?structure ?smiles_isomeric WHERE {
         wd:Q113145171
         wd:Q59199015
     }
-    ?structure wdt:P2017 ?smiles_isomeric. hint:Prior hint:rangeSafe TRUE.
-    ?structure wdt:P31 ?classes. hint:Prior hint:runFirst TRUE.
+    ?structure wdt:P2017 ?smiles_isomeric. hint:Prior hint:rangeSafe true.
+    ?structure wdt:P31 ?classes. hint:Prior hint:runFirst true.
     OPTIONAL { ?structure wdt:P233 ?smiles_canonical. }
     FILTER(!(BOUND(?smiles_canonical)))
 }

@@ -68,6 +68,10 @@ df_2 = (
     .with_columns([pl.lit("Q113993940").alias("S887")])
 )
 
+# Ensure structure is not the same as P279 (might be the case due to multiple InChIKeys)
+df_1 = df_1.filter(pl.col("qid") != pl.col("P279"))
+df_2 = df_2.filter(pl.col("qid") != pl.col("P279"))
+
 print(df_1)
 print(df_2)
 

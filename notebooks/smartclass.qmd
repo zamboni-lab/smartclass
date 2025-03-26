@@ -35,7 +35,7 @@ TODO Short intro
 ### Install
 
 ```{bash Install}
-poetry install
+uv sync
 ```
 
 ### Get some classes
@@ -43,7 +43,7 @@ poetry install
 This queries Wikidata for chemical classes defined with SMARTS and exports the results.
 
 ```{bash Get classes}
-poetry run smartclass querywikidata -q src/smartclass/data/queries/classes_smarts.rq -o scratch/wikidata_classes_smarts.tsv
+uv run smartclass querywikidata -q src/smartclass/data/queries/classes_smarts.rq -o scratch/wikidata_classes_smarts.tsv
 ```
 
 ### Classify
@@ -51,25 +51,25 @@ poetry run smartclass querywikidata -q src/smartclass/data/queries/classes_smart
 #### Help
 
 ```{bash Classification help}
-poetry run smartclass searchclasses --help
+uv run smartclass searchclasses --help
 ```
 
 #### Single structure (closest class only)
 
 ```{bash Classification single SMILES}
-poetry run smartclass searchclasses -s "O=C1OC2CC3C(C=C(OC)C(=O)C3(C)C4C(=O)C(OC)=C(C)C(C1)C24C)C" -c scratch/wikidata_classes_smarts.tsv --verbose
+uv run smartclass searchclasses -s "O=C1OC2CC3C(C=C(OC)C(=O)C3(C)C4C(=O)C(OC)=C(C)C(C1)C24C)C" -c scratch/wikidata_classes_smarts.tsv --verbose
 ```
 
 #### Single structure (all classes)
 
 ```{bash Classification single SMILES all classes}
-poetry run smartclass searchclasses -s "O=C1OC2CC3C(C=C(OC)C(=O)C3(C)C4C(=O)C(OC)=C(C)C(C1)C24C)C" -c scratch/wikidata_classes_smarts.tsv --closest-only False --verbose
+uv run smartclass searchclasses -s "O=C1OC2CC3C(C=C(OC)C(=O)C3(C)C4C(=O)C(OC)=C(C)C(C1)C24C)C" -c scratch/wikidata_classes_smarts.tsv --closest-only False --verbose
 ```
 
 #### File containing multiple structures
 
 ```{bash Classification file of SMILES}
-poetry run smartclass searchclasses -i src/smartclass/data/bitter_smiles.tsv -c scratch/wikidata_classes_smarts.tsv
+uv run smartclass searchclasses -i src/smartclass/data/bitter_smiles.tsv -c scratch/wikidata_classes_smarts.tsv
 ```
 
 (Results are saved in different formats in `scratch/results...`)

@@ -9,6 +9,7 @@ from tqdm import tqdm
 from smartclass.helpers import get_request
 from smartclass.io import export_results
 from smartclass.resources.wikidata.transforms import (
+    check_smiles,
     transform_entities_to_stereoisomers,
     transform_formula_to_formula,
     transform_inchi_mass_to_inchi_mass,
@@ -30,6 +31,7 @@ from smartclass.resources.wikidata.transforms import (
 __all__ = ["query_wikidata"]
 
 TRANSFORM_FUNCTIONS: dict[str, Callable] = {
+    "check_smiles": check_smiles,
     "transform_inchi_to_inchikey": transform_inchi_to_inchikey,
     "transform_inchi_to_mass": transform_inchi_to_mass,
     "transform_inchi_to_smiles_canonical": transform_inchi_to_smiles_canonical,

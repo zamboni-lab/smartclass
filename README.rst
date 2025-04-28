@@ -81,6 +81,9 @@ Generic maintenance
     uv run smartclass querywikidata -q src/smartclass/data/queries/maintenance_smiles_isomeric_incorrect_mass.rq -t transform_smiles_mass_to_smiles_mass -o scratch/masses_incorrect_isomeric.csv
     uv run smartclass querywikidata -q src/smartclass/data/queries/maintenance_no_smiles_isomeric_incorrect_mass.rq -t transform_inchi_mass_to_inchi_mass -o scratch/masses_incorrect_inchi.csv
 
+    uv run smartclass querywikidata -q src/smartclass/data/queries/chemicals_smiles_canonical.rq -t check_smiles -o scratch/smiles_c_invalid.csv
+    uv run smartclass querywikidata -q src/smartclass/data/queries/chemicals_smiles_isomeric.rq -t check_smiles -o scratch/smiles_i_invalid.csv
+
     uv run smartclass querywikidata -q src/smartclass/data/queries/chemicals_smiles_canonical_no_ref.rq -t transform_smiles_c_to_smiles_c_tauto -o scratch/smiles_c_tauto.csv
     uv run smartclass querywikidata -q src/smartclass/data/queries/chemicals_smiles_isomeric_no_ref.rq -t transform_smiles_i_to_smiles_i -o scratch/smiles_i.csv
     uv run smartclass querywikidata -q src/smartclass/data/queries/chemicals_smiles_isomeric_no_ref.rq -t transform_smiles_i_to_smiles_i_tauto -o scratch/smiles_i_tauto.csv

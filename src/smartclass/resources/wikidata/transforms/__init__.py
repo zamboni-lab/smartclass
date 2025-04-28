@@ -2,6 +2,9 @@
 
 from __future__ import annotations
 
+from smartclass.resources.wikidata.transforms.check_smiles import (  # noqa:F401
+    check_smiles,
+)
 from smartclass.resources.wikidata.transforms.transform_entities_to_stereoisomers import (  # noqa:F401
     transform_entities_to_stereoisomers,
 )

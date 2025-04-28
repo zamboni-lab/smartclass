@@ -4,6 +4,9 @@ from __future__ import annotations
 
 from rdkit.Chem import Mol, MolFromInchi
 
+from smartclass.chem.helpers.check_mol import check_mol
+
+
 __all__ = [
     "convert_inchi_to_mol",
 ]
@@ -19,7 +22,17 @@ def convert_inchi_to_mol(inchi: str) -> Mol | None:
     :returns: A MOL.
     :rtype: Union[Mol, None]
     """
-    return MolFromInchi(inchi)
+    mol = MolFromInchi(inchi)
+
+    if mol is None:
+        return None
+
+    mol, errors = check_mol(mol)
+
+    if errors:
+        return None
+
+    return mol
 
 
 if __name__ == "__main__":

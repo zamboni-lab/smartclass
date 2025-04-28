@@ -20,7 +20,7 @@ def transform_smiles_mass_to_smiles_mass(result: dict, tol: float = 0.001) -> di
     """
     mass = convert_smiles_to_mass(result.get("smiles", ""))
     mass_wd = float(result.get("mass", "").split("±")[0])
-    if mass is not None:
+    if mass:
         if abs(float(mass) - mass_wd) > tol:
             transformed_result = {
                 "qid": result.get("structure", "").replace("http://www.wikidata.org/entity/", ""),

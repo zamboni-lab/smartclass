@@ -4,6 +4,9 @@ from __future__ import annotations
 
 from rdkit.Chem import Mol, MolFromSmarts
 
+from smartclass.chem.helpers.check_mol import check_mol
+
+
 __all__ = [
     "convert_smarts_to_mol",
 ]
@@ -19,7 +22,17 @@ def convert_smarts_to_mol(smarts: str) -> Mol | None:
     :returns: A MOL.
     :rtype: Union[Mol, None]
     """
-    return MolFromSmarts(smarts)
+    mol = MolFromSmarts(smarts)
+
+    if mol is None:
+        return None
+
+    mol, errors = check_mol(mol)
+
+    if errors:
+        return None
+
+    return mol
 
 
 if __name__ == "__main__":

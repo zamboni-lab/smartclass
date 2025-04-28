@@ -16,7 +16,7 @@ def transform_inchi_to_inchikey(result: dict) -> dict | None:
     :rtype: Union[dict, None]
     """
     inchikey = convert_inchi_to_inchikey(result.get("inchi", ""))
-    if inchikey is not None:
+    if inchikey:
         transformed_result = {
             "qid": result.get("structure", "").replace("http://www.wikidata.org/entity/", ""),
             "P235": '"' + inchikey + '"',

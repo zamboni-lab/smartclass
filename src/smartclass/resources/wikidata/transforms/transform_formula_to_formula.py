@@ -19,12 +19,12 @@ def transform_formula_to_formula(result: dict) -> dict | None:
     formula = result.get("formula", "")
     nf = convert_smiles_to_formula(result.get("smiles", ""))
 
-    if nf is not None:
+    if nf:
         new_formula = convert_chemical_formula(nf)
     else:
         new_formula = None
 
-    if formula is not None and new_formula is not None:
+    if formula and new_formula:
         transformed_result = {
             "qid": result.get("structure", "").replace("http://www.wikidata.org/entity/", ""),
             "-P274": '"' + formula + '"',

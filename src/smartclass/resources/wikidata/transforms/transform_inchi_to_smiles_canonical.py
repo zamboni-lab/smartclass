@@ -17,7 +17,7 @@ def transform_inchi_to_smiles_canonical(result: dict) -> dict | None:
     :rtype: Union[dict, None]
     """
     smiles = convert_inchi_to_smiles(result.get("inchi", ""))
-    if smiles is not None:
+    if smiles:
         smiles = fix_inchi_tautomerization(smiles)
         if "@" not in smiles:
             transformed_result = {

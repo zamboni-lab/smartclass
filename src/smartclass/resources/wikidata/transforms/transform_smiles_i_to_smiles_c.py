@@ -17,7 +17,7 @@ def transform_smiles_i_to_smiles_c(result: dict) -> dict | None:
     """
     s = result.get("smiles_isomeric", "")
     smiles = check_smiles_isomeric(s, transform_to_canonical=True)
-    if smiles is not None:
+    if smiles:
         transformed_result = {
             "qid": result.get("structure", "").replace("http://www.wikidata.org/entity/", ""),
             "P233": '"' + smiles + '"',

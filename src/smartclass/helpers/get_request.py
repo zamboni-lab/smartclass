@@ -1,80 +1,80 @@
-"""Send a GET request and retrieve JSON data."""
+"""Send a GET request to a SPARQL endpoint and retrieve JSON data."""
 
 from __future__ import annotations
 
 import logging
 import time
+import random
 
 import requests
 from requests.exceptions import RequestException
 
-__all__ = [
-    "get_request",
-]
+__all__ = ["get_request"]
 
-# Configure logging
+# Configure module-level logging
+logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)
 
-
 def get_request(
-    url: str, query: str, max_retries: int = 3, retry_delay: int = 60
+    url: str,
+    query: str,
+    max_retries: int = 3,
+    base_delay: float = 2.0,
+    timeout: int = 60,
 ) -> list[dict[str, str]]:
     """
-    Send a GET request and retrieve JSON data with retry logic for handling rate limits.
+    Send a GET request to a SPARQL endpoint and retrieve JSON data.
 
-    :param url: The URL to send the GET request to.
-    :type url: str
-
-    :param query: The query string to include in the request.
-    :type query: str
-
-    :param max_retries: The maximum number of retry attempts on rate limit errors.
-    :type max_retries: int
-
-    :param retry_delay: The delay between retry attempts in seconds.
-    :type retry_delay: int
-
-    :raises RequestException: If there is an error after retry attempts.
-
-    :returns: A list of dictionaries containing the retrieved JSON data.
-    :rtype: list[dict]
+    :param url: The SPARQL endpoint URL.
+    :param query: The SPARQL query string.
+    :param max_retries: Maximum number of retry attempts.
+    :param base_delay: Base delay (in seconds) for retry backoff.
+    :param timeout: Timeout for the request in seconds.
+    :return: A list of dictionaries representing the query results.
     """
+    headers = {
+        "User-Agent": "SmartClassBot/1.0 (mailto:your_email@example.com)",
+        "Accept": "application/sparql-results+json",
+    }
+
+    params = {
+        "format": "json",
+        "query": query,
+    }
+
     attempt = 0
-    response = None
     while attempt < max_retries:
         try:
-            params = {"format": "json", "query": query}
-            response = requests.get(url, timeout=60, params=params)
-            response.raise_for_status()  # Raise an exception for non-2xx status codes
+            response = requests.get(url, headers=headers, params=params, timeout=timeout)
+            response.raise_for_status()
 
             data = response.json()
             bindings = data.get("results", {}).get("bindings", [])
 
             results = [
-                {key: value["value"] for key, value in binding.items()} for binding in bindings
+                {key: value["value"] for key, value in binding.items()}
+                for binding in bindings
             ]
 
+            logger.info(f"Query successful: {len(results)} results retrieved.")
             return results
 
         except RequestException as e:
-            if response and response.status_code == 429 and attempt < max_retries - 1:
-                logging.warning(f"Rate limit exceeded. Retrying after {retry_delay} seconds...")
-                time.sleep(retry_delay)
+            status_code = getattr(response, "status_code", None)
+            retriable = status_code in {429, 503}
+
+            if retriable and attempt < max_retries - 1:
+                wait_time = base_delay * (2 ** attempt) + random.uniform(0, 1)
+                logger.warning(
+                    f"Request failed with status {status_code}. Retrying in {wait_time:.1f} seconds..."
+                )
+                time.sleep(wait_time)
                 attempt += 1
             else:
-                logging.error(f"Error making the GET request: {e}")
-                raise
-    # Return an empty list if all retries fail
+                logger.error(f"Request failed: {e}")
+                raise RuntimeError(
+                    f"Failed to retrieve data from {url} after {max_retries} attempts."
+                ) from e
+
+    # If somehow exits loop without success
     return []
-
-
-# Example usage:
-if __name__ == "__main__":
-    try:
-        url = "https://query.wikidata.org/sparql"
-        query = "SELECT ?item ?itemLabel WHERE { ?item wdt:P31 wd:Q5. SERVICE wikibase:label { bd:serviceParam wikibase:language '[AUTO_LANGUAGE],en'. } } LIMIT 10"  # noqa:E501
-        results = get_request(url, query)
-        for result in results:
-            logging.info(f"{result}")
-    except RequestException as e:
-        logging.error(f"Request error: {e}")

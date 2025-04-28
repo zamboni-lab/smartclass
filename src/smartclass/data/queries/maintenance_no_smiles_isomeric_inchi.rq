@@ -13,5 +13,5 @@ SELECT ?structure ?inchi WHERE {
     ?structure wdt:P234 ?inchi. hint:Prior hint:rangeSafe true.
     OPTIONAL { ?structure wdt:P2017 ?smiles_i. }
     FILTER(!(BOUND(?smiles_i)))
-    FILTER(REGEX(STR(?inchi), "/b") || REGEX(STR(?inchi), "/t") || REGEX(STR(?inchi), "/m") || REGEX(STR(?inchi), "/s"))
+    FILTER(REGEX(STR(?inchi), "/[btsmi]"))
 }

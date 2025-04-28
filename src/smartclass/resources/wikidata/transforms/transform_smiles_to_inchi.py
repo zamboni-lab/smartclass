@@ -17,7 +17,7 @@ def transform_smiles_to_inchi(result: dict) -> dict | None:
     """
     inchi = convert_smiles_to_inchi(result.get("smiles", ""))
     inchi_wd = result.get("inchi")
-    if inchi is not None:
+    if inchi and len(inchi) < 1500:
         if inchi_wd is None:
             transformed_result = {
                 "qid": result.get("structure", "").replace("http://www.wikidata.org/entity/", ""),

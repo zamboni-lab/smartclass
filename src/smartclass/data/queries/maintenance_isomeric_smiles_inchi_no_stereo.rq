@@ -12,9 +12,7 @@ PREFIX hint: <http://www.bigdata.com/queryHints#>
 SELECT ?structure ?smiles ?inchi WHERE {
     ?structure wdt:P2017 ?smiles. hint:Prior hint:rangeSafe true.
     ?structure wdt:P234 ?inchi. hint:Prior hint:rangeSafe true.
-    FILTER(!REGEX(STR(?inchi), "/b"))
-    FILTER(!REGEX(STR(?inchi), "/t"))
-    FILTER(!REGEX(STR(?inchi), "/m"))
-    FILTER(!REGEX(STR(?inchi), "/s"))
-    FILTER(!REGEX(STR(?inchi), "/i"))
+    FILTER(
+        !REGEX(STR(?inchi), "/[btsmi]")
+    )
 }

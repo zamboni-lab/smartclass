@@ -12,7 +12,7 @@ PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX hint: <http://www.bigdata.com/queryHints#>
 #title: Chemicals with malformed chemical formula
-SELECT ?structure ?formula ?smiles WHERE {
+SELECT DISTINCT ?structure ?formula ?smiles WHERE {
     VALUES ?classes {
         wd:Q113145171
         wd:Q59199015
@@ -21,5 +21,5 @@ SELECT ?structure ?formula ?smiles WHERE {
     ?structure wdt:P233 ?smiles. hint:Prior hint:rangeSafe true.
     ?structure wdt:P31 ?classes. hint:Prior hint:runFirst true.
     wd:P274 wdt:P1793 ?constraint. hint:Prior hint:rangeSafe true.
-    FILTER(REGEX(?constraint, ?formula))
+    FILTER(REPLACE(?formula, ?constraint, "") != "")
 }

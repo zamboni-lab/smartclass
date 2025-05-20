@@ -81,11 +81,12 @@ def loadpkgdata():
     "-r", "--remove_prefix", type=bool, help="Remove prefix.", required=False, default=True
 )
 @click.option("-t", "--transform", type=str, help="Transform to apply.", required=False)
-def querywikidata(query, output, remove_prefix, transform):
+@click.option("-u", "--url", type=str, help="URL of the endpoint.", required=False)
+def querywikidata(query, output, remove_prefix, transform, url):
     """CLI command that calls query_wikidata function."""
     from smartclass.resources.wikidata import query_wikidata
 
-    query_wikidata(query, output, remove_prefix, transform)
+    query_wikidata(query, output, remove_prefix, transform, url)
     click.echo(output)
 
 

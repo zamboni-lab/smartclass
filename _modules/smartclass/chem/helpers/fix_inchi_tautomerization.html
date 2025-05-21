@@ -82,7 +82,9 @@
 <span class="kn">from</span> <span class="nn">rdkit.Chem</span> <span class="kn">import</span> <span class="n">AllChem</span>
 
 <span class="kn">from</span> <span class="nn">smartclass.helpers.check_smiles_contains_no_dot</span> <span class="kn">import</span> <span class="n">check_smiles_contains_no_dot</span>
-<span class="kn">from</span> <span class="nn">smartclass.helpers.check_smiles_contains_no_isotope</span> <span class="kn">import</span> <span class="n">check_smiles_contains_no_isotope</span>
+<span class="kn">from</span> <span class="nn">smartclass.helpers.check_smiles_contains_no_isotope</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">check_smiles_contains_no_isotope</span><span class="p">,</span>
+<span class="p">)</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s2">&quot;fix_inchi_tautomerization&quot;</span><span class="p">,</span>

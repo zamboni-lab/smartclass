@@ -221,7 +221,10 @@
             <span class="n">inchikey</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;structure_inchikey&quot;</span><span class="p">]</span>
             <span class="n">matched_ab</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;matched_ab&quot;</span><span class="p">]</span>
 
-            <span class="k">if</span> <span class="n">inchikey</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">max_ab_per_inchikey</span> <span class="ow">or</span> <span class="n">matched_ab</span> <span class="o">&gt;</span> <span class="n">max_ab_per_inchikey</span><span class="p">[</span><span class="n">inchikey</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="p">(</span>
+                <span class="n">inchikey</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">max_ab_per_inchikey</span>
+                <span class="ow">or</span> <span class="n">matched_ab</span> <span class="o">&gt;</span> <span class="n">max_ab_per_inchikey</span><span class="p">[</span><span class="n">inchikey</span><span class="p">]</span>
+            <span class="p">):</span>
                 <span class="n">max_ab_per_inchikey</span><span class="p">[</span><span class="n">inchikey</span><span class="p">]</span> <span class="o">=</span> <span class="n">matched_ab</span>
         <span class="n">results</span> <span class="o">=</span> <span class="p">[</span>
             <span class="n">result</span>

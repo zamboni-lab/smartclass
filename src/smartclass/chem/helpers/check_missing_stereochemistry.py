@@ -6,7 +6,10 @@ import logging
 
 from rdkit import Chem
 from rdkit.Chem import Mol
-from rdkit.Chem.EnumerateStereoisomers import GetStereoisomerCount, StereoEnumerationOptions
+from rdkit.Chem.EnumerateStereoisomers import (
+    GetStereoisomerCount,
+    StereoEnumerationOptions,
+)
 
 __all__ = [
     "check_missing_stereochemistry",

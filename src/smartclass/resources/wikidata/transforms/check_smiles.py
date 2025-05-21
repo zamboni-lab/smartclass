@@ -27,5 +27,3 @@ def check_smiles(result: dict) -> dict | None:
         }
     else:
         return None
-
-    

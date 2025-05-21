@@ -29,7 +29,9 @@ def get_exact_relationships(
     chebi_synonyms: dict[str, list[tuple[str, str]]] = {}
     with zipfile.ZipFile(obo_file_path, "r") as z:
         with z.open(z.namelist()[0]) as obo_file:
-            content = obo_file.read().decode("utf-8")  # Read and decode the entire file content
+            content = obo_file.read().decode(
+                "utf-8"
+            )  # Read and decode the entire file content
             current_id = None
             for line in content.splitlines():
                 line = line.strip()

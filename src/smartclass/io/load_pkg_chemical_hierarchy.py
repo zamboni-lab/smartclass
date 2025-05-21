@@ -7,7 +7,9 @@ __all__ = [
 ]
 
 
-def load_pkg_chemical_hierarchy(file_path: str = "scratch/wikidata_classes_taxonomy.tsv") -> dict:
+def load_pkg_chemical_hierarchy(
+    file_path: str = "scratch/wikidata_classes_taxonomy.tsv",
+) -> dict:
     """
     Load package chemical classes hierarchy.
 

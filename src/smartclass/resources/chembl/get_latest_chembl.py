@@ -51,7 +51,9 @@ def get_latest_chembl(
             for i, mol in enumerate(suppl):
                 if not ((i + 1) % report_interval):
                     elapsed_time = time.time() - t1
-                    logging.debug(f"Processed {i + 1} molecules in {elapsed_time:.1f} seconds")
+                    logging.debug(
+                        f"Processed {i + 1} molecules in {elapsed_time:.1f} seconds"
+                    )
 
                 if mol is None or mol.GetNumAtoms() > max_atoms:
                     continue

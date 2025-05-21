@@ -19,6 +19,7 @@ JSON_DOWNLOADER = pooch.create(
     registry={},
 )
 
+
 def load_json_from_url(url: str) -> Optional[dict[str, Any]]:
     """
     Load JSON from URL.
@@ -33,7 +34,7 @@ def load_json_from_url(url: str) -> Optional[dict[str, Any]]:
         fetcher = pooch.HTTPDownloader(timeout=60)
         data_file = JSON_DOWNLOADER.fetch(url, downloader=fetcher)
 
-        with open(data_file, 'r') as f:
+        with open(data_file, "r") as f:
             data = json.load(f)
         logging.debug(f"Got {url} successfully.")
         return data

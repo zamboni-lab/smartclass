@@ -32,5 +32,3 @@ def check_mol(mol: Mol) -> tuple[Mol, list[str]]:
         errors.append(f"Unknown sanitization error: {e}")
 
     return mol, errors
-
-    

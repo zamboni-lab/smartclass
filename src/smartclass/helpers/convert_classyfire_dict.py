@@ -11,7 +11,8 @@ __all__ = [
 
 
 def convert_classyfire_dict(
-    classyfire_json: str = "scratch/classyfire.json", output: str = "scratch/chemontids.txt"
+    classyfire_json: str = "scratch/classyfire.json",
+    output: str = "scratch/chemontids.txt",
 ) -> None:
     """
     Converts the classyfire json into a CHEMONTID dictionary.

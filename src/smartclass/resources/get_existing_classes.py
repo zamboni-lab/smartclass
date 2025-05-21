@@ -18,7 +18,9 @@ def get_existing_classes(existing_classes: dict | None = None) -> None:
     :type existing_classes: Union[dict, None]
     """
     if existing_classes is None:
-        existing_classes = load_pkg_file("existing_classes.json").to_dict(as_series=False)
+        existing_classes = load_pkg_file("existing_classes.json").to_dict(
+            as_series=False
+        )
 
     for name, url in existing_classes.items():
         load_json_from_url_or_path(url[0], name)

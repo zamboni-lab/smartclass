@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
-from smartclass.chem.helpers.check_missing_stereochemistry import check_missing_stereochemistry
+from smartclass.chem.helpers.check_missing_stereochemistry import (
+    check_missing_stereochemistry,
+)
 
 
 def transform_stereoisomers_to_entities(result: dict) -> dict | None:
@@ -18,7 +20,9 @@ def transform_stereoisomers_to_entities(result: dict) -> dict | None:
     flag = check_missing_stereochemistry(result.get("smiles", ""))
     if flag is False:
         transformed_result = {
-            "qid": result.get("structure", "").replace("http://www.wikidata.org/entity/", ""),
+            "qid": result.get("structure", "").replace(
+                "http://www.wikidata.org/entity/", ""
+            ),
             "P31": "Q113145171",
             "-P31": "Q59199015",
         }

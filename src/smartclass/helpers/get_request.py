@@ -15,6 +15,7 @@ __all__ = ["get_request"]
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)
 
+
 def get_request(
     url: str,
     query: str,
@@ -45,7 +46,9 @@ def get_request(
     attempt = 0
     while attempt < max_retries:
         try:
-            response = requests.get(url, headers=headers, params=params, timeout=timeout)
+            response = requests.get(
+                url, headers=headers, params=params, timeout=timeout
+            )
             response.raise_for_status()
 
             data = response.json()
@@ -64,7 +67,7 @@ def get_request(
             retriable = status_code in {429, 503}
 
             if retriable and attempt < max_retries - 1:
-                wait_time = base_delay * (2 ** attempt) + random.uniform(0, 1)
+                wait_time = base_delay * (2**attempt) + random.uniform(0, 1)
                 logger.warning(
                     f"Request failed with status {status_code}. Retrying in {wait_time:.1f} seconds..."
                 )

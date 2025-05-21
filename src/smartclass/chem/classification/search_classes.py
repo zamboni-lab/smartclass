@@ -143,7 +143,10 @@ def search_classes(
             inchikey = result["structure_inchikey"]
             matched_ab = result["matched_ab"]
 
-            if inchikey not in max_ab_per_inchikey or matched_ab > max_ab_per_inchikey[inchikey]:
+            if (
+                inchikey not in max_ab_per_inchikey
+                or matched_ab > max_ab_per_inchikey[inchikey]
+            ):
                 max_ab_per_inchikey[inchikey] = matched_ab
         results = [
             result

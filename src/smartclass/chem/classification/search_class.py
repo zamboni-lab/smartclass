@@ -9,7 +9,9 @@ from smartclass.chem.conversion.convert_mol_to_smarts import convert_mol_to_smar
 from smartclass.chem.conversion.convert_smarts_to_mol import convert_smarts_to_mol
 from smartclass.chem.helpers.enumerate_structures import enumerate_structures
 from smartclass.chem.helpers.get_num_atoms_bonds import get_num_atoms_bonds
-from smartclass.chem.helpers.get_num_matched_atoms_bonds import get_num_matched_atoms_bonds
+from smartclass.chem.helpers.get_num_matched_atoms_bonds import (
+    get_num_matched_atoms_bonds,
+)
 
 
 def search_class(
@@ -50,7 +52,8 @@ def search_class(
             for index, pattern in enumerate(patterns):
                 catalog.AddEntry(
                     FilterCatalog.FilterCatalogEntry(
-                        name=f"({class_id}_{index})", matcher=FilterCatalog.SmartsMatcher(pattern)
+                        name=f"({class_id}_{index})",
+                        matcher=FilterCatalog.SmartsMatcher(pattern),
                     )
                 )
             for structure in structures:

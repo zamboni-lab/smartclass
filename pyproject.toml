@@ -116,12 +116,10 @@ includes = ["docs/source/*.py", "docs/source/*.rst", "docs/source/*.png", "src/"
 excludes = [".bumpversion.cfg", ".coveragerc", ".flake8", ".readthedocs.yml", "CITATION.cff", "docker-compose.yml", "Dockerfile", "uv.lock", "tox.ini"]
 
 [tool.ruff]
-unfixable = [
-    # do not autoremove commented out code
-    "ERA",
-]
 target-version = "py312"
 line-length = 88
+
+[tool.ruff.lint]
 extend-select = [
     # flake8-bugbear
     "B",
@@ -148,13 +146,16 @@ extend-select = [
     # pyupgrade
     "UP",
 ]
+unfixable = [
+    # do not autoremove commented out code
+    "ERA",
+]
 
-[tool.ruff.flake8-tidy-imports]
+[tool.ruff.lint.flake8-tidy-imports]
 ban-relative-imports = "all"
 
-[tool.ruff.isort]
+[tool.ruff.lint.isort]
 force-single-line = true
 lines-between-types = 1
 lines-after-imports = 2
-known-first-party = ["poetry_plugin_export"]
 required-imports = ["from __future__ import annotations"]

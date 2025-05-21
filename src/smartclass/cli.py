@@ -51,10 +51,18 @@ def combinecsvfiles(input_file, output):
 
 @main.command()
 @click.option("-f", "--fp-len", type=int, default=2048, help="Fingerprints length.")
-@click.option("-m", "--max-atoms", type=int, default=50, help="Maximum number of atoms.")
-@click.option("-r", "--report-interval", type=int, default=50000, help="Reporting interval.")
 @click.option(
-    "-t", "--tautomer-fingerprints", type=bool, default=True, help="Tautomers fingerprints."
+    "-m", "--max-atoms", type=int, default=50, help="Maximum number of atoms."
+)
+@click.option(
+    "-r", "--report-interval", type=int, default=50000, help="Reporting interval."
+)
+@click.option(
+    "-t",
+    "--tautomer-fingerprints",
+    type=bool,
+    default=True,
+    help="Tautomers fingerprints.",
 )
 def getlatestchembl(fp_len, max_atoms, report_interval, tautomer_fingerprints):
     """CLI command that calls get_latest_chembl function."""
@@ -75,13 +83,27 @@ def loadpkgdata():
 
 
 @main.command()
-@click.option("-q", "--query", type=click.Path(exists=True), help="Query file.", required=True)
+@click.option(
+    "-q", "--query", type=click.Path(exists=True), help="Query file.", required=True
+)
 @click.option("-o", "--output", type=click.Path(), help="Output file.", required=True)
 @click.option(
-    "-r", "--remove_prefix", type=bool, help="Remove prefix.", required=False, default=True
+    "-r",
+    "--remove_prefix",
+    type=bool,
+    help="Remove prefix.",
+    required=False,
+    default=True,
 )
 @click.option("-t", "--transform", type=str, help="Transform to apply.", required=False)
-@click.option("-u", "--url", type=str, help="URL of the endpoint.", required=False)
+@click.option(
+    "-u",
+    "--url",
+    type=str,
+    help="URL of the endpoint.",
+    required=False,
+    default="https://query.wikidata.org/sparql",
+)
 def querywikidata(query, output, remove_prefix, transform, url):
     """CLI command that calls query_wikidata function."""
     from smartclass.resources.wikidata import query_wikidata
@@ -91,17 +113,36 @@ def querywikidata(query, output, remove_prefix, transform, url):
 
 
 @main.command()
-@click.option("-c", "--classes-file", type=click.Path(exists=True), help="Input file (classes).")
 @click.option(
-    "-d", "--classes-name-id", type=str, help="Name of the ID column in the classes file."
+    "-c", "--classes-file", type=click.Path(exists=True), help="Input file (classes)."
 )
 @click.option(
-    "-e", "--classes-name-smarts", type=str, help="Name of the SMARTS column in the classes file."
+    "-d",
+    "--classes-name-id",
+    type=str,
+    help="Name of the ID column in the classes file.",
 )
-@click.option("-f", "--include-hierarchy", type=bool, help="Use a chemical hierarchy to go faster.")
-@click.option("-i", "--input-smiles", type=click.Path(exists=True), help="Input file (SMILES).")
-@click.option("-s", "--smiles", type=str, multiple=True, help="(List of) SMILES string(s)")
-@click.option("-z", "--closest-only", type=bool, default=True, help="Return closest only.")
+@click.option(
+    "-e",
+    "--classes-name-smarts",
+    type=str,
+    help="Name of the SMARTS column in the classes file.",
+)
+@click.option(
+    "-f",
+    "--include-hierarchy",
+    type=bool,
+    help="Use a chemical hierarchy to go faster.",
+)
+@click.option(
+    "-i", "--input-smiles", type=click.Path(exists=True), help="Input file (SMILES)."
+)
+@click.option(
+    "-s", "--smiles", type=str, multiple=True, help="(List of) SMILES string(s)"
+)
+@click.option(
+    "-z", "--closest-only", type=bool, default=True, help="Return closest only."
+)
 @click.option("-v", "--verbose", count=True)
 def searchclasses(
     classes_file,

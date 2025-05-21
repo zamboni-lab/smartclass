@@ -21,9 +21,9 @@ df_inchikeys = df_inchikeys.with_columns(
 )
 
 # Perform a self-join on the short_inchikey column
-df_joined = df_inchikeys.join(df_inchikeys, on="short_inchikey", how="inner", suffix="_right").drop(
-    "short_inchikey"
-)
+df_joined = df_inchikeys.join(
+    df_inchikeys, on="short_inchikey", how="inner", suffix="_right"
+).drop("short_inchikey")
 
 # Filter rows where the first inchikey contains "UHFFFAOYSA-N"
 df_filtered = df_joined.filter(pl.col("inchikey").str.contains("UHFFFAOYSA-N"))
@@ -39,16 +39,24 @@ df_filtered = df_filtered.join(
 )
 
 # Join the filtered result with the subclass DataFrame on 'structure'
-df_filtered = df_filtered.join(df_subclass, left_on="structure", right_on="structure", how="inner")
 df_filtered = df_filtered.join(
-    df_subclass, left_on="structure_right", right_on="structure", how="inner", suffix="_right"
+    df_subclass, left_on="structure", right_on="structure", how="inner"
+)
+df_filtered = df_filtered.join(
+    df_subclass,
+    left_on="structure_right",
+    right_on="structure",
+    how="inner",
+    suffix="_right",
 )
 
 # Ensure the pair is not already modeled
 df_final = df_filtered.filter(pl.col("structure") != pl.col("class_right"))
 
 # Create new DataFrames based on specific class conditions
-df_1 = df_final.filter((pl.col("class") == "Q11173") & (pl.col("class_right") != "Q11173")).select(
+df_1 = df_final.filter(
+    (pl.col("class") == "Q11173") & (pl.col("class_right") != "Q11173")
+).select(
     [
         pl.col("structure").alias("qid"),
         pl.col("class").alias("-P279"),

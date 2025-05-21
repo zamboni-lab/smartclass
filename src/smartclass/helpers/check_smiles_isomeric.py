@@ -13,7 +13,9 @@ __all__ = [
 ]
 
 
-def check_smiles_isomeric(smiles_isomeric: str, transform_to_canonical: bool = False) -> str | None:
+def check_smiles_isomeric(
+    smiles_isomeric: str, transform_to_canonical: bool = False
+) -> str | None:
     """
     Check isomeric smiles.
 

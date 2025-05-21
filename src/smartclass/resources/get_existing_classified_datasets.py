@@ -22,9 +22,9 @@ def get_existing_classified_datasets(
     :type existing_classsified_datasets: Union[dict, None]
     """
     if existing_classsified_datasets is None:
-        existing_classsified_datasets = load_pkg_file("existing_classified_datasets.json").to_dict(
-            as_series=False
-        )
+        existing_classsified_datasets = load_pkg_file(
+            "existing_classified_datasets.json"
+        ).to_dict(as_series=False)
 
     for name, url in existing_classsified_datasets.items():
         download_file_if_not_exists(url[0], os.path.join("scratch", name))

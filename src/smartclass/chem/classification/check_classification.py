@@ -45,7 +45,11 @@ def process_classification(
     logging.info(f"Processing {classification}")
     smiles_list = group["smiles"].to_list()
 
-    mols = [mol for smiles in smiles_list if (mol := convert_smiles_to_mol(smiles)) is not None]
+    mols = [
+        mol
+        for smiles in smiles_list
+        if (mol := convert_smiles_to_mol(smiles)) is not None
+    ]
 
     if len(mols) > samples_max:
         logging.warning(f"Too many structures of this class. Sampling {samples_max}...")

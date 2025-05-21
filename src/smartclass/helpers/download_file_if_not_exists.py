@@ -18,6 +18,7 @@ FILE_DOWNLOADER = pooch.create(
     registry={},
 )
 
+
 def download_file_if_not_exists(url: str, output: str) -> None:
     """
     Downloads a file from the specified URL if it does not exist.

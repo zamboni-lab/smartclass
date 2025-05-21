@@ -12,7 +12,9 @@ __all__ = [
 ]
 
 
-def convert_name_and_molblock_to_cxsmiles(args: tuple[str, str]) -> tuple[str, str | None]:
+def convert_name_and_molblock_to_cxsmiles(
+    args: tuple[str, str],
+) -> tuple[str, str | None]:
     """
     Convert a name and a structure MOLBLOCK to CXSMILES.
 

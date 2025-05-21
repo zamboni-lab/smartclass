@@ -112,8 +112,14 @@ if __name__ == "__main__":
             "src/smartclass/data/queries/classes_cxsmiles.rq",
             "scratch/wikidata_classes_cxsmiles.tsv",
         ),
-        ("src/smartclass/data/queries/classes_smarts.rq", "scratch/wikidata_classes_smarts.tsv"),
-        ("src/smartclass/data/queries/classes_smiles.rq", "scratch/wikidata_classes_smiles.tsv"),
+        (
+            "src/smartclass/data/queries/classes_smarts.rq",
+            "scratch/wikidata_classes_smarts.tsv",
+        ),
+        (
+            "src/smartclass/data/queries/classes_smiles.rq",
+            "scratch/wikidata_classes_smiles.tsv",
+        ),
         (
             "src/smartclass/data/queries/classes_smiles_isomeric.rq",
             "scratch/wikidata_classes_smiles_isomeric.tsv",

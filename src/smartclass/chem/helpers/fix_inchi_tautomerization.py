@@ -6,7 +6,9 @@ from rdkit import Chem
 from rdkit.Chem import AllChem
 
 from smartclass.helpers.check_smiles_contains_no_dot import check_smiles_contains_no_dot
-from smartclass.helpers.check_smiles_contains_no_isotope import check_smiles_contains_no_isotope
+from smartclass.helpers.check_smiles_contains_no_isotope import (
+    check_smiles_contains_no_isotope,
+)
 
 __all__ = [
     "fix_inchi_tautomerization",

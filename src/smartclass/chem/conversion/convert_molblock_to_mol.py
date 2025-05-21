@@ -22,7 +22,7 @@ def convert_molblock_to_mol(molblock: str) -> Mol | None:
     :returns: A MOL.
     :rtype: Union[Mol, None]
     """
-    mol =  MolFromMolBlock(molblock)
+    mol = MolFromMolBlock(molblock)
 
     if mol is None:
         return None

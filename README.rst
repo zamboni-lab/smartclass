@@ -29,6 +29,12 @@ Get defined chemical classes
     uv run smartclass querywikidata -q src/smartclass/data/queries/classes_smarts.rq -o scratch/wikidata_classes_smarts.tsv
 
 
+Canonicalize them
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. code-block:: sh
+
+    uv run notebooks/canonicalize_smarts.py
+
 Get some SMILES to classify
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 .. code-block:: sh

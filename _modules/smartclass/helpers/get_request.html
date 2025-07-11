@@ -122,6 +122,7 @@
     <span class="p">}</span>
 
     <span class="n">attempt</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">qlever_url</span> <span class="o">=</span> <span class="s2">&quot;https://qlever.cs.uni-freiburg.de/api/wikidata&quot;</span>
     <span class="k">while</span> <span class="n">attempt</span> <span class="o">&lt;</span> <span class="n">max_retries</span><span class="p">:</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
@@ -151,6 +152,12 @@
                 <span class="p">)</span>
                 <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">wait_time</span><span class="p">)</span>
                 <span class="n">attempt</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="n">url</span> <span class="o">!=</span> <span class="n">qlever_url</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Request failed with status </span><span class="si">{</span><span class="n">status_code</span><span class="si">}</span><span class="s2"> on WDQS. &quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;Retrying one last time on QLever endpoint...&quot;</span>
+                <span class="p">)</span>
+                <span class="n">url</span> <span class="o">=</span> <span class="n">qlever_url</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Request failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
                 <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>

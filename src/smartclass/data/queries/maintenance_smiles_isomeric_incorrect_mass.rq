@@ -8,14 +8,13 @@
 
 PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
-PREFIX hint: <http://www.bigdata.com/queryHints#>
 #title: Which are the structures with SMILES but no mass?
 SELECT ?structure ?smiles ?mass WHERE {
     VALUES ?classes {
         wd:Q113145171
         wd:Q59199015
     }
-    ?structure wdt:P2017 ?smiles. hint:Prior hint:rangeSafe true.
-    ?structure wdt:P31 ?classes. hint:Prior hint:runFirst true.
-    ?structure wdt:P2067 ?mass. hint:Prior hint:rangeSafe true.
+    ?structure wdt:P2017 ?smiles.
+    ?structure wdt:P31 ?classes.
+    ?structure wdt:P2067 ?mass.
 }

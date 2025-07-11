@@ -9,7 +9,6 @@
 
 PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
-PREFIX hint: <http://www.bigdata.com/queryHints#>
 #title: Chemicals subclass of chemical class
 SELECT * WHERE {
     VALUES ?instance {
@@ -24,6 +23,6 @@ SELECT * WHERE {
         wd:Q72070508 # group or class of chemical entities
         wd:Q74892521 # imprecise class of chemical entities
     }
-    ?class wdt:P31 ?instance. hint:Prior hint:runFirst true.
-    ?structure wdt:P279 ?class. hint:Prior hint:rangeSafe true.
+    ?class wdt:P31 ?instance.
+    ?structure wdt:P279 ?class.
 }

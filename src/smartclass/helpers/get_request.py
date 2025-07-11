@@ -44,6 +44,7 @@ def get_request(
     }
 
     attempt = 0
+    qlever_url = "https://qlever.cs.uni-freiburg.de/api/wikidata"
     while attempt < max_retries:
         try:
             response = requests.get(
@@ -73,6 +74,12 @@ def get_request(
                 )
                 time.sleep(wait_time)
                 attempt += 1
+            elif url != qlever_url:
+                logger.warning(
+                    f"Request failed with status {status_code} on WDQS. "
+                    f"Retrying one last time on QLever endpoint..."
+                )
+                url = qlever_url
             else:
                 logger.error(f"Request failed: {e}")
                 raise RuntimeError(

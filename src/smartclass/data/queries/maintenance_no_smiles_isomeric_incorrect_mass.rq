@@ -8,16 +8,15 @@
 
 PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
-PREFIX hint: <http://www.bigdata.com/queryHints#>
 #title: Which are the structures whose mass could be wrong?
 SELECT ?structure ?inchi ?mass WHERE {
     VALUES ?classes {
         wd:Q113145171
         wd:Q59199015
     }
-    ?structure wdt:P234 ?inchi. hint:Prior hint:rangeSafe true.
+    ?structure wdt:P234 ?inchi.
     ?structure wdt:P31 ?classes.
-    ?structure wdt:P2067 ?mass. hint:Prior hint:rangeSafe true.
+    ?structure wdt:P2067 ?mass.
     OPTIONAL { ?structure wdt:P2017 ?smiles. }
     FILTER(!(BOUND(?smiles)))
 }

@@ -8,7 +8,6 @@
 
 PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
-PREFIX hint: <http://www.bigdata.com/queryHints#>
 #title: Chemical classes defined by canonical SMILES
 SELECT * WHERE {
     VALUES ?instance {
@@ -23,8 +22,8 @@ SELECT * WHERE {
         wd:Q72070508 # group or class of chemical entities
         wd:Q74892521 # imprecise class of chemical entities
     }
-    ?class wdt:P31 ?instance. hint:Prior hint:rangeSafe true.
-    ?class wdt:P233 ?structure. hint:Prior hint:rangeSafe true.
+    ?class wdt:P31 ?instance.
+    ?class wdt:P233 ?structure.
     OPTIONAL { ?class p:P2017 ?isomeric. }
     FILTER(!(BOUND(?isomeric)))
 }

@@ -7,8 +7,7 @@
 #+   - Chemicals
 
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
-PREFIX hint: <http://www.bigdata.com/queryHints#>
 #title: Chemicals with InChI
 SELECT * WHERE {
-    ?structure wdt:P234 ?inchi. hint:Prior hint:rangeSafe true.
+    ?structure wdt:P234 ?inchi.
 }

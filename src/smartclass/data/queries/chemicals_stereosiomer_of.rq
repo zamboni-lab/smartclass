@@ -7,8 +7,7 @@
 #+   - Chemicals
 
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
-PREFIX hint: <http://www.bigdata.com/queryHints#>
 #title: Which pairs of stereoisomers are present on Wikidata?
 SELECT ?structure_1 ?structure_2 WHERE {
-    ?structure_1 wdt:P3364 ?structure_2. hint:Prior hint:rangeSafe true.
+    ?structure_1 wdt:P3364 ?structure_2.
 }

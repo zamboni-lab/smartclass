@@ -11,13 +11,12 @@ PREFIX p: <http://www.wikidata.org/prop/>
 PREFIX ps: <http://www.wikidata.org/prop/statement/>
 # PREFIX pr: <http://www.wikidata.org/prop/reference/>
 PREFIX prov: <http://www.w3.org/ns/prov#>
-PREFIX hint: <http://www.bigdata.com/queryHints#>
 #title: Chemicals with isomeric SMILES without ref
 SELECT * WHERE {
-    ?structure p:P2017 ?stmt. hint:Prior hint:runFirst true.
+    ?structure p:P2017 ?stmt.
     OPTIONAL { ?stmt prov:wasDerivedFrom ?ref. }
     FILTER(!(BOUND(?ref)))
-    ?stmt ps:P2017 ?smiles_isomeric. hint:Prior hint:rangeSafe true.
+    ?stmt ps:P2017 ?smiles_isomeric.
 }
 
 # SELECT * WHERE {

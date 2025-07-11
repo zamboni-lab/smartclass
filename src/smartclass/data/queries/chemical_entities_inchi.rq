@@ -8,9 +8,8 @@
 
 PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
-PREFIX hint: <http://www.bigdata.com/queryHints#>
 #title: Type of chemical entities with InChI
 SELECT * WHERE {
-    ?structure wdt:P31 wd:Q113145171. hint:Prior hint:runFirst true.
-    ?structure wdt:P234 ?inchi. hint:Prior hint:rangeSafe true.
+    ?structure wdt:P31 wd:Q113145171.
+    ?structure wdt:P234 ?inchi.
 }

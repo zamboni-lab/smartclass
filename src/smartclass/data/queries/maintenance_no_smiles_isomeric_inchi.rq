@@ -7,10 +7,9 @@
 #+   - Maintenance
 
 PREFIX wdt: <http://www.wikidata.org/prop/direct/>
-PREFIX hint: <http://www.bigdata.com/queryHints#>
 #title: Which structures should have an isomeric SMILES but do not?
 SELECT ?structure ?inchi WHERE {
-    ?structure wdt:P234 ?inchi. hint:Prior hint:rangeSafe true.
+    ?structure wdt:P234 ?inchi.
     OPTIONAL { ?structure wdt:P2017 ?smiles_i. }
     FILTER(!(BOUND(?smiles_i)))
     FILTER(REGEX(STR(?inchi), "/[btsmi]"))

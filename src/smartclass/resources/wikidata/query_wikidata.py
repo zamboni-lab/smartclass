@@ -7,6 +7,7 @@ from collections.abc import Callable
 from tqdm import tqdm
 
 from smartclass.helpers import get_request
+from smartclass.helpers import read_query
 from smartclass.io import export_results
 from smartclass.resources.wikidata.transforms import (
     check_smiles,
@@ -76,10 +77,9 @@ def query_wikidata(
     :param url: URL of the Wikidata SPARQL endpoint.
     :type url: str
     """
-    with open(query) as file:
-        query = file.read()
+    query_str = read_query(query)
 
-    results = get_request(url=url, query=query)
+    results = get_request(url=url, query=query_str)
     results = [x for x in results if x is not None]
 
     if remove_prefix:

@@ -84,7 +84,11 @@ def loadpkgdata():
 
 @main.command()
 @click.option(
-    "-q", "--query", type=click.Path(exists=True), help="Query file.", required=True
+    "-q",
+    "--query",
+    type=str,
+    help="SPARQL query file path or URL.",
+    required=True,
 )
 @click.option("-o", "--output", type=click.Path(), help="Output file.", required=True)
 @click.option(

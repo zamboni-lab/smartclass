@@ -1,11 +1,9 @@
+---
 project:
   output-dir: _output
   execute-dir: project
-
 toc: true
 number-sections: true
-# bibliography: references.bib
-  
 format:
   html:
     css: styles.css

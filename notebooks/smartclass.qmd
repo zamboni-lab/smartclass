@@ -1,7 +1,7 @@
 ---
-title: "smartclass-notebook"
-author: "Adriano Rutz"
-date: "2024-05-06"
+title: smartclass-notebook
+author: Adriano Rutz
+date: 2024-05-06
 execute:
   echo: true
   output: true
@@ -20,10 +20,11 @@ format:
           breaklines
           % Note: setting commandchars=\\\{\} here will cause an error 
         }
-    include-in-header: 
-       text: |
-         \usepackage{fvextra}
-         \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
+    include-in-header:
+      text: >
+        \usepackage{fvextra}
+
+        \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
 ---
 
 ## Smartclass

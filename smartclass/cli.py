@@ -51,8 +51,12 @@ def combinecsvfiles(input_file, output):
 
 @main.command()
 @click.option("-f", "--fp-len", type=int, default=2048, help="Fingerprints length.")
-@click.option("-m", "--max-atoms", type=int, default=50, help="Maximum number of atoms.")
-@click.option("-r", "--report-interval", type=int, default=50000, help="Reporting interval.")
+@click.option(
+    "-m", "--max-atoms", type=int, default=50, help="Maximum number of atoms."
+)
+@click.option(
+    "-r", "--report-interval", type=int, default=50000, help="Reporting interval."
+)
 @click.option(
     "-t",
     "--tautomer-fingerprints",
@@ -113,7 +117,9 @@ def querywikidata(query, output, remove_prefix, transform, url):
 
 
 @main.command()
-@click.option("-c", "--classes-file", type=click.Path(exists=True), help="Input file (classes).")
+@click.option(
+    "-c", "--classes-file", type=click.Path(exists=True), help="Input file (classes)."
+)
 @click.option(
     "-d",
     "--classes-name-id",
@@ -132,9 +138,15 @@ def querywikidata(query, output, remove_prefix, transform, url):
     type=bool,
     help="Use a chemical hierarchy to go faster.",
 )
-@click.option("-i", "--input-smiles", type=click.Path(exists=True), help="Input file (SMILES).")
-@click.option("-s", "--smiles", type=str, multiple=True, help="(List of) SMILES string(s)")
-@click.option("-z", "--closest-only", type=bool, default=True, help="Return closest only.")
+@click.option(
+    "-i", "--input-smiles", type=click.Path(exists=True), help="Input file (SMILES)."
+)
+@click.option(
+    "-s", "--smiles", type=str, multiple=True, help="(List of) SMILES string(s)"
+)
+@click.option(
+    "-z", "--closest-only", type=bool, default=True, help="Return closest only."
+)
 @click.option("-v", "--verbose", count=True)
 def searchclasses(
     classes_file,

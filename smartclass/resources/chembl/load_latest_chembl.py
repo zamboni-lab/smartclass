@@ -49,7 +49,9 @@ def load_latest_chembl() -> rdSubstructLibrary.SubstructLibrary:
                 sslib = pickle.load(inf)
             logging.info(f"SubstructLibrary loaded with {len(sslib)} molecules")
         except Exception as download_error:
-            logging.exception(f"Failed to download or load ChEMBL data: {download_error!s}")
+            logging.exception(
+                f"Failed to download or load ChEMBL data: {download_error!s}"
+            )
             raise download_error  # Raise the error to notify the caller
 
     return sslib

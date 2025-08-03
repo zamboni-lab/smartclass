@@ -87,7 +87,9 @@ def search_classes(
 
     # Load classes
     if classes_file:
-        c = load_external_classes_file(file=classes_file, id_name=classes_name_id, smarts_name=classes_name_smarts)
+        c = load_external_classes_file(
+            file=classes_file, id_name=classes_name_id, smarts_name=classes_name_smarts
+        )
     else:
         logging.basicConfig(level=logging.INFO)
         logging.info("No classes given, loading default package classes instead.")
@@ -141,10 +143,15 @@ def search_classes(
             inchikey = result["structure_inchikey"]
             matched_ab = result["matched_ab"]
 
-            if inchikey not in max_ab_per_inchikey or matched_ab > max_ab_per_inchikey[inchikey]:
+            if (
+                inchikey not in max_ab_per_inchikey
+                or matched_ab > max_ab_per_inchikey[inchikey]
+            ):
                 max_ab_per_inchikey[inchikey] = matched_ab
         results = [
-            result for result in results if result["matched_ab"] == max_ab_per_inchikey[result["structure_inchikey"]]
+            result
+            for result in results
+            if result["matched_ab"] == max_ab_per_inchikey[result["structure_inchikey"]]
         ]
 
     # Export

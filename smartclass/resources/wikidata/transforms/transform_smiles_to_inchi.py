@@ -20,14 +20,18 @@ def transform_smiles_to_inchi(result: dict) -> dict | None:
     if inchi and len(inchi) < 1500:
         if inchi_wd is None:
             transformed_result = {
-                "qid": result.get("structure", "").replace("http://www.wikidata.org/entity/", ""),
+                "qid": result.get("structure", "").replace(
+                    "http://www.wikidata.org/entity/", ""
+                ),
                 "P234": '"' + inchi + '"',
                 "S887": "Q113907573",
             }
         else:
             if inchi != inchi_wd:
                 transformed_result = {
-                    "qid": result.get("structure", "").replace("http://www.wikidata.org/entity/", ""),
+                    "qid": result.get("structure", "").replace(
+                        "http://www.wikidata.org/entity/", ""
+                    ),
                     "P234": '"' + inchi + '"',
                     "S887": "Q113907573",
                     "-P234": '"' + inchi_wd + '"',

@@ -23,7 +23,9 @@ def transform_inchi_mass_to_inchi_mass(result: dict, tol: float = 0.001) -> dict
     if mass:
         if abs(float(mass) - mass_wd) > tol:
             transformed_result = {
-                "qid": result.get("structure", "").replace("http://www.wikidata.org/entity/", ""),
+                "qid": result.get("structure", "").replace(
+                    "http://www.wikidata.org/entity/", ""
+                ),
                 "-P2067": "+" + str(mass_wd) + "U483261",
                 "P2067": "+" + str(mass) + "U483261",
                 "S887": "Q123137214",

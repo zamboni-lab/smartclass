@@ -47,13 +47,18 @@ def get_request(
     qlever_url = "https://qlever.cs.uni-freiburg.de/api/wikidata"
     while attempt < max_retries:
         try:
-            response = requests.get(url, headers=headers, params=params, timeout=timeout)
+            response = requests.get(
+                url, headers=headers, params=params, timeout=timeout
+            )
             response.raise_for_status()
 
             data = response.json()
             bindings = data.get("results", {}).get("bindings", [])
 
-            results = [{key: value["value"] for key, value in binding.items()} for binding in bindings]
+            results = [
+                {key: value["value"] for key, value in binding.items()}
+                for binding in bindings
+            ]
 
             logger.info(f"Query successful: {len(results)} results retrieved.")
             return results
@@ -64,7 +69,9 @@ def get_request(
 
             if retriable and attempt < max_retries - 1:
                 wait_time = base_delay * (2**attempt) + random.uniform(0, 1)
-                logger.warning(f"Request failed with status {status_code}. Retrying in {wait_time:.1f} seconds...")
+                logger.warning(
+                    f"Request failed with status {status_code}. Retrying in {wait_time:.1f} seconds..."
+                )
                 time.sleep(wait_time)
                 attempt += 1
             elif url != qlever_url:
@@ -74,7 +81,9 @@ def get_request(
                 url = qlever_url
             else:
                 logger.error(f"Request failed: {e}")
-                raise RuntimeError(f"Failed to retrieve data from {url} after {max_retries} attempts.") from e
+                raise RuntimeError(
+                    f"Failed to retrieve data from {url} after {max_retries} attempts."
+                ) from e
 
     # If somehow exits loop without success
     return []

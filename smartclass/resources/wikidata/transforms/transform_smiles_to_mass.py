@@ -18,7 +18,9 @@ def transform_smiles_to_mass(result: dict) -> dict | None:
     mass = convert_smiles_to_mass(result.get("smiles", ""))
     if mass:
         transformed_result = {
-            "qid": result.get("structure", "").replace("http://www.wikidata.org/entity/", ""),
+            "qid": result.get("structure", "").replace(
+                "http://www.wikidata.org/entity/", ""
+            ),
             "P2067": "+" + str(mass) + "U483261",
             "S887": "Q113907573",
         }

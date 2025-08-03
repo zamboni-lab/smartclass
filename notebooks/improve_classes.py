@@ -61,7 +61,10 @@ chemicals_df = chemicals_df.with_columns(
 
 # Merge stereoisomers_df with chemicals_df based on the "inchi_no_stereo" column
 merged_df = chemicals_df.join(
-    stereoisomers_df, left_on="inchi_no_stereo", right_on="inchi_no_stereo", how="inner"
+    stereoisomers_df,
+    left_on="inchi_no_stereo",
+    right_on="inchi_no_stereo",
+    how="inner",
 ).drop("inchi_no_stereo")
 print(merged_df)
 
@@ -89,16 +92,19 @@ print(merged_df)
 
 # Merge with classes_df based on the "structure" columns
 final_merged_df = merged_df.join(classes_df, left_on="structure", right_on="structure").join(
-    classes_df, left_on="structure_right", right_on="structure", how="inner"
+    classes_df,
+    left_on="structure_right",
+    right_on="structure",
+    how="inner",
 )
 print(final_merged_df)
 
 # Filter rows where classes match
 matched_classes_df = final_merged_df.filter(pl.col("class_right") == pl.col("class")).filter(
-    pl.col("structure") != pl.col("structure_right")
+    pl.col("structure") != pl.col("structure_right"),
 )
 matched_classes_df_2 = final_merged_df.filter(pl.col("class") == "Q11173").filter(
-    pl.col("structure") != pl.col("structure_right")
+    pl.col("structure") != pl.col("structure_right"),
 )
 
 # Renaming

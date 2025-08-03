@@ -11,7 +11,9 @@ opts.timeout = 0
 
 
 def calculate_structural_similarity(
-    mol_1: Mol, mol_2: Mol, options: rdRascalMCES.RascalOptions = opts
+    mol_1: Mol,
+    mol_2: Mol,
+    options: rdRascalMCES.RascalOptions = opts,
 ) -> rdRascalMCES.RascalResult:
     """
     Calculate structural similarity.

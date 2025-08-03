@@ -54,7 +54,7 @@ def search_class(
                     FilterCatalog.FilterCatalogEntry(
                         name=f"({class_id}_{index})",
                         matcher=FilterCatalog.SmartsMatcher(pattern),
-                    )
+                    ),
                 )
             for structure in structures:
                 if catalog.HasMatch(structure):

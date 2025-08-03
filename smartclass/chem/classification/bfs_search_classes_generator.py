@@ -62,8 +62,7 @@ def bfs_search_classes_generator(
                 structures=structures,
                 params=params,
             )
-            for result in results:
-                yield result
+            yield from results
 
             searched_classes.add(current_class_id)
 
@@ -80,8 +79,7 @@ def bfs_search_classes_generator(
                     structures=structures,
                     params=params,
                 )
-                for result in results:
-                    yield result
+                yield from results
 
 
 def tqdm_bfs_search_classes_generator(
@@ -196,7 +194,7 @@ if __name__ == "__main__":
             class_hierarchy=class_hierarchy,
             structures=structures,
             params=params,
-        )
+        ),
     )
 
     # Perform DFS search

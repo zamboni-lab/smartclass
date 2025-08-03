@@ -5,9 +5,7 @@ from __future__ import annotations
 from myopic_mces.myopic_mces import MCES
 
 
-def calculate_myopic_mces(
-    s_1: str, s_2: str, thr: int = -1
-) -> tuple[int, float, float, int]:
+def calculate_myopic_mces(s_1: str, s_2: str, thr: int = -1) -> tuple[int, float, float, int]:
     """
     Calculate myopic MCES.
 

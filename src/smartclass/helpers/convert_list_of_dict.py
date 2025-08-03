@@ -7,9 +7,7 @@ __all__ = [
 ]
 
 
-def convert_list_of_dict(
-    list_of_dict: list, key: str, value: str, invert: bool = False
-) -> dict:
+def convert_list_of_dict(list_of_dict: list, key: str, value: str, invert: bool = False) -> dict:
     """
     Convert a list of dictionaries to a dictionary with possible inversion.
 

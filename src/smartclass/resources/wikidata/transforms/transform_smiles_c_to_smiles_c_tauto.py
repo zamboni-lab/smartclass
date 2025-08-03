@@ -19,9 +19,7 @@ def transform_smiles_c_to_smiles_c_tauto(result: dict) -> dict | None:
     smiles = fix_inchi_tautomerization(s)
     if smiles is not s and smiles:
         transformed_result = {
-            "qid": result.get("structure", "").replace(
-                "http://www.wikidata.org/entity/", ""
-            ),
+            "qid": result.get("structure", "").replace("http://www.wikidata.org/entity/", ""),
             "-P233": '"' + s + '"',
             "P233": '"' + smiles + '"',
             # "S887": "Q123282952",

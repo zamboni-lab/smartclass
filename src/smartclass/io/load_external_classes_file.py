@@ -26,12 +26,10 @@ def load_external_classes_file(
     :returns: A Polars DataFrame containing the loaded data.
     :rtype: DataFrame
     """
-    return polars.read_csv(file, truncate_ragged_lines=True, separator="\t").select(
-        {
-            id_name: "class_id",
-            smarts_name: "class_smarts",
-        }
-    )
+    return polars.read_csv(file, truncate_ragged_lines=True, separator="\t").select({
+        id_name: "class_id",
+        smarts_name: "class_smarts",
+    })
 
 
 if __name__ == "__main__":

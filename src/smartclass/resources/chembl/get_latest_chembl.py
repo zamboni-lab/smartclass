@@ -51,16 +51,12 @@ def get_latest_chembl(
             for i, mol in enumerate(suppl):
                 if not ((i + 1) % report_interval):
                     elapsed_time = time.time() - t1
-                    logging.debug(
-                        f"Processed {i + 1} molecules in {elapsed_time:.1f} seconds"
-                    )
+                    logging.debug(f"Processed {i + 1} molecules in {elapsed_time:.1f} seconds")
 
                 if mol is None or mol.GetNumAtoms() > max_atoms:
                     continue
 
-                fp = Chem.PatternFingerprint(
-                    mol, fpSize=fp_len, tautomerFingerprints=tautomer_fingerprints
-                )
+                fp = Chem.PatternFingerprint(mol, fpSize=fp_len, tautomerFingerprints=tautomer_fingerprints)
                 smi = Chem.MolToSmiles(mol)
                 data.append((smi, fp))
 
@@ -79,14 +75,12 @@ def get_latest_chembl(
         library = rdSubstructLibrary.SubstructLibrary(mols, fps)
 
         elapsed_time = time.time() - t1
-        logging.debug(
-            f"Processed ChEMBL data in {elapsed_time:.2f} seconds. The library has {len(library)} molecules."
-        )
+        logging.debug(f"Processed ChEMBL data in {elapsed_time:.2f} seconds. The library has {len(library)} molecules.")
 
         with open(lib_path, "wb") as file:
             pickle.dump(library, file)
     except Exception as e:
-        logging.error(f"Failed to process ChEMBL data: {e!s}")
+        logging.exception(f"Failed to process ChEMBL data: {e!s}")
 
 
 if __name__ == "__main__":

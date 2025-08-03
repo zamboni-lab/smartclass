@@ -38,7 +38,7 @@ def search_class(
     results: list = []
 
     # COMMENT: This is the actual version. TODO params could be removed
-    # TODO See https://greglandrum.github.io/rdkit-blog/posts/2021-05-13-intro-to-the-molecule-enumerator.html#using-molbundles-for-substructure-search  # noqa: E501
+    # TODO See https://greglandrum.github.io/rdkit-blog/posts/2021-05-13-intro-to-the-molecule-enumerator.html#using-molbundles-for-substructure-search
     for class_id, class_structures in class_dict.items():
         for class_structure in class_structures:
             catalog = FilterCatalog.FilterCatalog()
@@ -58,17 +58,13 @@ def search_class(
                 )
             for structure in structures:
                 if catalog.HasMatch(structure):
-                    results.append(
-                        {
-                            "class_id": class_id,
-                            "class_structure": class_structure,
-                            "structure_inchikey": convert_mol_to_inchikey(structure),
-                            "structure_smarts": convert_mol_to_smarts(structure),
-                            "structure_ab": get_num_atoms_bonds(structure),
-                            "matched_ab": get_num_matched_atoms_bonds(
-                                mol_1=structure, mol_2=pattern
-                            ),
-                        }
-                    )
+                    results.append({
+                        "class_id": class_id,
+                        "class_structure": class_structure,
+                        "structure_inchikey": convert_mol_to_inchikey(structure),
+                        "structure_smarts": convert_mol_to_smarts(structure),
+                        "structure_ab": get_num_atoms_bonds(structure),
+                        "matched_ab": get_num_matched_atoms_bonds(mol_1=structure, mol_2=pattern),
+                    })
 
     return results

@@ -6,8 +6,7 @@ from collections.abc import Callable
 
 from tqdm import tqdm
 
-from smartclass.helpers import get_request
-from smartclass.helpers import read_query
+from smartclass.helpers import get_request, read_query
 from smartclass.io import export_results
 from smartclass.resources.wikidata.transforms import (
     check_smiles,

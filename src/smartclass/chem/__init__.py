@@ -2,11 +2,13 @@
 
 from __future__ import annotations
 
-# from smartclass.chem.classification import check_classification  # noqa:F401
-from smartclass.chem.classification import bfs_search_classes_generator  # noqa:F401
-from smartclass.chem.classification import get_class_structures  # noqa:F401
-from smartclass.chem.classification import search_class  # noqa:F401
-from smartclass.chem.classification import search_classes  # noqa:F401
+# from smartclass.chem.classification import check_classification
+from smartclass.chem.classification import (
+    bfs_search_classes_generator,  # noqa:F401
+    get_class_structures,  # noqa:F401
+    search_class,  # noqa:F401
+    search_classes,  # noqa:F401
+)
 from smartclass.chem.conversion.convert_inchi_to_inchikey import (  # noqa:F401
     convert_inchi_to_inchikey,
 )
@@ -20,7 +22,7 @@ from smartclass.chem.conversion.convert_mol_to_smarts import convert_mol_to_smar
 from smartclass.chem.conversion.convert_mol_to_smiles import convert_mol_to_smiles  # noqa:F401
 from smartclass.chem.conversion.convert_molblock_to_mol import convert_molblock_to_mol  # noqa:F401
 
-# from smartclass.chem.conversion.convert_name_and_molblock_to_cxsmiles import convert_mol_to_cxsmiles  # noqa:F401
+# from smartclass.chem.conversion.convert_name_and_molblock_to_cxsmiles import convert_mol_to_cxsmiles
 from smartclass.chem.conversion.convert_smarts_to_mol import convert_smarts_to_mol  # noqa:F401
 from smartclass.chem.conversion.convert_smiles_to_canonical_smiles import (  # noqa:F401
     convert_smiles_to_canonical_smiles,
@@ -43,9 +45,9 @@ from smartclass.chem.helpers.get_num_matched_atoms_bonds import (  # noqa:F401
 from smartclass.chem.helpers.standardize import standardize  # noqa:F401
 from smartclass.chem.similarity.calculate_mcs import calculate_mcs  # noqa:F401
 
-# from smartclass.chem.complexity import *  # noqa:F401
+# from smartclass.chem.complexity import *
 
 
-# from smartclass.chem.similarity import calculate_myopic_mces  # noqa:F401
-# from smartclass.chem.similarity import calculate_structural_similarity  # noqa:F401
-# from smartclass.chem.similarity import measure_mhfp  # noqa:F401
+# from smartclass.chem.similarity import calculate_myopic_mces
+# from smartclass.chem.similarity import calculate_structural_similarity
+# from smartclass.chem.similarity import measure_mhfp

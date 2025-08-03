@@ -54,9 +54,7 @@ def bfs_search_classes_generator(
 
             class_structure = class_structures.get(current_class_id)
             if class_structure is None:
-                logging.error(
-                    f"No class structure found for class_id {current_class_id}"
-                )
+                logging.error(f"No class structure found for class_id {current_class_id}")
                 continue
 
             results = search_class(
@@ -71,17 +69,12 @@ def bfs_search_classes_generator(
 
             if current_class_id in class_hierarchy:
                 for child_class in class_hierarchy[current_class_id]:
-                    if (
-                        child_class not in visited
-                        and child_class not in searched_classes
-                    ):
+                    if child_class not in visited and child_class not in searched_classes:
                         queue.append(child_class)
 
     for class_dict in classes:
         for class_id, class_structure_list in class_dict.items():
-            if class_id not in searched_classes and (
-                class_hierarchy is None or class_id not in class_hierarchy
-            ):
+            if class_id not in searched_classes and (class_hierarchy is None or class_id not in class_hierarchy):
                 results = search_class(
                     class_dict={class_id: class_structure_list},
                     structures=structures,
@@ -117,9 +110,7 @@ def tqdm_bfs_search_classes_generator(
     with tqdm(
         desc="Searching classes",
     ) as pbar:
-        for result in bfs_search_classes_generator(
-            classes, structures, params, class_hierarchy
-        ):
+        for result in bfs_search_classes_generator(classes, structures, params, class_hierarchy):
             yield result
             pbar.update(1)
 

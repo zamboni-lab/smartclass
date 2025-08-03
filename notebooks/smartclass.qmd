@@ -18,7 +18,7 @@ format:
           showtabs = false,
           breaksymbolleft={},
           breaklines
-          % Note: setting commandchars=\\\{\} here will cause an error 
+          % Note: setting commandchars=\\\{\} here will cause an error
         }
     include-in-header:
       text: >

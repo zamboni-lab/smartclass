@@ -34,28 +34,26 @@ dependencies = [
     "chembl-downloader<1.0.0,>=0.5.1",
     "click<9.0.0,>=8.1.7",
     "importlib-resources<7.0.0,>=6.5.2",
-    "jupyter<2.0.0,>=1.1.1",
-    "more-click<1.0.0,>=0.1.2",
-    "more-itertools<11.0.0,>=10.7.0",
     "myopic-mces<2.0.0,>=1.0.1",
-    "numpy<3.0.0,>=2.2.1",
     "polars<2.0.0,>=1.29.0",
     "pooch<2.0.0,>=1.8.2",
     "pystow<1.0.0,>=0.5.3",
     "rdcanon<1.0.0,>=0.1.2",
     "rdkit<2026.0.0,>=2025.3.1",
     "requests<3.0.0,>=2.32.3",
-    "snakefmt<1.0.0,>=0.11.0",
-    "treelib<2.0.0,>=1.7.1",
+    "tqdm<5.0.0,>=4.67.1",
 ]
 
 [dependency-groups]
 dev = [
     "black<25.0.0,>=24.10.0",
     "coverage<8.0.0,>=7.8.0",
+    "deptry<1.0.0,>=0.23.0",
     "flake8<8.0.0,>=7.2.0",
     "importlib-metadata<9.0.0,>=8.7.0",
     "isort<7.0.0,>=6.0.1",
+    "mypy<2.0.0,>=1.17.1",
+    "pre-commit<5.0.0,>=4.2.0",
     "pytest<9.0.0,>=8.3.5",
     "pytest-asyncio<1.0.0,>=0.26.0",
     "pytest-cov<7.0.0,>=6.1.1",
@@ -159,4 +157,3 @@ ban-relative-imports = "all"
 force-single-line = true
 lines-between-types = 1
 lines-after-imports = 2
-required-imports = ["from __future__ import annotations"]

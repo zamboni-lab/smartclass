@@ -70,7 +70,7 @@ def search_classes(
         s.update(smiles)
 
     # TODO redundant with get_latest_chembl
-    structures: list = list()
+    structures: list = []
     for smi in s:
         if smi != "smiles":
             mol = convert_smiles_to_mol(smi)
@@ -88,7 +88,9 @@ def search_classes(
     # Load classes
     if classes_file:
         c = load_external_classes_file(
-            file=classes_file, id_name=classes_name_id, smarts_name=classes_name_smarts
+            file=classes_file,
+            id_name=classes_name_id,
+            smarts_name=classes_name_smarts,
         )
     else:
         logging.basicConfig(level=logging.INFO)
@@ -119,22 +121,22 @@ def search_classes(
     logging.basicConfig(level=logging.INFO)
     logging.info(f"...against {len(classes[0])} chemical classes...")
 
-    results = list(
+    results = [
         tqdm_bfs_search_classes_generator(
             classes=classes,
             class_hierarchy=class_hierarchy,
             structures=structures,
             params=params,
         ),
-    )
-    # results = list(
+    ]
+    # results = [
     #     dfs_search_classes_generator(
     #         classes=classes,
     #         class_hierarchy=class_hierarchy,
     #         structures=structures,
     #         params=params,
     #     )
-    # )
+    # ]
 
     # Filter the results to keep only the result with the closest class for each unique InChIKey
     if closest_only:

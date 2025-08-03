@@ -21,7 +21,8 @@ def transform_inchi_to_inchikey(result: dict) -> dict | None:
     if inchikey:
         transformed_result = {
             "qid": result.get("structure", "").replace(
-                "http://www.wikidata.org/entity/", ""
+                "http://www.wikidata.org/entity/",
+                "",
             ),
             "P235": '"' + inchikey + '"',
             "S887": "Q123137214",

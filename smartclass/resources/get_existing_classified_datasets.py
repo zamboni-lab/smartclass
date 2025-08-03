@@ -23,7 +23,7 @@ def get_existing_classified_datasets(
     """
     if existing_classsified_datasets is None:
         existing_classsified_datasets = load_pkg_file(
-            "existing_classified_datasets.json"
+            "existing_classified_datasets.json",
         ).to_dict(as_series=False)
 
     for name, url in existing_classsified_datasets.items():

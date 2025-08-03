@@ -10,7 +10,8 @@ __all__ = ["extract_chebi"]
 
 
 def extract_chebi(
-    file_path: str = "scratch/chebi.obo", output: str = "scratch/chebi_extracted.tsv"
+    file_path: str = "scratch/chebi.obo",
+    output: str = "scratch/chebi_extracted.tsv",
 ):
     """
     Extract CHEBI.
@@ -25,7 +26,7 @@ def extract_chebi(
     term_start_pattern = re.compile(r"^\[Term\]")
     id_pattern = re.compile(r"^id: (.+)")
     inchikey_pattern = re.compile(
-        r"^property_value: .+?/chebi/inchikey \"(.+)\" xsd:string"
+        r"^property_value: .+?/chebi/inchikey \"(.+)\" xsd:string",
     )
     is_a_pattern = re.compile(r"^is_a: (.+)")
 

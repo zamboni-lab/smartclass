@@ -27,7 +27,7 @@ def bfs_search_classes_generator(
     """
     Perform substructure search for chemical classes using Breadth-First Search (BFS) and yield results.
 
-    :param classes: List of chemical classe.
+    :param classes: List of chemical classes.
     :type classes: list[dict[str, list[str]]]
 
     :param structures: List of structures.
@@ -55,7 +55,7 @@ def bfs_search_classes_generator(
             class_structure = class_structures.get(current_class_id)
             if class_structure is None:
                 logging.error(
-                    f"No class structure found for class_id {current_class_id}"
+                    f"No class structure found for class_id {current_class_id}",
                 )
                 continue
 
@@ -98,7 +98,7 @@ def tqdm_bfs_search_classes_generator(
     """
     Perform substructure search for chemical classes using Breadth-First Search (BFS) and yield results with tqdm.
 
-    :param classes: List of chemical classe.
+    :param classes: List of chemical classes.
     :type classes: list[dict[str, list[str]]]
 
     :param structures: List of structures.
@@ -116,7 +116,10 @@ def tqdm_bfs_search_classes_generator(
         desc="Searching classes",
     ) as pbar:
         for result in bfs_search_classes_generator(
-            classes, structures, params, class_hierarchy
+            classes,
+            structures,
+            params,
+            class_hierarchy,
         ):
             yield result
             pbar.update(1)
@@ -131,7 +134,7 @@ def tqdm_bfs_search_classes_generator(
 #     """
 #     Perform substructure search for chemical classes using Depth-First Search (DFS) and yield results.
 #
-#    :param classes: List of chemical classe.
+#    :param classes: List of chemical classes.
 #    :type classes: list[dict[str, list[str]]]
 #
 #    :param structures: List of structures.

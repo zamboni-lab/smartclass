@@ -21,7 +21,8 @@ def transform_stereoisomers_to_entities(result: dict) -> dict | None:
     if flag is False:
         transformed_result = {
             "qid": result.get("structure", "").replace(
-                "http://www.wikidata.org/entity/", ""
+                "http://www.wikidata.org/entity/",
+                "",
             ),
             "P31": "Q113145171",
             "-P31": "Q59199015",

@@ -48,7 +48,10 @@ def get_request(
     while attempt < max_retries:
         try:
             response = requests.get(
-                url, headers=headers, params=params, timeout=timeout
+                url,
+                headers=headers,
+                params=params,
+                timeout=timeout,
             )
             response.raise_for_status()
 
@@ -70,7 +73,7 @@ def get_request(
             if retriable and attempt < max_retries - 1:
                 wait_time = base_delay * (2**attempt) + random.uniform(0, 1)
                 logger.warning(
-                    f"Request failed with status {status_code}. Retrying in {wait_time:.1f} seconds..."
+                    f"Request failed with status {status_code}. Retrying in {wait_time:.1f} seconds...",
                 )
                 time.sleep(wait_time)
                 attempt += 1
@@ -82,7 +85,7 @@ def get_request(
             else:
                 logger.error(f"Request failed: {e}")
                 raise RuntimeError(
-                    f"Failed to retrieve data from {url} after {max_retries} attempts."
+                    f"Failed to retrieve data from {url} after {max_retries} attempts.",
                 ) from e
 
     # If somehow exits loop without success

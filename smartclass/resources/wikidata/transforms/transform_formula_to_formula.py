@@ -29,7 +29,8 @@ def transform_formula_to_formula(result: dict) -> dict | None:
     if formula and new_formula:
         transformed_result = {
             "qid": result.get("structure", "").replace(
-                "http://www.wikidata.org/entity/", ""
+                "http://www.wikidata.org/entity/",
+                "",
             ),
             "-P274": '"' + formula + '"',
             "P274": '"' + new_formula + '"',

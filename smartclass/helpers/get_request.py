@@ -69,7 +69,7 @@ def get_request(
                 attempt += 1
             elif url != qlever_url:
                 logger.warning(
-                    f"Request failed with status {status_code} on WDQS. Retrying one last time on QLever endpoint..."
+                    f"Request failed with status {status_code} on WDQS. Retrying one last time on QLever endpoint...",
                 )
                 url = qlever_url
             else:

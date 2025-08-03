@@ -123,7 +123,7 @@ def search_classes(
             class_hierarchy=class_hierarchy,
             structures=structures,
             params=params,
-        )
+        ),
     )
     # results = list(
     #     dfs_search_classes_generator(

@@ -26,7 +26,7 @@ def check_smiles_isomeric(smiles_isomeric: str, transform_to_canonical: bool = F
     :returns: SMILES.
     :rtype: Union[str,None]
     """
-    # COMMMENT this could be updated live using
+    # COMMENT this could be updated live using
     # """SELECT * WHERE { wd:P2017 wdt:P1793 ?reg. }"""
     pattern = re.compile(r"^[A-Za-z0-9+\-\*=#$:().>\\[\]%]*([@\/]|\[\d)[A-Za-z0-9+\-\*=#$:().>@\/\\[\]%]+")
     # Use re.match to check if the molecular formula matches the pattern

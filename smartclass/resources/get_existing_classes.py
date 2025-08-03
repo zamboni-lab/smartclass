@@ -19,7 +19,7 @@ def get_existing_classes(existing_classes: dict | None = None) -> None:
     """
     if existing_classes is None:
         existing_classes = load_pkg_file("existing_classes.json").to_dict(
-            as_series=False
+            as_series=False,
         )
 
     for name, url in existing_classes.items():

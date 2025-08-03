@@ -22,7 +22,8 @@ def transform_smiles_to_formula(result: dict) -> dict | None:
     if formula:
         transformed_result = {
             "qid": result.get("structure", "").replace(
-                "http://www.wikidata.org/entity/", ""
+                "http://www.wikidata.org/entity/",
+                "",
             ),
             "P274": '"' + convert_chemical_formula(formula) + '"',
             "S887": "Q113907573",

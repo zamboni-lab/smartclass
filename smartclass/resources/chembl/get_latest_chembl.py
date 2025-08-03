@@ -52,14 +52,16 @@ def get_latest_chembl(
                 if not ((i + 1) % report_interval):
                     elapsed_time = time.time() - t1
                     logging.debug(
-                        f"Processed {i + 1} molecules in {elapsed_time:.1f} seconds"
+                        f"Processed {i + 1} molecules in {elapsed_time:.1f} seconds",
                     )
 
                 if mol is None or mol.GetNumAtoms() > max_atoms:
                     continue
 
                 fp = Chem.PatternFingerprint(
-                    mol, fpSize=fp_len, tautomerFingerprints=tautomer_fingerprints
+                    mol,
+                    fpSize=fp_len,
+                    tautomerFingerprints=tautomer_fingerprints,
                 )
                 smi = Chem.MolToSmiles(mol)
                 data.append((smi, fp))
@@ -80,7 +82,7 @@ def get_latest_chembl(
 
         elapsed_time = time.time() - t1
         logging.debug(
-            f"Processed ChEMBL data in {elapsed_time:.2f} seconds. The library has {len(library)} molecules."
+            f"Processed ChEMBL data in {elapsed_time:.2f} seconds. The library has {len(library)} molecules.",
         )
 
         with open(lib_path, "wb") as file:

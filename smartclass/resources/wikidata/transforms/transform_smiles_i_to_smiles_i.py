@@ -20,7 +20,8 @@ def transform_smiles_i_to_smiles_i(result: dict) -> dict | None:
     if smiles:
         transformed_result = {
             "qid": result.get("structure", "").replace(
-                "http://www.wikidata.org/entity/", ""
+                "http://www.wikidata.org/entity/",
+                "",
             ),
             "-P2017": '"' + smiles + '"',
         }

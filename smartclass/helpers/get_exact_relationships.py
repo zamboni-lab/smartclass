@@ -38,7 +38,8 @@ def get_exact_relationships(
                     current_id = line.split(": ")[1]
                 elif line.startswith("synonym: ") and "EXACT" in line:
                     synonym_match = re.match(
-                        r"""synonym: "(.*?)" EXACT ChEBI_TERM \[CHEBI:(\d+)\]""", line
+                        r"""synonym: "(.*?)" EXACT ChEBI_TERM \[CHEBI:(\d+)\]""",
+                        line,
                     )
                     if synonym_match and current_id:
                         synonym = synonym_match.group(1)

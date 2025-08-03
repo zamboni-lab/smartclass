@@ -19,7 +19,8 @@ def transform_inchi_to_mass(result: dict) -> dict | None:
     if mass:
         transformed_result = {
             "qid": result.get("structure", "").replace(
-                "http://www.wikidata.org/entity/", ""
+                "http://www.wikidata.org/entity/",
+                "",
             ),
             "P2067": "+" + str(mass) + "U483261",
             "S887": "Q123137214",

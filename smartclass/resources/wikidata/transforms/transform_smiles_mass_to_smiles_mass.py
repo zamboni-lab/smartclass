@@ -6,7 +6,8 @@ from smartclass.chem.conversion.convert_smiles_to_mass import convert_smiles_to_
 
 
 def transform_smiles_mass_to_smiles_mass(
-    result: dict, tol: float = 0.001
+    result: dict,
+    tol: float = 0.001,
 ) -> dict | None:
     """
     Transform SMILES to mass.
@@ -26,7 +27,8 @@ def transform_smiles_mass_to_smiles_mass(
         if abs(float(mass) - mass_wd) > tol:
             transformed_result = {
                 "qid": result.get("structure", "").replace(
-                    "http://www.wikidata.org/entity/", ""
+                    "http://www.wikidata.org/entity/",
+                    "",
                 ),
                 "-P2067": "+" + str(mass_wd) + "U483261",
                 "P2067": "+" + str(mass) + "U483261",

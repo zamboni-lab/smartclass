@@ -21,7 +21,8 @@ def transform_smiles_to_inchi(result: dict) -> dict | None:
         if inchi_wd is None:
             transformed_result = {
                 "qid": result.get("structure", "").replace(
-                    "http://www.wikidata.org/entity/", ""
+                    "http://www.wikidata.org/entity/",
+                    "",
                 ),
                 "P234": '"' + inchi + '"',
                 "S887": "Q113907573",
@@ -30,7 +31,8 @@ def transform_smiles_to_inchi(result: dict) -> dict | None:
             if inchi != inchi_wd:
                 transformed_result = {
                     "qid": result.get("structure", "").replace(
-                        "http://www.wikidata.org/entity/", ""
+                        "http://www.wikidata.org/entity/",
+                        "",
                     ),
                     "P234": '"' + inchi + '"',
                     "S887": "Q113907573",

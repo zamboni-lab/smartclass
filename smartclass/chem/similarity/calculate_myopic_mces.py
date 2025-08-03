@@ -6,7 +6,9 @@ from myopic_mces.myopic_mces import MCES
 
 
 def calculate_myopic_mces(
-    s_1: str, s_2: str, the: int = -1
+    s_1: str,
+    s_2: str,
+    the: int = -1,
 ) -> tuple[int, float, float, int]:
     """
     Calculate myopic MCES.

@@ -132,9 +132,7 @@
 
             <span class="n">class_structure</span> <span class="o">=</span> <span class="n">class_structures</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">current_class_id</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">class_structure</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span>
-                    <span class="sa">f</span><span class="s2">&quot;No class structure found for class_id </span><span class="si">{</span><span class="n">current_class_id</span><span class="si">}</span><span class="s2">&quot;</span>
-                <span class="p">)</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No class structure found for class_id </span><span class="si">{</span><span class="n">current_class_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
                 <span class="k">continue</span>
 
             <span class="n">results</span> <span class="o">=</span> <span class="n">search_class</span><span class="p">(</span>
@@ -149,17 +147,12 @@
 
             <span class="k">if</span> <span class="n">current_class_id</span> <span class="ow">in</span> <span class="n">class_hierarchy</span><span class="p">:</span>
                 <span class="k">for</span> <span class="n">child_class</span> <span class="ow">in</span> <span class="n">class_hierarchy</span><span class="p">[</span><span class="n">current_class_id</span><span class="p">]:</span>
-                    <span class="k">if</span> <span class="p">(</span>
-                        <span class="n">child_class</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">visited</span>
-                        <span class="ow">and</span> <span class="n">child_class</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">searched_classes</span>
-                    <span class="p">):</span>
+                    <span class="k">if</span> <span class="n">child_class</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">visited</span> <span class="ow">and</span> <span class="n">child_class</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">searched_classes</span><span class="p">:</span>
                         <span class="n">queue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">child_class</span><span class="p">)</span>
 
     <span class="k">for</span> <span class="n">class_dict</span> <span class="ow">in</span> <span class="n">classes</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">class_id</span><span class="p">,</span> <span class="n">class_structure_list</span> <span class="ow">in</span> <span class="n">class_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="k">if</span> <span class="n">class_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">searched_classes</span> <span class="ow">and</span> <span class="p">(</span>
-                <span class="n">class_hierarchy</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">class_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">class_hierarchy</span>
-            <span class="p">):</span>
+            <span class="k">if</span> <span class="n">class_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">searched_classes</span> <span class="ow">and</span> <span class="p">(</span><span class="n">class_hierarchy</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">class_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">class_hierarchy</span><span class="p">):</span>
                 <span class="n">results</span> <span class="o">=</span> <span class="n">search_class</span><span class="p">(</span>
                     <span class="n">class_dict</span><span class="o">=</span><span class="p">{</span><span class="n">class_id</span><span class="p">:</span> <span class="n">class_structure_list</span><span class="p">},</span>
                     <span class="n">structures</span><span class="o">=</span><span class="n">structures</span><span class="p">,</span>
@@ -196,9 +189,7 @@
     <span class="k">with</span> <span class="n">tqdm</span><span class="p">(</span>
         <span class="n">desc</span><span class="o">=</span><span class="s2">&quot;Searching classes&quot;</span><span class="p">,</span>
     <span class="p">)</span> <span class="k">as</span> <span class="n">pbar</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">bfs_search_classes_generator</span><span class="p">(</span>
-            <span class="n">classes</span><span class="p">,</span> <span class="n">structures</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">class_hierarchy</span>
-        <span class="p">):</span>
+        <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">bfs_search_classes_generator</span><span class="p">(</span><span class="n">classes</span><span class="p">,</span> <span class="n">structures</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">class_hierarchy</span><span class="p">):</span>
             <span class="k">yield</span> <span class="n">result</span>
             <span class="n">pbar</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 

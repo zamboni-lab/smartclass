@@ -105,7 +105,7 @@
     <span class="k">try</span><span class="p">:</span>
         <span class="n">enumerated_mols</span> <span class="o">=</span> <span class="n">rdMolEnumerator</span><span class="o">.</span><span class="n">Enumerate</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Enumeration failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Enumeration failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="n">enumerated_mols</span> <span class="o">=</span> <span class="p">[]</span>
 
     <span class="c1"># Check if enumeration was successful</span>

@@ -165,9 +165,7 @@
 
     <span class="c1"># Load classes</span>
     <span class="k">if</span> <span class="n">classes_file</span><span class="p">:</span>
-        <span class="n">c</span> <span class="o">=</span> <span class="n">load_external_classes_file</span><span class="p">(</span>
-            <span class="n">file</span><span class="o">=</span><span class="n">classes_file</span><span class="p">,</span> <span class="n">id_name</span><span class="o">=</span><span class="n">classes_name_id</span><span class="p">,</span> <span class="n">smarts_name</span><span class="o">=</span><span class="n">classes_name_smarts</span>
-        <span class="p">)</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">load_external_classes_file</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="n">classes_file</span><span class="p">,</span> <span class="n">id_name</span><span class="o">=</span><span class="n">classes_name_id</span><span class="p">,</span> <span class="n">smarts_name</span><span class="o">=</span><span class="n">classes_name_smarts</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
         <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;No classes given, loading default package classes instead.&quot;</span><span class="p">)</span>
@@ -221,15 +219,10 @@
             <span class="n">inchikey</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;structure_inchikey&quot;</span><span class="p">]</span>
             <span class="n">matched_ab</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;matched_ab&quot;</span><span class="p">]</span>
 
-            <span class="k">if</span> <span class="p">(</span>
-                <span class="n">inchikey</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">max_ab_per_inchikey</span>
-                <span class="ow">or</span> <span class="n">matched_ab</span> <span class="o">&gt;</span> <span class="n">max_ab_per_inchikey</span><span class="p">[</span><span class="n">inchikey</span><span class="p">]</span>
-            <span class="p">):</span>
+            <span class="k">if</span> <span class="n">inchikey</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">max_ab_per_inchikey</span> <span class="ow">or</span> <span class="n">matched_ab</span> <span class="o">&gt;</span> <span class="n">max_ab_per_inchikey</span><span class="p">[</span><span class="n">inchikey</span><span class="p">]:</span>
                 <span class="n">max_ab_per_inchikey</span><span class="p">[</span><span class="n">inchikey</span><span class="p">]</span> <span class="o">=</span> <span class="n">matched_ab</span>
         <span class="n">results</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="n">result</span>
-            <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span>
-            <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;matched_ab&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">max_ab_per_inchikey</span><span class="p">[</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;structure_inchikey&quot;</span><span class="p">]]</span>
+            <span class="n">result</span> <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span> <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;matched_ab&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">max_ab_per_inchikey</span><span class="p">[</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;structure_inchikey&quot;</span><span class="p">]]</span>
         <span class="p">]</span>
 
     <span class="c1"># Export</span>

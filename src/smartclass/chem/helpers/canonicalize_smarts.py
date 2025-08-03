@@ -1,7 +1,9 @@
 """Canonicalize SMARTS."""
 
 from __future__ import annotations
+
 import logging
+
 from rdcanon import canon_smarts
 
 __all__ = [
@@ -24,8 +26,8 @@ def canonicalize_smarts(smarts: str, return_mapping: bool = False) -> str | None
     """
     try:
         return canon_smarts(smarts, return_mapping)
-    except Exception as e:
-        logging.error(f"Error canonicalizing SMARTS: {smarts}")
+    except Exception:
+        logging.exception(f"Error canonicalizing SMARTS: {smarts}")
         return None
 
 
@@ -42,7 +44,5 @@ if __name__ == "__main__":
     for smarts in test_smarts:
         print("Original:", smarts)
         print("Canonical:", canonicalize_smarts(smarts))
-        print(
-            "Canonical with mapping:", canonicalize_smarts(smarts, return_mapping=True)
-        )
+        print("Canonical with mapping:", canonicalize_smarts(smarts, return_mapping=True))
         print()

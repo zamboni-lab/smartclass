@@ -37,7 +37,7 @@ def export_results(output: str, results: list[dict]) -> None:
             writer.writerows(results)
         logging.debug(f"Data exported to {output}")
     except Exception as e:
-        logging.error(f"Error exporting data to {output}: {e!s}")
+        logging.exception(f"Error exporting data to {output}: {e!s}")
 
 
 if __name__ == "__main__":

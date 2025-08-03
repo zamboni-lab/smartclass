@@ -9,9 +9,7 @@ __all__ = [
 ]
 
 
-def combine_csv_files(
-    input_files: list[str] | str, output_file: str, separator="\t"
-) -> None:
+def combine_csv_files(input_files: list[str] | str, output_file: str, separator="\t") -> None:
     """
     Combine multiple CSV files into a single CSV file.
 

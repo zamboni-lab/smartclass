@@ -19,9 +19,7 @@ def transform_smiles_i_to_smiles_i(result: dict) -> dict | None:
     smiles = check_smiles_isomeric(s)
     if smiles:
         transformed_result = {
-            "qid": result.get("structure", "").replace(
-                "http://www.wikidata.org/entity/", ""
-            ),
+            "qid": result.get("structure", "").replace("http://www.wikidata.org/entity/", ""),
             "-P2017": '"' + smiles + '"',
         }
         return transformed_result

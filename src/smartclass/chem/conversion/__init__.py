@@ -15,7 +15,7 @@ from smartclass.chem.conversion.convert_mol_to_smarts import convert_mol_to_smar
 from smartclass.chem.conversion.convert_mol_to_smiles import convert_mol_to_smiles  # noqa:F401
 from smartclass.chem.conversion.convert_molblock_to_mol import convert_molblock_to_mol  # noqa:F401
 
-# from smartclass.chem.conversion.convert_name_and_molblock_to_cxsmiles import convert_mol_to_cxsmiles  # noqa:F401
+# from smartclass.chem.conversion.convert_name_and_molblock_to_cxsmiles import convert_mol_to_cxsmiles
 from smartclass.chem.conversion.convert_smarts_to_mol import convert_smarts_to_mol  # noqa:F401
 from smartclass.chem.conversion.convert_smiles_to_canonical_smiles import (  # noqa:F401
     convert_smiles_to_canonical_smiles,

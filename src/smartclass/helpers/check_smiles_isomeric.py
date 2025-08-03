@@ -13,9 +13,7 @@ __all__ = [
 ]
 
 
-def check_smiles_isomeric(
-    smiles_isomeric: str, transform_to_canonical: bool = False
-) -> str | None:
+def check_smiles_isomeric(smiles_isomeric: str, transform_to_canonical: bool = False) -> str | None:
     """
     Check isomeric smiles.
 
@@ -30,9 +28,7 @@ def check_smiles_isomeric(
     """
     # COMMMENT this could be updated live using
     # """SELECT * WHERE { wd:P2017 wdt:P1793 ?reg. }"""
-    pattern = re.compile(
-        r"^[A-Za-z0-9+\-\*=#$:().>\\[\]%]*([@\/]|\[\d)[A-Za-z0-9+\-\*=#$:().>@\/\\[\]%]+"
-    )
+    pattern = re.compile(r"^[A-Za-z0-9+\-\*=#$:().>\\[\]%]*([@\/]|\[\d)[A-Za-z0-9+\-\*=#$:().>@\/\\[\]%]+")
     # Use re.match to check if the molecular formula matches the pattern
     if re.match(pattern, smiles_isomeric):
         if transform_to_canonical is True:

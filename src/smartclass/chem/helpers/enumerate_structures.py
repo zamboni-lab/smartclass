@@ -27,7 +27,7 @@ def enumerate_structures(
     try:
         enumerated_mols = rdMolEnumerator.Enumerate(mol)
     except Exception as e:
-        logging.error(f"Enumeration failed: {e}")
+        logging.exception(f"Enumeration failed: {e}")
         enumerated_mols = []
 
     # Check if enumeration was successful

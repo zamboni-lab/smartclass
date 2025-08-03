@@ -21,9 +21,7 @@ def transform_inchi_to_smiles_canonical(result: dict) -> dict | None:
         smiles = fix_inchi_tautomerization(smiles)
         if "@" not in smiles:
             transformed_result = {
-                "qid": result.get("structure", "").replace(
-                    "http://www.wikidata.org/entity/", ""
-                ),
+                "qid": result.get("structure", "").replace("http://www.wikidata.org/entity/", ""),
                 "P233": '"' + smiles + '"',
                 "S887": "Q123137214",
             }

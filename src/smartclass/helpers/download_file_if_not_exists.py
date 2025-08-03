@@ -42,4 +42,4 @@ def download_file_if_not_exists(url: str, output: str) -> None:
 
         logging.info(f"File downloaded and saved to {output}")
     except Exception as e:
-        logging.error(f"Failed to download the file: {e}")
+        logging.exception(f"Failed to download the file: {e}")

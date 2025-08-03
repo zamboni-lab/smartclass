@@ -40,7 +40,7 @@ def load_latest_chembl() -> rdSubstructLibrary.SubstructLibrary:
         if os.path.exists(lib_path):
             os.remove(lib_path)  # Delete the corrupted library file
 
-        logging.error(f"Error loading library: {e!s}")
+        logging.exception(f"Error loading library: {e!s}")
         logging.info("Downloading the latest ChEMBL data...")
 
         try:
@@ -49,7 +49,7 @@ def load_latest_chembl() -> rdSubstructLibrary.SubstructLibrary:
                 sslib = pickle.load(inf)
             logging.info(f"SubstructLibrary loaded with {len(sslib)} molecules")
         except Exception as download_error:
-            logging.error(f"Failed to download or load ChEMBL data: {download_error!s}")
+            logging.exception(f"Failed to download or load ChEMBL data: {download_error!s}")
             raise download_error  # Raise the error to notify the caller
 
     return sslib

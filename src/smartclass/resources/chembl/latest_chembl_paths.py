@@ -41,4 +41,4 @@ if __name__ == "__main__":
         logging.debug(f"Data path: {data_path}")
         logging.debug(f"Library path: {lib_path}")
     except RuntimeError as e:
-        logging.error(f"Error: {e}")
+        logging.exception(f"Error: {e}")

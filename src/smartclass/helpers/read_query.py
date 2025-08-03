@@ -15,5 +15,5 @@ def read_query(query):
         response.raise_for_status()
         return response.text
     else:
-        with open(query, "r", encoding="utf-8") as file:
+        with open(query, encoding="utf-8") as file:
             return file.read()

@@ -2,13 +2,17 @@
 
 from __future__ import annotations
 
-from smartclass import api  # noqa:F401
-from smartclass import cli  # noqa:F401
-from smartclass import version  # noqa:F401
-from smartclass.chem.classification import bfs_search_classes_generator  # noqa:F401
-from smartclass.chem.classification import get_class_structures  # noqa:F401
-from smartclass.chem.classification import search_class  # noqa:F401
-from smartclass.chem.classification import search_classes  # noqa:F401
+from smartclass import (
+    api,  # noqa:F401
+    cli,  # noqa:F401
+    version,  # noqa:F401
+)
+from smartclass.chem.classification import (
+    bfs_search_classes_generator,  # noqa:F401
+    get_class_structures,  # noqa:F401
+    search_class,  # noqa:F401
+    search_classes,  # noqa:F401
+)
 from smartclass.chem.conversion.convert_inchi_to_inchikey import (  # noqa:F401
     convert_inchi_to_inchikey,
 )
@@ -22,7 +26,7 @@ from smartclass.chem.conversion.convert_mol_to_smarts import convert_mol_to_smar
 from smartclass.chem.conversion.convert_mol_to_smiles import convert_mol_to_smiles  # noqa:F401
 from smartclass.chem.conversion.convert_molblock_to_mol import convert_molblock_to_mol  # noqa:F401
 
-# from smartclass.chem.conversion.convert_name_and_molblock_to_cxsmiles import convert_mol_to_cxsmiles  # noqa:F401
+# from smartclass.chem.conversion.convert_name_and_molblock_to_cxsmiles import convert_mol_to_cxsmiles
 from smartclass.chem.conversion.convert_smarts_to_mol import convert_smarts_to_mol  # noqa:F401
 from smartclass.chem.conversion.convert_smiles_to_canonical_smiles import (  # noqa:F401
     convert_smiles_to_canonical_smiles,
@@ -76,7 +80,9 @@ from smartclass.io.load_pkg_mappings import load_pkg_mappings  # noqa:F401
 from smartclass.io.load_pkg_mia import load_pkg_mia  # noqa:F401
 from smartclass.io.load_smiles import load_smiles  # noqa:F401
 from smartclass.io.load_tsv_from_path import load_tsv_from_path  # noqa:F401
-from smartclass.resources import chebi  # noqa:F401
-from smartclass.resources import chembl  # noqa:F401
-from smartclass.resources import chemont  # noqa:F401
-from smartclass.resources import wikidata  # noqa:F401
+from smartclass.resources import (
+    chebi,  # noqa:F401
+    chembl,  # noqa:F401
+    chemont,  # noqa:F401
+    wikidata,  # noqa:F401
+)

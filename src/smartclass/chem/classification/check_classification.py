@@ -45,11 +45,7 @@ def process_classification(
     logging.info(f"Processing {classification}")
     smiles_list = group["smiles"].to_list()
 
-    mols = [
-        mol
-        for smiles in smiles_list
-        if (mol := convert_smiles_to_mol(smiles)) is not None
-    ]
+    mols = [mol for smiles in smiles_list if (mol := convert_smiles_to_mol(smiles)) is not None]
 
     if len(mols) > samples_max:
         logging.warning(f"Too many structures of this class. Sampling {samples_max}...")
@@ -83,7 +79,7 @@ def check_classification(
     try:
         classifications = DataFrame(load_tsv_from_path(classified_mols))
     except Exception as e:
-        logging.error(f"Error loading classified mols: {e}")
+        logging.exception(f"Error loading classified mols: {e}")
         return []
 
     mcses = []
@@ -94,26 +90,22 @@ def check_classification(
             results = process_classification(c, group)
             mcs = results[0]
             n = results[1]
-            mcses.append(
-                {
-                    "class": c,
-                    "class_structure": mcs.smartsString,
-                    "structure_ab": mcs.numAtoms + mcs.numBonds,
-                    "threshold": threshold,
-                    "n": n,
-                }
-            )
+            mcses.append({
+                "class": c,
+                "class_structure": mcs.smartsString,
+                "structure_ab": mcs.numAtoms + mcs.numBonds,
+                "threshold": threshold,
+                "n": n,
+            })
         else:
             logging.warning(f"Chemical Classification {c} not found in the data.")
-            mcses.append(
-                {
-                    "class": c,
-                    "class_structure": "",
-                    "structure_ab": 0,
-                    "threshold": threshold,
-                    "n": 0,
-                }
-            )
+            mcses.append({
+                "class": c,
+                "class_structure": "",
+                "structure_ab": 0,
+                "threshold": threshold,
+                "n": 0,
+            })
     return mcses
 
 

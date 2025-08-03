@@ -29,18 +29,14 @@ def get_exact_relationships(
     chebi_synonyms: dict[str, list[tuple[str, str]]] = {}
     with zipfile.ZipFile(obo_file_path, "r") as z:
         with z.open(z.namelist()[0]) as obo_file:
-            content = obo_file.read().decode(
-                "utf-8"
-            )  # Read and decode the entire file content
+            content = obo_file.read().decode("utf-8")  # Read and decode the entire file content
             current_id = None
             for line in content.splitlines():
                 line = line.strip()
                 if line.startswith("id: "):
                     current_id = line.split(": ")[1]
                 elif line.startswith("synonym: ") and "EXACT" in line:
-                    synonym_match = re.match(
-                        r"""synonym: "(.*?)" EXACT ChEBI_TERM \[CHEBI:(\d+)\]""", line
-                    )
+                    synonym_match = re.match(r"""synonym: "(.*?)" EXACT ChEBI_TERM \[CHEBI:(\d+)\]""", line)
                     if synonym_match and current_id:
                         synonym = synonym_match.group(1)
                         chebi_id = synonym_match.group(2)

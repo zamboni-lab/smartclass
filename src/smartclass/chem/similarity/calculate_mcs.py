@@ -9,9 +9,7 @@ __all__ = [
 ]
 
 
-def calculate_mcs(
-    mols: list, threshold: float = 0.7, ring_matches_ring_only: bool = False
-) -> rdFMCS.MCSResult:
+def calculate_mcs(mols: list, threshold: float = 0.7, ring_matches_ring_only: bool = False) -> rdFMCS.MCSResult:
     """
     Calculate MCS.
 

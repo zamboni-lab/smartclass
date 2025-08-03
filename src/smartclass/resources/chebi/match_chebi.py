@@ -45,9 +45,7 @@ def match_chebi(
     csv_reader = csv.DictReader(csv_content.splitlines())
     ids_df = (
         DataFrame(list(csv_reader))
-        .rename(
-            {"Smiles": "ChemOntID", "ChemOntID": "ParentName", "ParentName": "drop"}
-        )
+        .rename({"Smiles": "ChemOntID", "ChemOntID": "ParentName", "ParentName": "drop"})
         .drop("drop")
     )
 
@@ -60,9 +58,7 @@ def match_chebi(
         ]
 
     matched_df = DataFrame(chebi_molecules, schema=["CompoundID", "smiles"])
-    matched_df = matched_df.with_columns(
-        matched_df["CompoundID"].cast(ids_df["CompoundID"].dtype)
-    )
+    matched_df = matched_df.with_columns(matched_df["CompoundID"].cast(ids_df["CompoundID"].dtype))
     merged_df = ids_df.join(matched_df, on="CompoundID", how="inner")
 
     merged_df.write_csv(output, separator="\t")

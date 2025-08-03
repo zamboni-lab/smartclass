@@ -22,13 +22,17 @@ inchis_df = pl.read_csv(
 
 # Filter out InchIs that contain the specified layers
 inchis_df = inchis_df.filter(
-    pl.col("inchi").map_elements(lambda x: check_layers_from_inchi(x, layers=LAYERS), return_dtype=bool),
+    pl.col("inchi").map_elements(
+        lambda x: check_layers_from_inchi(x, layers=LAYERS), return_dtype=bool
+    ),
 )
 
 # Remove InChI stereo layers
 inchis_df = inchis_df.with_columns(
     pl.col("inchi")
-    .map_elements(lambda x: remove_layers_from_inchi(x, layers=LAYERS), return_dtype=str)
+    .map_elements(
+        lambda x: remove_layers_from_inchi(x, layers=LAYERS), return_dtype=str
+    )
     .alias("inchi_no_stereo"),
 )
 

@@ -5,7 +5,9 @@ from __future__ import annotations
 from myopic_mces.myopic_mces import MCES
 
 
-def calculate_myopic_mces(s_1: str, s_2: str, thr: int = -1) -> tuple[int, float, float, int]:
+def calculate_myopic_mces(
+    s_1: str, s_2: str, the: int = -1
+) -> tuple[int, float, float, int]:
     """
     Calculate myopic MCES.
 
@@ -15,8 +17,8 @@ def calculate_myopic_mces(s_1: str, s_2: str, thr: int = -1) -> tuple[int, float
     :param s_2: SMILES 2.
     :type s_2: str
 
-    :param thr: Threshold.
-    :type thr: int
+    :param the: Threshold.
+    :type the: int
 
     :returns: Index, Distance between the molecules, Time taken for the calculation, Type of Distance:
             - 1 : Exact Distance
@@ -24,4 +26,4 @@ def calculate_myopic_mces(s_1: str, s_2: str, thr: int = -1) -> tuple[int, float
             - 4 : Lower bound (second lower bound was used)
     :rtype: int, float, float, int
     """
-    return MCES(ind=0, s1=s_1, s2=s_2, threshold=thr, solver="default")
+    return MCES(ind=0, s1=s_1, s2=s_2, threshold=the, solver="default")

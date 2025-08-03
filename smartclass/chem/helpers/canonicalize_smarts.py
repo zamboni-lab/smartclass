@@ -44,5 +44,7 @@ if __name__ == "__main__":
     for smarts in test_smarts:
         print("Original:", smarts)
         print("Canonical:", canonicalize_smarts(smarts))
-        print("Canonical with mapping:", canonicalize_smarts(smarts, return_mapping=True))
+        print(
+            "Canonical with mapping:", canonicalize_smarts(smarts, return_mapping=True)
+        )
         print()

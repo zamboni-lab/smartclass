@@ -39,23 +39,37 @@ classes_df = pl.read_csv(
 ).drop("instance")
 
 # Combine both stereoisomers and chemicals dfs
-stereoisomers_canonical_df = stereoisomers_canonical_df.select(sorted(stereoisomers_canonical_df.columns))
-stereoisomers_isomeric_df = stereoisomers_isomeric_df.select(sorted(stereoisomers_isomeric_df.columns))
+stereoisomers_canonical_df = stereoisomers_canonical_df.select(
+    sorted(stereoisomers_canonical_df.columns)
+)
+stereoisomers_isomeric_df = stereoisomers_isomeric_df.select(
+    sorted(stereoisomers_isomeric_df.columns)
+)
 chemicals_df = chemicals_df.select(sorted(chemicals_df.columns))
-stereoisomers_df = pl.concat([stereoisomers_canonical_df, stereoisomers_isomeric_df], rechunk=True).unique()
+stereoisomers_df = pl.concat(
+    [stereoisomers_canonical_df, stereoisomers_isomeric_df], rechunk=True
+).unique()
 
-stereoisomers_df = pl.concat([stereoisomers_canonical_df, stereoisomers_isomeric_df], rechunk=True).unique()
-chemicals_df = pl.concat([chemicals_df, stereoisomers_isomeric_df], rechunk=True).unique()
+stereoisomers_df = pl.concat(
+    [stereoisomers_canonical_df, stereoisomers_isomeric_df], rechunk=True
+).unique()
+chemicals_df = pl.concat(
+    [chemicals_df, stereoisomers_isomeric_df], rechunk=True
+).unique()
 
 # Remove InChI stereo layers
 stereoisomers_df = stereoisomers_df.with_columns(
     pl.col("inchi")
-    .map_elements(lambda x: remove_layers_from_inchi(x, layers=LAYERS), return_dtype=str)
+    .map_elements(
+        lambda x: remove_layers_from_inchi(x, layers=LAYERS), return_dtype=str
+    )
     .alias("inchi_no_stereo"),
 ).drop("inchi")
 chemicals_df = chemicals_df.with_columns(
     pl.col("inchi")
-    .map_elements(lambda x: remove_layers_from_inchi(x, layers=LAYERS), return_dtype=str)
+    .map_elements(
+        lambda x: remove_layers_from_inchi(x, layers=LAYERS), return_dtype=str
+    )
     .alias("inchi_no_stereo"),
 ).drop("inchi")
 
@@ -69,7 +83,9 @@ merged_df = chemicals_df.join(
 print(merged_df)
 
 # Merge merged_df with tautomers_df to avoid tautomers
-merged_df = merged_df.join(tautomers_df, left_on="structure", right_on="structure_1", how="anti")
+merged_df = merged_df.join(
+    tautomers_df, left_on="structure", right_on="structure_1", how="anti"
+)
 print(merged_df)
 
 merged_df = (
@@ -91,7 +107,9 @@ print(merged_df)
 # TODO check if this part could be improved
 
 # Merge with classes_df based on the "structure" columns
-final_merged_df = merged_df.join(classes_df, left_on="structure", right_on="structure").join(
+final_merged_df = merged_df.join(
+    classes_df, left_on="structure", right_on="structure"
+).join(
     classes_df,
     left_on="structure_right",
     right_on="structure",
@@ -100,7 +118,9 @@ final_merged_df = merged_df.join(classes_df, left_on="structure", right_on="stru
 print(final_merged_df)
 
 # Filter rows where classes match
-matched_classes_df = final_merged_df.filter(pl.col("class_right") == pl.col("class")).filter(
+matched_classes_df = final_merged_df.filter(
+    pl.col("class_right") == pl.col("class")
+).filter(
     pl.col("structure") != pl.col("structure_right"),
 )
 matched_classes_df_2 = final_merged_df.filter(pl.col("class") == "Q11173").filter(

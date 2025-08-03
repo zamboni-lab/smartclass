@@ -9,7 +9,9 @@ from smartclass.io import export_results
 __all__ = ["extract_chebi"]
 
 
-def extract_chebi(file_path: str = "scratch/chebi.obo", output: str = "scratch/chebi_extracted.tsv"):
+def extract_chebi(
+    file_path: str = "scratch/chebi.obo", output: str = "scratch/chebi_extracted.tsv"
+):
     """
     Extract CHEBI.
 
@@ -22,7 +24,9 @@ def extract_chebi(file_path: str = "scratch/chebi.obo", output: str = "scratch/c
     # Define regular expressions to match relevant lines in the OBO file
     term_start_pattern = re.compile(r"^\[Term\]")
     id_pattern = re.compile(r"^id: (.+)")
-    inchikey_pattern = re.compile(r"^property_value: .+?/chebi/inchikey \"(.+)\" xsd:string")
+    inchikey_pattern = re.compile(
+        r"^property_value: .+?/chebi/inchikey \"(.+)\" xsd:string"
+    )
     is_a_pattern = re.compile(r"^is_a: (.+)")
 
     # Initialize a list to store dictionaries of extracted data
@@ -40,7 +44,9 @@ def extract_chebi(file_path: str = "scratch/chebi.obo", output: str = "scratch/c
                     term_data_list.append({
                         "id": current_id.replace("CHEBI:", "") if current_id else None,
                         "inchikey": current_inchikey if current_inchikey else None,
-                        "parent": current_is_a.replace("CHEBI:", "") if current_is_a else None,
+                        "parent": current_is_a.replace("CHEBI:", "")
+                        if current_is_a
+                        else None,
                     })
                 current_id = None
                 current_inchikey = None

@@ -64,7 +64,9 @@ def search_class(
                         "structure_inchikey": convert_mol_to_inchikey(structure),
                         "structure_smarts": convert_mol_to_smarts(structure),
                         "structure_ab": get_num_atoms_bonds(structure),
-                        "matched_ab": get_num_matched_atoms_bonds(mol_1=structure, mol_2=pattern),
+                        "matched_ab": get_num_matched_atoms_bonds(
+                            mol_1=structure, mol_2=pattern
+                        ),
                     })
 
     return results

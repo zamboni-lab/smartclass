@@ -104,7 +104,7 @@
 <span class="sd">    :returns: SMILES.</span>
 <span class="sd">    :rtype: Union[str,None]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># COMMMENT this could be updated live using</span>
+    <span class="c1"># COMMENT this could be updated live using</span>
     <span class="c1"># &quot;&quot;&quot;SELECT * WHERE { wd:P2017 wdt:P1793 ?reg. }&quot;&quot;&quot;</span>
     <span class="n">pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^[A-Za-z0-9+\-\*=#$:().&gt;</span><span class="se">\\</span><span class="s2">[\]%]*([@\/]|\[\d)[A-Za-z0-9+\-\*=#$:().&gt;@\/</span><span class="se">\\</span><span class="s2">[\]%]+&quot;</span><span class="p">)</span>
     <span class="c1"># Use re.match to check if the molecular formula matches the pattern</span>

@@ -147,7 +147,7 @@
                 <span class="n">attempt</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="k">elif</span> <span class="n">url</span> <span class="o">!=</span> <span class="n">qlever_url</span><span class="p">:</span>
                 <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
-                    <span class="sa">f</span><span class="s2">&quot;Request failed with status </span><span class="si">{</span><span class="n">status_code</span><span class="si">}</span><span class="s2"> on WDQS. Retrying one last time on QLever endpoint...&quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;Request failed with status </span><span class="si">{</span><span class="n">status_code</span><span class="si">}</span><span class="s2"> on WDQS. Retrying one last time on QLever endpoint...&quot;</span><span class="p">,</span>
                 <span class="p">)</span>
                 <span class="n">url</span> <span class="o">=</span> <span class="n">qlever_url</span>
             <span class="k">else</span><span class="p">:</span>

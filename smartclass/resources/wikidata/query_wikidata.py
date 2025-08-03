@@ -108,23 +108,23 @@ if __name__ == "__main__":
 
     queries = [
         (
-            "src/smartclass/data/queries/classes_cxsmiles.rq",
+            "smartclass/data/queries/classes_cxsmiles.rq",
             "scratch/wikidata_classes_cxsmiles.tsv",
         ),
         (
-            "src/smartclass/data/queries/classes_smarts.rq",
+            "smartclass/data/queries/classes_smarts.rq",
             "scratch/wikidata_classes_smarts.tsv",
         ),
         (
-            "src/smartclass/data/queries/classes_smiles.rq",
+            "smartclass/data/queries/classes_smiles.rq",
             "scratch/wikidata_classes_smiles.tsv",
         ),
         (
-            "src/smartclass/data/queries/classes_smiles_isomeric.rq",
+            "smartclass/data/queries/classes_smiles_isomeric.rq",
             "scratch/wikidata_classes_smiles_isomeric.tsv",
         ),
         (
-            "src/smartclass/data/queries/classes_taxonomy.rq",
+            "smartclass/data/queries/classes_taxonomy.rq",
             "scratch/wikidata_classes_taxonomy.tsv",
         ),
     ]

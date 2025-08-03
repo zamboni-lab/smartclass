@@ -44,7 +44,7 @@ uv sync
 This queries Wikidata for chemical classes defined with SMARTS and exports the results.
 
 ```{bash Get classes}
-uv run smartclass querywikidata -q src/smartclass/data/queries/classes_smarts.rq -o scratch/wikidata_classes_smarts.tsv
+uv run smartclass querywikidata -q smartclass/data/queries/classes_smarts.rq -o scratch/wikidata_classes_smarts.tsv
 ```
 
 ### Classify
@@ -70,7 +70,7 @@ uv run smartclass searchclasses -s "O=C1OC2CC3C(C=C(OC)C(=O)C3(C)C4C(=O)C(OC)=C(
 #### File containing multiple structures
 
 ```{bash Classification file of SMILES}
-uv run smartclass searchclasses -i src/smartclass/data/bitter_smiles.tsv -c scratch/wikidata_classes_smarts.tsv
+uv run smartclass searchclasses -i smartclass/data/bitter_smiles.tsv -c scratch/wikidata_classes_smarts.tsv
 ```
 
 (Results are saved in different formats in `scratch/results...`)

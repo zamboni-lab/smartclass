@@ -9,8 +9,8 @@ source = smartclass
 omit =
     tests/*
     docs/*
-    src/smartclass/cli.py
-    src/smartclass/__main__.py
+    smartclass/cli.py
+    smartclass/__main__.py
 
 [report]
 # Regexes for lines to exclude from consideration

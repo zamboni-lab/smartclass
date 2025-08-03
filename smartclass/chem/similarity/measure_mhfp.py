@@ -49,7 +49,7 @@ TODO.
 #     return substructures_dict
 
 # # TODO
-# input = "src/smartclass/data/mia_smarts.tsv"
+# input = "smartclass/data/mia_smarts.tsv"
 # output = "distances_mia.tsv"
 
 # substructures_dict = load_substructures_smarts(substructures = input)

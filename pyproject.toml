@@ -46,13 +46,7 @@ dependencies = [
 
 [dependency-groups]
 dev = [
-    "black<25.0.0,>=24.10.0",
     "coverage<8.0.0,>=7.8.0",
-    "deptry<1.0.0,>=0.23.0",
-    "flake8<8.0.0,>=7.2.0",
-    "importlib-metadata<9.0.0,>=8.7.0",
-    "isort<7.0.0,>=6.0.1",
-    "mypy<2.0.0,>=1.17.1",
     "pre-commit<5.0.0,>=4.2.0",
     "pytest<9.0.0,>=8.3.5",
     "pytest-asyncio<1.0.0,>=0.26.0",
@@ -60,7 +54,6 @@ dev = [
     "pytest-mock<4.0.0,>=3.14.0",
     "pytest-xdist<4.0.0,>=3.6.1",
     "requests-mock<2.0.0,>=1.12.1",
-    "tox<5.0.0,>=4.25.0",
 ]
 docs = ["Sphinx", "sphinx-rtd-theme", "sphinxcontrib-napoleon"]
 
@@ -85,10 +78,6 @@ skip_empty = true
 branch = true
 source = ["smartclass"]
 
-[tool.mypy]
-files = ["smartclass"]
-ignore_missing_imports = true
-
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 
@@ -100,3 +89,6 @@ preview = true
 
 [tool.setuptools]
 py-modules = ["smartclass"]
+
+[tool.ty.rules]
+unresolved-import = "ignore"

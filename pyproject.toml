@@ -31,29 +31,29 @@ license = {text = "LICENSE"}
 readme = "README.rst"
 
 dependencies = [
-    "chembl-downloader<1.0.0,>=0.5.1",
-    "click<9.0.0,>=8.1.7",
-    "importlib-resources<7.0.0,>=6.5.2",
-    "myopic-mces<2.0.0,>=1.0.1",
-    "polars<2.0.0,>=1.29.0",
-    "pooch<2.0.0,>=1.8.2",
-    "pystow<1.0.0,>=0.5.3",
-    "rdcanon<1.0.0,>=0.1.2",
-    "rdkit<2026.0.0,>=2025.3.1",
-    "requests<3.0.0,>=2.32.3",
-    "tqdm<5.0.0,>=4.67.1",
+    "chembl-downloader>=0.5.1,<1.0.0",
+    "click>=8.1.7,<9.0.0",
+    "importlib-resources>=6.5.2,<7.0.0",
+    "myopic-mces>=1.0.1,<2.0.0",
+    "polars>=1.29.0,<2.0.0",
+    "pooch>=1.8.2,<2.0.0",
+    "pystow>=0.5.3,<1.0.0",
+    "rdcanon>=0.1.2,<1.0.0",
+    "rdkit>=2025.3.1,<2026.0.0",
+    "requests>=2.32.3,<3.0.0",
+    "tqdm>=4.67.1,<5.0.0",
 ]
 
 [dependency-groups]
 dev = [
-    "coverage<8.0.0,>=7.8.0",
-    "pre-commit<5.0.0,>=4.2.0",
-    "pytest<9.0.0,>=8.3.5",
-    "pytest-asyncio<1.0.0,>=0.26.0",
-    "pytest-cov<7.0.0,>=6.1.1",
-    "pytest-mock<4.0.0,>=3.14.0",
-    "pytest-xdist<4.0.0,>=3.6.1",
-    "requests-mock<2.0.0,>=1.12.1",
+    "coverage>=7.8.0,<8.0.0",
+    "pre-commit>=4.2.0,<5.0.0",
+    "pytest>=8.3.5,<9.0.0",
+    "pytest-asyncio>=0.26.0,<1.0.0",
+    "pytest-cov>=6.1.1,<7.0.0",
+    "pytest-mock>=3.14.0,<4.0.0",
+    "pytest-xdist>=3.6.1,<4.0.0",
+    "requests-mock>=1.12.1,<2.0.0",
 ]
 docs = ["Sphinx", "sphinx-rtd-theme", "sphinxcontrib-napoleon"]
 

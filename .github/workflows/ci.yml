@@ -14,7 +14,7 @@ jobs:
       - name: Install system dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y build-essential gfortran libfreetype6-dev libjpeg-turbo8-dev liblapack-dev libopenblas-dev libpng-dev libtiff-dev pkg-config
+          sudo apt-get install -y build-essential libfreetype6-dev libjpeg-turbo8-dev liblapack-dev libopenblas-dev libpng-dev libtiff-dev
       - uses: astral-sh/setup-uv@v7
         with:
           enable-cache: true
@@ -31,6 +31,10 @@ jobs:
           coverageFile: coverage.xml
           token: ${{ secrets.GITHUB_TOKEN }}
           thresholdAll: 0.98
+      - name: Ensure pip is installed
+        run: |
+          uv run python3 -m ensurepip --upgrade
+          uv run python3 -m pip install --upgrade pip
       - name: Run tests
         if: github.event_name != 'pull_request'
         run: |

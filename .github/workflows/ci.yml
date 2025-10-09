@@ -33,22 +33,14 @@ jobs:
           thresholdAll: 0.98
       - name: Ensure pip is installed
         run: |
-          uv run python3 -m ensurepip --upgrade
-          uv run python3 -m pip install --upgrade pip
+          uv run pip install --upgrade pip
       - name: Run tests
         if: github.event_name != 'pull_request'
         run: |
           uv run coverage report
-      - name: Build documentation
+      - name: Build and deploy documentation
         run: |
-          uv run python3 -m pip install -r docs/requirements.in
-          mkdir gh-pages
-          touch gh-pages/.nojekyll
-          cd docs/source
-          uv run sphinx-build -b html . _build
-          cp -r _build/* ../../gh-pages/
-      - uses: JamesIves/github-pages-deploy-action@v4.6.0
-        if: ${{ github.event_name == 'push' }}
-        with:
-          branch: gh-pages
-          folder: gh-pages
+          uv sync --group docs
+          uv run sphinx-build -b html docs/source docs/_build/html
+          uv run ghp-import -n -p -f docs/_build/html
+        if: github.event_name == 'push'

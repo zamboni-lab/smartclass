@@ -20,9 +20,8 @@ jobs:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
       - name: Run tests for PR
-        env:
-          PYTHONDONTWRITEBYTECODE: 1
         run: |
+          uv sync --group dev
           uv run pytest --cov-config=.coveragerc --cov=.
           uv run coverage xml
       - uses: orgoro/coverage@v3.1

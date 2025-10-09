@@ -55,7 +55,15 @@ dev = [
     "pytest-xdist>=3.8.0,<4.0.0",
     "requests-mock>=1.12.1,<2.0.0",
 ]
-docs = ["Sphinx", "sphinx-rtd-theme", "sphinxcontrib-napoleon"]
+docs = [
+    "autodoc_pydantic>=2.2.0,<3.0.0",
+    "ghp-import>=2.1.0,<3.0.0",
+    "Sphinx>=8.2.3,<9.0.0",
+    "sphinx_automodapi>=0.20.0,<1.0.0",
+    "sphinx_click>=6.1.0,<7.0.0",
+    "sphinx-rtd-theme>=3.0.2,<4.0.0",
+    "sphinxcontrib-napoleon>=0.7,<1.0",
+    ]
 
 [options.entry_points]
 console_scripts = "smartclass = smartclass.cli:main"

@@ -14,7 +14,7 @@ jobs:
       - name: Install system dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y libjpeg-turbo-devel zlib-devel libpng-devel libtiff-devel freetype-devel
+          sudo apt-get install -y libjpeg-turbo8-dev zlib1g-dev libpng-dev libtiff-dev libfreetype6-dev
       - uses: astral-sh/setup-uv@v7
         with:
           enable-cache: true

@@ -10,30 +10,23 @@ jobs:
   ci:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Install uv
-        uses: astral-sh/setup-uv@v3
+      - uses: actions/checkout@v5
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libjpeg-turbo-devel zlib-devel libpng-devel libtiff-devel freetype-devel
+      - uses: astral-sh/setup-uv@v7
         with:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
-      - name: Set up Python
-        run: uv python install
-      - name: Install dependencies
-        run: uv sync --all-groups
-      - name: Ensure pip is installed
-        run: |
-          uv run python3 -m ensurepip --upgrade
-          uv run python3 -m pip install --upgrade pip
       - name: Run tests for PR
         env:
           PYTHONDONTWRITEBYTECODE: 1
         run: |
           uv run pytest --cov-config=.coveragerc --cov=.
           uv run coverage xml
-      - name: Get Cover
+      - uses: orgoro/coverage@v3.1
         if: github.event_name == 'pull_request'
-        uses: orgoro/coverage@v3.1
         with:
           coverageFile: coverage.xml
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -50,9 +43,8 @@ jobs:
           cd docs/source
           uv run sphinx-build -b html . _build
           cp -r _build/* ../../gh-pages/
-      - name: Deploy documentation
+      - uses: JamesIves/github-pages-deploy-action@v4.6.0
         if: ${{ github.event_name == 'push' }}
-        uses: JamesIves/github-pages-deploy-action@v4.6.0
         with:
           branch: gh-pages
           folder: gh-pages

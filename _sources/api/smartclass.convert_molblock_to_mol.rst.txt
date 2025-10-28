@@ -1,0 +1,6 @@
+convert_molblock_to_mol
+=======================
+
+.. currentmodule:: smartclass
+
+.. autofunction:: convert_molblock_to_mol

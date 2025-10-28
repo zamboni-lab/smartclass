@@ -1,0 +1,6 @@
+load_pkg_file
+=============
+
+.. currentmodule:: smartclass
+
+.. autofunction:: load_pkg_file

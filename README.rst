@@ -85,7 +85,7 @@ Generic maintenance
     uv run smartclass querywikidata -q smartclass/data/queries/maintenance_inchi_no_inchikey.rq -t transform_inchi_to_inchikey -o scratch/inchikeys.csv
     uv run smartclass querywikidata -q smartclass/data/queries/maintenance_formula_malformed.rq -t transform_formula_to_formula -o scratch/formulas_malformed.csv
     # WDQS is not parsing the REGEX well
-    # uv run smartclass querywikidata -q smartclass/data/queries/maintenance_formula_malformed.rq -t transform_formula_to_formula -o scratch/formulas_malformed.csv -u https://qlever.cs.uni-freiburg.de/api/wikidata
+    # uv run smartclass querywikidata -q smartclass/data/queries/maintenance_formula_malformed.rq -t transform_formula_to_formula -o scratch/formulas_malformed.csv -u https://qlever.dev/api/wikidata
     uv run smartclass querywikidata -q smartclass/data/queries/maintenance_smiles_isomeric_incorrect_mass.rq -t transform_smiles_mass_to_smiles_mass -o scratch/masses_incorrect_isomeric.csv
     uv run smartclass querywikidata -q smartclass/data/queries/maintenance_no_smiles_isomeric_incorrect_mass.rq -t transform_inchi_mass_to_inchi_mass -o scratch/masses_incorrect_inchi.csv
 

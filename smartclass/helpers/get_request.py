@@ -44,7 +44,7 @@ def get_request(
     }
 
     attempt = 0
-    qlever_url = "https://qlever.cs.uni-freiburg.de/api/wikidata"
+    qlever_url = "https://qlever.dev/api/wikidata"
     while attempt < max_retries:
         try:
             response = requests.get(

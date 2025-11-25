@@ -1,0 +1,6 @@
+split_csv
+=========
+
+.. currentmodule:: smartclass
+
+.. autofunction:: split_csv

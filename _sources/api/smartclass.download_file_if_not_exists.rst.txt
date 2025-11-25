@@ -1,0 +1,6 @@
+download_file_if_not_exists
+===========================
+
+.. currentmodule:: smartclass
+
+.. autofunction:: download_file_if_not_exists

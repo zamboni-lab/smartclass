@@ -1,0 +1,6 @@
+search_classes
+==============
+
+.. currentmodule:: smartclass
+
+.. autofunction:: search_classes

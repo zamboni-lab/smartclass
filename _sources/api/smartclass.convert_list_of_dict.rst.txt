@@ -1,0 +1,6 @@
+convert_list_of_dict
+====================
+
+.. currentmodule:: smartclass
+
+.. autofunction:: convert_list_of_dict

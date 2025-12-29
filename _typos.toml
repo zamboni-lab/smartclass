@@ -1,6 +1,6 @@
 [files]
 extend-exclude = [
-    "cache/",
-    "data/",
-    "scratch/",
+  "cache/",
+  "data/",
+  "scratch/",
 ]

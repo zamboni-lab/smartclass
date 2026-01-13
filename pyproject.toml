@@ -7,7 +7,7 @@ name = "smartclass"
 version = "0.0.1"
 description = "Short Description TODO"
 readme = "README.rst"
-requires-python = ">=3.13.0,<4.0.0"
+requires-python = "==3.13.*"
 license = { text = "LICENSE" }
 authors = [
   { name = "Adriano Rutz", email = "rutz@imsb.biol.ethz.ch" },
@@ -30,39 +30,39 @@ classifiers = [
   "Programming Language :: Python :: 3.13",
 ]
 dependencies = [
-  "chembl-downloader>=0.5.2,<1.0.0",
-  "click>=8.3.1,<9.0.0",
-  "importlib-resources>=6.5.2,<7.0.0",
-  "myopic-mces>=1.0.1,<2.0.0",
-  "polars>=1.35.2,<2.0.0",
-  "pooch>=1.8.2,<2.0.0",
-  "pystow>=0.7.8,<1.0.0",
-  "rdcanon>=0.1.2,<1.0.0",
-  "rdkit>=2025.9.1,<2026.0.0",
-  "requests>=2.32.3,<3.0.0",
-  "tqdm>=4.67.1,<5.0.0",
+  "chembl-downloader>=0.5.2",
+  "click>=8.3.1",
+  "importlib-resources>=6.5.2",
+  "myopic-mces>=1.0.1",
+  "polars>=1.37.1",
+  "pooch>=1.8.2",
+  "pystow>=0.7.15",
+  "rdcanon>=0.1.2",
+  "rdkit>=2025.9.3",
+  "requests>=2.32.5",
+  "tqdm>=4.67.1",
 ]
 
 [dependency-groups]
 dev = [
-  "coverage>=7.12.0,<8.0.0",
-  "pre-commit>=4.5.0,<5.0.0",
-  "pytest>=9.0.1,<10.0.0",
-  "pytest-asyncio>=1.3.0,<2.0.0",
-  "pytest-cov>=7.0.0,<8.0.0",
-  "pytest-mock>=3.15.1,<4.0.0",
-  "pytest-xdist>=3.8.0,<4.0.0",
-  "requests-mock>=1.12.1,<2.0.0",
+  "coverage>=7.13.1",
+  "pre-commit>=4.5.1",
+  "pytest>=9.0.2",
+  "pytest-asyncio>=1.3.0",
+  "pytest-cov>=7.0.0",
+  "pytest-mock>=3.15.1",
+  "pytest-xdist>=3.8.0",
+  "requests-mock>=1.12.1",
 ]
 docs = [
-  "Sphinx>=8.2.3,<9.0.0",
-  "autodoc_pydantic>=2.2.0,<3.0.0",
-  "ghp-import>=2.1.0,<3.0.0",
-  "pydantic_core>=2.41.1,<3.0.0",
-  "sphinx_automodapi>=0.20.0,<1.0.0",
-  "sphinx_click>=6.1.0,<7.0.0",
-  "sphinx-rtd-theme>=3.0.2,<4.0.0",
-  "sphinxcontrib-napoleon>=0.7,<1.0",
+  "sphinx>=9.1.0",
+  "autodoc_pydantic>=2.2.0",
+  "ghp-import>=2.1.0",
+  "pydantic-core>=2.41.5",
+  "sphinx-automodapi>=0.22.0",
+  "sphinx-click>=6.2.0",
+  "sphinx-rtd-theme>=3.1.0",
+  "sphinxcontrib-napoleon>=0.7",
 ]
 
 [options.entry_points]

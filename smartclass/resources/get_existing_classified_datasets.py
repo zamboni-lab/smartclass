@@ -13,20 +13,20 @@ __all__ = [
 
 
 def get_existing_classified_datasets(
-    existing_classsified_datasets: dict | None = None,
+    existing_classified_datasets: dict | None = None,
 ) -> None:
     """
     Get existing classified datasets.
 
-    :param existing_classsified_datasets: Fixed dictionary of existing classified datasets.
-    :type existing_classsified_datasets: Union[dict, None]
+    :param existing_classified_datasets: Fixed dictionary of existing classified datasets.
+    :type existing_classified_datasets: Union[dict, None]
     """
-    if existing_classsified_datasets is None:
-        existing_classsified_datasets = load_pkg_file(
+    if existing_classified_datasets is None:
+        existing_classified_datasets = load_pkg_file(
             "existing_classified_datasets.json",
         ).to_dict(as_series=False)
 
-    for name, url in existing_classsified_datasets.items():
+    for name, url in existing_classified_datasets.items():
         download_file_if_not_exists(url[0], os.path.join("scratch", name))
 
 

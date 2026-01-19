@@ -74,4 +74,6 @@ repos:
         name: ty-check
         language: python
         entry: ty check
+        exclude: '^(?!.*\.py$).*$'
+        respect-ignore-files: true
         additional_dependencies: [ty]

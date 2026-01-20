@@ -4,8 +4,8 @@ build-backend = "pdm.backend"
 
 [project]
 name = "smartclass"
-version = "0.0.1"
-description = "Short Description TODO"
+version = "0.1.0"
+description = "Smartclass classifies structures using SMARTS"
 readme = "README.rst"
 requires-python = "==3.13.*"
 license = { text = "LICENSE" }

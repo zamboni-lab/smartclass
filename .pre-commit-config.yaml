@@ -61,7 +61,7 @@ repos:
       - id: tombi-format
       - id: tombi-lint
   - repo: https://github.com/crate-ci/typos
-    rev: v1
+    rev: v1.43.1
     hooks:
       - id: typos
   - repo: https://github.com/astral-sh/uv-pre-commit

@@ -1,0 +1,6 @@
+check_missing_stereochemistry
+=============================
+
+.. currentmodule:: smartclass
+
+.. autofunction:: check_missing_stereochemistry

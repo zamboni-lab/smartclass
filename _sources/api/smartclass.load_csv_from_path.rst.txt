@@ -1,0 +1,6 @@
+load_csv_from_path
+==================
+
+.. currentmodule:: smartclass
+
+.. autofunction:: load_csv_from_path

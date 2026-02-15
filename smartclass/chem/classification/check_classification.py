@@ -1,48 +1,51 @@
-"""Check classification."""
+"""Check and validate chemical classification rules.
+
+This module provides utilities for verifying that chemical class definitions
+(SMARTS patterns) correctly capture the expected structural features.
+"""
 
 from __future__ import annotations
 
-import logging
+from pathlib import Path
+from typing import TYPE_CHECKING
 
 from polars import DataFrame, col
 
 from smartclass.chem.conversion.convert_smiles_to_mol import convert_smiles_to_mol
 from smartclass.chem.similarity.calculate_mcs import calculate_mcs
+from smartclass.config import get_config
+from smartclass.exceptions import DataLoadingError
 from smartclass.helpers.sample_list import sample_list
 from smartclass.io.load_tsv_from_path import load_tsv_from_path
+from smartclass.logging import get_logger
 
-__all__ = ["check_classification"]
+if TYPE_CHECKING:
+    from rdkit.Chem import rdFMCS
+
+__all__ = ["check_classification", "process_classification"]
+
+logger = get_logger(__name__)
 
 
 def process_classification(
     classification: str,
     group: DataFrame,
-    samples_min: int = 6,
-    samples_max: int = 1000,
-    threshold: float = 0.7,
-) -> tuple:
+    max_samples: int = 1000,
+    threshold: float | None = None,
+) -> tuple[rdFMCS.MCSResult, int]:
     """
-    Processes a chemical classification group.
+    Process a chemical classification group to find common substructure.
 
     :param classification: Chemical classification name.
-    :type classification: str
-
-    :param group: DataFrame group containing structures.
-    :type group: DataFrame
-
-    :param samples_min: Minimum number of samples to check. Default to 1.
-    :type samples_min: int
-
-    :param samples_max: Minimum number of samples to check. Default to 1000.
-    :type samples_max: int
-
-    :param threshold: Threshold. Default to 0.7.
-    :type threshold: float
-
-    :returns: A SMARTS.
-    :rtype: tuple
+    :param group: DataFrame group containing structures with 'smiles' column.
+    :param max_samples: Maximum number of molecules to sample. Default 1000.
+    :param threshold: MCS threshold. Uses config default if None.
+    :returns: Tuple of (MCS result, number of molecules processed).
     """
-    logging.info(f"Processing {classification}")
+    config = get_config()
+    threshold = threshold if threshold is not None else config.mcs_threshold
+
+    logger.info(f"Processing classification: {classification}")
     smiles_list = group["smiles"].to_list()
 
     mols = [
@@ -51,73 +54,72 @@ def process_classification(
         if (mol := convert_smiles_to_mol(smiles)) is not None
     ]
 
-    if len(mols) > samples_max:
-        logging.warning(f"Too many structures of this class. Sampling {samples_max}...")
-        mols = sample_list(mols, samples_max=samples_max)
+    if len(mols) > max_samples:
+        logger.warning(
+            f"Too many structures ({len(mols)}) for {classification}. "
+            f"Sampling {max_samples}..."
+        )
+        mols = sample_list(mols, max_samples=max_samples)
 
     mcs = calculate_mcs(mols=mols, threshold=threshold)
-
     return (mcs, len(mols))
 
 
 def check_classification(
-    classes: tuple = ("Quassinoids", "4'-hydroxyflavonoids"),
-    classified_mols: str = "scratch/chebi_matched_molecules.tsv",
-    threshold: float = 0.7,
+    classes: tuple[str, ...] = ("Quassinoids", "4'-hydroxyflavonoids"),
+    classified_mols: str | Path = "scratch/chebi_matched_molecules.tsv",
+    threshold: float | None = None,
 ) -> list[dict]:
     """
-    Check classification.
+    Check classification rules by finding MCS for each class.
 
-    :param classes: Tuple of classes to check.
-    :type classes: tuple
+    Analyzes molecules belonging to each specified class and finds their
+    maximum common substructure, which can be used to validate or generate
+    SMARTS patterns for classification.
 
-    :param classified_mols: TSV file containing classified molecules.
-    :type classified_mols: str
-
-    :param threshold: Threshold. Default to 0.7.
-    :type threshold: float
-
-    :returns: A list (of dictionaries).
-    :rtype: list[dict]
+    :param classes: Tuple of class names to check.
+    :param classified_mols: Path to TSV file with classified molecules.
+        Must have 'ParentName' and 'smiles' columns.
+    :param threshold: MCS threshold. Uses config default if None.
+    :returns: List of dictionaries with MCS results for each class.
+    :raises DataLoadingError: If the classified molecules file cannot be loaded.
     """
-    try:
-        classifications = DataFrame(load_tsv_from_path(classified_mols))
-    except Exception as e:
-        logging.exception(f"Error loading classified mols: {e}")
-        return []
+    config = get_config()
+    threshold = threshold if threshold is not None else config.mcs_threshold
 
-    mcses = []
-    # Iterate through the specified chemical classifications
-    for c in classes:
-        group = classifications.filter(col("ParentName") == c)
+    try:
+        classifications = DataFrame(load_tsv_from_path(str(classified_mols)))
+    except Exception as e:
+        raise DataLoadingError(str(classified_mols), reason=str(e)) from e
+
+    results = []
+    for class_name in classes:
+        group = classifications.filter(col("ParentName") == class_name)
         if len(group) > 0:
-            results = process_classification(c, group)
-            mcs = results[0]
-            n = results[1]
-            mcses.append({
-                "class": c,
+            mcs, n_mols = process_classification(class_name, group, threshold=threshold)
+            results.append({
+                "class": class_name,
                 "class_structure": mcs.smartsString,
                 "structure_ab": mcs.numAtoms + mcs.numBonds,
                 "threshold": threshold,
-                "n": n,
+                "n": n_mols,
             })
         else:
-            logging.warning(f"Chemical Classification {c} not found in the data.")
-            mcses.append({
-                "class": c,
+            logger.warning(f"Classification '{class_name}' not found in data.")
+            results.append({
+                "class": class_name,
                 "class_structure": "",
                 "structure_ab": 0,
                 "threshold": threshold,
                 "n": 0,
             })
-    return mcses
+    return results
 
 
 if __name__ == "__main__":
     from smartclass.io.export_results import export_results
 
-    logging.basicConfig(level=logging.INFO)  # Set logging level
-    logging.info("This is slow for now...")
+    logger.info("Running classification check (this may be slow)...")
     results = check_classification()
-    logging.info(results)
+    logger.info(f"Results: {results}")
     export_results(output="scratch/classes_checked.tsv", results=results)

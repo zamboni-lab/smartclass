@@ -73,8 +73,7 @@ df_1 = df_final.filter(
 ])
 
 df_2 = (
-    df_final
-    .filter(pl.col("class_right") == "Q11173")
+    df_final.filter(pl.col("class_right") == "Q11173")
     .select([
         pl.col("structure_right").alias("qid"),
         pl.col("class_right").alias("-P279"),

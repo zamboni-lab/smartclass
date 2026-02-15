@@ -1,59 +1,65 @@
-"""Load SMILES."""
+"""Load SMILES strings from CSV/TSV files."""
 
 from __future__ import annotations
 
+from pathlib import Path
+
 import polars
+
+from smartclass.exceptions import DataLoadingError
+from smartclass.logging import get_logger
 
 __all__ = [
     "load_smiles",
 ]
 
+logger = get_logger(__name__)
 
-def load_smiles(input: str, column: str = "smiles") -> list[str]:
+
+def load_smiles(
+    input: str | Path,
+    column: str = "smiles",
+    limit: int | None = None,
+) -> list[str]:
     """
-    Load SMILES.
+    Load unique SMILES strings from a CSV or TSV file.
 
-    :param input: The path to the input CSV file.
-    :type input: str
-
-    :param column: The name of the column containing the SMILES.
-    :type column: str
-
-    :returns: List of SMILES.
-    :rtype: list[str]
+    :param input: Path to the input file (CSV or TSV).
+    :param column: Name of the column containing SMILES strings.
+    :param limit: Optional limit on number of SMILES to return (for testing).
+    :returns: List of unique SMILES strings.
+    :raises DataLoadingError: If the file cannot be read or column not found.
     """
-    # Read the CSV file and extract the "smiles" column
-    if input.endswith(".tsv"):
-        df = polars.read_csv(input, separator="\t", columns=[column])
-    else:
-        # Read the CSV file with default separator
-        df = polars.read_csv(input, columns=[column])
+    input_path = Path(input)
 
-    # Filter empty values
-    df = df.filter(df[column].is_not_null())
+    if not input_path.exists():
+        raise DataLoadingError(str(input_path), reason="File not found")
 
-    # Uncomment the following lines for debug
-    # df = df.head(1048576)
-    # df = df.head(524288)
-    # df = df.head(262144)
-    # df = df.head(131072)
-    # df = df.head(65536)
-    # df = df.head(32768)
-    # df = df.head(16384)
-    # df = df.head(8192)
-    # df = df.head(4096)
-    # df = df.head(2048)
-    # df = df.head(1024)
-    # df = df.head(512)
-    # df = df.head(256)
-    # df = df.head(128)
-    # df = df.head(64)
-    # df = df.head(32)
-    # df = df.head(16)
-    # df = df.head(8)
-    # df = df.head(4)
-    # df = df.head(2)
-    # df = df.tail(1)
+    try:
+        # Determine separator from file extension
+        separator = "\t" if input_path.suffix == ".tsv" else ","
 
-    # Return the unique structure SMILES as a list
-    return df[column].unique().to_list()
+        df = polars.read_csv(
+            input_path,
+            separator=separator,
+            columns=[column],
+        )
+
+        # Filter out null/empty values
+        df = df.filter(df[column].is_not_null())
+
+        # Apply limit if specified (useful for testing)
+        if limit is not None and limit > 0:
+            df = df.head(limit)
+
+        unique_smiles = df[column].unique().to_list()
+        logger.debug(f"Loaded {len(unique_smiles)} unique SMILES from {input_path}")
+        return unique_smiles
+
+    except polars.exceptions.ColumnNotFoundError:
+        raise DataLoadingError(
+            str(input_path),
+            reason=f"Column '{column}' not found in file",
+        )
+    except Exception as e:
+        raise DataLoadingError(str(input_path), reason=str(e)) from e

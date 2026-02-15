@@ -14,21 +14,34 @@ but that will cause problems--the code will get executed twice:
 
 from __future__ import annotations
 
-import logging
-
 import click
+
+from smartclass.logging import configure_logging, get_logger
 
 __all__ = [
     "main",
 ]
 
-logger = logging.getLogger(__name__)
+logger = get_logger(__name__)
 
 
 @click.group()
 @click.version_option()
-def main():
-    """CLI for smartclass."""
+@click.option(
+    "-v",
+    "--verbose",
+    count=True,
+    help="Increase verbosity (-v for INFO, -vv for DEBUG).",
+)
+def main(verbose: int):
+    """CLI for smartclass - classify chemical structures using SMARTS."""
+    # Configure logging based on verbosity
+    if verbose >= 2:
+        configure_logging(level="DEBUG", force=True)
+    elif verbose >= 1:
+        configure_logging(level="INFO", force=True)
+    else:
+        configure_logging(level="WARNING", force=True)
 
 
 @main.command()

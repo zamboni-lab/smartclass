@@ -2,39 +2,51 @@
 
 from __future__ import annotations
 
-import logging
 import random
 import time
 
 import requests
 from requests.exceptions import RequestException
 
+from smartclass.config import get_config
+from smartclass.exceptions import NetworkError
+from smartclass.logging import get_logger
+
 __all__ = ["get_request"]
 
-# Configure module-level logging
-logger = logging.getLogger(__name__)
-logging.basicConfig(level=logging.INFO)
+logger = get_logger(__name__)
 
 
 def get_request(
     url: str,
     query: str,
-    max_retries: int = 3,
-    base_delay: float = 2.0,
-    timeout: int = 60,
+    max_retries: int | None = None,
+    base_delay: float | None = None,
+    timeout: int | None = None,
 ) -> list[dict[str, str]]:
     """
     Send a GET request to a SPARQL endpoint and retrieve JSON data.
 
+    Uses exponential backoff with jitter for retries. Falls back to QLever
+    endpoint if the primary endpoint fails.
+
     :param url: The SPARQL endpoint URL.
     :param query: The SPARQL query string.
-    :param max_retries: Maximum number of retry attempts.
-    :param base_delay: Base delay (in seconds) for retry backoff.
-    :param timeout: Timeout for the request in seconds.
-    :return: A list of dictionaries representing the query results.
+    :param max_retries: Maximum retry attempts. Uses config default if None.
+    :param base_delay: Base delay (seconds) for backoff. Uses config default if None.
+    :param timeout: Request timeout in seconds. Uses config default if None.
+    :returns: List of dictionaries representing query results.
+    :raises NetworkError: If the request fails after all retries.
     """
+    config = get_config()
+
+    # Use config defaults if not specified
+    max_retries = max_retries if max_retries is not None else config.http_max_retries
+    base_delay = base_delay if base_delay is not None else config.http_base_delay
+    timeout = timeout if timeout is not None else config.http_timeout
+
     headers = {
-        "User-Agent": "SmartClassBot/1.0 (mailto:your_email@example.com)",
+        "User-Agent": config.user_agent,
         "Accept": "application/sparql-results+json",
     }
 
@@ -44,7 +56,8 @@ def get_request(
     }
 
     attempt = 0
-    qlever_url = "https://qlever.dev/api/wikidata"
+    response = None  # Initialize to avoid UnboundLocalError
+
     while attempt < max_retries:
         try:
             response = requests.get(
@@ -67,26 +80,30 @@ def get_request(
             return results
 
         except RequestException as e:
-            status_code = getattr(response, "status_code", None)
-            retriable = status_code in {429, 503}
+            status_code = getattr(response, "status_code", None) if response else None
+            retriable_codes = {429, 503}
 
-            if retriable and attempt < max_retries - 1:
+            if status_code in retriable_codes and attempt < max_retries - 1:
                 wait_time = base_delay * (2**attempt) + random.uniform(0, 1)
                 logger.warning(
-                    f"Request failed with status {status_code}. Retrying in {wait_time:.1f} seconds...",
+                    f"Request failed with status {status_code}. "
+                    f"Retrying in {wait_time:.1f} seconds (attempt {attempt + 1}/{max_retries})..."
                 )
                 time.sleep(wait_time)
                 attempt += 1
-            elif url != qlever_url:
+            elif url != config.qlever_endpoint:
                 logger.warning(
-                    f"Request failed with status {status_code} on WDQS. Retrying one last time on QLever endpoint...",
+                    f"Request failed with status {status_code}. "
+                    "Trying fallback QLever endpoint..."
                 )
-                url = qlever_url
+                url = config.qlever_endpoint
+                attempt = 0  # Reset attempts for fallback
             else:
-                logger.error(f"Request failed: {e}")
-                raise RuntimeError(
-                    f"Failed to retrieve data from {url} after {max_retries} attempts.",
+                raise NetworkError(
+                    url=url,
+                    status_code=status_code,
+                    reason=str(e),
                 ) from e
 
-    # If somehow exits loop without success
+    # Should not reach here, but return empty list as safeguard
     return []

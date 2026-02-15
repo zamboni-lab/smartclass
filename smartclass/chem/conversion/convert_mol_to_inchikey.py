@@ -1,22 +1,19 @@
-"""Convert a structure MOL to InChIKey."""
+"""Convert RDKit Mol objects to InChIKey."""
 
 from __future__ import annotations
 
-from rdkit.Chem import MolToInchiKey
+from rdkit.Chem import Mol, MolToInchiKey
 
 __all__ = [
     "convert_mol_to_inchikey",
 ]
 
 
-def convert_mol_to_inchikey(mol: str) -> str:
+def convert_mol_to_inchikey(mol: Mol) -> str:
     """
-    Convert a structure MOL to InChIKey.
+    Convert an RDKit Mol object to an InChIKey.
 
-    :param mol: A structure MOL.
-    :type mol: str
-
-    :returns: An InChIKey.
-    :rtype: str
+    :param mol: RDKit Mol object.
+    :returns: InChIKey string.
     """
     return MolToInchiKey(mol)

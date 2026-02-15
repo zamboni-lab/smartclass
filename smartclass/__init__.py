@@ -1,12 +1,28 @@
-"""Smartclass classifies structures using SMARTS."""
+"""Smartclass classifies structures using SMARTS.
+
+This package provides tools for classifying chemical structures
+using SMARTS patterns against defined chemical classes.
+
+Example:
+    >>> from smartclass.api import classify_smiles
+    >>> results = classify_smiles("CCO")  # Classify ethanol
+"""
 
 from __future__ import annotations
 
+# Core modules
 from smartclass import (
     api,  # noqa:F401
     cli,  # noqa:F401
+    config,  # noqa:F401
+    exceptions,  # noqa:F401
     version,  # noqa:F401
 )
+from smartclass.config import get_config  # noqa:F401
+from smartclass.exceptions import SmartclassError  # noqa:F401
+from smartclass.logging import configure_logging, get_logger  # noqa:F401
+
+# Classification
 from smartclass.chem.classification import (
     bfs_search_classes_generator,  # noqa:F401
     get_class_structures,  # noqa:F401

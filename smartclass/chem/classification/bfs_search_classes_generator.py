@@ -1,8 +1,11 @@
-"""Perform substructure search for chemical classes and yield results."""
+"""Perform substructure search for chemical classes and yield results.
+
+This module implements Breadth-First Search (BFS) traversal of chemical
+class hierarchies for efficient substructure matching.
+"""
 
 from __future__ import annotations
 
-import logging
 from collections.abc import Generator
 
 from rdkit.Chem import SubstructMatchParameters
@@ -10,12 +13,15 @@ from tqdm import tqdm
 
 from smartclass.chem.classification.get_class_structures import get_class_structures
 from smartclass.chem.classification.search_class import search_class
+from smartclass.logging import get_logger
 
 __all__ = [
     "bfs_search_classes_generator",
     # "dfs_search_classes_generator"
     "tqdm_bfs_search_classes_generator",
 ]
+
+logger = get_logger(__name__)
 
 
 def bfs_search_classes_generator(
@@ -54,8 +60,8 @@ def bfs_search_classes_generator(
 
             class_structure = class_structures.get(current_class_id)
             if class_structure is None:
-                logging.error(
-                    f"No class structure found for class_id {current_class_id}",
+                logger.warning(
+                    f"No class structure found for class_id: {current_class_id}"
                 )
                 continue
 

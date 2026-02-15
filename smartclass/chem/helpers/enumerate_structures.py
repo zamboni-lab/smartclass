@@ -1,38 +1,36 @@
-"""Enumerate structures."""
+"""Enumerate structural variants of molecules."""
 
 from __future__ import annotations
 
-import logging
-
 from rdkit.Chem import Mol, rdMolEnumerator
+
+from smartclass.logging import get_logger
 
 __all__ = [
     "enumerate_structures",
 ]
 
+logger = get_logger(__name__)
 
-def enumerate_structures(
-    mol: Mol,
-) -> list[Mol]:
+
+def enumerate_structures(mol: Mol) -> list[Mol]:
     """
-    Enumerate structures.
+    Enumerate structural variants of a molecule.
 
-    :param mol: A structure MOL.
-    :type mol: Mol
+    Uses RDKit's MolEnumerator to generate structural variants
+    (e.g., for handling tautomers or stereoisomers in queries).
 
-
-    :returns: A list of enumerated molecules.
-    :rtype: list[Mol]
+    :param mol: RDKit Mol object to enumerate.
+    :returns: List of enumerated Mol objects. Falls back to the original
+        molecule if enumeration fails or produces no results.
     """
     try:
         enumerated_mols = rdMolEnumerator.Enumerate(mol)
     except Exception as e:
-        logging.exception(f"Enumeration failed: {e}")
-        enumerated_mols = []
+        logger.debug(f"Enumeration failed: {e}")
+        return [mol]
 
-    # Check if enumeration was successful
     if not enumerated_mols:
-        # If enumeration failed, use the original mol as a fallback
-        enumerated_mols = [mol]
+        return [mol]
 
-    return enumerated_mols
+    return list(enumerated_mols)

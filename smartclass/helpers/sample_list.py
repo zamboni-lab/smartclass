@@ -1,23 +1,25 @@
-"""Sample list."""
+"""Utility for random sampling from collections."""
 
 from __future__ import annotations
 
 from random import sample
+from typing import TypeVar
 
 __all__ = ["sample_list"]
 
+T = TypeVar("T")
 
-def sample_list(list: list, samples_max: int = 1000) -> list:
+
+def sample_list(items: list[T], max_samples: int = 1000) -> list[T]:
     """
-    Sample from a list of things.
+    Randomly sample items from a list.
 
-    :param list: List of things.
-    :type list: list
+    Returns at most `max_samples` items. If the list has fewer items
+    than `max_samples`, returns all items in random order.
 
-    :param samples_max: Maximum number of samples to return.
-    :type samples_max: int
-
-    :returns: Sampled things.
-    :rtype: list
+    :param items: List of items to sample from.
+    :param max_samples: Maximum number of samples to return.
+    :returns: List of randomly sampled items.
     """
-    return sample(list, min(len(list), samples_max))
+    sample_size = min(len(items), max_samples)
+    return sample(items, sample_size)

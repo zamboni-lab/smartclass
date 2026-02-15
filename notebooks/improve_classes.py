@@ -62,8 +62,7 @@ chemicals_df = pl.concat(
 
 # Remove InChI stereo layers
 stereoisomers_df = stereoisomers_df.with_columns(
-    pl
-    .col("inchi")
+    pl.col("inchi")
     .map_elements(
         lambda x: remove_layers_from_inchi(x, layers=LAYERS),
         return_dtype=str,
@@ -71,8 +70,7 @@ stereoisomers_df = stereoisomers_df.with_columns(
     .alias("inchi_no_stereo"),
 ).drop("inchi")
 chemicals_df = chemicals_df.with_columns(
-    pl
-    .col("inchi")
+    pl.col("inchi")
     .map_elements(
         lambda x: remove_layers_from_inchi(x, layers=LAYERS),
         return_dtype=str,
@@ -99,10 +97,8 @@ merged_df = merged_df.join(
 print(merged_df)
 
 merged_df = (
-    merged_df
-    .with_columns(
-        pl
-        .struct(["smiles", "smiles_right"])
+    merged_df.with_columns(
+        pl.struct(["smiles", "smiles_right"])
         .map_elements(
             lambda cols: match_smiles(cols["smiles"], cols["smiles_right"]),
             return_dtype=bool,

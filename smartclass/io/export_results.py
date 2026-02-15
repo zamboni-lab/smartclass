@@ -1,43 +1,54 @@
-"""Export a list of dictionaries to a CSV file."""
+"""Export a list of dictionaries to a CSV or TSV file."""
 
 from __future__ import annotations
 
 import csv
-import logging
+from pathlib import Path
+
+from smartclass.exceptions import DataExportError
+from smartclass.logging import get_logger
 
 __all__ = [
     "export_results",
 ]
 
+logger = get_logger(__name__)
 
-def export_results(output: str, results: list[dict]) -> None:
+
+def export_results(output: str | Path, results: list[dict]) -> None:
     """
-    Export a list of dictionaries to a CSV file.
+    Export a list of dictionaries to a CSV or TSV file.
 
-    :param output: The path to the output CSV file.
-    :type output: str
+    The output format is determined by the file extension:
+    - .tsv: Tab-separated values
+    - .csv: Comma-separated values
 
-    :param results: A list of dictionaries to be exported as CSV rows.
-    :type results: list[dict]
+    :param output: Path to the output file.
+    :param results: List of dictionaries to export as rows.
+    :raises DataExportError: If the export fails.
     """
     if not results:
-        logging.debug("No data to export.")
+        logger.debug("No data to export.")
         return
 
-    fieldnames = results[0].keys()
+    output_path = Path(output)
+
+    # Ensure parent directory exists
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+
+    # Determine delimiter from file extension
+    delimiter = "\t" if output_path.suffix == ".tsv" else ","
+
+    fieldnames = list(results[0].keys())
 
     try:
-        with open(output, "w", newline="") as file:
-            if output.endswith(".tsv"):
-                delimiter = "\t"
-            elif output.endswith(".csv"):
-                delimiter = ","
+        with open(output_path, "w", newline="", encoding="utf-8") as file:
             writer = csv.DictWriter(file, fieldnames=fieldnames, delimiter=delimiter)
             writer.writeheader()
             writer.writerows(results)
-        logging.debug(f"Data exported to {output}")
-    except Exception as e:
-        logging.exception(f"Error exporting data to {output}: {e!s}")
+        logger.debug(f"Data exported to {output_path}")
+    except OSError as e:
+        raise DataExportError(str(output_path), reason=str(e)) from e
 
 
 if __name__ == "__main__":

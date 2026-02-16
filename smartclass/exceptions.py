@@ -42,7 +42,7 @@ __all__ = [
 ]
 
 # Maximum length for error message snippets
-_MAX_SNIPPET_LENGTH = 50
+_MAX_SNIPPET_LENGTH = 1500
 
 
 def _truncate(text: str, max_length: int = _MAX_SNIPPET_LENGTH) -> str:
@@ -98,7 +98,11 @@ class MoleculeParsingError(ChemicalConversionError):
     """
 
     def __init__(
-        self, input_string: str, input_type: str = "unknown", *args: Any, **kwargs: Any
+        self,
+        input_string: str,
+        input_type: str = "unknown",
+        *args: Any,
+        **kwargs: Any,
     ) -> None:
         """Initialize with details about the failed parsing.
 
@@ -181,7 +185,11 @@ class DataExportError(SmartclassError):
     """
 
     def __init__(
-        self, destination: str, reason: str | None = None, *args, **kwargs
+        self,
+        destination: str,
+        reason: str | None = None,
+        *args,
+        **kwargs,
     ) -> None:
         """Initialize with details about the failed export.
 
@@ -204,7 +212,12 @@ class InvalidInputError(SmartclassError):
     """
 
     def __init__(
-        self, parameter: str, value: object, reason: str | None = None, *args, **kwargs
+        self,
+        parameter: str,
+        value: object,
+        reason: str | None = None,
+        *args,
+        **kwargs,
     ) -> None:
         """Initialize with details about the invalid input.
 

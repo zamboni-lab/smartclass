@@ -32,14 +32,14 @@ def convert_smiles_to_mol(smiles: str, sanitize: bool = True) -> Mol | None:
     mol = MolFromSmiles(smiles, sanitize=sanitize)
 
     if mol is None:
-        logger.debug(f"Failed to parse SMILES: {smiles}...")
+        logger.debug(f"Failed to parse SMILES: {smiles}")
         return None
 
     mol, errors = check_mol(mol)
 
     if errors:
         logger.debug(
-            f"Molecule validation failed for SMILES {smiles[:30]}...: {errors}"
+            f"Molecule validation failed for SMILES {smiles} : {errors}",
         )
         return None
 
@@ -51,4 +51,4 @@ if __name__ == "__main__":
 
     for smi in test_smiles:
         result = convert_smiles_to_mol(smi)
-        print(f"{smi[:30]}: {result is not None}")
+        print(f"{smi}: {result is not None}")

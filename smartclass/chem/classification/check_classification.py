@@ -58,7 +58,7 @@ def process_classification(
     if len(mols) > max_samples:
         logger.warning(
             f"Too many structures ({len(mols)}) for {classification}. "
-            f"Sampling {max_samples}..."
+            f"Sampling {max_samples}...",
         )
         mols = sample_list(mols, max_samples=max_samples)
 

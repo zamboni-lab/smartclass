@@ -54,7 +54,7 @@ def build_filter_catalog(
     for class_smarts in class_structures:
         smarts_mol = convert_smarts_to_mol(class_smarts)
         if smarts_mol is None:
-            logger.debug(f"Failed to parse SMARTS: {class_smarts[:50]}...")
+            logger.debug(f"Failed to parse SMARTS: {class_smarts}")
             continue
 
         enumerated_patterns = enumerate_structures(mol=smarts_mol)
@@ -65,7 +65,7 @@ def build_filter_catalog(
                 FilterCatalog.FilterCatalogEntry(
                     name=entry_name,
                     matcher=FilterCatalog.SmartsMatcher(pattern),
-                )
+                ),
             )
             pattern_info.append((class_smarts, pattern))
 

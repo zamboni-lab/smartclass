@@ -7,6 +7,7 @@ from rdkit.Chem import Mol, MolFromSmiles
 from smartclass.chem.helpers.check_mol import check_mol
 from smartclass.logging import get_logger
 
+
 __all__ = [
     "convert_smiles_to_mol",
 ]
@@ -31,7 +32,7 @@ def convert_smiles_to_mol(smiles: str, sanitize: bool = True) -> Mol | None:
     mol = MolFromSmiles(smiles, sanitize=sanitize)
 
     if mol is None:
-        logger.debug(f"Failed to parse SMILES: {smiles[:50]}...")
+        logger.debug(f"Failed to parse SMILES: {smiles}...")
         return None
 
     mol, errors = check_mol(mol)

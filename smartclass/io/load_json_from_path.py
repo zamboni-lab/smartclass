@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 
+
 __all__ = [
     "load_json_from_path",
 ]

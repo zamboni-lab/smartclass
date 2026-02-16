@@ -1,29 +1,44 @@
 [project]
 name = "smartclass"
 version = "0.1.0"
-description = "Smartclass classifies structures using SMARTS"
-readme = "README.rst"
-requires-python = "==3.13.*"
-license = { text = "LICENSE" }
+description = "Classify chemical structures using SMARTS patterns against Wikidata-sourced chemical classes"
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
 authors = [
+  { name = "Adriano Rutz", email = "rutz@imsb.biol.ethz.ch" },
+]
+maintainers = [
   { name = "Adriano Rutz", email = "rutz@imsb.biol.ethz.ch" },
 ]
 keywords = [
   "cheminformatics",
   "classification",
+  "chemical-classes",
+  "SMARTS",
+  "SMILES",
   "openData",
+  "wikidata",
+  "rdkit",
+  "natural-products",
 ]
 classifiers = [
   "Development Status :: 1 - Planning",
   "Environment :: Console",
   "Framework :: Pytest",
   "Framework :: Sphinx",
-  "Framework :: tox",
   "Intended Audience :: Developers",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: MIT License",
+  "Natural Language :: English",
   "Operating System :: OS Independent",
   "Programming Language :: Python",
   "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
+  "Topic :: Scientific/Engineering :: Chemistry",
+  "Topic :: Scientific/Engineering :: Bio-Informatics",
+  "Typing :: Typed",
 ]
 dependencies = [
   "chembl-downloader>=0.5.2",

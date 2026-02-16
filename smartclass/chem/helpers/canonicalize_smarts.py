@@ -6,23 +6,22 @@ import logging
 
 from rdcanon import canon_smarts
 
+
 __all__ = [
     "canonicalize_smarts",
 ]
 
 
 def canonicalize_smarts(smarts: str, return_mapping: bool = False) -> str | None:
-    """
-    Canonicalize SMARTS.
+    """Canonicalize a SMARTS string.
 
-    :param smarts: SMARTS string to canonicalize.
-    :type smarts: str
+    Args:
+        smarts: SMARTS string to canonicalize.
+        return_mapping: Whether to return the atom mapping.
 
-    :param return_mapping: Whether to return the atom mapping.
-    :type return_mapping: bool
-
-    :returns: Canonical SMARTS string, optionally with atom mapping. Returns None on failure.
-    :rtype: Union[str, Tuple[str, List[int]], None]
+    Returns:
+        Canonical SMARTS string, optionally with atom mapping.
+        Returns None on failure.
     """
     try:
         return canon_smarts(smarts, return_mapping)

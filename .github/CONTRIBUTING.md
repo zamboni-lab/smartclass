@@ -59,51 +59,93 @@ Python's builtin `print()` should not be used (except when writing to files),
 it's checked by the
 [`flake8-print`](https://github.com/jbkahn/flake8-print) plugin to `flake8`. If
 you're in a command line setting or `main()` function for a module, you can use
-`click.echo()`. Otherwise, you can use the builtin `logging` module by adding
-`logger = logging.getLogger(__name__)` below the imports at the top of your
-file.
+`click.echo()`. Otherwise, you should use the centralized logging module:
+
+```python
+from smartclass.logging import get_logger
+
+logger = get_logger(__name__)
+logger.info("Processing started")
+```
+
+### Code Quality
+
+This project uses [`ruff`](https://github.com/astral-sh/ruff) for linting and formatting.
+Run the following commands to check and fix code style issues:
+
+```shell
+# Check for issues
+uv run ruff check .
+
+# Auto-fix issues
+uv run ruff check --fix .
+
+# Format code
+uv run ruff format .
+```
 
 ### Documentation
 
 All public functions (i.e., not starting with an underscore `_`) must be
-documented using
-the [sphinx documentation format](https://sphinx-rtd-tutorial.readthedocs.io/en/latest/docstrings.html#the-sphinx-docstring-format).
-The [`darglint`](https://github.com/terrencepreilly/darglint) plugin to `flake8`
-reports on functions that are not fully documented.
+documented using Google-style docstrings. Example:
+
+```python
+def classify_smiles(smiles: str, closest_only: bool = True) -> list[dict]:
+    """Classify a SMILES string against chemical classes.
+
+    Args:
+        smiles: The SMILES string to classify.
+        closest_only: If True, return only the closest match.
+
+    Returns:
+        List of classification results.
+
+    Raises:
+        SMILESError: If the SMILES cannot be parsed.
+    """
+```
 
 This project uses [`sphinx`](https://www.sphinx-doc.org) to automatically build
-documentation into a narrative structure. You can check that the documentation
-builds properly in an isolated environment with `tox -e docs-test` and actually
-build it locally with `tox -e docs`.
+documentation. You can build it locally with:
+
+```shell
+uv run sphinx-build docs docs/_build
+```
 
 ### Testing
 
-Functions in this repository should be unit tested. These can either be written
-using the `unittest` framework in the `tests/` directory or as embedded
-doctests. You can check that the unit tests pass with `tox -e py` and that the
-doctests pass with `tox -e doctests`. These tests are required to pass for
-accepting a contribution.
+Functions in this repository should be unit tested. Tests are written using
+the `unittest` framework in the `tests/` directory. Run tests with:
+
+```shell
+# Run all tests
+uv run pytest
+
+# Run with coverage
+uv run pytest --cov=smartclass --cov-report=html
+
+# Run specific test file
+uv run pytest tests/test_api.py -v
+```
+
+All tests must pass before a contribution can be accepted.
 
 ### Syncing your fork
 
 If other code is updated before your contribution gets merged, you might need to
 resolve conflicts against the main branch. After cloning, you should add the
-upstream repository with
+upstream repository with:
 
 ```shell
-$ git remote add zambonilab https://gitlab.ethz.ch/zambonilab/smartclass.git
+git remote add upstream https://gitlab.ethz.ch/zambonilab/smartclass.git
+git fetch upstream
+git merge upstream/main
 ```
-
-Then, you can merge upstream code into your branch. You can also use the GitHub
-UI to do this by
-following [this tutorial](https://docs.github.com/en/github/collaborating-with-pull-requests/working-with-forks/syncing-a-fork).
 
 ### Python Version Compatibility
 
-This project aims to support all versions of Python that have not passed their
-end-of-life dates. After end-of-life, the version will be removed from the Trove
-qualifiers in the [`setup.cfg`](setup.cfg) and from the GitHub Actions testing
-configuration.
+This project supports Python 3.11 and later. We aim to support all versions
+of Python that have not passed their end-of-life dates.
 
 See https://endoflife.date/python for a timeline of Python release and
 end-of-life dates.

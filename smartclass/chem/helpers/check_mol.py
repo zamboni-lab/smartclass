@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from rdkit.Chem import KekulizeException, Mol, SanitizeMol
 
+
 __all__ = [
     "check_mol",
 ]

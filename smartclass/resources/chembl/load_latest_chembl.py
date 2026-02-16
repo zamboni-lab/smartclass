@@ -10,6 +10,7 @@ from typing import TYPE_CHECKING
 from smartclass.resources.chembl.get_latest_chembl import get_latest_chembl
 from smartclass.resources.chembl.latest_chembl_paths import latest_chembl_paths
 
+
 if TYPE_CHECKING:
     from rdkit.Chem import rdSubstructLibrary
 
@@ -36,7 +37,7 @@ def load_latest_chembl() -> rdSubstructLibrary.SubstructLibrary:
             sslib = pickle.load(inf)
         logging.info(f"SubstructLibrary loaded with {len(sslib)} molecules")
     except (FileNotFoundError, pickle.PickleError) as e:
-        # If there is an issue with loading the library or it doesn't exist, download the latest ChEMBL data
+        # If loading fails or library doesn't exist, download latest ChEMBL
         if os.path.exists(lib_path):
             os.remove(lib_path)  # Delete the corrupted library file
 

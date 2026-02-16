@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from rdkit.Chem.inchi import InchiToInchiKey
 
+
 __all__ = [
     "convert_inchi_to_inchikey",
 ]

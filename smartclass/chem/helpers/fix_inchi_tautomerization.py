@@ -10,6 +10,7 @@ from smartclass.helpers.check_smiles_contains_no_isotope import (
     check_smiles_contains_no_isotope,
 )
 
+
 __all__ = [
     "fix_inchi_tautomerization",
 ]
@@ -56,10 +57,6 @@ def fix_inchi_tautomerization(smiles: str) -> str:
             "SMARTS": "[C&!c]([!CX3&!SHX2])([!CX3&!SHX2])=[C&!c]([SHX2])",
             "Reaction": "[!c&C:1]([SH:2])=[!c&C:3]>>[C:1](=[SH0:2])[CH:3]",
         },
-        # "Enethiol_n": {
-        #     "SMARTS": "[N&!n]([!CX3&!SHX2])([!CX3&!SHX2])=[C&!c]([SHX2])",
-        #     "Reaction": "[N&!n:1]([!CX3&!SHX2:2])([!CX3&!SHX2:3])=[C&!c:4]([SHX2])>>[C:4](=[SH0:2])[CH:3]",
-        # },
     }
     ####################################################
 

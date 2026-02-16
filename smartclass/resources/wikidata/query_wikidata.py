@@ -28,6 +28,7 @@ from smartclass.resources.wikidata.transforms import (
     transform_stereoisomers_to_entities,
 )
 
+
 __all__ = ["query_wikidata"]
 
 TRANSFORM_FUNCTIONS: dict[str, Callable] = {

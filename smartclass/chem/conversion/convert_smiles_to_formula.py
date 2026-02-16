@@ -5,6 +5,7 @@ from __future__ import annotations
 from smartclass.chem.conversion.convert_mol_to_formula import convert_mol_to_formula
 from smartclass.chem.conversion.convert_smiles_to_mol import convert_smiles_to_mol
 
+
 __all__ = [
     "convert_smiles_to_formula",
 ]

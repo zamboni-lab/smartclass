@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from rdkit.Chem import Mol, MolToSmarts
 
+
 __all__ = [
     "convert_mol_to_smarts",
 ]

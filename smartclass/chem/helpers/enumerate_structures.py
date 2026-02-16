@@ -6,6 +6,7 @@ from rdkit.Chem import Mol, rdMolEnumerator
 
 from smartclass.logging import get_logger
 
+
 __all__ = [
     "enumerate_structures",
 ]

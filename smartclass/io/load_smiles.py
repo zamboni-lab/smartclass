@@ -9,6 +9,7 @@ import polars
 from smartclass.exceptions import DataLoadingError
 from smartclass.logging import get_logger
 
+
 __all__ = [
     "load_smiles",
 ]
@@ -56,10 +57,10 @@ def load_smiles(
         logger.debug(f"Loaded {len(unique_smiles)} unique SMILES from {input_path}")
         return unique_smiles
 
-    except polars.exceptions.ColumnNotFoundError:
+    except polars.exceptions.ColumnNotFoundError as e:
         raise DataLoadingError(
             str(input_path),
             reason=f"Column '{column}' not found in file",
-        )
+        ) from e
     except Exception as e:
         raise DataLoadingError(str(input_path), reason=str(e)) from e

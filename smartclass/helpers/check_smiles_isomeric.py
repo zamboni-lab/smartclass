@@ -8,6 +8,7 @@ from smartclass.chem.conversion.convert_smiles_to_canonical_smiles import (
     convert_smiles_to_canonical_smiles,
 )
 
+
 __all__ = [
     "check_smiles_isomeric",
 ]

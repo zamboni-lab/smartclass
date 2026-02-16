@@ -8,6 +8,7 @@ from smartclass.io.load_pkg_classes import load_pkg_classes
 from smartclass.io.load_pkg_mappings import load_pkg_mappings
 from smartclass.io.load_pkg_mia import load_pkg_mia
 
+
 if TYPE_CHECKING:
     from polars import DataFrame
 

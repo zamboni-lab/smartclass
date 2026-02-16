@@ -8,6 +8,7 @@ from pathlib import Path
 from smartclass.exceptions import DataExportError
 from smartclass.logging import get_logger
 
+
 __all__ = [
     "export_results",
 ]

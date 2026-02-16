@@ -6,6 +6,7 @@ from rdkit.Chem import Mol, MolFromInchi
 
 from smartclass.chem.helpers.check_mol import check_mol
 
+
 __all__ = [
     "convert_inchi_to_mol",
 ]

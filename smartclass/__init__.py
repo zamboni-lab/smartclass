@@ -18,9 +18,6 @@ from smartclass import (
     exceptions,  # noqa:F401
     version,  # noqa:F401
 )
-from smartclass.config import get_config  # noqa:F401
-from smartclass.exceptions import SmartclassError  # noqa:F401
-from smartclass.logging import configure_logging, get_logger  # noqa:F401
 
 # Classification
 from smartclass.chem.classification import (
@@ -32,38 +29,68 @@ from smartclass.chem.classification import (
 from smartclass.chem.conversion.convert_inchi_to_inchikey import (  # noqa:F401
     convert_inchi_to_inchikey,
 )
-from smartclass.chem.conversion.convert_inchi_to_mass import convert_inchi_to_mass  # noqa:F401
-from smartclass.chem.conversion.convert_inchi_to_mol import convert_inchi_to_mol  # noqa:F401
-from smartclass.chem.conversion.convert_inchi_to_smiles import convert_inchi_to_smiles  # noqa:F401
-from smartclass.chem.conversion.convert_mol_to_cxsmiles import convert_mol_to_cxsmiles  # noqa:F401
-from smartclass.chem.conversion.convert_mol_to_inchi import convert_mol_to_inchi  # noqa:F401
-from smartclass.chem.conversion.convert_mol_to_inchikey import convert_mol_to_inchikey  # noqa:F401
-from smartclass.chem.conversion.convert_mol_to_smarts import convert_mol_to_smarts  # noqa:F401
-from smartclass.chem.conversion.convert_mol_to_smiles import convert_mol_to_smiles  # noqa:F401
-from smartclass.chem.conversion.convert_molblock_to_mol import convert_molblock_to_mol  # noqa:F401
-
-# from smartclass.chem.conversion.convert_name_and_molblock_to_cxsmiles import convert_mol_to_cxsmiles
-from smartclass.chem.conversion.convert_smarts_to_mol import convert_smarts_to_mol  # noqa:F401
+from smartclass.chem.conversion.convert_inchi_to_mass import (
+    convert_inchi_to_mass,  # noqa:F401
+)
+from smartclass.chem.conversion.convert_inchi_to_mol import (
+    convert_inchi_to_mol,  # noqa:F401
+)
+from smartclass.chem.conversion.convert_inchi_to_smiles import (
+    convert_inchi_to_smiles,  # noqa:F401
+)
+from smartclass.chem.conversion.convert_mol_to_cxsmiles import (
+    convert_mol_to_cxsmiles,  # noqa:F401
+)
+from smartclass.chem.conversion.convert_mol_to_inchi import (
+    convert_mol_to_inchi,  # noqa:F401
+)
+from smartclass.chem.conversion.convert_mol_to_inchikey import (
+    convert_mol_to_inchikey,  # noqa:F401
+)
+from smartclass.chem.conversion.convert_mol_to_smarts import (
+    convert_mol_to_smarts,  # noqa:F401
+)
+from smartclass.chem.conversion.convert_mol_to_smiles import (
+    convert_mol_to_smiles,  # noqa:F401
+)
+from smartclass.chem.conversion.convert_molblock_to_mol import (
+    convert_molblock_to_mol,  # noqa:F401
+)
+from smartclass.chem.conversion.convert_smarts_to_mol import (
+    convert_smarts_to_mol,  # noqa:F401
+)
 from smartclass.chem.conversion.convert_smiles_to_canonical_smiles import (  # noqa:F401
     convert_smiles_to_canonical_smiles,
 )
 from smartclass.chem.conversion.convert_smiles_to_formula import (  # noqa:F401
     convert_smiles_to_formula,
 )
-from smartclass.chem.conversion.convert_smiles_to_inchi import convert_smiles_to_inchi  # noqa:F401
-from smartclass.chem.conversion.convert_smiles_to_mass import convert_smiles_to_mass  # noqa:F401
-from smartclass.chem.conversion.convert_smiles_to_mol import convert_smiles_to_mol  # noqa:F401
+from smartclass.chem.conversion.convert_smiles_to_inchi import (
+    convert_smiles_to_inchi,  # noqa:F401
+)
+from smartclass.chem.conversion.convert_smiles_to_mass import (
+    convert_smiles_to_mass,  # noqa:F401
+)
+from smartclass.chem.conversion.convert_smiles_to_mol import (
+    convert_smiles_to_mol,  # noqa:F401
+)
 from smartclass.chem.helpers.check_missing_stereochemistry import (  # noqa:F401
     check_missing_stereochemistry,
 )
-from smartclass.chem.helpers.enumerate_structures import enumerate_structures  # noqa:F401
-from smartclass.chem.helpers.fix_inchi_tautomerization import fix_inchi_tautomerization  # noqa:F401
+from smartclass.chem.helpers.enumerate_structures import (
+    enumerate_structures,  # noqa:F401
+)
+from smartclass.chem.helpers.fix_inchi_tautomerization import (
+    fix_inchi_tautomerization,  # noqa:F401
+)
 from smartclass.chem.helpers.get_num_atoms_bonds import get_num_atoms_bonds  # noqa:F401
 from smartclass.chem.helpers.get_num_matched_atoms_bonds import (  # noqa:F401
     get_num_matched_atoms_bonds,
 )
 from smartclass.chem.helpers.standardize import standardize  # noqa:F401
 from smartclass.chem.similarity.calculate_mcs import calculate_mcs  # noqa:F401
+from smartclass.config import get_config  # noqa:F401
+from smartclass.exceptions import SmartclassError  # noqa:F401
 from smartclass.helpers.check_smiles_contains_no_dot import (  # noqa:F401
     check_smiles_contains_no_dot,
 )
@@ -72,10 +99,16 @@ from smartclass.helpers.check_smiles_contains_no_isotope import (  # noqa:F401
 )
 from smartclass.helpers.check_smiles_isomeric import check_smiles_isomeric  # noqa:F401
 from smartclass.helpers.combine_csv_files import combine_csv_files  # noqa:F401
-from smartclass.helpers.convert_chemical_formula import convert_chemical_formula  # noqa:F401
-from smartclass.helpers.convert_classyfire_dict import convert_classyfire_dict  # noqa:F401
+from smartclass.helpers.convert_chemical_formula import (
+    convert_chemical_formula,  # noqa:F401
+)
+from smartclass.helpers.convert_classyfire_dict import (
+    convert_classyfire_dict,  # noqa:F401
+)
 from smartclass.helpers.convert_list_of_dict import convert_list_of_dict  # noqa:F401
-from smartclass.helpers.download_file_if_not_exists import download_file_if_not_exists  # noqa:F401
+from smartclass.helpers.download_file_if_not_exists import (
+    download_file_if_not_exists,  # noqa:F401
+)
 from smartclass.helpers.get_request import get_request  # noqa:F401
 from smartclass.helpers.read_query import read_query  # noqa:F401
 from smartclass.helpers.sample_list import sample_list  # noqa:F401
@@ -83,12 +116,18 @@ from smartclass.helpers.split_csv import split_csv  # noqa:F401
 from smartclass.io.export_dict_to_json import export_dict_to_json  # noqa:F401
 from smartclass.io.export_results import export_results  # noqa:F401
 from smartclass.io.load_csv_from_path import load_csv_from_path  # noqa:F401
-from smartclass.io.load_external_classes_file import load_external_classes_file  # noqa:F401
+from smartclass.io.load_external_classes_file import (
+    load_external_classes_file,  # noqa:F401
+)
 from smartclass.io.load_json_from_path import load_json_from_path  # noqa:F401
 from smartclass.io.load_json_from_url import load_json_from_url  # noqa:F401
-from smartclass.io.load_json_from_url_or_path import load_json_from_url_or_path  # noqa:F401
+from smartclass.io.load_json_from_url_or_path import (
+    load_json_from_url_or_path,  # noqa:F401
+)
 from smartclass.io.load_pkg_bitter_smiles import load_pkg_bitter_smiles  # noqa:F401
-from smartclass.io.load_pkg_chemical_hierarchy import load_pkg_chemical_hierarchy  # noqa:F401
+from smartclass.io.load_pkg_chemical_hierarchy import (
+    load_pkg_chemical_hierarchy,  # noqa:F401
+)
 from smartclass.io.load_pkg_classes import load_pkg_classes  # noqa:F401
 from smartclass.io.load_pkg_data import load_pkg_data  # noqa:F401
 from smartclass.io.load_pkg_file import load_pkg_file  # noqa:F401
@@ -96,6 +135,7 @@ from smartclass.io.load_pkg_mappings import load_pkg_mappings  # noqa:F401
 from smartclass.io.load_pkg_mia import load_pkg_mia  # noqa:F401
 from smartclass.io.load_smiles import load_smiles  # noqa:F401
 from smartclass.io.load_tsv_from_path import load_tsv_from_path  # noqa:F401
+from smartclass.logging import configure_logging, get_logger  # noqa:F401
 from smartclass.resources import (
     chebi,  # noqa:F401
     chembl,  # noqa:F401

@@ -5,6 +5,7 @@ from __future__ import annotations
 from smartclass.chem.conversion.convert_inchi_to_mol import convert_inchi_to_mol
 from smartclass.chem.conversion.convert_mol_to_mass import convert_mol_to_mass
 
+
 __all__ = [
     "convert_inchi_to_mass",
 ]

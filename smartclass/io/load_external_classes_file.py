@@ -5,6 +5,7 @@ from __future__ import annotations
 import polars
 from polars import DataFrame  # Because of type
 
+
 __all__ = ["load_external_classes_file"]
 
 

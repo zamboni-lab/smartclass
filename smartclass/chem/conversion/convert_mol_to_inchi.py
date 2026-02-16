@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from rdkit.Chem import MolToInchi
 
+
 __all__ = [
     "convert_mol_to_inchi",
 ]

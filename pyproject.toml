@@ -2,7 +2,7 @@
 name = "smartclass"
 version = "0.1.0"
 description = "Classify chemical structures using SMARTS patterns against Wikidata-sourced chemical classes"
-readme = "README.md"
+readme = "README.rst"
 requires-python = ">=3.12"
 license = { text = "MIT" }
 authors = [
@@ -12,15 +12,15 @@ maintainers = [
   { name = "Adriano Rutz", email = "rutz@imsb.biol.ethz.ch" },
 ]
 keywords = [
-  "cheminformatics",
-  "classification",
-  "chemical-classes",
   "SMARTS",
   "SMILES",
-  "openData",
-  "wikidata",
-  "rdkit",
+  "chemical-classes",
+  "cheminformatics",
+  "classification",
   "natural-products",
+  "openData",
+  "rdkit",
+  "wikidata",
 ]
 classifiers = [
   "Development Status :: 1 - Planning",
@@ -36,8 +36,8 @@ classifiers = [
   "Programming Language :: Python :: 3 :: Only",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
-  "Topic :: Scientific/Engineering :: Chemistry",
   "Topic :: Scientific/Engineering :: Bio-Informatics",
+  "Topic :: Scientific/Engineering :: Chemistry",
   "Typing :: Typed",
 ]
 dependencies = [

@@ -62,7 +62,7 @@ def _parse_smiles_to_mols(smiles_set: set[str]) -> list[Mol]:
         if mol is not None:
             structures.append(mol)
         else:
-            logger.debug(f"Failed to parse SMILES: {smi[:50]}...")
+            logger.debug(f"Failed to parse SMILES: {smi}")
     return structures
 
 
@@ -149,7 +149,8 @@ def _export_classification_results(
 
     # Export sorted by structure
     results_by_structure = sorted(
-        results_by_match, key=lambda x: x["structure_inchikey"]
+        results_by_match,
+        key=lambda x: x["structure_inchikey"],
     )
     export_results(
         output=str(output_path / "results_by_structure.tsv"),
@@ -234,7 +235,7 @@ def search_classes(
 
     logger.info(
         f"Classifying {len(structures)} structures "
-        f"against {len(classes[0])} chemical classes..."
+        f"against {len(classes[0])} chemical classes...",
     )
 
     # Perform classification
@@ -244,7 +245,7 @@ def search_classes(
             class_hierarchy=class_hierarchy,
             structures=structures,
             params=params,
-        )
+        ),
     )
 
     # Filter to closest matches if requested

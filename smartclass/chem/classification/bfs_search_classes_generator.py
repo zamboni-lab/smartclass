@@ -107,7 +107,7 @@ def bfs_search_classes_generator(
     structures: list[Mol],
     params: SubstructMatchParameters,
     class_hierarchy: ClassHierarchy | None = None,
-) -> Generator[MatchResult, None, None]:
+) -> Generator[MatchResult]:
     """Perform substructure search using Breadth-First Search traversal.
 
     When a class hierarchy is provided, classes are searched in BFS order
@@ -145,7 +145,10 @@ def bfs_search_classes_generator(
                 continue
 
             yield from _search_single_class(
-                current_class_id, class_structure, structures, params
+                current_class_id,
+                class_structure,
+                structures,
+                params,
             )
             searched_classes.add(current_class_id)
 
@@ -164,7 +167,10 @@ def bfs_search_classes_generator(
                 continue
 
             yield from _search_single_class(
-                class_id, class_structure_list, structures, params
+                class_id,
+                class_structure_list,
+                structures,
+                params,
             )
 
 
@@ -173,7 +179,7 @@ def tqdm_bfs_search_classes_generator(
     structures: list[Mol],
     params: SubstructMatchParameters,
     class_hierarchy: ClassHierarchy | None = None,
-) -> Generator[MatchResult, None, None]:
+) -> Generator[MatchResult]:
     """BFS search with tqdm progress bar.
 
     Wraps bfs_search_classes_generator with a progress indicator.

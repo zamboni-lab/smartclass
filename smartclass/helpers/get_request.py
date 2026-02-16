@@ -88,14 +88,14 @@ def get_request(
                 wait_time = base_delay * (2**attempt) + random.uniform(0, 1)
                 logger.warning(
                     f"Request failed (status {status_code}). "
-                    f"Retry in {wait_time:.1f}s ({attempt + 1}/{max_retries})..."
+                    f"Retry in {wait_time:.1f}s ({attempt + 1}/{max_retries})...",
                 )
                 time.sleep(wait_time)
                 attempt += 1
             elif url != config.qlever_endpoint:
                 logger.warning(
                     f"Request failed with status {status_code}. "
-                    "Trying fallback QLever endpoint..."
+                    "Trying fallback QLever endpoint...",
                 )
                 url = config.qlever_endpoint
                 attempt = 0  # Reset attempts for fallback

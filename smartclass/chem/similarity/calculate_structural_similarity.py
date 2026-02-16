@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from rdkit.Chem import Mol, rdRascalMCES
 
+
 opts = rdRascalMCES.RascalOptions()
 opts.returnEmptyMCES = True
 opts.similarityThreshold = -1
@@ -27,7 +28,7 @@ def calculate_structural_similarity(
     :param options: Options.
     :type options: rdRascalMCES.RascalOptions
 
-    :returns: An object containing the similarity between the two molecules (amongst others).
+    :returns: RascalResult with similarity metrics.
     :rtype: rdRascalMCES.RascalResult
     """
     return rdRascalMCES.FindMCES(mol_1, mol_2, options)

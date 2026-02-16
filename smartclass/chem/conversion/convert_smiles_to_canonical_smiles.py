@@ -7,6 +7,7 @@ from rdkit.Chem import RemoveStereochemistry
 from smartclass.chem.conversion.convert_mol_to_smiles import convert_mol_to_smiles
 from smartclass.chem.conversion.convert_smiles_to_mol import convert_smiles_to_mol
 
+
 __all__ = [
     "convert_smiles_to_canonical_smiles",
 ]

@@ -19,6 +19,7 @@ from smartclass.helpers.sample_list import sample_list
 from smartclass.io.load_tsv_from_path import load_tsv_from_path
 from smartclass.logging import get_logger
 
+
 if TYPE_CHECKING:
     from rdkit.Chem import rdFMCS
 

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from rdkit.Chem import Mol
 
+
 __all__ = [
     "get_num_atoms_bonds",
 ]

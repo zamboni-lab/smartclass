@@ -6,6 +6,7 @@ from rdkit.Chem import Mol, MolFromSmarts
 
 from smartclass.chem.helpers.check_mol import check_mol
 
+
 __all__ = [
     "convert_smarts_to_mol",
 ]

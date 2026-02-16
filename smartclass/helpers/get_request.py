@@ -12,6 +12,7 @@ from smartclass.config import get_config
 from smartclass.exceptions import NetworkError
 from smartclass.logging import get_logger
 
+
 __all__ = ["get_request"]
 
 logger = get_logger(__name__)
@@ -86,8 +87,8 @@ def get_request(
             if status_code in retriable_codes and attempt < max_retries - 1:
                 wait_time = base_delay * (2**attempt) + random.uniform(0, 1)
                 logger.warning(
-                    f"Request failed with status {status_code}. "
-                    f"Retrying in {wait_time:.1f} seconds (attempt {attempt + 1}/{max_retries})..."
+                    f"Request failed (status {status_code}). "
+                    f"Retry in {wait_time:.1f}s ({attempt + 1}/{max_retries})..."
                 )
                 time.sleep(wait_time)
                 attempt += 1

@@ -14,6 +14,7 @@ import os
 
 import polars
 
+
 path_lotus = "~/Git/lotus-processor/data/processed/230106_frozen_metadata.csv.gz"
 path_lotus_smiles_out = "~/Git/smartclass/data/lotus_smiles.csv.gz"
 

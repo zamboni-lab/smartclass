@@ -7,6 +7,7 @@ import logging
 from smartclass.chem.conversion.convert_mol_to_cxsmiles import convert_mol_to_cxsmiles
 from smartclass.chem.conversion.convert_molblock_to_mol import convert_molblock_to_mol
 
+
 __all__ = [
     "convert_name_and_molblock_to_cxsmiles",
 ]

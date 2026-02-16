@@ -16,7 +16,6 @@ from smartclass.chem.classification.bfs_search_classes_generator import (
 )
 from smartclass.chem.conversion.convert_smiles_to_mol import convert_smiles_to_mol
 from smartclass.config import get_config
-from smartclass.helpers import convert_list_of_dict
 from smartclass.io import (
     export_results,
     load_external_classes_file,
@@ -27,12 +26,12 @@ from smartclass.io import (
 from smartclass.logging import get_logger
 from smartclass.resources.chembl import load_latest_chembl
 
+
 if TYPE_CHECKING:
     from rdkit.Chem import Mol
 
 __all__ = [
     "search_classes",
-    "ClassificationResult",
 ]
 
 logger = get_logger(__name__)
@@ -234,7 +233,8 @@ def search_classes(
     params.useGenericMatchers = True
 
     logger.info(
-        f"Classifying {len(structures)} structures against {len(classes[0])} chemical classes..."
+        f"Classifying {len(structures)} structures "
+        f"against {len(classes[0])} chemical classes..."
     )
 
     # Perform classification

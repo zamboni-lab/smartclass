@@ -12,6 +12,7 @@ from rdkit.Chem import rdSubstructLibrary
 
 from smartclass.resources.chembl.latest_chembl_paths import latest_chembl_paths
 
+
 __all__ = [
     "get_latest_chembl",
 ]
@@ -32,10 +33,10 @@ def get_latest_chembl(
     :param max_atoms: Maximal number of atoms.
     :type max_atoms: int
 
-    :param report_interval: Number of molecules to be processed before reporting.
+    :param report_interval: Molecules processed before reporting.
     :type report_interval: int
 
-    :param tautomer_fingerprints: Flag indicating whether tautomer fingerprints are used.
+    :param tautomer_fingerprints: Whether to use tautomer fingerprints.
     :type tautomer_fingerprints: bool
     """
     try:
@@ -82,7 +83,8 @@ def get_latest_chembl(
 
         elapsed_time = time.time() - t1
         logging.debug(
-            f"Processed ChEMBL data in {elapsed_time:.2f} seconds. The library has {len(library)} molecules.",
+            f"Processed ChEMBL in {elapsed_time:.2f}s. "
+            f"Library has {len(library)} molecules.",
         )
 
         with open(lib_path, "wb") as file:

@@ -7,6 +7,7 @@ from pathlib import Path
 from smartclass.exceptions import DataLoadingError
 from smartclass.logging import get_logger
 
+
 __all__ = [
     "load_pkg_chemical_hierarchy",
 ]

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+
 __all__ = [
     "convert_list_of_dict",
 ]

@@ -7,6 +7,7 @@ import logging
 from chembl_downloader import latest
 from pystow import join
 
+
 __all__ = [
     "latest_chembl_paths",
 ]
@@ -31,7 +32,7 @@ def latest_chembl_paths() -> tuple:
 
         return version, data_path, lib_path
     except Exception as e:
-        raise RuntimeError(f"Failed to retrieve ChEMBL paths: {e!s}")
+        raise RuntimeError(f"Failed to retrieve ChEMBL paths: {e!s}") from e
 
 
 if __name__ == "__main__":

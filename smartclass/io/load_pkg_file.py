@@ -12,6 +12,7 @@ from smartclass.io.load_json_from_path import load_json_from_path
 from smartclass.io.load_tsv_from_path import load_tsv_from_path
 from smartclass.logging import get_logger
 
+
 if TYPE_CHECKING:
     from polars import DataFrame
 

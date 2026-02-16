@@ -2,9 +2,29 @@
 
 This module defines a hierarchy of exceptions specific to the smartclass
 package, enabling more precise error handling and clearer error messages.
+
+Exception Hierarchy:
+    SmartclassError (base)
+    ├── ChemicalConversionError
+    │   └── MoleculeParsingError
+    │       ├── SMILESError
+    │       ├── SMARTSError
+    │       └── InChIError
+    ├── ClassificationError
+    ├── ConfigurationError
+    ├── DataLoadingError
+    ├── DataExportError
+    ├── InvalidInputError
+    └── NetworkError
 """
 
 from __future__ import annotations
+
+from typing import TYPE_CHECKING
+
+
+if TYPE_CHECKING:
+    from typing import Any
 
 __all__ = [
     "SmartclassError",
@@ -21,21 +41,39 @@ __all__ = [
     "InChIError",
 ]
 
+# Maximum length for error message snippets
+_MAX_SNIPPET_LENGTH = 50
+
+
+def _truncate(text: str, max_length: int = _MAX_SNIPPET_LENGTH) -> str:
+    """Truncate text with ellipsis if too long."""
+    if len(text) <= max_length:
+        return text
+    return f"{text[:max_length]}..."
+
 
 class SmartclassError(Exception):
     """Base exception for all smartclass errors.
 
     All custom exceptions in smartclass inherit from this class,
     making it easy to catch all smartclass-specific errors.
+
+    Attributes:
+        message: Human-readable error description.
     """
 
-    def __init__(self, message: str, *args, **kwargs) -> None:
+    def __init__(self, message: str, *args: Any, **kwargs: Any) -> None:
         """Initialize with a descriptive message.
 
-        :param message: Human-readable error description.
+        Args:
+            message: Human-readable error description.
         """
         self.message = message
         super().__init__(message, *args, **kwargs)
+
+    def __str__(self) -> str:
+        """Return the error message."""
+        return self.message
 
 
 # Chemical Conversion Errors
@@ -53,19 +91,24 @@ class MoleculeParsingError(ChemicalConversionError):
     """Error parsing a molecule representation.
 
     Raised when RDKit fails to parse a molecular structure.
+
+    Attributes:
+        input_string: The string that failed to parse.
+        input_type: Type of input (SMILES, InChI, SMARTS, etc.).
     """
 
     def __init__(
-        self, input_string: str, input_type: str = "unknown", *args, **kwargs
+        self, input_string: str, input_type: str = "unknown", *args: Any, **kwargs: Any
     ) -> None:
         """Initialize with details about the failed parsing.
 
-        :param input_string: The string that failed to parse.
-        :param input_type: Type of input (SMILES, InChI, SMARTS, etc.).
+        Args:
+            input_string: The string that failed to parse.
+            input_type: Type of input (SMILES, InChI, SMARTS, etc.).
         """
         self.input_string = input_string
         self.input_type = input_type
-        message = f"Failed to parse {input_type}: '{input_string[:50]}{'...' if len(input_string) > 50 else ''}'"
+        message = f"Failed to parse {input_type}: '{_truncate(input_string)}'"
         super().__init__(message, *args, **kwargs)
 
 

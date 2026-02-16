@@ -22,10 +22,11 @@ def calculate_myopic_mces(
     :param the: Threshold.
     :type the: int
 
-    :returns: Index, Distance between the molecules, Time taken for the calculation, Type of Distance:
-            - 1 : Exact Distance
-            - 2 : Lower bound (if the exact distance is above the threshold; bound chosen dynamically)
-            - 4 : Lower bound (second lower bound was used)
+    :returns: Tuple of (Index, Distance, Time, Distance Type).
+        Distance Type values:
+            - 1: Exact Distance
+            - 2: Lower bound (distance above threshold)
+            - 4: Lower bound (second bound used)
     :rtype: int, float, float, int
     """
     return MCES(ind=0, s1=s_1, s2=s_2, threshold=the, solver="default")

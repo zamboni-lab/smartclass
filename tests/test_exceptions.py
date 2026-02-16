@@ -116,7 +116,7 @@ class TestSMILESError(unittest.TestCase):
 
     def test_long_smiles_truncated(self):
         """Test long SMILES are truncated in message."""
-        long_smiles = "C" * 100
+        long_smiles = "C" * 10000
         exc = SMILESError(long_smiles)
 
         # Should truncate to 50 chars + "..."

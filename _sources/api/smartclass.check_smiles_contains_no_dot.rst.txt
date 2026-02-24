@@ -1,0 +1,6 @@
+check_smiles_contains_no_dot
+============================
+
+.. currentmodule:: smartclass
+
+.. autofunction:: check_smiles_contains_no_dot

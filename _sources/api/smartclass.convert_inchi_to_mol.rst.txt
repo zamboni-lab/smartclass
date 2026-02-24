@@ -1,0 +1,6 @@
+convert_inchi_to_mol
+====================
+
+.. currentmodule:: smartclass
+
+.. autofunction:: convert_inchi_to_mol

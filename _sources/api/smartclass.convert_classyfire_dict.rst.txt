@@ -1,0 +1,6 @@
+convert_classyfire_dict
+=======================
+
+.. currentmodule:: smartclass
+
+.. autofunction:: convert_classyfire_dict

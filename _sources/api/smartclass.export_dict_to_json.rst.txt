@@ -1,0 +1,6 @@
+export_dict_to_json
+===================
+
+.. currentmodule:: smartclass
+
+.. autofunction:: export_dict_to_json

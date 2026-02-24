@@ -1,0 +1,6 @@
+enumerate_structures
+====================
+
+.. currentmodule:: smartclass
+
+.. autofunction:: enumerate_structures

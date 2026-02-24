@@ -1,0 +1,6 @@
+combine_csv_files
+=================
+
+.. currentmodule:: smartclass
+
+.. autofunction:: combine_csv_files

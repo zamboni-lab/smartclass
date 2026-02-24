@@ -1,0 +1,6 @@
+check_smiles_isomeric
+=====================
+
+.. currentmodule:: smartclass
+
+.. autofunction:: check_smiles_isomeric

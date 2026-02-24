@@ -1,0 +1,6 @@
+SmartclassError
+===============
+
+.. currentmodule:: smartclass
+
+.. autoexception:: SmartclassError

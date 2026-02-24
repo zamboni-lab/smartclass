@@ -1,0 +1,6 @@
+load_smiles
+===========
+
+.. currentmodule:: smartclass
+
+.. autofunction:: load_smiles

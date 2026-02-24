@@ -1,0 +1,6 @@
+get_class_structures
+====================
+
+.. currentmodule:: smartclass
+
+.. autofunction:: get_class_structures

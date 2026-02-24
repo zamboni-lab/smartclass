@@ -1,0 +1,6 @@
+calculate_mcs
+=============
+
+.. currentmodule:: smartclass
+
+.. autofunction:: calculate_mcs

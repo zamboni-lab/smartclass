@@ -1,0 +1,6 @@
+export_results
+==============
+
+.. currentmodule:: smartclass
+
+.. autofunction:: export_results

@@ -1,0 +1,6 @@
+load_json_from_url_or_path
+==========================
+
+.. currentmodule:: smartclass
+
+.. autofunction:: load_json_from_url_or_path

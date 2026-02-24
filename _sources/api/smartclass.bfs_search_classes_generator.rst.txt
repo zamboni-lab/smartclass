@@ -1,0 +1,6 @@
+bfs_search_classes_generator
+============================
+
+.. currentmodule:: smartclass
+
+.. autofunction:: bfs_search_classes_generator

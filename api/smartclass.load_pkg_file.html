@@ -1,0 +1,204 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>load_pkg_file &mdash; smartclass 0.0.1-dev documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../_static/autodoc_pydantic.css" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=03180e26"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="load_pkg_mappings" href="smartclass.load_pkg_mappings.html" />
+    <link rel="prev" title="load_pkg_data" href="smartclass.load_pkg_data.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            smartclass
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cli.html">Command Line Interface</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../reference.html">Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../reference.html#functions">Functions</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="smartclass.bfs_search_classes_generator.html">bfs_search_classes_generator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.calculate_mcs.html">calculate_mcs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.check_missing_stereochemistry.html">check_missing_stereochemistry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.check_smiles_contains_no_dot.html">check_smiles_contains_no_dot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.check_smiles_contains_no_isotope.html">check_smiles_contains_no_isotope</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.check_smiles_isomeric.html">check_smiles_isomeric</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.combine_csv_files.html">combine_csv_files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.configure_logging.html">configure_logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.convert_chemical_formula.html">convert_chemical_formula</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.convert_classyfire_dict.html">convert_classyfire_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.convert_inchi_to_inchikey.html">convert_inchi_to_inchikey</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.convert_inchi_to_mass.html">convert_inchi_to_mass</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.convert_inchi_to_mol.html">convert_inchi_to_mol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.convert_inchi_to_smiles.html">convert_inchi_to_smiles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.convert_list_of_dict.html">convert_list_of_dict</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.convert_mol_to_cxsmiles.html">convert_mol_to_cxsmiles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.convert_mol_to_inchi.html">convert_mol_to_inchi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.convert_mol_to_inchikey.html">convert_mol_to_inchikey</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.convert_mol_to_smarts.html">convert_mol_to_smarts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.convert_mol_to_smiles.html">convert_mol_to_smiles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.convert_molblock_to_mol.html">convert_molblock_to_mol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.convert_smarts_to_mol.html">convert_smarts_to_mol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.convert_smiles_to_canonical_smiles.html">convert_smiles_to_canonical_smiles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.convert_smiles_to_formula.html">convert_smiles_to_formula</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.convert_smiles_to_inchi.html">convert_smiles_to_inchi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.convert_smiles_to_mass.html">convert_smiles_to_mass</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.convert_smiles_to_mol.html">convert_smiles_to_mol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.download_file_if_not_exists.html">download_file_if_not_exists</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.enumerate_structures.html">enumerate_structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.export_dict_to_json.html">export_dict_to_json</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.export_results.html">export_results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.fix_inchi_tautomerization.html">fix_inchi_tautomerization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.get_class_structures.html">get_class_structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.get_config.html">get_config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.get_logger.html">get_logger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.get_num_atoms_bonds.html">get_num_atoms_bonds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.get_num_matched_atoms_bonds.html">get_num_matched_atoms_bonds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.get_request.html">get_request</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.load_csv_from_path.html">load_csv_from_path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.load_external_classes_file.html">load_external_classes_file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.load_json_from_path.html">load_json_from_path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.load_json_from_url.html">load_json_from_url</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.load_json_from_url_or_path.html">load_json_from_url_or_path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.load_pkg_bitter_smiles.html">load_pkg_bitter_smiles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.load_pkg_chemical_hierarchy.html">load_pkg_chemical_hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.load_pkg_classes.html">load_pkg_classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.load_pkg_data.html">load_pkg_data</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">load_pkg_file</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#smartclass.load_pkg_file"><code class="docutils literal notranslate"><span class="pre">load_pkg_file()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.load_pkg_mappings.html">load_pkg_mappings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.load_pkg_mia.html">load_pkg_mia</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.load_smiles.html">load_smiles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.load_tsv_from_path.html">load_tsv_from_path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.read_query.html">read_query</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.sample_list.html">sample_list</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.search_class.html">search_class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.search_classes.html">search_classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.split_csv.html">split_csv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smartclass.standardize.html">standardize</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../reference.html#classes">Classes</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">smartclass</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../reference.html">Reference</a></li>
+      <li class="breadcrumb-item active">load_pkg_file</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/smartclass.load_pkg_file.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="load-pkg-file">
+<h1>load_pkg_file<a class="headerlink" href="#load-pkg-file" title="Link to this heading"></a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="smartclass.load_pkg_file">
+<span class="sig-name descname"><span class="pre">load_pkg_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">directory</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'smartclass.data'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="../_modules/smartclass/io/load_pkg_file.html#load_pkg_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#smartclass.load_pkg_file" title="Link to this definition"></a></dt>
+<dd><p>Load data from a package-bundled file into a Polars DataFrame.</p>
+<p>Supports TSV, CSV, and JSON file formats.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file</strong> – Name of the file to load (e.g., “classes_smarts.tsv”).</p></li>
+<li><p><strong>directory</strong> – Package directory containing the file.
+Defaults to “smartclass.data”.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Polars DataFrame containing the loaded data.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>DataLoadingError</strong> – If the file cannot be loaded or format is unsupported.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="smartclass.load_pkg_data.html" class="btn btn-neutral float-left" title="load_pkg_data" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="smartclass.load_pkg_mappings.html" class="btn btn-neutral float-right" title="load_pkg_mappings" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Adriano Rutz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

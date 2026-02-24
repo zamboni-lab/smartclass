@@ -1,0 +1,6 @@
+convert_smarts_to_mol
+=====================
+
+.. currentmodule:: smartclass
+
+.. autofunction:: convert_smarts_to_mol

@@ -1,0 +1,6 @@
+convert_mol_to_cxsmiles
+=======================
+
+.. currentmodule:: smartclass
+
+.. autofunction:: convert_mol_to_cxsmiles

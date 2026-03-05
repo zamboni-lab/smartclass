@@ -1,0 +1,6 @@
+configure_logging
+=================
+
+.. currentmodule:: smartclass
+
+.. autofunction:: configure_logging

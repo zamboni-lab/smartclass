@@ -1,0 +1,277 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>smartclass.chem.helpers.check_missing_stereochemistry &mdash; smartclass 0.0.1-dev documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/autodoc_pydantic.css" />
+
+  
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=03180e26"></script>
+      <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            smartclass
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../cli.html">Command Line Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../reference.html">Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">smartclass</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">smartclass.chem.helpers.check_missing_stereochemistry</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for smartclass.chem.helpers.check_missing_stereochemistry</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Check stereochemistry.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">rdkit</span><span class="w"> </span><span class="kn">import</span> <span class="n">Chem</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rdkit.Chem</span><span class="w"> </span><span class="kn">import</span> <span class="n">Mol</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">rdkit.Chem.EnumerateStereoisomers</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">GetStereoisomerCount</span><span class="p">,</span>
+    <span class="n">StereoEnumerationOptions</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;check_missing_stereochemistry&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<div class="viewcode-block" id="check_missing_stereochemistry">
+<a class="viewcode-back" href="../../../../api/smartclass.check_missing_stereochemistry.html#smartclass.check_missing_stereochemistry">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">check_missing_stereochemistry</span><span class="p">(</span><span class="n">smiles</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">use_legacy</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Check stereochemistry.</span>
+
+<span class="sd">    :param smiles: SMILES.</span>
+<span class="sd">    :type smiles: str</span>
+
+<span class="sd">    :param use_legacy: Flag indicating to use legacy or not.</span>
+<span class="sd">    :type use_legacy: bool</span>
+
+<span class="sd">    :returns: flag.</span>
+<span class="sd">    :rtype: Union[bool, None]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># See https://github.com/rdkit/rdkit/issues/6217</span>
+    <span class="n">Chem</span><span class="o">.</span><span class="n">SetAllowNontetrahedralChirality</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+    <span class="c1"># Chem.SetUseLegacyStereoPerception(use_legacy)</span>
+    <span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="n">smiles</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">mol</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">Chem</span><span class="o">.</span><span class="n">FindPotentialStereoBonds</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">cleanIt</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">si</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">FindPotentialStereo</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">cleanIt</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">flagPossible</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">specified_count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">unspecified_count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">unknown_count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">si</span><span class="p">:</span>
+            <span class="c1"># logging.warning(</span>
+            <span class="c1">#     f&quot;Type: {element.type}, Which: {element.centeredOn},</span>
+            <span class="c1"># Specified: {element.specified}, Descriptor: {element.descriptor}&quot;</span>
+            <span class="c1">#     )</span>
+            <span class="k">if</span> <span class="n">element</span><span class="o">.</span><span class="n">specified</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">specified</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;Unknown&quot;</span><span class="p">:</span>
+                    <span class="n">unknown_count</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">specified_count</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">unspecified_count</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="c1"># TODO this is almost working for now</span>
+        <span class="c1"># logging.warning(specified_count)</span>
+        <span class="c1"># logging.warning(unspecified_count)</span>
+        <span class="c1"># logging.warning(unknown_count)</span>
+        <span class="k">if</span> <span class="n">unspecified_count</span> <span class="o">+</span> <span class="n">unknown_count</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># Fully defined</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">elif</span> <span class="n">specified_count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># TODO additional check leading to almost everything OK</span>
+            <span class="k">return</span> <span class="n">count_multiple_stereoisomers</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># TODO additional check leading to almost everything OK</span>
+            <span class="k">return</span> <span class="n">count_multiple_stereoisomers</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">count_multiple_stereoisomers</span><span class="p">(</span>
+    <span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Count multiple stereoisomers.</span>
+
+<span class="sd">    :param mol: A structure MOL.</span>
+<span class="sd">    :type mol: Mol</span>
+
+<span class="sd">    :returns: flag.</span>
+<span class="sd">    :rtype: bool</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="p">(</span>
+        <span class="n">GetStereoisomerCount</span><span class="p">(</span>
+            <span class="n">mol</span><span class="p">,</span>
+            <span class="n">options</span><span class="o">=</span><span class="n">StereoEnumerationOptions</span><span class="p">(</span>
+                <span class="c1"># onlyUnassigned=False,</span>
+                <span class="c1"># onlyStereoGroups=True,</span>
+                <span class="n">tryEmbedding</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="p">),</span>
+        <span class="p">)</span>
+        <span class="o">==</span> <span class="mi">1</span>
+    <span class="p">):</span>
+        <span class="c1"># logging.warning(GetStereoisomerCount(mol, options=options))</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># logging.warning(GetStereoisomerCount(mol, options=options))</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">argparse</span>
+
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Check stereochemistry&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;--smiles&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;SMILES string (optional)&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--use-legacy&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Use legacy stereochemistry perception (default: False)&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+
+    <span class="n">use_legacy</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">use_legacy</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">check_expectations</span><span class="p">(</span><span class="n">smiles</span><span class="p">,</span> <span class="n">expectation</span><span class="p">,</span> <span class="n">use_legacy</span><span class="o">=</span><span class="n">use_legacy</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check expectations.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">expectation</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\033</span><span class="s2">[33m&quot;</span> <span class="o">+</span> <span class="n">smiles</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">check_missing_stereochemistry</span><span class="p">(</span><span class="n">smiles</span><span class="p">,</span> <span class="n">use_legacy</span><span class="p">)</span> <span class="o">==</span> <span class="n">expectation</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\033</span><span class="s2">[32m&quot;</span> <span class="o">+</span> <span class="n">smiles</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\033</span><span class="s2">[31m&quot;</span> <span class="o">+</span> <span class="n">smiles</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\033</span><span class="s2">[0m&quot;</span><span class="p">)</span>
+
+    <span class="n">smiles_undefined_to_test</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">&quot;CCOC(=O)C=C(CC(=O)O)C(=O)O&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;C1CCCCCC=CCCCC1&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;CC(CCCF)(F)Cl&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;CC(F)C(F)(Cl)C(F)C&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;C[C@H]1C=C[C@@H](O)C=C(Cl)CCOC(=O)C2=CC[C@H]3CCC[C@]4(CCC[C@H]14)N3C2&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;COc1cc(C(=O)O[C@@H]2CC(O)(C(=O)O)C[C@@H](OC(=O)c3ccc(O)c(OC)c3)C2O)ccc1O&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;C=CCSS/C=C/CS(=O)CC=C&quot;</span><span class="p">,</span>
+    <span class="p">]</span>
+
+    <span class="n">smiles_defined_to_test</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">&quot;C[C@H](CN1C=NC2=C1N=CN=C2N)OCP(=O)(O)O&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;C1CCCCC/C=C/CCCC1&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Cc1cc(C(=C2C=CC(=Nc3ccc(S(=O)(=O)[O-])cc3)C=C2)c2ccc(Nc3ccc(S(=O)(=O)[O-])cc3)cc2)cc(S(=O)(=O)O)c1N&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;CN1[C@H]2CC[C@@H]1[C@H]([C@H](C2)OC(=O)c3ccc(cc3)N=C=S)C(=O)OC&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;O=[As]O[As]=O&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;CN[C@H](C)[C@H](OB1C2CCCC(CCC2)[C@H]1[Si](C)(C)C)c1ccccc1&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;C1CN2C(=N)N([C@H]([C@H]3[C@]2(C1(O)O)N=C(N3)N)COC(=O)N)O&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;CC12CCC(CC1)C(C)(C)O2&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;COC(=O)C1CCC(C)CC1&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;COC1=CC2=C(C=CN=C2C=C1)[C@H]([C@@H]3C[C@@H]4CCN3C[C@@H]4C=C)O&quot;</span><span class="p">,</span>
+    <span class="p">]</span>
+
+    <span class="n">smiles_unclear_to_test</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">&quot;C1CN2CCC1[C@@]3(C2)CC4=C(O3)N=CC=C4&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;C1c2cccnc2O[C@]11CN2CCC1CC2&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;C1CN2CCC1[C@H](C2)OC(=O)N3CCC4=CC=CC=C4[C@@H]3C5=CC=CC=C5&quot;</span><span class="p">,</span>
+    <span class="p">]</span>
+
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Undefined:&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">smiles</span> <span class="ow">in</span> <span class="n">smiles_undefined_to_test</span><span class="p">:</span>
+        <span class="n">check_expectations</span><span class="p">(</span><span class="n">smiles</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Defined:&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">smiles</span> <span class="ow">in</span> <span class="n">smiles_defined_to_test</span><span class="p">:</span>
+        <span class="n">check_expectations</span><span class="p">(</span><span class="n">smiles</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+    <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Unclear:&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">smiles</span> <span class="ow">in</span> <span class="n">smiles_unclear_to_test</span><span class="p">:</span>
+        <span class="n">check_expectations</span><span class="p">(</span><span class="n">smiles</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Adriano Rutz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

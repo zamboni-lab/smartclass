@@ -1,0 +1,6 @@
+get_num_matched_atoms_bonds
+===========================
+
+.. currentmodule:: smartclass
+
+.. autofunction:: get_num_matched_atoms_bonds

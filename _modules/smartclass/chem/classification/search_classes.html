@@ -1,0 +1,374 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>smartclass.chem.classification.search_classes &mdash; smartclass 0.0.1-dev documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/autodoc_pydantic.css" />
+
+  
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=03180e26"></script>
+      <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            smartclass
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../cli.html">Command Line Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../reference.html">Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">smartclass</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">smartclass.chem.classification.search_classes</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for smartclass.chem.classification.search_classes</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Substructure search for chemical classes.</span>
+
+<span class="sd">This module provides the main classification functionality for smartclass,</span>
+<span class="sd">matching chemical structures against SMARTS-based chemical class definitions.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">rdkit.Chem</span><span class="w"> </span><span class="kn">import</span> <span class="n">SubstructMatchParameters</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">smartclass.chem.classification.bfs_search_classes_generator</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">tqdm_bfs_search_classes_generator</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">smartclass.chem.conversion.convert_smiles_to_mol</span><span class="w"> </span><span class="kn">import</span> <span class="n">convert_smiles_to_mol</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">smartclass.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_config</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">smartclass.io</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">export_results</span><span class="p">,</span>
+    <span class="n">load_external_classes_file</span><span class="p">,</span>
+    <span class="n">load_pkg_chemical_hierarchy</span><span class="p">,</span>
+    <span class="n">load_pkg_classes</span><span class="p">,</span>
+    <span class="n">load_smiles</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">smartclass.logging</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_logger</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">smartclass.resources.chembl</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_latest_chembl</span>
+
+
+<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">rdkit.Chem</span><span class="w"> </span><span class="kn">import</span> <span class="n">Mol</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;search_classes&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">get_logger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="c1"># Result field names for export</span>
+<span class="n">RESULT_FIELDS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;class_id&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;class_structure&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;structure_inchikey&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;structure_smarts&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;structure_ab&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;matched_ab&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_parse_smiles_to_mols</span><span class="p">(</span><span class="n">smiles_set</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Mol</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert a set of SMILES strings to RDKit Mol objects.</span>
+
+<span class="sd">    :param smiles_set: Set of SMILES strings to convert.</span>
+<span class="sd">    :returns: List of valid Mol objects (invalid SMILES are filtered out).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">structures</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">smi</span> <span class="ow">in</span> <span class="n">smiles_set</span><span class="p">:</span>
+        <span class="c1"># Skip header rows that might be in the data</span>
+        <span class="k">if</span> <span class="n">smi</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;smiles&quot;</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="n">mol</span> <span class="o">=</span> <span class="n">convert_smiles_to_mol</span><span class="p">(</span><span class="n">smi</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">mol</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">structures</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to parse SMILES: </span><span class="si">{</span><span class="n">smi</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">structures</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_load_classes</span><span class="p">(</span>
+    <span class="n">classes_file</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">classes_name_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">classes_name_smarts</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Load chemical classes from file or package defaults.</span>
+
+<span class="sd">    :param classes_file: Optional path to external classes file.</span>
+<span class="sd">    :param classes_name_id: Name of ID column in external file.</span>
+<span class="sd">    :param classes_name_smarts: Name of SMARTS column in external file.</span>
+<span class="sd">    :returns: List containing a dictionary mapping class IDs to SMARTS patterns.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">classes_file</span><span class="p">:</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">load_external_classes_file</span><span class="p">(</span>
+            <span class="n">file</span><span class="o">=</span><span class="n">classes_file</span><span class="p">,</span>
+            <span class="n">id_name</span><span class="o">=</span><span class="n">classes_name_id</span><span class="p">,</span>
+            <span class="n">smarts_name</span><span class="o">=</span><span class="n">classes_name_smarts</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;No classes file provided, loading default package classes.&quot;</span><span class="p">)</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">load_pkg_classes</span><span class="p">()</span>
+
+    <span class="c1"># Build dictionary mapping class_id to list of SMARTS patterns</span>
+    <span class="n">classes_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">c</span><span class="o">.</span><span class="n">iter_rows</span><span class="p">():</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">classes_dict</span><span class="p">:</span>
+            <span class="n">classes_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">classes_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">value</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="p">[</span><span class="n">classes_dict</span><span class="p">]</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_filter_closest_matches</span><span class="p">(</span><span class="n">results</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Filter results to keep only the closest class match for each structure.</span>
+
+<span class="sd">    :param results: List of classification results.</span>
+<span class="sd">    :returns: Filtered list with only closest matches per InChIKey.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">max_ab_per_inchikey</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+        <span class="n">inchikey</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;structure_inchikey&quot;</span><span class="p">]</span>
+        <span class="n">matched_ab</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;matched_ab&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="n">inchikey</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">max_ab_per_inchikey</span>
+            <span class="ow">or</span> <span class="n">matched_ab</span> <span class="o">&gt;</span> <span class="n">max_ab_per_inchikey</span><span class="p">[</span><span class="n">inchikey</span><span class="p">]</span>
+        <span class="p">):</span>
+            <span class="n">max_ab_per_inchikey</span><span class="p">[</span><span class="n">inchikey</span><span class="p">]</span> <span class="o">=</span> <span class="n">matched_ab</span>
+
+    <span class="k">return</span> <span class="p">[</span>
+        <span class="n">result</span>
+        <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span>
+        <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;matched_ab&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">max_ab_per_inchikey</span><span class="p">[</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;structure_inchikey&quot;</span><span class="p">]]</span>
+    <span class="p">]</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_export_classification_results</span><span class="p">(</span>
+    <span class="n">results</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">],</span>
+    <span class="n">output_dir</span><span class="p">:</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Export classification results to multiple formats.</span>
+
+<span class="sd">    :param results: List of classification results to export.</span>
+<span class="sd">    :param output_dir: Directory for output files. Uses config default if None.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">results</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;No results to export.&quot;</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="n">config</span> <span class="o">=</span> <span class="n">get_config</span><span class="p">()</span>
+    <span class="n">output_path</span> <span class="o">=</span> <span class="n">output_dir</span> <span class="ow">or</span> <span class="n">config</span><span class="o">.</span><span class="n">output_dir</span>
+
+    <span class="c1"># Export sorted by matched_ab (descending)</span>
+    <span class="n">results_by_match</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;matched_ab&quot;</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">export_results</span><span class="p">(</span>
+        <span class="n">output</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">output_path</span> <span class="o">/</span> <span class="s2">&quot;results_by_class.tsv&quot;</span><span class="p">),</span>
+        <span class="n">results</span><span class="o">=</span><span class="n">results_by_match</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Export sorted by structure</span>
+    <span class="n">results_by_structure</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span>
+        <span class="n">results_by_match</span><span class="p">,</span>
+        <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="s2">&quot;structure_inchikey&quot;</span><span class="p">],</span>
+    <span class="p">)</span>
+    <span class="n">export_results</span><span class="p">(</span>
+        <span class="n">output</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">output_path</span> <span class="o">/</span> <span class="s2">&quot;results_by_structure.tsv&quot;</span><span class="p">),</span>
+        <span class="n">results</span><span class="o">=</span><span class="n">results_by_structure</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Results exported to </span><span class="si">{</span><span class="n">output_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="search_classes">
+<a class="viewcode-back" href="../../../../api/smartclass.search_classes.html#smartclass.search_classes">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">search_classes</span><span class="p">(</span>
+    <span class="n">classes_file</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">classes_name_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">classes_name_smarts</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">closest_only</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">include_hierarchy</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">input_smiles</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">smiles</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">export</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">output_dir</span><span class="p">:</span> <span class="n">Path</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Perform substructure search to classify chemical structures.</span>
+
+<span class="sd">    This function matches input structures against a set of chemical class</span>
+<span class="sd">    definitions using SMARTS patterns. Results include the class ID, matching</span>
+<span class="sd">    SMARTS pattern, and structural similarity metrics.</span>
+
+<span class="sd">    :param classes_file: Path to TSV file with chemical class definitions.</span>
+<span class="sd">        If None, uses the default package classes.</span>
+<span class="sd">    :param classes_name_id: Column name for class IDs in the classes file.</span>
+<span class="sd">        Defaults to &quot;class&quot;.</span>
+<span class="sd">    :param classes_name_smarts: Column name for SMARTS in the classes file.</span>
+<span class="sd">        Defaults to &quot;structure&quot;.</span>
+<span class="sd">    :param closest_only: If True, return only the closest matching class</span>
+<span class="sd">        for each structure. Default is True.</span>
+<span class="sd">    :param include_hierarchy: If True, use chemical hierarchy for faster</span>
+<span class="sd">        searching. Default is False.</span>
+<span class="sd">    :param input_smiles: Path to file containing SMILES strings to classify.</span>
+<span class="sd">    :param smiles: Single SMILES string or list of SMILES to classify.</span>
+<span class="sd">    :param export: If True, export results to files. Default is True.</span>
+<span class="sd">    :param output_dir: Directory for output files. Uses config default if None.</span>
+<span class="sd">    :returns: List of dictionaries with classification results.</span>
+<span class="sd">    :raises ValueError: If no structures are provided and ChEMBL fallback fails.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Set column name defaults</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">classes_name_id</span><span class="p">:</span>
+        <span class="n">classes_name_id</span> <span class="o">=</span> <span class="s2">&quot;class&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">classes_name_smarts</span><span class="p">:</span>
+        <span class="n">classes_name_smarts</span> <span class="o">=</span> <span class="s2">&quot;structure&quot;</span>
+
+    <span class="c1"># Collect SMILES from all sources</span>
+    <span class="n">smiles_set</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">input_smiles</span><span class="p">:</span>
+        <span class="n">smiles_set</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">load_smiles</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="n">input_smiles</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">smiles</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">smiles</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">smiles_set</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">smiles</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">smiles_set</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">smiles</span><span class="p">)</span>
+
+    <span class="c1"># Convert SMILES to Mol objects</span>
+    <span class="n">structures</span> <span class="o">=</span> <span class="n">_parse_smiles_to_mols</span><span class="p">(</span><span class="n">smiles_set</span><span class="p">)</span>
+
+    <span class="c1"># Fallback to ChEMBL if no structures provided</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">structures</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;No structures provided, loading ChEMBL library as fallback.&quot;</span><span class="p">)</span>
+        <span class="n">structures</span> <span class="o">=</span> <span class="n">load_latest_chembl</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">structures</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No structures available for classification.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Load chemical classes</span>
+    <span class="n">classes</span> <span class="o">=</span> <span class="n">_load_classes</span><span class="p">(</span><span class="n">classes_file</span><span class="p">,</span> <span class="n">classes_name_id</span><span class="p">,</span> <span class="n">classes_name_smarts</span><span class="p">)</span>
+
+    <span class="c1"># Load class hierarchy if requested</span>
+    <span class="n">class_hierarchy</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">if</span> <span class="n">include_hierarchy</span><span class="p">:</span>
+        <span class="n">class_hierarchy</span> <span class="o">=</span> <span class="n">load_pkg_chemical_hierarchy</span><span class="p">()</span>
+
+    <span class="c1"># Configure substructure matching parameters</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="n">SubstructMatchParameters</span><span class="p">()</span>
+    <span class="n">params</span><span class="o">.</span><span class="n">useGenericMatchers</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;Classifying </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">structures</span><span class="p">)</span><span class="si">}</span><span class="s2"> structures &quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;against </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">classes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="si">}</span><span class="s2"> chemical classes...&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Perform classification</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
+        <span class="n">tqdm_bfs_search_classes_generator</span><span class="p">(</span>
+            <span class="n">classes</span><span class="o">=</span><span class="n">classes</span><span class="p">,</span>
+            <span class="n">class_hierarchy</span><span class="o">=</span><span class="n">class_hierarchy</span><span class="p">,</span>
+            <span class="n">structures</span><span class="o">=</span><span class="n">structures</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Filter to closest matches if requested</span>
+    <span class="k">if</span> <span class="n">closest_only</span> <span class="ow">and</span> <span class="n">results</span><span class="p">:</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">_filter_closest_matches</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+
+    <span class="c1"># Export results</span>
+    <span class="k">if</span> <span class="n">export</span> <span class="ow">and</span> <span class="n">results</span><span class="p">:</span>
+        <span class="n">output_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">output_dir</span><span class="p">)</span> <span class="k">if</span> <span class="n">output_dir</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="n">_export_classification_results</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">output_path</span><span class="p">)</span>
+
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Classification complete. Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)</span><span class="si">}</span><span class="s2"> matches.&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">results</span></div>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">search_classes</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Adriano Rutz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,265 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>smartclass.config &mdash; smartclass 0.0.1-dev documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../../_static/autodoc_pydantic.css" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=03180e26"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            smartclass
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cli.html">Command Line Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference.html">Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">smartclass</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">smartclass.config</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for smartclass.config</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Centralized configuration management for smartclass.</span>
+
+<span class="sd">This module provides configuration settings with sensible defaults that can be</span>
+<span class="sd">overridden via environment variables or programmatically.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClassVar</span>
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;Config&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;get_config&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;reset_config&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Config</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration settings for smartclass.</span>
+
+<span class="sd">    Settings can be overridden via environment variables prefixed with SMARTCLASS_.</span>
+<span class="sd">    For example, SMARTCLASS_OUTPUT_DIR=/path/to/output.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        output_dir: Directory for output files (default: &quot;output&quot;).</span>
+<span class="sd">        cache_dir: Directory for cached data (default: &quot;.smartclass_cache&quot;).</span>
+<span class="sd">        wikidata_endpoint: Default Wikidata SPARQL endpoint URL.</span>
+<span class="sd">        qlever_endpoint: Fallback QLever SPARQL endpoint URL.</span>
+<span class="sd">        http_timeout: Default HTTP request timeout in seconds.</span>
+<span class="sd">        http_max_retries: Maximum number of HTTP retry attempts.</span>
+<span class="sd">        http_base_delay: Base delay for exponential backoff in seconds.</span>
+<span class="sd">        chembl_fp_length: Default fingerprint length for ChEMBL processing.</span>
+<span class="sd">        chembl_max_atoms: Maximum number of atoms for ChEMBL molecules.</span>
+<span class="sd">        chembl_report_interval: Reporting interval for ChEMBL processing.</span>
+<span class="sd">        mcs_timeout: Timeout for MCS calculations in seconds.</span>
+<span class="sd">        mcs_threshold: Default threshold for MCS calculations.</span>
+<span class="sd">        log_level: Logging level (DEBUG, INFO, WARNING, ERROR, CRITICAL).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Output settings</span>
+    <span class="n">output_dir</span><span class="p">:</span> <span class="n">Path</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;output&quot;</span><span class="p">))</span>
+    <span class="n">cache_dir</span><span class="p">:</span> <span class="n">Path</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;.smartclass_cache&quot;</span><span class="p">))</span>
+
+    <span class="c1"># SPARQL endpoints</span>
+    <span class="n">wikidata_endpoint</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;https://query.wikidata.org/sparql&quot;</span>
+    <span class="n">qlever_endpoint</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;https://qlever.dev/api/wikidata&quot;</span>
+
+    <span class="c1"># HTTP settings</span>
+    <span class="n">http_timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">60</span>
+    <span class="n">http_max_retries</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">http_base_delay</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">2.0</span>
+
+    <span class="c1"># ChEMBL processing settings</span>
+    <span class="n">chembl_fp_length</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2048</span>
+    <span class="n">chembl_max_atoms</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span>
+    <span class="n">chembl_report_interval</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50000</span>
+    <span class="n">chembl_tautomer_fingerprints</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="c1"># MCS settings</span>
+    <span class="n">mcs_timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">60</span>
+    <span class="n">mcs_threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.7</span>
+
+    <span class="c1"># Logging</span>
+    <span class="n">log_level</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;INFO&quot;</span>
+
+    <span class="c1"># User agent for HTTP requests</span>
+    <span class="n">user_agent</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;SmartClassBot/1.0 (https://github.com/zamboni-lab/smartclass)&quot;</span>
+
+    <span class="c1"># Environment variable prefix</span>
+    <span class="n">_ENV_PREFIX</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;SMARTCLASS_&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Load settings from environment variables after initialization.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_load_from_env</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ensure_directories</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_load_from_env</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Override settings from environment variables.&quot;&quot;&quot;</span>
+        <span class="n">env_mappings</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;OUTPUT_DIR&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;output_dir&quot;</span><span class="p">,</span> <span class="n">Path</span><span class="p">),</span>
+            <span class="s2">&quot;CACHE_DIR&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;cache_dir&quot;</span><span class="p">,</span> <span class="n">Path</span><span class="p">),</span>
+            <span class="s2">&quot;WIKIDATA_ENDPOINT&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;wikidata_endpoint&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">),</span>
+            <span class="s2">&quot;QLEVER_ENDPOINT&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;qlever_endpoint&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">),</span>
+            <span class="s2">&quot;HTTP_TIMEOUT&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;http_timeout&quot;</span><span class="p">,</span> <span class="nb">int</span><span class="p">),</span>
+            <span class="s2">&quot;HTTP_MAX_RETRIES&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;http_max_retries&quot;</span><span class="p">,</span> <span class="nb">int</span><span class="p">),</span>
+            <span class="s2">&quot;HTTP_BASE_DELAY&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;http_base_delay&quot;</span><span class="p">,</span> <span class="nb">float</span><span class="p">),</span>
+            <span class="s2">&quot;CHEMBL_FP_LENGTH&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;chembl_fp_length&quot;</span><span class="p">,</span> <span class="nb">int</span><span class="p">),</span>
+            <span class="s2">&quot;CHEMBL_MAX_ATOMS&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;chembl_max_atoms&quot;</span><span class="p">,</span> <span class="nb">int</span><span class="p">),</span>
+            <span class="s2">&quot;CHEMBL_REPORT_INTERVAL&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;chembl_report_interval&quot;</span><span class="p">,</span> <span class="nb">int</span><span class="p">),</span>
+            <span class="s2">&quot;MCS_TIMEOUT&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;mcs_timeout&quot;</span><span class="p">,</span> <span class="nb">int</span><span class="p">),</span>
+            <span class="s2">&quot;MCS_THRESHOLD&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;mcs_threshold&quot;</span><span class="p">,</span> <span class="nb">float</span><span class="p">),</span>
+            <span class="s2">&quot;LOG_LEVEL&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;log_level&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">),</span>
+            <span class="s2">&quot;USER_AGENT&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;user_agent&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">),</span>
+        <span class="p">}</span>
+
+        <span class="k">for</span> <span class="n">env_suffix</span><span class="p">,</span> <span class="p">(</span><span class="n">attr_name</span><span class="p">,</span> <span class="n">type_converter</span><span class="p">)</span> <span class="ow">in</span> <span class="n">env_mappings</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">env_var</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_ENV_PREFIX</span><span class="si">}{</span><span class="n">env_suffix</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="n">env_value</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">env_var</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">env_value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr_name</span><span class="p">,</span> <span class="n">type_converter</span><span class="p">(</span><span class="n">env_value</span><span class="p">))</span>
+                <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">TypeError</span><span class="p">):</span>
+                    <span class="k">pass</span>  <span class="c1"># Keep default if conversion fails</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_ensure_directories</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create output and cache directories if they don&#39;t exist.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cache_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_output_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get full path for an output file.</span>
+
+<span class="sd">        :param filename: Name of the output file.</span>
+<span class="sd">        :returns: Full path to the output file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span> <span class="o">/</span> <span class="n">filename</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_cache_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get full path for a cache file.</span>
+
+<span class="sd">        :param filename: Name of the cache file.</span>
+<span class="sd">        :returns: Full path to the cache file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache_dir</span> <span class="o">/</span> <span class="n">filename</span>
+
+
+<span class="c1"># Global configuration instance (singleton pattern)</span>
+<span class="n">_config</span><span class="p">:</span> <span class="n">Config</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+
+
+<div class="viewcode-block" id="get_config">
+<a class="viewcode-back" href="../../api/smartclass.get_config.html#smartclass.get_config">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_config</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Config</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the global configuration instance.</span>
+
+<span class="sd">    Creates a new Config instance on first call, then returns the same</span>
+<span class="sd">    instance on subsequent calls.</span>
+
+<span class="sd">    :returns: The global Config instance.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">global</span> <span class="n">_config</span>
+    <span class="k">if</span> <span class="n">_config</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">_config</span> <span class="o">=</span> <span class="n">Config</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">_config</span></div>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">reset_config</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Reset the global configuration to None.</span>
+
+<span class="sd">    Useful for testing or when you need to reload configuration.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">global</span> <span class="n">_config</span>
+    <span class="n">_config</span> <span class="o">=</span> <span class="kc">None</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Adriano Rutz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

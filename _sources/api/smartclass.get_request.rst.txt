@@ -1,0 +1,6 @@
+get_request
+===========
+
+.. currentmodule:: smartclass
+
+.. autofunction:: get_request

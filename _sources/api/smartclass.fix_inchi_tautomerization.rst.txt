@@ -1,0 +1,6 @@
+fix_inchi_tautomerization
+=========================
+
+.. currentmodule:: smartclass
+
+.. autofunction:: fix_inchi_tautomerization

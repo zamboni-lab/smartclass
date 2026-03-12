@@ -1,0 +1,399 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Command Line Interface &mdash; smartclass 0.0.1-dev documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/autodoc_pydantic.css" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=03180e26"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Reference" href="reference.html" />
+    <link rel="prev" title="Usage" href="usage.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            smartclass
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Command Line Interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#smartclass">smartclass</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#smartclass-combinecsvfiles">combinecsvfiles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#smartclass-getlatestchembl">getlatestchembl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#smartclass-loadpkgdata">loadpkgdata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#smartclass-querywikidata">querywikidata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#smartclass-searchclasses">searchclasses</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="reference.html">Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">smartclass</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Command Line Interface</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/cli.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="command-line-interface">
+<h1>Command Line Interface<a class="headerlink" href="#command-line-interface" title="Link to this heading"></a></h1>
+<p>smartclass automatically installs the command <code class="code docutils literal notranslate"><span class="pre">smartclass</span></code>.
+See <code class="code docutils literal notranslate"><span class="pre">smartclass</span> <span class="pre">--help</span></code> for usage details.</p>
+<section id="smartclass">
+<h2>smartclass<a class="headerlink" href="#smartclass" title="Link to this heading"></a></h2>
+<p>Smartclass - Classify chemical structures using SMARTS patterns.</p>
+<p>A tool for classifying chemical structures against SMARTS-based
+chemical class definitions from Wikidata or custom sources.</p>
+<div class="line-block">
+<div class="line">Examples:</div>
+<div class="line-block">
+<div class="line"># Classify a single molecule</div>
+<div class="line">smartclass searchclasses -s “CCO” -c classes.tsv</div>
+</div>
+</div>
+<blockquote>
+<div><p># Query Wikidata for chemical classes
+smartclass querywikidata -q query.rq -o output.tsv</p>
+</div></blockquote>
+<p class="rubric">Usage</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>smartclass<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span><span class="w"> </span>COMMAND<span class="w"> </span><span class="o">[</span>ARGS<span class="o">]</span>...
+</pre></div>
+</div>
+<p class="rubric">Options</p>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-smartclass-version">
+<span class="sig-name descname"><span class="pre">--version</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-smartclass-version" title="Link to this definition"></a></dt>
+<dd><p>Show the version and exit.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-smartclass-v">
+<span id="cmdoption-smartclass-verbose"></span><span class="sig-name descname"><span class="pre">-v</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--verbose</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-smartclass-v" title="Link to this definition"></a></dt>
+<dd><p>Increase verbosity (-v for INFO, -vv for DEBUG).</p>
+</dd></dl>
+
+<section id="smartclass-combinecsvfiles">
+<h3>combinecsvfiles<a class="headerlink" href="#smartclass-combinecsvfiles" title="Link to this heading"></a></h3>
+<p>Combine multiple CSV/TSV files into one.</p>
+<p>Merges rows from multiple input files with the same schema.</p>
+<p class="rubric">Usage</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>smartclass<span class="w"> </span>combinecsvfiles<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span>
+</pre></div>
+</div>
+<p class="rubric">Options</p>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-smartclass-combinecsvfiles-i">
+<span id="cmdoption-smartclass-combinecsvfiles-input-file"></span><span class="sig-name descname"><span class="pre">-i</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--input-file</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;input_file&gt;</span></span><a class="headerlink" href="#cmdoption-smartclass-combinecsvfiles-i" title="Link to this definition"></a></dt>
+<dd><p><strong>Required</strong> Input CSV/TSV file(s) to combine.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-smartclass-combinecsvfiles-o">
+<span id="cmdoption-smartclass-combinecsvfiles-output"></span><span class="sig-name descname"><span class="pre">-o</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--output</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;output&gt;</span></span><a class="headerlink" href="#cmdoption-smartclass-combinecsvfiles-o" title="Link to this definition"></a></dt>
+<dd><p><strong>Required</strong> Output file path.</p>
+</dd></dl>
+
+</section>
+<section id="smartclass-getlatestchembl">
+<h3>getlatestchembl<a class="headerlink" href="#smartclass-getlatestchembl" title="Link to this heading"></a></h3>
+<p>Download and process the latest ChEMBL database.</p>
+<p>Generates fingerprints for molecules in ChEMBL for use in
+classification and similarity searches.</p>
+<p class="rubric">Usage</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>smartclass<span class="w"> </span>getlatestchembl<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span>
+</pre></div>
+</div>
+<p class="rubric">Options</p>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-smartclass-getlatestchembl-f">
+<span id="cmdoption-smartclass-getlatestchembl-fp-len"></span><span class="sig-name descname"><span class="pre">-f</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--fp-len</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;fp_len&gt;</span></span><a class="headerlink" href="#cmdoption-smartclass-getlatestchembl-f" title="Link to this definition"></a></dt>
+<dd><p>Fingerprint length for molecular fingerprints.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">2048</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-smartclass-getlatestchembl-m">
+<span id="cmdoption-smartclass-getlatestchembl-max-atoms"></span><span class="sig-name descname"><span class="pre">-m</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--max-atoms</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;max_atoms&gt;</span></span><a class="headerlink" href="#cmdoption-smartclass-getlatestchembl-m" title="Link to this definition"></a></dt>
+<dd><p>Maximum number of atoms in molecules to process.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">50</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-smartclass-getlatestchembl-r">
+<span id="cmdoption-smartclass-getlatestchembl-report-interval"></span><span class="sig-name descname"><span class="pre">-r</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--report-interval</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;report_interval&gt;</span></span><a class="headerlink" href="#cmdoption-smartclass-getlatestchembl-r" title="Link to this definition"></a></dt>
+<dd><p>Progress reporting interval (number of molecules).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">50000</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-smartclass-getlatestchembl-t">
+<span id="cmdoption-smartclass-getlatestchembl-tautomer-fingerprints"></span><span id="cmdoption-smartclass-getlatestchembl-no-tautomer-fingerprints"></span><span class="sig-name descname"><span class="pre">-t</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--tautomer-fingerprints</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--no-tautomer-fingerprints</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-smartclass-getlatestchembl-t" title="Link to this definition"></a></dt>
+<dd><p>Include tautomer fingerprints in output.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">True</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="smartclass-loadpkgdata">
+<h3>loadpkgdata<a class="headerlink" href="#smartclass-loadpkgdata" title="Link to this heading"></a></h3>
+<p>Load and display bundled package data.</p>
+<p>Shows the chemical classes, mappings, and MIA data included
+with the smartclass package.</p>
+<p class="rubric">Usage</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>smartclass<span class="w"> </span>loadpkgdata<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span>
+</pre></div>
+</div>
+</section>
+<section id="smartclass-querywikidata">
+<h3>querywikidata<a class="headerlink" href="#smartclass-querywikidata" title="Link to this heading"></a></h3>
+<p>Query Wikidata using SPARQL and export results.</p>
+<p>Execute a SPARQL query against Wikidata and optionally apply
+chemical transformations to the results.</p>
+<p>Examples:</p>
+<div class="line-block">
+<div class="line"># Get chemical classes with SMARTS</div>
+<div class="line">smartclass querywikidata -q classes_smarts.rq -o classes.tsv</div>
+</div>
+<div class="line-block">
+<div class="line"># Generate InChIKeys from InChI</div>
+<div class="line">smartclass querywikidata -q inchi.rq -t transform_inchi_to_inchikey -o keys.csv</div>
+</div>
+<p class="rubric">Usage</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>smartclass<span class="w"> </span>querywikidata<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span>
+</pre></div>
+</div>
+<p class="rubric">Options</p>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-smartclass-querywikidata-q">
+<span id="cmdoption-smartclass-querywikidata-query"></span><span class="sig-name descname"><span class="pre">-q</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--query</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;query&gt;</span></span><a class="headerlink" href="#cmdoption-smartclass-querywikidata-q" title="Link to this definition"></a></dt>
+<dd><p><strong>Required</strong> Path to SPARQL query file (.rq).</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-smartclass-querywikidata-o">
+<span id="cmdoption-smartclass-querywikidata-output"></span><span class="sig-name descname"><span class="pre">-o</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--output</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;output&gt;</span></span><a class="headerlink" href="#cmdoption-smartclass-querywikidata-o" title="Link to this definition"></a></dt>
+<dd><p><strong>Required</strong> Output file path (CSV or TSV based on extension).</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-smartclass-querywikidata-r">
+<span id="cmdoption-smartclass-querywikidata-remove-prefix"></span><span id="cmdoption-smartclass-querywikidata-keep-prefix"></span><span class="sig-name descname"><span class="pre">-r</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--remove-prefix</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--keep-prefix</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-smartclass-querywikidata-r" title="Link to this definition"></a></dt>
+<dd><p>Remove Wikidata entity prefix from results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">True</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-smartclass-querywikidata-t">
+<span id="cmdoption-smartclass-querywikidata-transform"></span><span class="sig-name descname"><span class="pre">-t</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--transform</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;transform&gt;</span></span><a class="headerlink" href="#cmdoption-smartclass-querywikidata-t" title="Link to this definition"></a></dt>
+<dd><p>Apply a transformation to query results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Options<span class="colon">:</span></dt>
+<dd class="field-odd"><p>check_smiles | transform_inchi_to_inchikey | transform_inchi_to_mass | transform_inchi_to_smiles_canonical | transform_inchi_to_smiles_isomeric | transform_smiles_to_formula | transform_smiles_to_inchi | transform_smiles_to_mass | transform_smiles_i_to_smiles_c | transform_formula_to_formula</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-smartclass-querywikidata-u">
+<span id="cmdoption-smartclass-querywikidata-url"></span><span class="sig-name descname"><span class="pre">-u</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--url</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;url&gt;</span></span><a class="headerlink" href="#cmdoption-smartclass-querywikidata-u" title="Link to this definition"></a></dt>
+<dd><p>SPARQL endpoint URL.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">'https://query.wikidata.org/sparql'</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="smartclass-searchclasses">
+<h3>searchclasses<a class="headerlink" href="#smartclass-searchclasses" title="Link to this heading"></a></h3>
+<p>Classify chemical structures against SMARTS-based classes.</p>
+<p>Match input SMILES strings against chemical class definitions
+using substructure searching. Results include the matched class
+and structural similarity metrics.</p>
+<p>Examples:</p>
+<div class="line-block">
+<div class="line"># Classify a single molecule</div>
+<div class="line">smartclass searchclasses -s “CCO” -c classes.tsv -v</div>
+</div>
+<div class="line-block">
+<div class="line"># Classify molecules from a file</div>
+<div class="line">smartclass searchclasses -i molecules.tsv -c classes.tsv</div>
+</div>
+<div class="line-block">
+<div class="line"># Get all matches, not just closest</div>
+<div class="line">smartclass searchclasses -s “CCO” -c classes.tsv –all-matches</div>
+</div>
+<p class="rubric">Usage</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>smartclass<span class="w"> </span>searchclasses<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span>
+</pre></div>
+</div>
+<p class="rubric">Options</p>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-smartclass-searchclasses-c">
+<span id="cmdoption-smartclass-searchclasses-classes-file"></span><span class="sig-name descname"><span class="pre">-c</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--classes-file</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;classes_file&gt;</span></span><a class="headerlink" href="#cmdoption-smartclass-searchclasses-c" title="Link to this definition"></a></dt>
+<dd><p>TSV file with chemical class definitions (class, structure columns).</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-smartclass-searchclasses-d">
+<span id="cmdoption-smartclass-searchclasses-classes-name-id"></span><span class="sig-name descname"><span class="pre">-d</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--classes-name-id</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;classes_name_id&gt;</span></span><a class="headerlink" href="#cmdoption-smartclass-searchclasses-d" title="Link to this definition"></a></dt>
+<dd><p>Column name for class identifiers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">'class'</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-smartclass-searchclasses-e">
+<span id="cmdoption-smartclass-searchclasses-classes-name-smarts"></span><span class="sig-name descname"><span class="pre">-e</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--classes-name-smarts</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;classes_name_smarts&gt;</span></span><a class="headerlink" href="#cmdoption-smartclass-searchclasses-e" title="Link to this definition"></a></dt>
+<dd><p>Column name for SMARTS patterns.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">'structure'</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-smartclass-searchclasses-f">
+<span id="cmdoption-smartclass-searchclasses-include-hierarchy"></span><span id="cmdoption-smartclass-searchclasses-no-hierarchy"></span><span class="sig-name descname"><span class="pre">-f</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--include-hierarchy</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--no-hierarchy</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-smartclass-searchclasses-f" title="Link to this definition"></a></dt>
+<dd><p>Use chemical hierarchy for faster BFS-based searching.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">False</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-smartclass-searchclasses-i">
+<span id="cmdoption-smartclass-searchclasses-input-smiles"></span><span class="sig-name descname"><span class="pre">-i</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--input-smiles</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;input_smiles&gt;</span></span><a class="headerlink" href="#cmdoption-smartclass-searchclasses-i" title="Link to this definition"></a></dt>
+<dd><p>Input file containing SMILES (CSV/TSV with ‘smiles’ column).</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-smartclass-searchclasses-s">
+<span id="cmdoption-smartclass-searchclasses-smiles"></span><span class="sig-name descname"><span class="pre">-s</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--smiles</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;smiles&gt;</span></span><a class="headerlink" href="#cmdoption-smartclass-searchclasses-s" title="Link to this definition"></a></dt>
+<dd><p>SMILES string(s) to classify. Can be specified multiple times.</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-smartclass-searchclasses-z">
+<span id="cmdoption-smartclass-searchclasses-closest-only"></span><span id="cmdoption-smartclass-searchclasses-all-matches"></span><span class="sig-name descname"><span class="pre">-z</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--closest-only</span></span><span class="sig-prename descclassname"></span><span class="sig-prename descclassname"><span class="pre">,</span> </span><span class="sig-name descname"><span class="pre">--all-matches</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-smartclass-searchclasses-z" title="Link to this definition"></a></dt>
+<dd><p>Return only closest matching class per structure.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">True</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="usage.html" class="btn btn-neutral float-left" title="Usage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="reference.html" class="btn btn-neutral float-right" title="Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Adriano Rutz.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

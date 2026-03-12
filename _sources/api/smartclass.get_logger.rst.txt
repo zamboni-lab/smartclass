@@ -1,0 +1,6 @@
+get_logger
+==========
+
+.. currentmodule:: smartclass
+
+.. autofunction:: get_logger

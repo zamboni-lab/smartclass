@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from rdkit.Chem import Mol, MolFromSmarts
+from rdkit.Chem import Mol, MolFromSmarts, MolFromSmiles
 
 from smartclass.chem.helpers.check_mol import check_mol
 
@@ -22,7 +22,10 @@ def convert_smarts_to_mol(smarts: str) -> Mol | None:
     :returns: A MOL.
     :rtype: Union[Mol, None]
     """
+    # Try SMARTS first; if that fails, fall back to SMILES/CXSMILES parsing.
     mol = MolFromSmarts(smarts)
+    if mol is None:
+        mol = MolFromSmiles(smarts)
 
     if mol is None:
         return None

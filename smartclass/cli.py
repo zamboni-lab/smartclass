@@ -33,6 +33,9 @@ DEFAULT_SMARTS_COLUMN = "structure"
 DEFAULT_WIKIDATA_ENDPOINT = "https://query.wikidata.org/sparql"
 DEFAULT_QUERY_FILE = Path("smartclass/data/queries/classes_smarts.rq")
 DEFAULT_QUERY_OUTPUT = Path("scratch/wikidata_classes_smarts.tsv")
+DEFAULT_CLASS_FILE_SMARTS = Path("scratch/wikidata_classes_smarts.tsv")
+DEFAULT_CLASS_FILE_SMILES = Path("scratch/wikidata_classes_smiles.tsv")
+DEFAULT_CLASS_FILE_CXSMILES = Path("scratch/wikidata_classes_cxsmiles.tsv")
 DEFAULT_CLASS_QUERY_BATCH: tuple[tuple[Path, Path], ...] = (
     (
         Path("smartclass/data/queries/classes_cxsmiles.rq"),
@@ -397,6 +400,136 @@ def searchclasses(
 
     click.echo(f"Classification complete. Found {len(results)} matches.")
     logger.info(f"Results: {results}")
+
+
+@main.command(name="searchclasses-all-sources")
+@click.option(
+    "--classes-smarts-file",
+    type=click.Path(exists=True, path_type=Path),
+    default=DEFAULT_CLASS_FILE_SMARTS,
+    show_default=True,
+    help="TSV file with SMARTS-based class definitions.",
+)
+@click.option(
+    "--classes-smiles-file",
+    type=click.Path(exists=True, path_type=Path),
+    default=DEFAULT_CLASS_FILE_SMILES,
+    show_default=True,
+    help="TSV file with SMILES-based class definitions.",
+)
+@click.option(
+    "--classes-cxsmiles-file",
+    type=click.Path(exists=True, path_type=Path),
+    default=DEFAULT_CLASS_FILE_CXSMILES,
+    show_default=True,
+    help="TSV file with CXSMILES-based class definitions.",
+)
+@click.option(
+    "-f",
+    "--include-hierarchy/--no-hierarchy",
+    default=True,
+    help="Use chemical hierarchy for faster BFS-based searching.",
+)
+@click.option(
+    "-i",
+    "--input-smiles",
+    type=click.Path(exists=True, path_type=Path),
+    help="Input file containing SMILES (CSV/TSV with 'smiles' column).",
+)
+@click.option(
+    "-s",
+    "--smiles",
+    type=str,
+    multiple=True,
+    help="SMILES string(s) to classify. Can be specified multiple times.",
+)
+@click.option(
+    "-z",
+    "--closest-only/--all-matches",
+    default=False,
+    help="Return only closest matching class per structure.",
+)
+@click.option(
+    "--output-dir",
+    type=click.Path(path_type=Path),
+    default=None,
+    help="Directory for combined output files.",
+)
+def searchclasses_all_sources(
+    classes_smarts_file: Path,
+    classes_smiles_file: Path,
+    classes_cxsmiles_file: Path,
+    closest_only: bool,
+    include_hierarchy: bool,
+    input_smiles: Path | None,
+    smiles: tuple[str, ...],
+    output_dir: Path | None,
+) -> None:
+    """Classify structures against SMARTS, SMILES, and CXSMILES class sources.
+
+    This command runs three classification passes and combines the results,
+    adding a `class_source` field (`smarts`, `smiles`, `cxsmiles`).
+    """
+    from smartclass.chem.classification import search_classes
+    from smartclass.config import get_config
+    from smartclass.io import export_results
+
+    if not smiles and not input_smiles:
+        raise click.UsageError("Must provide either --smiles or --input-smiles")
+
+    class_sources: list[tuple[str, Path, str, str]] = [
+        ("smarts", classes_smarts_file, "class", "structure"),
+        ("smiles", classes_smiles_file, "structure", "smiles"),
+        ("cxsmiles", classes_cxsmiles_file, "class", "structure"),
+    ]
+
+    combined_results: list[dict] = []
+    for source_name, class_file, id_col, structure_col in class_sources:
+        click.echo(f"Running classification for source: {source_name} ({class_file})")
+        source_results = search_classes(
+            classes_file=str(class_file),
+            classes_name_id=id_col,
+            classes_name_smarts=structure_col,
+            closest_only=closest_only,
+            include_hierarchy=include_hierarchy,
+            input_smiles=str(input_smiles) if input_smiles else None,
+            smiles=list(smiles) if smiles else None,
+            export=False,
+        )
+        for result in source_results:
+            result["class_source"] = source_name
+        combined_results.extend(source_results)
+
+    if not combined_results:
+        click.echo("Classification complete. Found 0 combined matches.")
+        return
+
+    output_path = output_dir or get_config().output_dir
+    output_path.mkdir(parents=True, exist_ok=True)
+
+    results_by_match = sorted(
+        combined_results,
+        key=lambda x: x["matched_ab"],
+        reverse=True,
+    )
+    export_results(
+        output=str(output_path / "results_all_sources_by_class.tsv"),
+        results=results_by_match,
+    )
+
+    results_by_structure = sorted(
+        results_by_match,
+        key=lambda x: x["structure_inchikey"],
+    )
+    export_results(
+        output=str(output_path / "results_all_sources_by_structure.tsv"),
+        results=results_by_structure,
+    )
+
+    click.echo(
+        "Classification complete. "
+        f"Found {len(combined_results)} combined matches across all class sources.",
+    )
 
 
 if __name__ == "__main__":

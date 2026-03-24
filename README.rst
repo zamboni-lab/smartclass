@@ -51,9 +51,7 @@ Classify compounds
     uv run smartclass searchclasses -s "O=C1OC2CC3C(C=C(OC)C(=O)C3(C)C4C(=O)C(OC)=C(C)C(C1)C24C)C" -c scratch/wikidata_classes_smarts.tsv --verbose
     uv run smartclass searchclasses -s "O=C1OC2CC3C(C=C(OC)C(=O)C3(C)C4C(=O)C(OC)=C(C)C(C1)C24C)C" -c scratch/wikidata_classes_smarts.tsv --closest-only False --verbose
     uv run smartclass searchclasses -i smartclass/data/bitter_smiles.tsv -c scratch/wikidata_classes_smarts.tsv
-    # uv run smartclass searchclasses -i scratch/wikidata_chemicals_smiles.tsv -c scratch/wikidata_classes_smarts.tsv --closest-only False
-    # TODO Improve classes taxonomy
-    # uv run smartclass searchclasses -i scratch/wikidata_classes_smiles.tsv -c scratch/wikidata_classes_smarts.tsv --closest-only False
+    # uv run smartclass searchclasses -i scratch/wikidata_chemicals_smiles.tsv -c scratch/wikidata_classes_smarts.tsv --all-matches
 
 🤯 Future steps (not fully available now)
 -----------------------------------------

@@ -117,8 +117,8 @@ if __name__ == "__main__":
             "scratch/wikidata_classes_smarts.tsv",
         ),
         (
-            "smartclass/data/queries/classes_smiles.rq",
-            "scratch/wikidata_classes_smiles.tsv",
+            "smartclass/data/queries/classes_smiles_canonical.rq",
+            "scratch/wikidata_classes_smiles_canonical.tsv",
         ),
         (
             "smartclass/data/queries/classes_smiles_isomeric.rq",

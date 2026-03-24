@@ -31,6 +31,30 @@ logger = get_logger(__name__)
 DEFAULT_ID_COLUMN = "class"
 DEFAULT_SMARTS_COLUMN = "structure"
 DEFAULT_WIKIDATA_ENDPOINT = "https://query.wikidata.org/sparql"
+DEFAULT_QUERY_FILE = Path("smartclass/data/queries/classes_smarts.rq")
+DEFAULT_QUERY_OUTPUT = Path("scratch/wikidata_classes_smarts.tsv")
+DEFAULT_CLASS_QUERY_BATCH: tuple[tuple[Path, Path], ...] = (
+    (
+        Path("smartclass/data/queries/classes_cxsmiles.rq"),
+        Path("scratch/wikidata_classes_cxsmiles.tsv"),
+    ),
+    (
+        Path("smartclass/data/queries/classes_smarts.rq"),
+        Path("scratch/wikidata_classes_smarts.tsv"),
+    ),
+    (
+        Path("smartclass/data/queries/classes_smiles_canonical.rq"),
+        Path("scratch/wikidata_classes_smiles_canonical.tsv"),
+    ),
+    (
+        Path("smartclass/data/queries/classes_smiles_isomeric.rq"),
+        Path("scratch/wikidata_classes_smiles_isomeric.tsv"),
+    ),
+    (
+        Path("smartclass/data/queries/classes_taxonomy.rq"),
+        Path("scratch/wikidata_classes_taxonomy.tsv"),
+    ),
+)
 
 
 @click.group()
@@ -117,7 +141,6 @@ def combinecsvfiles(input_file: tuple[Path, ...], output: Path) -> None:
     "-t",
     "--tautomer-fingerprints/--no-tautomer-fingerprints",
     default=True,
-    show_default=True,
     help="Include tautomer fingerprints in output.",
 )
 def getlatestchembl(
@@ -160,23 +183,28 @@ def loadpkgdata() -> None:
 @click.option(
     "-q",
     "--query",
-    type=click.Path(exists=True, path_type=Path),
-    help="Path to SPARQL query file (.rq).",
-    required=True,
+    type=click.Path(path_type=Path),
+    default=None,
+    help=(
+        "Path to SPARQL query file (.rq). If omitted with --output, the command "
+        "runs the default class query batch."
+    ),
 )
 @click.option(
     "-o",
     "--output",
     type=click.Path(path_type=Path),
-    help="Output file path (CSV or TSV based on extension).",
-    required=True,
+    default=None,
+    help=(
+        "Output file path (CSV or TSV based on extension). Requires --query. "
+        "If omitted with --query, the command runs the default class query batch."
+    ),
 )
 @click.option(
     "-r",
     "--remove-prefix/--keep-prefix",
     "remove_prefix",
     default=True,
-    show_default=True,
     help="Remove Wikidata entity prefix from results.",
 )
 @click.option(
@@ -197,7 +225,7 @@ def loadpkgdata() -> None:
         ],
         case_sensitive=False,
     ),
-    help="Apply a transformation to query results.",
+    help="Apply a transformation to query results (e.g., check_smiles, transform_inchi_to_inchikey, transform_smiles_to_inchi).",
 )
 @click.option(
     "-u",
@@ -208,8 +236,8 @@ def loadpkgdata() -> None:
     help="SPARQL endpoint URL.",
 )
 def querywikidata(
-    query: Path,
-    output: Path,
+    query: Path | None,
+    output: Path | None,
     remove_prefix: bool,
     transform: str | None,
     url: str,
@@ -231,8 +259,48 @@ def querywikidata(
     """
     from smartclass.resources.wikidata import query_wikidata
 
-    query_wikidata(str(query), str(output), remove_prefix, transform, url)
-    click.echo(f"Results saved to: {output}")
+    query_path = query or DEFAULT_QUERY_FILE
+    output_path = output or DEFAULT_QUERY_OUTPUT
+
+    # No explicit query/output -> run the default batch used in maintenance workflows.
+    if query is None and output is None:
+        for default_query, default_output in DEFAULT_CLASS_QUERY_BATCH:
+            if not default_query.exists() or not default_query.is_file():
+                raise click.UsageError(
+                    f"Query file not found: {default_query}.",
+                )
+            default_output.parent.mkdir(parents=True, exist_ok=True)
+            query_wikidata(
+                str(default_query),
+                str(default_output),
+                remove_prefix,
+                transform,
+                url,
+            )
+            click.echo(f"Results saved to: {default_output}")
+        return
+
+    # Explicit single-query mode requires both query and output.
+    if query is None or output is None:
+        raise click.UsageError(
+            "Provide both --query and --output for single-query mode, or omit both to run the default batch.",
+        )
+
+    if not query_path.exists() or not query_path.is_file():
+        raise click.UsageError(
+            f"Query file not found: {query_path}. Provide --query with a valid .rq file.",
+        )
+
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+
+    query_wikidata(
+        str(query_path),
+        str(output_path),
+        remove_prefix,
+        transform,
+        url,
+    )
+    click.echo(f"Results saved to: {output_path}")
 
 
 @main.command()
@@ -262,7 +330,6 @@ def querywikidata(
     "-f",
     "--include-hierarchy/--no-hierarchy",
     default=False,
-    show_default=True,
     help="Use chemical hierarchy for faster BFS-based searching.",
 )
 @click.option(
@@ -282,7 +349,6 @@ def querywikidata(
     "-z",
     "--closest-only/--all-matches",
     default=True,
-    show_default=True,
     help="Return only closest matching class per structure.",
 )
 def searchclasses(

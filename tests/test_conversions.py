@@ -76,6 +76,7 @@ class TestConvertMolToSmiles(unittest.TestCase):
         )
 
         mol = convert_smiles_to_mol("CCO")
+        assert mol is not None
         smiles = convert_mol_to_smiles(mol)
 
         self.assertIsInstance(smiles, str)
@@ -95,6 +96,7 @@ class TestConvertMolToInchikey(unittest.TestCase):
         )
 
         mol = convert_smiles_to_mol("CCO")
+        assert mol is not None
         inchikey = convert_mol_to_inchikey(mol)
 
         self.assertIsInstance(inchikey, str)
@@ -117,6 +119,7 @@ class TestConvertInchiToSmiles(unittest.TestCase):
         smiles = convert_inchi_to_smiles(inchi)
 
         self.assertIsInstance(smiles, str)
+        assert smiles is not None
         self.assertTrue(len(smiles) > 0)
 
     def test_invalid_inchi_returns_none(self):
@@ -147,11 +150,15 @@ class TestRoundTripConversions(unittest.TestCase):
 
         original_smiles = "c1ccccc1"  # Benzene
         mol = convert_smiles_to_mol(original_smiles)
+        assert mol is not None
         result_smiles = convert_mol_to_smiles(mol)
 
         # Convert both to InChIKey for comparison (canonical)
         mol1 = convert_smiles_to_mol(original_smiles)
         mol2 = convert_smiles_to_mol(result_smiles)
+
+        assert mol1 is not None
+        assert mol2 is not None
 
         self.assertEqual(
             convert_mol_to_inchikey(mol1),

@@ -15,7 +15,7 @@ __all__ = [
 logger = get_logger(__name__)
 
 
-def convert_smiles_to_mol(smiles: str, sanitize: bool = True) -> Mol | None:
+def convert_smiles_to_mol(smiles: str | None, sanitize: bool = True) -> Mol | None:
     """
     Convert a SMILES string to an RDKit Mol object.
 

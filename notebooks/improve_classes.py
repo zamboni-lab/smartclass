@@ -66,7 +66,7 @@ stereoisomers_df = stereoisomers_df.with_columns(
     .col("inchi")
     .map_elements(
         lambda x: remove_layers_from_inchi(x, layers=LAYERS),
-        return_dtype=str,
+        return_dtype=pl.String,
     )
     .alias("inchi_no_stereo"),
 ).drop("inchi")
@@ -75,7 +75,7 @@ chemicals_df = chemicals_df.with_columns(
     .col("inchi")
     .map_elements(
         lambda x: remove_layers_from_inchi(x, layers=LAYERS),
-        return_dtype=str,
+        return_dtype=pl.String,
     )
     .alias("inchi_no_stereo"),
 ).drop("inchi")
@@ -105,7 +105,7 @@ merged_df = (
         .struct(["smiles", "smiles_right"])
         .map_elements(
             lambda cols: match_smiles(cols["smiles"], cols["smiles_right"]),
-            return_dtype=bool,
+            return_dtype=pl.Boolean,
         )
         .alias("match"),
     )

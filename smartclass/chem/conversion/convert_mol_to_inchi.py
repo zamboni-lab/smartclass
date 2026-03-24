@@ -2,6 +2,9 @@
 
 from __future__ import annotations
 
+from typing import cast
+
+from rdkit.Chem import Mol
 from rdkit.Chem import MolToInchi
 
 
@@ -10,14 +13,14 @@ __all__ = [
 ]
 
 
-def convert_mol_to_inchi(mol: str) -> str:
+def convert_mol_to_inchi(mol: Mol) -> str:
     """
     Convert a structure MOL to InChI.
 
     :param mol: A structure MOL.
-    :type mol: str
+    :type mol: Mol
 
     :returns: An InChI.
     :rtype: str
     """
-    return MolToInchi(mol)
+    return cast(str, MolToInchi(mol))

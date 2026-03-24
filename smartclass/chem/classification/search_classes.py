@@ -79,10 +79,12 @@ def _load_classes(
     :returns: List containing a dictionary mapping class IDs to SMARTS patterns.
     """
     if classes_file:
+        id_col = classes_name_id or "class"
+        smarts_col = classes_name_smarts or "structure"
         c = load_external_classes_file(
             file=classes_file,
-            id_name=classes_name_id,
-            smarts_name=classes_name_smarts,
+            id_name=id_col,
+            smarts_name=smarts_col,
         )
     else:
         logger.info("No classes file provided, loading default package classes.")

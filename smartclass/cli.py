@@ -111,7 +111,7 @@ def combinecsvfiles(input_file: tuple[Path, ...], output: Path) -> None:
     """
     from smartclass.helpers import combine_csv_files
 
-    combine_csv_files(input_file, output)
+    combine_csv_files([str(path) for path in input_file], str(output))
     click.echo(f"Combined {len(input_file)} files -> {output}")
 
 

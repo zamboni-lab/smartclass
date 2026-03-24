@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from rdkit import Chem
-from rdkit.Chem import AllChem
+from rdkit.Chem import rdChemReactions
 
 from smartclass.helpers.check_smiles_contains_no_dot import check_smiles_contains_no_dot
 from smartclass.helpers.check_smiles_contains_no_isotope import (
@@ -75,7 +75,7 @@ def fix_inchi_tautomerization(smiles: str) -> str:
                 for _, data in transformations.items():
                     target = Chem.MolFromSmarts(data["SMARTS"])
                     if mol.HasSubstructMatch(target):
-                        rxn = AllChem.ReactionFromSmarts(data["Reaction"])
+                        rxn = rdChemReactions.ReactionFromSmarts(data["Reaction"])
                         reactants = (mol,)
                         mol = rxn.RunReactants(reactants)
                         mol = mol[0][0]

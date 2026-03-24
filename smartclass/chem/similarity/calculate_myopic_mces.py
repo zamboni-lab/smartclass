@@ -29,4 +29,4 @@ def calculate_myopic_mces(
             - 4: Lower bound (second bound used)
     :rtype: int, float, float, int
     """
-    return MCES(ind=0, s1=s_1, s2=s_2, threshold=the, solver="default")
+    return MCES(smiles1=s_1, smiles2=s_2, threshold=the, i=0, solver="default")

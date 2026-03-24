@@ -124,6 +124,7 @@ class TestGetNumAtomsBonds(unittest.TestCase):
         from smartclass.chem.helpers.get_num_atoms_bonds import get_num_atoms_bonds
 
         mol = convert_smiles_to_mol("CCO")
+        assert mol is not None
         count = get_num_atoms_bonds(mol)
 
         # Ethanol: 3 heavy atoms + 2 bonds = 5 (without hydrogens)

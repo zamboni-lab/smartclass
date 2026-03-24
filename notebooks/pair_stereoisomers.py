@@ -24,7 +24,7 @@ inchis_df = pl.read_csv(
 inchis_df = inchis_df.filter(
     pl.col("inchi").map_elements(
         lambda x: check_layers_from_inchi(x, layers=LAYERS),
-        return_dtype=bool,
+        return_dtype=pl.Boolean,
     ),
 )
 
@@ -34,7 +34,7 @@ inchis_df = inchis_df.with_columns(
     .col("inchi")
     .map_elements(
         lambda x: remove_layers_from_inchi(x, layers=LAYERS),
-        return_dtype=str,
+        return_dtype=pl.String,
     )
     .alias("inchi_no_stereo"),
 )

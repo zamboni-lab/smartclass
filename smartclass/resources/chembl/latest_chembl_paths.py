@@ -25,10 +25,11 @@ def latest_chembl_paths() -> tuple:
     try:
         # Get the latest ChEMBL version
         version = latest()
+        version_str = str(version)
 
         # Generate file paths for data and library
-        data_path = join("chembl", version, name="sssdata.pkl")
-        lib_path = join("chembl", version, name="ssslib.pkl")
+        data_path = join("chembl", version_str, name="sssdata.pkl")
+        lib_path = join("chembl", version_str, name="ssslib.pkl")
 
         return version, data_path, lib_path
     except Exception as e:

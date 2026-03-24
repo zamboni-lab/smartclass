@@ -76,7 +76,11 @@ def _find_matching_pattern(
 ) -> tuple[str, Mol] | None:
     """Return the first matched class pattern for a structure."""
     for class_smarts, pattern in pattern_info:
-        if structure.HasSubstructMatch(pattern, params=params):
+        if params is None:
+            is_match = structure.HasSubstructMatch(pattern)
+        else:
+            is_match = structure.HasSubstructMatch(pattern, params=params)
+        if is_match:
             return class_smarts, pattern
     return None
 

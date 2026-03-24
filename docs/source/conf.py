@@ -34,6 +34,9 @@ parsed_version = re.match(
     "(?P<major>\\d+)\\.(?P<minor>\\d+)\\.(?P<patch>\\d+)(?:-(?P<release>[0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\+(?P<build>[0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?",
     release,
 )
+if parsed_version is None:
+    raise ValueError(f"Invalid release version format: {release}")
+
 version = parsed_version.expand("\\g<major>.\\g<minor>.\\g<patch>")
 
 tags = set()

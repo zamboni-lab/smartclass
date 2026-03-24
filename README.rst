@@ -26,8 +26,19 @@ Get defined chemical classes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 .. code-block:: sh
 
+    # Run the default Wikidata class-query batch
+    uv run smartclass querywikidata
+
+    # Optional: run a single explicit query/output pair
     uv run smartclass querywikidata -q smartclass/data/queries/classes_smarts.rq -o scratch/wikidata_classes_smarts.tsv
 
+By default, ``smartclass querywikidata`` generates these class files:
+
+- ``scratch/wikidata_classes_cxsmiles.tsv``
+- ``scratch/wikidata_classes_smarts.tsv``
+- ``scratch/wikidata_classes_smiles_canonical.tsv``
+- ``scratch/wikidata_classes_smiles_isomeric.tsv``
+- ``scratch/wikidata_classes_taxonomy.tsv``
 
 Canonicalize them
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -52,6 +63,14 @@ Classify compounds
     uv run smartclass searchclasses -s "O=C1OC2CC3C(C=C(OC)C(=O)C3(C)C4C(=O)C(OC)=C(C)C(C1)C24C)C" -c scratch/wikidata_classes_smarts.tsv --closest-only False --verbose
     uv run smartclass searchclasses -i smartclass/data/bitter_smiles.tsv -c scratch/wikidata_classes_smarts.tsv
     # uv run smartclass searchclasses -i scratch/wikidata_chemicals_smiles.tsv -c scratch/wikidata_classes_smarts.tsv --all-matches
+
+    # Classify against SMARTS + SMILES + CXSMILES in one run (all matches)
+    uv run smartclass searchclasses-all-sources -i scratch/wikidata_chemicals_smiles.tsv --all-matches --include-hierarchy --output-dir scratch/all_sources
+
+The ``searchclasses-all-sources`` command writes:
+
+- ``scratch/all_sources/results_all_sources_by_class.tsv``
+- ``scratch/all_sources/results_all_sources_by_structure.tsv``
 
 🤯 Future steps (not fully available now)
 -----------------------------------------

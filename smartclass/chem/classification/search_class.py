@@ -15,9 +15,6 @@ from smartclass.chem.conversion.convert_mol_to_smarts import convert_mol_to_smar
 from smartclass.chem.conversion.convert_smarts_to_mol import convert_smarts_to_mol
 from smartclass.chem.helpers.enumerate_structures import enumerate_structures
 from smartclass.chem.helpers.get_num_atoms_bonds import get_num_atoms_bonds
-from smartclass.chem.helpers.get_num_matched_atoms_bonds import (
-    get_num_matched_atoms_bonds,
-)
 from smartclass.logging import get_logger
 
 
@@ -72,6 +69,18 @@ def build_filter_catalog(
     return catalog, pattern_info
 
 
+def _find_matching_pattern(
+    structure: Mol,
+    pattern_info: list[tuple[str, Mol]],
+    params: SubstructMatchParameters | None,
+) -> tuple[str, Mol] | None:
+    """Return the first matched class pattern for a structure."""
+    for class_smarts, pattern in pattern_info:
+        if structure.HasSubstructMatch(pattern, params=params):
+            return class_smarts, pattern
+    return None
+
+
 def search_class(
     class_dict: dict[str, list[str]],
     structures: list[Mol],
@@ -86,8 +95,8 @@ def search_class(
     Args:
         class_dict: Dictionary mapping class_id to list of SMARTS patterns.
         structures: List of RDKit Mol objects to classify.
-        params: Optional SubstructMatchParameters (currently unused but
-            kept for API compatibility).
+        params: Optional SubstructMatchParameters forwarded to RDKit
+            substructure matching.
 
     Returns:
         List of dictionaries with match information:
@@ -99,6 +108,7 @@ def search_class(
         - matched_ab: Number of matched atoms + bonds
     """
     results: list[dict[str, str | int]] = []
+    structure_cache: dict[int, dict[str, str | int]] = {}
 
     for class_id, class_structures in class_dict.items():
         # Build catalog once per class for efficiency
@@ -113,20 +123,28 @@ def search_class(
             if not catalog.HasMatch(structure):
                 continue
 
-            # Get the last pattern for matched_ab calculation
-            # TODO: Consider tracking which specific pattern matched
-            class_smarts, pattern = pattern_info[-1]
+            matched = _find_matching_pattern(structure, pattern_info, params)
+            if matched is None:
+                # Defensive fallback; catalog matched but no specific pattern found.
+                continue
 
+            class_smarts, pattern = matched
+            structure_id = id(structure)
+            if structure_id not in structure_cache:
+                structure_cache[structure_id] = {
+                    "structure_inchikey": convert_mol_to_inchikey(structure),
+                    "structure_smarts": convert_mol_to_smarts(structure),
+                    "structure_ab": get_num_atoms_bonds(structure),
+                }
+
+            cached = structure_cache[structure_id]
             results.append({
                 "class_id": class_id,
                 "class_structure": class_smarts,
-                "structure_inchikey": convert_mol_to_inchikey(structure),
-                "structure_smarts": convert_mol_to_smarts(structure),
-                "structure_ab": get_num_atoms_bonds(structure),
-                "matched_ab": get_num_matched_atoms_bonds(
-                    mol_1=structure,
-                    mol_2=pattern,
-                ),
+                "structure_inchikey": cached["structure_inchikey"],
+                "structure_smarts": cached["structure_smarts"],
+                "structure_ab": cached["structure_ab"],
+                "matched_ab": pattern.GetNumAtoms() + pattern.GetNumBonds(),
             })
 
     return results

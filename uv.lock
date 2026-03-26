@@ -1472,17 +1472,15 @@ wheels = [
 
 [[package]]
 name = "pystow"
-version = "0.7.28"
+version = "0.8.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-  { name = "click" },
-  { name = "requests" },
   { name = "tqdm" },
   { name = "typing-extensions" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/ac/0d/b107972e085ec13c71d0beb3fa39103e2fe48f5f310acf3dffd9a0ba851b/pystow-0.7.28.tar.gz", hash = "sha256:7c043bda2e4d6d8de8ae8e3944d2caeef5dd370e81df31e2e74557eaa574946a", size = 50905 }
+sdist = { url = "https://files.pythonhosted.org/packages/8d/83/970f9c29b0cda4f77dcea7c05362401a6ac19d66c3916731f57c91143f7a/pystow-0.8.2.tar.gz", hash = "sha256:12d4845c6f17c2ffb20b0f289235579b204b83054e748ce999483a8b17a808af", size = 51557 }
 wheels = [
-  { url = "https://files.pythonhosted.org/packages/2b/3a/8dfc7e10341d6331dc2ccc09afb8d25501565112798adbd90cf35528c9ab/pystow-0.7.28-py3-none-any.whl", hash = "sha256:aa73dec0f6dea8bfc844f3abd3d985d6d3594291ebd234d9ec05b16884b13336", size = 57950 },
+  { url = "https://files.pythonhosted.org/packages/92/9f/959b609981dea4ac259322d538b808d80ab32b9e5695b488482a1e56dffd/pystow-0.8.2-py3-none-any.whl", hash = "sha256:a8fb99230a59a7decd98805914466724d2293061f54fc2e46b17c19db635086e", size = 58156 },
 ]
 
 [[package]]
@@ -1662,7 +1660,7 @@ wheels = [
 
 [[package]]
 name = "requests"
-version = "2.32.5"
+version = "2.33.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
   { name = "certifi" },
@@ -1670,9 +1668,9 @@ dependencies = [
   { name = "idna" },
   { name = "urllib3" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/c9/74/b3ff8e6c8446842c3f5c837e9c3dfcfe2018ea6ecef224c710c85ef728f4/requests-2.32.5.tar.gz", hash = "sha256:dbba0bac56e100853db0ea71b82b4dfd5fe2bf6d3754a8893c3af500cec7d7cf", size = 134517 }
+sdist = { url = "https://files.pythonhosted.org/packages/34/64/8860370b167a9721e8956ae116825caff829224fbca0ca6e7bf8ddef8430/requests-2.33.0.tar.gz", hash = "sha256:c7ebc5e8b0f21837386ad0e1c8fe8b829fa5f544d8df3b2253bff14ef29d7652", size = 134232 }
 wheels = [
-  { url = "https://files.pythonhosted.org/packages/1e/db/4254e3eabe8020b458f1a747140d32277ec7a271daf1d235b70dc0b4e6e3/requests-2.32.5-py3-none-any.whl", hash = "sha256:2462f94637a34fd532264295e186976db0f5d453d1cdd31473c85a6a161affb6", size = 64738 },
+  { url = "https://files.pythonhosted.org/packages/56/5d/c814546c2333ceea4ba42262d8c4d55763003e767fa169adc693bd524478/requests-2.33.0-py3-none-any.whl", hash = "sha256:3324635456fa185245e24865e810cecec7b4caf933d7eb133dcde67d48cee69b", size = 65017 },
 ]
 
 [[package]]
@@ -1858,10 +1856,10 @@ requires-dist = [
   { name = "myopic-mces", specifier = ">=1.0.1" },
   { name = "polars", specifier = ">=1.39.3" },
   { name = "pooch", specifier = ">=1.9.0" },
-  { name = "pystow", specifier = ">=0.7.28" },
+  { name = "pystow", specifier = ">=0.8.2" },
   { name = "rdcanon", specifier = ">=0.1.2" },
   { name = "rdkit", specifier = ">=2025.9.6" },
-  { name = "requests", specifier = ">=2.32.5" },
+  { name = "requests", specifier = ">=2.33.0" },
   { name = "tqdm", specifier = ">=4.67.3" },
 ]
 

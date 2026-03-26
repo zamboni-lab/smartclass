@@ -47,10 +47,10 @@ dependencies = [
   "myopic-mces>=1.0.1",
   "polars>=1.39.3",
   "pooch>=1.9.0",
-  "pystow>=0.7.28",
+  "pystow>=0.8.2",
   "rdcanon>=0.1.2",
   "rdkit>=2025.9.6",
-  "requests>=2.32.5",
+  "requests>=2.33.0",
   "tqdm>=4.67.3",
 ]
 

@@ -1,0 +1,6 @@
+sample_list
+===========
+
+.. currentmodule:: smartclass
+
+.. autofunction:: sample_list

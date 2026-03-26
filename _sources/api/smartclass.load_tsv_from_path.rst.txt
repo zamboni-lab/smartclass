@@ -1,0 +1,6 @@
+load_tsv_from_path
+==================
+
+.. currentmodule:: smartclass
+
+.. autofunction:: load_tsv_from_path

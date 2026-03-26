@@ -1,0 +1,6 @@
+convert_chemical_formula
+========================
+
+.. currentmodule:: smartclass
+
+.. autofunction:: convert_chemical_formula

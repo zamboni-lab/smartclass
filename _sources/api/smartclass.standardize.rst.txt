@@ -1,0 +1,6 @@
+standardize
+===========
+
+.. currentmodule:: smartclass
+
+.. autofunction:: standardize

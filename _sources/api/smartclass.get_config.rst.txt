@@ -1,0 +1,6 @@
+get_config
+==========
+
+.. currentmodule:: smartclass
+
+.. autofunction:: get_config

@@ -1,0 +1,6 @@
+convert_smiles_to_mass
+======================
+
+.. currentmodule:: smartclass
+
+.. autofunction:: convert_smiles_to_mass

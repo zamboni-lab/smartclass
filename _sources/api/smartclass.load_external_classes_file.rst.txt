@@ -1,0 +1,6 @@
+load_external_classes_file
+==========================
+
+.. currentmodule:: smartclass
+
+.. autofunction:: load_external_classes_file

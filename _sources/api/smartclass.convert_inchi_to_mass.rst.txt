@@ -1,0 +1,6 @@
+convert_inchi_to_mass
+=====================
+
+.. currentmodule:: smartclass
+
+.. autofunction:: convert_inchi_to_mass

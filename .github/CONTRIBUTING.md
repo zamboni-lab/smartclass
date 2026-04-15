@@ -8,10 +8,10 @@ This project uses the [GitHub Flow](https://guides.github.com/introduction/flow)
 model for code contributions. Follow these steps:
 
 1. [Create a fork](https://help.github.com/articles/fork-a-repo) of the upstream
-   repository at [`zambonilab/smartclass`](https://gitlab.ethz.ch/zambonilab/smartclass)
+   repository at [`zambonilab/smartclass`](https://github.com/zamboni-lab/smartclass)
    on your GitHub account (or in one of your organizations)
 2. [Clone your fork](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
-   with `git clone https://gitlab.ethz.ch/<your namespace here>/smartclass.git`
+   with `git clone https://github.com/<your namespace here>/smartclass.git`
 3. Make and commit changes to your fork with `git commit`
 4. Push changes to your fork with `git push`
 5. Repeat steps 3 and 4 as needed
@@ -137,7 +137,7 @@ resolve conflicts against the main branch. After cloning, you should add the
 upstream repository with:
 
 ```shell
-git remote add upstream https://gitlab.ethz.ch/zambonilab/smartclass.git
+git remote add upstream https://github.com/zamboni-lab/smartclass.git
 git fetch upstream
 git merge upstream/main
 ```

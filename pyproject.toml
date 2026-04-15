@@ -55,9 +55,9 @@ dependencies = [
 ]
 
 [project.urls]
-documentation = "https://posit-dev.github.io/great-docs/smartclass/"
-homepage = "https://gitlab.ethz.ch/zambonilab/smartclass"
-repository = "https://gitlab.ethz.ch/zambonilab/smartclass"
+documentation = "https://zamboni-lab.github.io/smartclass/"
+homepage = "https://github.com/zamboni-lab/smartclass"
+repository = "https://github.com/zamboni-lab/smartclass"
 
 [project.scripts]
 smartclass = "smartclass.cli:main"

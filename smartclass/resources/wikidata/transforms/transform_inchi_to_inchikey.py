@@ -8,14 +8,17 @@ from smartclass.chem.conversion.convert_inchi_to_inchikey import (
 
 
 def transform_inchi_to_inchikey(result: dict) -> dict | None:
-    """
-    Transform InChI to InChIKey.
+    """Transform InChI to InChIKey.
 
-    :param result: A single query result (dictionary).
-    :type result: dict
+Parameters
+----------
+result : dict
+    A single query result (dictionary).
 
-    :returns: Transformed query result.
-    :rtype: Union[dict, None]
+Returns
+-------
+dict | None
+    Transformed query result.
     """
     inchikey = convert_inchi_to_inchikey(result.get("inchi", ""))
     if inchikey:

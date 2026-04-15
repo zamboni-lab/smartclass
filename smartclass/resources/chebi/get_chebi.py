@@ -12,14 +12,14 @@ def get_chebi_1(
     url: str = "https://ftp.ebi.ac.uk/pub/databases/chebi/ontology/chebi.obo",
     output: str = "scratch/chebi.obo",
 ):
-    """
-    Get CHEBI 1.
+    """Get CHEBI 1.
 
-    :param url: URL.
-    :type url: str
-
-    :param output: Output.
-    :type output: str
+Parameters
+----------
+url : str
+    Default is 'https://ftp.ebi.ac.uk/pub/databases/chebi/ontology/chebi.obo'.
+output : str
+    Default is 'scratch/chebi.obo'.
     """
     download_file_if_not_exists(url=url, output=output)
 
@@ -28,20 +28,21 @@ def get_chebi_2(
     url: str = "https://ftp.ebi.ac.uk/pub/databases/chebi/SDF/ChEBI_lite_3star.sdf.gz",
     output: str = "scratch/ChEBI_lite_3star.sdf.gz",
 ):
-    """
-    Get CHEBI 2.
+    """Get CHEBI 2.
 
-    :param url: URL.
-    :type url: str
-
-    :param output: Output.
-    :type output: str
+Parameters
+----------
+url : str
+    Default is 'https://ftp.ebi.ac.uk/pub/databases/chebi/SDF/ChEBI_lite_3star.sdf.gz'.
+output : str
+    Default is 'scratch/ChEBI_lite_3star.sdf.gz'.
     """
     download_file_if_not_exists(url=url, output=output)
 
 
 def get_chebi():
-    """Get CHEBI."""
+    """Get CHEBI.
+    """
     get_chebi_1()
     get_chebi_2()
 

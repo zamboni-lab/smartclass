@@ -13,15 +13,16 @@ __all__ = [
 def check_smiles_contains_no_isotope(
     smiles: str,
 ) -> bool:
-    """
-    Checks if SMILES contains no isotope.
+    """Checks if SMILES contains no isotope.
 
-    :param smiles: The SMILES.
+Parameters
+----------
+smiles : str
+    SMILES.
 
-    :type smiles: str
-
-    :returns: A boolean if the SMILES meets the given criteria.
-
-    :rtype: bool
+Returns
+-------
+bool
+    SMILES meets the given criteria.
     """
     return not re.search(r"[2-9]\]", smiles) and not re.search(r"\[[1-9]", smiles)

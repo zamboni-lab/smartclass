@@ -14,23 +14,23 @@ def convert_list_of_dict(
     value: str,
     invert: bool = False,
 ) -> dict:
-    """
-    Convert a list of dictionaries to a dictionary with possible inversion.
+    """Convert a list of dictionaries to a dictionary with possible inversion.
 
-    :param list_of_dict: The list of dictionaries to convert.
-    :type list_of_dict: list
+Parameters
+----------
+list_of_dict : list
+    The list of dictionaries to convert.
+key : str
+    The key.
+value : str
+    The value.
+invert : bool
+    False. Default is False.
 
-    :param key: The key.
-    :type key: str
-
-    :param value: The value.
-    :type value: str
-
-    :param invert: Flag to indicate whether to invert key and value.
-    :type invert: bool
-
-    :returns: A dictionary with given keys and values.
-    :rtype: dict
+Returns
+-------
+dict
+    A dictionary with given keys and values.
     """
     result_dict: dict = {}
     for item in list_of_dict:

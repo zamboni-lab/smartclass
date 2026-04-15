@@ -20,11 +20,12 @@ VERSION = "0.0.1-dev"
 
 
 def get_git_hash() -> str:
-    """
-    Get the :mod:`smartclass` git hash.
+    """Get the :mod:`smartclass` git hash.
 
-    :returns: Git Hash.
-    :rtype: str
+Returns
+-------
+str
+    Hash.
     """
     with open(os.devnull, "w") as devnull:
         try:
@@ -40,14 +41,12 @@ def get_git_hash() -> str:
 
 
 def get_version(with_git_hash: bool = False):
-    """
-    Get the :mod:`smartclass` version string, including a git hash.
+    """Get the :mod:`smartclass` version string, including a git hash.
 
-    :param with_git_hash: Flag to include git hash.
-    :type with_git_hash: bool
-
-    :returns: The version.
-    :rtype: str
+Parameters
+----------
+with_git_hash : bool
+    False. Default is False.
     """
     return f"{VERSION}-{get_git_hash()}" if with_git_hash else VERSION
 

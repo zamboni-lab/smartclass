@@ -17,14 +17,17 @@ __all__ = [
 
 
 def fix_inchi_tautomerization(smiles: str) -> str:
-    """
-    Fix InChI tautomerization.
+    """Fix InChI tautomerization.
 
-    :param smiles: SMILES.
-    :type smiles: str
+Parameters
+----------
+smiles : str
+    SMILES.
 
-    :returns: SMILES.
-    :rtype: str
+Returns
+-------
+str
+    SMILES.
     """
     #  Courtesy of Richy Leroy (via Jean-Marc Nuzillard)
     ####################################################

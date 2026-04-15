@@ -20,13 +20,17 @@ __all__ = [
 
 
 def load_latest_chembl() -> rdSubstructLibrary.SubstructLibrary:
-    """
-    Load the latest ChEMBL data and return a SubstructLibrary.
+    """Load the latest ChEMBL data and return a SubstructLibrary.
 
-    :raises Exception: If the download of the file failed.
+Returns
+-------
+rdSubstructLibrary.SubstructLibrary
+    ChEMBL data.
 
-    :returns: SubstructLibrary containing ChEMBL data.
-    :rtype: rdSubstructLibrary.SubstructLibrary
+Raises
+------
+    Exception
+        If the download of the file failed.
     """
     # Get the latest ChEMBL version and paths
     version, data_path, lib_path = latest_chembl_paths()

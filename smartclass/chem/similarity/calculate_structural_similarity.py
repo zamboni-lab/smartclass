@@ -16,19 +16,20 @@ def calculate_structural_similarity(
     mol_2: Mol,
     options: rdRascalMCES.RascalOptions = opts,
 ) -> list[rdRascalMCES.RascalResult]:
-    """
-    Calculate structural similarity.
+    """Calculate structural similarity.
 
-    :param mol_1: Mol 1.
-    :type mol_1: Mol
+Parameters
+----------
+mol_1 : Mol
+    Mol 1.
+mol_2 : Mol
+    Mol 2.
+options : rdRascalMCES.RascalOptions
+    Default is opts.
 
-    :param mol_2: Mol 2.
-    :type mol_2: Mol
-
-    :param options: Options.
-    :type options: rdRascalMCES.RascalOptions
-
-    :returns: Rascal results with similarity metrics.
-    :rtype: list[rdRascalMCES.RascalResult]
+Returns
+-------
+list[rdRascalMCES.RascalResult]
+    Rascal results with similarity metrics.
     """
     return rdRascalMCES.FindMCES(mol_1, mol_2, options)

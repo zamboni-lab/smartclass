@@ -14,18 +14,19 @@ def get_num_matched_atoms_bonds(
     mol_1: Mol,
     mol_2: Mol,
 ) -> int:
-    """
-    Get number of matched atoms and bonds.
+    """Get number of matched atoms and bonds.
 
-    :param mol_1: A structure MOL.
-    :type mol_1: Mol
+Parameters
+----------
+mol_1 : Mol
+    MOL.
+mol_2 : Mol
+    MOL.
 
-    :param mol_2: A structure MOL.
-    :type mol_2: Mol
-
-    :returns: Number of matched atoms and bonds.
-    :rtype: int
-
+Returns
+-------
+int
+    Number of matched atoms and bonds.
     """
     # TODO See if using the RASCAL MCES
     mcs = rdFMCS.FindMCS(

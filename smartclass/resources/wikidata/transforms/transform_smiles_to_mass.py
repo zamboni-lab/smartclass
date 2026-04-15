@@ -6,14 +6,17 @@ from smartclass.chem.conversion.convert_smiles_to_mass import convert_smiles_to_
 
 
 def transform_smiles_to_mass(result: dict) -> dict | None:
-    """
-    Transform SMILES to mass.
+    """Transform SMILES to mass.
 
-    :param result: A single query result (dictionary).
-    :type result: dict
+Parameters
+----------
+result : dict
+    A single query result (dictionary).
 
-    :returns: Transformed query result.
-    :rtype: Union[dict, None]
+Returns
+-------
+dict | None
+    Transformed query result.
     """
     mass = convert_smiles_to_mass(result.get("smiles", ""))
     if mass:

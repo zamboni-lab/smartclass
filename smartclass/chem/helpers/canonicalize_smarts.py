@@ -15,13 +15,17 @@ __all__ = [
 def canonicalize_smarts(smarts: str, return_mapping: bool = False) -> str | None:
     """Canonicalize a SMARTS string.
 
-    Args:
-        smarts: SMARTS string to canonicalize.
-        return_mapping: Whether to return the atom mapping.
+Parameters
+----------
+smarts : str
+    SMARTS string to canonicalize.
+return_mapping : bool
+    Whether to return the atom mapping alongside the canonical SMARTS. Default is False.
 
-    Returns:
-        Canonical SMARTS string, optionally with atom mapping.
-        Returns None on failure.
+Returns
+-------
+str | None
+    Canonical SMARTS string (with atom mapping if requested), or ``None`` on failure.
     """
     try:
         return canon_smarts(smarts, return_mapping)

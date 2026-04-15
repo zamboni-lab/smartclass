@@ -11,15 +11,16 @@ __all__ = [
 def check_smiles_contains_no_dot(
     smiles: str,
 ) -> bool:
-    """
-    Checks if SMILES contains no dot.
+    """Checks if SMILES contains no dot.
 
-    :param smiles: The SMILES.
+Parameters
+----------
+smiles : str
+    SMILES.
 
-    :type smiles: str
-
-    :returns: A boolean if the SMILES meets the given criteria.
-
-    :rtype: bool
+Returns
+-------
+bool
+    SMILES meets the given criteria.
     """
     return "." not in smiles

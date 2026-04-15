@@ -34,18 +34,23 @@ def configure_logging(
     log_file: Path | str | None = None,
     force: bool = False,
 ) -> None:
-    """
-    Configure logging for the smartclass package.
-
+    """Configure logging for the smartclass package.
+    
     This should be called once at application startup. Subsequent calls
     will be ignored unless `force=True`.
 
-    :param level: Logging level (e.g., logging.DEBUG, logging.INFO, "DEBUG", "INFO").
-    :param format_string: Format string for log messages.
-    :param date_format: Format string for timestamps.
-    :param log_file: Optional path to a log file. If provided, logs will be
-        written to both console and file.
-    :param force: If True, reconfigure logging even if already configured.
+Parameters
+----------
+level : int | str
+    Logging level (e.g., logging.DEBUG, logging.INFO, "DEBUG", "INFO"). Default is logging.INFO.
+format_string : str
+    DEFAULT_FORMAT. Default is DEFAULT_FORMAT.
+date_format : str
+    DEFAULT_DATE_FORMAT. Default is DEFAULT_DATE_FORMAT.
+log_file : Path | str | None
+    None. Default is None.
+force : bool
+    False. Default is False.
     """
     global _logging_configured
 
@@ -90,20 +95,21 @@ def configure_logging(
 
 
 def get_logger(name: str) -> logging.Logger:
-    """
-    Get a logger for the given module name.
-
+    """Get a logger for the given module name.
+    
     This is the preferred way to obtain a logger in smartclass modules.
     The logger will be a child of the 'smartclass' logger, inheriting
     its configuration.
 
-    :param name: Module name (typically __name__).
-    :returns: Configured logger instance.
+Parameters
+----------
+name : str
+    Module name (typically __name__).
 
-    Example:
-        >>> from smartclass.logging import get_logger
-        >>> logger = get_logger(__name__)
-        >>> logger.info("Processing started")
+Returns
+-------
+logging.Logger
+    Example: >>> from smartclass.logging import get_logger >>> logger = get_logger(__name__) >>> logger.info("Processing started")
     """
     # Ensure logging is configured with defaults if not already
     if not _logging_configured:

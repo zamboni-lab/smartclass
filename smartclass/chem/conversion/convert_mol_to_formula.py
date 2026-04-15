@@ -12,13 +12,16 @@ __all__ = [
 
 
 def convert_mol_to_formula(mol: Mol) -> str:
-    """
-    Convert a structure MOL to formula.
+    """Convert a structure MOL to formula.
 
-    :param mol: A structure MOL.
-    :type mol: Mol
+Parameters
+----------
+mol : Mol
+    MOL.
 
-    :returns: A formula.
-    :rtype: str
+Returns
+-------
+str
+    A formula.
     """
     return CalcMolFormula(mol)

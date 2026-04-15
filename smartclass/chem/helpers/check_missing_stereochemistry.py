@@ -18,17 +18,19 @@ __all__ = [
 
 
 def check_missing_stereochemistry(smiles: str, use_legacy: bool = False) -> bool | None:
-    """
-    Check stereochemistry.
+    """Check stereochemistry.
 
-    :param smiles: SMILES.
-    :type smiles: str
+Parameters
+----------
+smiles : str
+    SMILES.
+use_legacy : bool
+    False. Default is False.
 
-    :param use_legacy: Flag indicating to use legacy or not.
-    :type use_legacy: bool
-
-    :returns: flag.
-    :rtype: Union[bool, None]
+Returns
+-------
+bool | None
+    None] flag.
     """
     # See https://github.com/rdkit/rdkit/issues/6217
     Chem.SetAllowNontetrahedralChirality(False)
@@ -73,14 +75,17 @@ def check_missing_stereochemistry(smiles: str, use_legacy: bool = False) -> bool
 def count_multiple_stereoisomers(
     mol: Mol,
 ) -> bool:
-    """
-    Count multiple stereoisomers.
+    """Count multiple stereoisomers.
 
-    :param mol: A structure MOL.
-    :type mol: Mol
+Parameters
+----------
+mol : Mol
+    MOL.
 
-    :returns: flag.
-    :rtype: bool
+Returns
+-------
+bool
+    bool bool flag.
     """
     if (
         GetStereoisomerCount(
@@ -115,7 +120,17 @@ if __name__ == "__main__":
     use_legacy = args.use_legacy
 
     def check_expectations(smiles, expectation, use_legacy=use_legacy):
-        """Check expectations."""
+        """Check expectations and log colorized results.
+
+Parameters
+----------
+smiles : str
+    SMILES string to test.
+expectation : bool | None
+    Expected result (True = ambiguous, False = defined, None = unclear).
+use_legacy : bool
+    Use legacy stereochemistry perception. Default is use_legacy.
+        """
         if expectation is None:
             logging.info("\033[33m" + smiles)
         elif check_missing_stereochemistry(smiles, use_legacy) == expectation:

@@ -9,14 +9,17 @@ from smartclass.helpers.convert_chemical_formula import convert_chemical_formula
 
 
 def transform_smiles_to_formula(result: dict) -> dict | None:
-    """
-    Transform SMILES to formula.
+    """Transform SMILES to formula.
 
-    :param result: A single query result (dictionary).
-    :type result: dict
+Parameters
+----------
+result : dict
+    A single query result (dictionary).
 
-    :returns: Transformed query result.
-    :rtype: Union[dict, None]
+Returns
+-------
+dict | None
+    Transformed query result.
     """
     formula = convert_smiles_to_formula(result.get("smiles", ""))
     if formula:

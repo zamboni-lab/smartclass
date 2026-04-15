@@ -8,14 +8,17 @@ from smartclass.chem.helpers.check_missing_stereochemistry import (
 
 
 def transform_entities_to_stereoisomers(result: dict) -> dict | None:
-    """
-    Transform chemical entities to group of stereoisomers.
+    """Transform chemical entities to group of stereoisomers.
 
-    :param result: A single query result (dictionary).
-    :type result: dict
+Parameters
+----------
+result : dict
+    A single query result (dictionary).
 
-    :returns: Transformed query result.
-    :rtype: Union[dict, None]
+Returns
+-------
+dict | None
+    Transformed query result.
     """
     flag = check_missing_stereochemistry(result.get("smiles", ""))
     if flag is True:

@@ -16,14 +16,17 @@ __all__ = [
 def convert_name_and_molblock_to_cxsmiles(
     args: tuple[str, str],
 ) -> tuple[str, str | None]:
-    """
-    Convert a name and a structure MOLBLOCK to CXSMILES.
+    """Convert a name and a structure MOLBLOCK to CXSMILES.
 
-    :param args: A tuple containing the structure name and structure MOL.
-    :type args: tuple[str, str]
+Parameters
+----------
+args : tuple[str, str]
+    MOL. str] :
 
-    :returns: A tuple containing the structure name and its CXSMILES representation.
-    :rtype: tuple[str, Union[str,None]]
+Returns
+-------
+tuple[str, str | None]
+    CXSMILES representation.
     """
     structure_name, structure_mol = args
 

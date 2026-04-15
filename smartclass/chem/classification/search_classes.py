@@ -50,8 +50,15 @@ RESULT_FIELDS = [
 def _parse_smiles_to_mols(smiles_set: set[str]) -> list[Mol]:
     """Convert a set of SMILES strings to RDKit Mol objects.
 
-    :param smiles_set: Set of SMILES strings to convert.
-    :returns: List of valid Mol objects (invalid SMILES are filtered out).
+Parameters
+----------
+smiles_set : set[str]
+    SMILES strings to convert.
+
+Returns
+-------
+list[Mol]
+    Mol objects (invalid SMILES are filtered out).
     """
     structures = []
     for smi in smiles_set:
@@ -73,10 +80,19 @@ def _load_classes(
 ) -> list[dict[str, list[str]]]:
     """Load chemical classes from file or package defaults.
 
-    :param classes_file: Optional path to external classes file.
-    :param classes_name_id: Name of ID column in external file.
-    :param classes_name_smarts: Name of SMARTS column in external file.
-    :returns: List containing a dictionary mapping class IDs to SMARTS patterns.
+Parameters
+----------
+classes_file : str | None
+    Optional path to external classes file.
+classes_name_id : str | None
+    ID column in external file.
+classes_name_smarts : str | None
+    SMARTS column in external file.
+
+Returns
+-------
+list[dict[str, list[str]]]
+    SMARTS patterns.
     """
     if classes_file:
         id_col = classes_name_id or "class"
@@ -106,8 +122,15 @@ def _load_classes(
 def _filter_closest_matches(results: list[dict]) -> list[dict]:
     """Filter results to keep only the closest class match for each structure.
 
-    :param results: List of classification results.
-    :returns: Filtered list with only closest matches per InChIKey.
+Parameters
+----------
+results : list[dict]
+    List of classification results.
+
+Returns
+-------
+list[dict]
+    InChIKey.
     """
     max_ab_per_inchikey: dict[str, int] = {}
     for result in results:
@@ -132,8 +155,12 @@ def _export_classification_results(
 ) -> None:
     """Export classification results to multiple formats.
 
-    :param results: List of classification results to export.
-    :param output_dir: Directory for output files. Uses config default if None.
+Parameters
+----------
+results : list[dict]
+    List of classification results to export.
+output_dir : Path | None
+    None. Default is None.
     """
     if not results:
         logger.warning("No results to export.")
@@ -173,29 +200,42 @@ def search_classes(
     export: bool = True,
     output_dir: Path | str | None = None,
 ) -> list[dict]:
-    """
-    Perform substructure search to classify chemical structures.
-
+    """Perform substructure search to classify chemical structures.
+    
     This function matches input structures against a set of chemical class
     definitions using SMARTS patterns. Results include the class ID, matching
     SMARTS pattern, and structural similarity metrics.
 
-    :param classes_file: Path to TSV file with chemical class definitions.
-        If None, uses the default package classes.
-    :param classes_name_id: Column name for class IDs in the classes file.
-        Defaults to "class".
-    :param classes_name_smarts: Column name for SMARTS in the classes file.
-        Defaults to "structure".
-    :param closest_only: If True, return only the closest matching class
-        for each structure. Default is True.
-    :param include_hierarchy: If True, use chemical hierarchy for faster
-        searching. Default is False.
-    :param input_smiles: Path to file containing SMILES strings to classify.
-    :param smiles: Single SMILES string or list of SMILES to classify.
-    :param export: If True, export results to files. Default is True.
-    :param output_dir: Directory for output files. Uses config default if None.
-    :returns: List of dictionaries with classification results.
-    :raises ValueError: If no structures are provided and ChEMBL fallback fails.
+Parameters
+----------
+classes_file : str | None
+    None. Default is None.
+classes_name_id : str | None
+    Defaults to "class".
+classes_name_smarts : str | None
+    Defaults to "structure".
+closest_only : bool
+    True. Default is True.
+include_hierarchy : bool
+    False. Default is False.
+input_smiles : str | None
+    None. Default is None.
+smiles : str | list[str] | None
+    None. Default is None.
+export : bool
+    True. Default is True.
+output_dir : Path | str | None
+    None. Default is None.
+
+Returns
+-------
+list[dict]
+    List of dictionaries with classification results.
+
+Raises
+------
+    ValueError
+        If no structures are provided and ChEMBL fallback fails.
     """
     # Set column name defaults
     if not classes_name_id:

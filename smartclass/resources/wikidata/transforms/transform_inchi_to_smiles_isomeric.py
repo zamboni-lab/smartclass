@@ -7,14 +7,17 @@ from smartclass.chem.helpers.fix_inchi_tautomerization import fix_inchi_tautomer
 
 
 def transform_inchi_to_smiles_isomeric(result: dict) -> dict | None:
-    """
-    Transform InChI to SMILES.
+    """Transform InChI to SMILES.
 
-    :param result: A single query result (dictionary).
-    :type result: dict
+Parameters
+----------
+result : dict
+    A single query result (dictionary).
 
-    :returns: Transformed query result.
-    :rtype: Union[dict, None]
+Returns
+-------
+dict | None
+    Transformed query result.
     """
     smiles = convert_inchi_to_smiles(result.get("inchi", ""))
     if smiles:

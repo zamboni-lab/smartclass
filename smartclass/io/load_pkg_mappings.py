@@ -14,11 +14,12 @@ __all__ = ["load_pkg_mappings"]
 
 
 def load_pkg_mappings() -> DataFrame:
-    """
-    Load chemont__wd mappings data from the package file into a Polars DataFrame.
+    """Load chemont__wd mappings data from the package file into a Polars DataFrame.
 
-    :returns: DataFrame containing chemont__wd mappings.
-    :rtype: DataFrame
+Returns
+-------
+DataFrame
+    DataFrame containing chemont__wd mappings.
     """
     return load_pkg_file(file="chemontids__wdids.tsv")
 

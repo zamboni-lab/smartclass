@@ -11,17 +11,19 @@ __all__ = [
 
 
 def check_layers_from_inchi(inchi: str, layers: list) -> bool:
-    """
-    Check layers from InChI.
+    """Check layers from InChI.
 
-    :param inchi: InChI.
-    :type inchi: str
+Parameters
+----------
+inchi : str
+    InChI.
+layers : list
+    Layer(s) to check should be in [c, h, q, p, b, t, m, s, i].
 
-    :param layers: Layer(s) to check should be in [c, h, q, p, b, t, m, s, i].
-    :type layers: list
-
-    :returns: flag indicating if the layer is in the InChI.
-    :rtype: bool
+Returns
+-------
+bool
+    InChI.
     """
     for layer in layers:
         if re.search(rf"\/{layer}[^\/]*\/", inchi):

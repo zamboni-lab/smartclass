@@ -11,13 +11,16 @@ __all__ = [
 
 
 def convert_mol_to_smiles(mol: Mol) -> str:
-    """
-    Convert a structure MOL to SMILES.
+    """Convert a structure MOL to SMILES.
 
-    :param mol: A structure MOL.
-    :type mol: Mol
+Parameters
+----------
+mol : Mol
+    MOL.
 
-    :returns: A SMILES.
-    :rtype: str
+Returns
+-------
+str
+    SMILES.
     """
     return MolToSmiles(mol)

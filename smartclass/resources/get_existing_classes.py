@@ -12,11 +12,12 @@ __all__ = [
 
 
 def get_existing_classes(existing_classes: dict | None = None) -> None:
-    """
-    Get existing classes.
+    """Get existing classes.
 
-    :param existing_classes: Fixed dictionary of existing classes.
-    :type existing_classes: Union[dict, None]
+Parameters
+----------
+existing_classes : dict | None
+    None. Default is None.
     """
     if existing_classes is None:
         existing_classes = load_pkg_file("existing_classes.json").to_dict(

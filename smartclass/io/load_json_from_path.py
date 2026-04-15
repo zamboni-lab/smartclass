@@ -11,14 +11,17 @@ __all__ = [
 
 
 def load_json_from_path(path: str) -> dict:
-    """
-    Load json from path.
+    """Load json from path.
 
-    :param path: Path of the file.
-    :type path: str
+Parameters
+----------
+path : str
+    Path of the file.
 
-    :returns: A dictionary.
-    :rtype: dict
+Returns
+-------
+dict
+    A dictionary.
     """
     with open(path, encoding="utf-8") as f:
         data = json.load(f)

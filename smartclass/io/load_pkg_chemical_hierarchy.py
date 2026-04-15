@@ -18,16 +18,26 @@ logger = get_logger(__name__)
 def load_pkg_chemical_hierarchy(
     file_path: str | Path = "scratch/wikidata_classes_taxonomy.tsv",
 ) -> dict[str, list[str]]:
-    """
-    Load chemical class hierarchy from a TSV file.
-
+    """Load chemical class hierarchy from a TSV file.
+    
     The file should have at least 3 columns, where:
     - Column 2 (index 1): Class URI
     - Column 3 (index 2): Parent URI
 
-    :param file_path: Path to the TSV file containing hierarchy data.
-    :returns: Dictionary mapping parent class URIs to lists of child class URIs.
-    :raises DataLoadingError: If the file cannot be read or parsed.
+Parameters
+----------
+file_path : str | Path
+    Default is 'scratch/wikidata_classes_taxonomy.tsv'.
+
+Returns
+-------
+dict[str, list[str]]
+    URIs.
+
+Raises
+------
+    DataLoadingError
+        If the file cannot be read or parsed.
     """
     file_path = Path(file_path)
 

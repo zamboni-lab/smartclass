@@ -10,23 +10,20 @@ def calculate_myopic_mces(
     s_2: str,
     the: int = -1,
 ) -> tuple[int, float, float, int]:
-    """
-    Calculate myopic MCES.
+    """Calculate myopic MCES.
 
-    :param s_1: SMILES 1.
-    :type s_1: str
+Parameters
+----------
+s_1 : str
+    SMILES 1.
+s_2 : str
+    SMILES 2.
+the : int
+    Default is -1.
 
-    :param s_2: SMILES 2.
-    :type s_2: str
-
-    :param the: Threshold.
-    :type the: int
-
-    :returns: Tuple of (Index, Distance, Time, Distance Type).
-        Distance Type values:
-            - 1: Exact Distance
-            - 2: Lower bound (distance above threshold)
-            - 4: Lower bound (second bound used)
-    :rtype: int, float, float, int
+Returns
+-------
+tuple[int, float, float, int]
+    Tuple of (Index, Distance, Time, Distance Type). Distance Type values: - 1: Exact Distance - 2: Lower bound (distance above threshold) - 4: Lower bound (second bound used)
     """
     return MCES(smiles1=s_1, smiles2=s_2, threshold=the, i=0, solver="default")

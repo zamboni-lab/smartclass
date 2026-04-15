@@ -25,19 +25,33 @@ def get_request(
     base_delay: float | None = None,
     timeout: int | None = None,
 ) -> list[dict[str, str]]:
-    """
-    Send a GET request to a SPARQL endpoint and retrieve JSON data.
-
+    """Send a GET request to a SPARQL endpoint and retrieve JSON data.
+    
     Uses exponential backoff with jitter for retries. Falls back to QLever
     endpoint if the primary endpoint fails.
 
-    :param url: The SPARQL endpoint URL.
-    :param query: The SPARQL query string.
-    :param max_retries: Maximum retry attempts. Uses config default if None.
-    :param base_delay: Base delay (seconds) for backoff. Uses config default if None.
-    :param timeout: Request timeout in seconds. Uses config default if None.
-    :returns: List of dictionaries representing query results.
-    :raises NetworkError: If the request fails after all retries.
+Parameters
+----------
+url : str
+    URL.
+query : str
+    SPARQL query string.
+max_retries : int | None
+    None. Default is None.
+base_delay : float | None
+    Base delay (seconds) for backoff. Uses config default if None. Default is None.
+timeout : int | None
+    None. Default is None.
+
+Returns
+-------
+list[dict[str, str]]
+    List of dictionaries representing query results.
+
+Raises
+------
+    NetworkError
+        If the request fails after all retries.
     """
     config = get_config()
 

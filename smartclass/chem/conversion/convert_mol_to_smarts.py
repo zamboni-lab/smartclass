@@ -11,13 +11,16 @@ __all__ = [
 
 
 def convert_mol_to_smarts(mol: Mol) -> str:
-    """
-    Convert a structure MOL to SMARTS.
+    """Convert a structure MOL to SMARTS.
 
-    :param mol: A structure MOL.
-    :type mol: Mol
+Parameters
+----------
+mol : Mol
+    MOL.
 
-    :returns: A SMARTS.
-    :rtype: str
+Returns
+-------
+str
+    SMARTS.
     """
     return MolToSmarts(mol)

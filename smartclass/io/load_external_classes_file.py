@@ -14,20 +14,21 @@ def load_external_classes_file(
     id_name: str = "class",
     smarts_name: str = "structure",
 ) -> DataFrame:
-    """
-    Load a Polars DataFrame from an external tsv file with chemical classes.
+    """Load a Polars DataFrame from an external tsv file with chemical classes.
 
-    :param file: The name of the file to load.
-    :type file: str
+Parameters
+----------
+file : str
+    The name of the file to load.
+id_name : str
+    Default is 'class'.
+smarts_name : str
+    Default is 'structure'.
 
-    :param id_name: The name of the column containing ids.
-    :type id_name: str
-
-    :param smarts_name: The name of the column containing SMARTS.
-    :type smarts_name: str
-
-    :returns: A Polars DataFrame containing the loaded data.
-    :rtype: DataFrame
+Returns
+-------
+DataFrame
+    DataFrame containing the loaded data.
     """
     df = polars.read_csv(file, truncate_ragged_lines=True, separator="\t")
     return df.select([

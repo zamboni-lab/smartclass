@@ -13,14 +13,17 @@ __all__ = [
 
 
 def convert_smarts_to_mol(smarts: str) -> Mol | None:
-    """
-    Convert a structure SMARTS to MOL.
+    """Convert a structure SMARTS to MOL.
 
-    :param smarts: A SMARTS.
-    :type smarts: str
+Parameters
+----------
+smarts : str
+    SMARTS.
 
-    :returns: A MOL.
-    :rtype: Union[Mol, None]
+Returns
+-------
+Mol | None
+    MOL.
     """
     # Try SMARTS first; if that fails, fall back to SMILES/CXSMILES parsing.
     mol = MolFromSmarts(smarts)

@@ -4,7 +4,18 @@ from __future__ import annotations
 
 
 def get_class_structures(classes: list[dict[str, list[str]]]) -> dict[str, list[str]]:
-    """Build a mapping from class IDs to their SMARTS structures."""
+    """Build a mapping from class IDs to their SMARTS structures.
+
+Parameters
+----------
+classes : list[dict[str, list[str]]]
+    List of dicts mapping class IDs to lists of SMARTS patterns.
+
+Returns
+-------
+dict[str, list[str]]
+    Merged mapping from class ID to SMARTS pattern list.
+    """
     class_structures: dict[str, list[str]] = {}
     for c in classes:
         for class_id, class_structure in c.items():

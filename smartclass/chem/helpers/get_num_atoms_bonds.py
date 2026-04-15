@@ -13,14 +13,16 @@ __all__ = [
 def get_num_atoms_bonds(
     mol: Mol,
 ) -> int:
-    """
-    Get number of atoms and bonds.
+    """Get number of atoms and bonds.
 
-    :param mol: A structure MOL.
-    :type mol: Mol
+Parameters
+----------
+mol : Mol
+    MOL.
 
-    :returns: Number of atoms and bonds.
-    :rtype: int
-
+Returns
+-------
+int
+    Number of atoms and bonds.
     """
     return mol.GetNumAtoms() + mol.GetNumBonds()

@@ -13,14 +13,17 @@ __all__ = [
 
 
 def convert_molblock_to_mol(molblock: str) -> Mol | None:
-    """
-    Convert a structure MOLBlock to MOL.
+    """Convert a structure MOLBlock to MOL.
 
-    :param molblock: A MOLBlock.
-    :type molblock: str
+Parameters
+----------
+molblock : str
+    MOLBlock.
 
-    :returns: A MOL.
-    :rtype: Union[Mol, None]
+Returns
+-------
+Mol | None
+    MOL.
     """
     mol = MolFromMolBlock(molblock)
 

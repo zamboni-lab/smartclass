@@ -12,14 +12,14 @@ def get_chemont(
     url: str = "http://classyfire.wishartlab.com/system/downloads/1_0/chemont/ChemOnt_2_1.obo.zip",
     output: str = "scratch/ChemOnt_2_1.obo.zip",
 ):
-    """
-    Get ChemOnt.
+    """Get ChemOnt.
 
-    :param url: URL.
-    :type url: str
-
-    :param output: Output.
-    :type output: str
+Parameters
+----------
+url : str
+    Default is 'http://classyfire.wishartlab.com/system/downloads/1_0/chemont/ChemOnt_2_1.obo.zip'.
+output : str
+    Default is 'scratch/ChemOnt_2_1.obo.zip'.
     """
     download_file_if_not_exists(url=url, output=output)
 

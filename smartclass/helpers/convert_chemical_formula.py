@@ -11,25 +11,31 @@ __all__ = [
 
 
 def convert_chemical_formula(text: str) -> str:
-    """
-    Convert chemical formula.
+    """Convert chemical formula.
 
-    :param text: Text.
-    :type text: str
+Parameters
+----------
+text : str
+    Text.
 
-    :returns: Modified text.
-    :rtype: str
+Returns
+-------
+str
+    Modified text.
     """
 
     def replace(match: re.Match) -> str:
-        """
-        Matches subscripts.
+        """Matches subscripts.
 
-        :param match: Match object.
-        :type match: re.Match
+Parameters
+----------
+match : re.Match
+    Match object.
 
-        :returns: Modified text.
-        :rtype: str
+Returns
+-------
+str
+    Modified text.
         """
         number, symbol = match.groups()
         subscript_map = {

@@ -21,12 +21,14 @@ FILE_DOWNLOADER = pooch.create(
 
 
 def download_file_if_not_exists(url: str, output: str) -> None:
-    """
-    Downloads a file from the specified URL if it does not exist.
+    """Downloads a file from the specified URL if it does not exist.
 
-    Args:
-        url: Input URL.
-        output: Output file path.
+Parameters
+----------
+url : str
+    URL.
+output : str
+    Output file path.
     """
     if os.path.exists(output):
         logging.info(f"File already exists at {output}")

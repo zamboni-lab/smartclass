@@ -22,24 +22,9 @@ __all__ = [
 @dataclass
 class Config:
     """Configuration settings for smartclass.
-
+    
     Settings can be overridden via environment variables prefixed with SMARTCLASS_.
     For example, SMARTCLASS_OUTPUT_DIR=/path/to/output.
-
-    Attributes:
-        output_dir: Directory for output files (default: "output").
-        cache_dir: Directory for cached data (default: ".smartclass_cache").
-        wikidata_endpoint: Default Wikidata SPARQL endpoint URL.
-        qlever_endpoint: Fallback QLever SPARQL endpoint URL.
-        http_timeout: Default HTTP request timeout in seconds.
-        http_max_retries: Maximum number of HTTP retry attempts.
-        http_base_delay: Base delay for exponential backoff in seconds.
-        chembl_fp_length: Default fingerprint length for ChEMBL processing.
-        chembl_max_atoms: Maximum number of atoms for ChEMBL molecules.
-        chembl_report_interval: Reporting interval for ChEMBL processing.
-        mcs_timeout: Timeout for MCS calculations in seconds.
-        mcs_threshold: Default threshold for MCS calculations.
-        log_level: Logging level (DEBUG, INFO, WARNING, ERROR, CRITICAL).
     """
 
     # Output settings
@@ -75,12 +60,14 @@ class Config:
     _ENV_PREFIX: ClassVar[str] = "SMARTCLASS_"
 
     def __post_init__(self) -> None:
-        """Load settings from environment variables after initialization."""
+        """Load settings from environment variables after initialization.
+        """
         self._load_from_env()
         self._ensure_directories()
 
     def _load_from_env(self) -> None:
-        """Override settings from environment variables."""
+        """Override settings from environment variables.
+        """
         env_mappings = {
             "OUTPUT_DIR": ("output_dir", Path),
             "CACHE_DIR": ("cache_dir", Path),
@@ -108,23 +95,38 @@ class Config:
                     pass  # Keep default if conversion fails
 
     def _ensure_directories(self) -> None:
-        """Create output and cache directories if they don't exist."""
+        """Create output and cache directories if they don't exist.
+        """
         self.output_dir.mkdir(parents=True, exist_ok=True)
         self.cache_dir.mkdir(parents=True, exist_ok=True)
 
     def get_output_path(self, filename: str) -> Path:
         """Get full path for an output file.
 
-        :param filename: Name of the output file.
-        :returns: Full path to the output file.
+Parameters
+----------
+filename : str
+    Name of the output file.
+
+Returns
+-------
+Path
+    Full path to the output file.
         """
         return self.output_dir / filename
 
     def get_cache_path(self, filename: str) -> Path:
         """Get full path for a cache file.
 
-        :param filename: Name of the cache file.
-        :returns: Full path to the cache file.
+Parameters
+----------
+filename : str
+    Name of the cache file.
+
+Returns
+-------
+Path
+    Full path to the cache file.
         """
         return self.cache_dir / filename
 
@@ -135,11 +137,14 @@ _config: Config | None = None
 
 def get_config() -> Config:
     """Get the global configuration instance.
-
+    
     Creates a new Config instance on first call, then returns the same
     instance on subsequent calls.
 
-    :returns: The global Config instance.
+Returns
+-------
+Config
+    Config instance.
     """
     global _config
     if _config is None:
@@ -149,7 +154,7 @@ def get_config() -> Config:
 
 def reset_config() -> None:
     """Reset the global configuration to None.
-
+    
     Useful for testing or when you need to reload configuration.
     """
     global _config

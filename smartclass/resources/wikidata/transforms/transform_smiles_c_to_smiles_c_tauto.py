@@ -6,14 +6,17 @@ from smartclass.chem.helpers.fix_inchi_tautomerization import fix_inchi_tautomer
 
 
 def transform_smiles_c_to_smiles_c_tauto(result: dict) -> dict | None:
-    """
-    Transform smiles_c to smiles_c_tauto.
+    """Transform smiles_c to smiles_c_tauto.
 
-    :param result: A single query result (dictionary).
-    :type result: dict
+Parameters
+----------
+result : dict
+    A single query result (dictionary).
 
-    :returns: Transformed query result.
-    :rtype: Union[dict, None]
+Returns
+-------
+dict | None
+    Transformed query result.
     """
     s = result.get("smiles", "")
     smiles = fix_inchi_tautomerization(s)

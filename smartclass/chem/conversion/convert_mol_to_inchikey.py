@@ -11,10 +11,16 @@ __all__ = [
 
 
 def convert_mol_to_inchikey(mol: Mol) -> str:
-    """
-    Convert an RDKit Mol object to an InChIKey.
+    """Convert an RDKit Mol object to an InChIKey.
 
-    :param mol: RDKit Mol object.
-    :returns: InChIKey string.
+Parameters
+----------
+mol : Mol
+    Mol object.
+
+Returns
+-------
+str
+    InChIKey string.
     """
     return MolToInchiKey(mol)

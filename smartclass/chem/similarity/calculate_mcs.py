@@ -18,18 +18,25 @@ def calculate_mcs(
     ring_matches_ring_only: bool = False,
     timeout: int | None = None,
 ) -> rdFMCS.MCSResult:
-    """
-    Calculate Maximum Common Substructure (MCS) for a list of molecules.
-
+    """Calculate Maximum Common Substructure (MCS) for a list of molecules.
+    
     Uses RDKit's FindMCS algorithm with flexible atom and bond matching.
 
-    :param mols: List of RDKit Mol objects.
-    :param threshold: Fraction of molecules that must contain the substructure.
-        Uses config default if None.
-    :param ring_matches_ring_only: If True, ring atoms only match ring atoms.
-    :param timeout: Maximum time in seconds for MCS calculation.
-        Uses config default if None.
-    :returns: MCS result object containing the common substructure.
+Parameters
+----------
+mols : list
+    Mol objects.
+threshold : float | None
+    None. Default is None.
+ring_matches_ring_only : bool
+    False. Default is False.
+timeout : int | None
+    None. Default is None.
+
+Returns
+-------
+rdFMCS.MCSResult
+    MCS result object containing the common substructure.
     """
     config = get_config()
 

@@ -18,17 +18,19 @@ def check_smiles_isomeric(
     smiles_isomeric: str,
     transform_to_canonical: bool = False,
 ) -> str | None:
-    """
-    Check isomeric smiles.
+    """Check isomeric smiles.
 
-    :param smiles_isomeric: SMILES.
-    :type smiles_isomeric: str
+Parameters
+----------
+smiles_isomeric : str
+    SMILES.
+transform_to_canonical : bool
+    False. Default is False.
 
-    :param transform_to_canonical: Flag indicating whether to generate canonical.
-    :type transform_to_canonical: bool
-
-    :returns: SMILES.
-    :rtype: Union[str,None]
+Returns
+-------
+str | None
+    SMILES.
     """
     # COMMENT this could be updated live using
     # """SELECT * WHERE { wd:P2017 wdt:P1793 ?reg. }"""

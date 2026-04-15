@@ -18,14 +18,17 @@ import zipfile
 def get_exact_relationships(
     obo_file_path: str = "scratch/ChemOnt_2_1.obo.zip",
 ) -> dict[str, list[tuple[str, str]]]:
-    """
-    Get exact relationships.
+    """Get exact relationships.
 
-    :param obo_file_path: Obo file path.
-    :type obo_file_path: str
+Parameters
+----------
+obo_file_path : str
+    Path to the ChemOnt OBO zip file. Default is 'scratch/ChemOnt_2_1.obo.zip'.
 
-    :returns: Description.
-    :rtype: dict[str, list[tuple[str, str]]]
+Returns
+-------
+dict[str, list[tuple[str, str]]]
+    Mapping from ChemOnt term ID to list of (synonym, ChEBI ID) pairs.
     """
     chebi_synonyms: dict[str, list[tuple[str, str]]] = {}
     with zipfile.ZipFile(obo_file_path, "r") as z:

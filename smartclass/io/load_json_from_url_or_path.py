@@ -16,17 +16,19 @@ __all__ = [
 
 
 def load_json_from_url_or_path(url: str, name: str) -> dict | None:
-    """
-    Load json from URL or path.
+    """Load json from URL or path.
 
-    :param url: URL to get the json from.
-    :type url: str
+Parameters
+----------
+url : str
+    URL to get the json from.
+name : str
+    Name of the file.
 
-    :param name: Name of the file.
-    :type name: str
-
-    :returns: A dictionary or None.
-    :rtype: Union[dict,None]
+Returns
+-------
+dict | None
+    None.
     """
     file_name = f"{name}.json"
     file_path = os.path.join("scratch", file_name)

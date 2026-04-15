@@ -17,16 +17,23 @@ logger = get_logger(__name__)
 
 
 def export_results(output: str | Path, results: list[dict]) -> None:
-    """
-    Export a list of dictionaries to a CSV or TSV file.
-
+    """Export a list of dictionaries to a CSV or TSV file.
+    
     The output format is determined by the file extension:
     - .tsv: Tab-separated values
     - .csv: Comma-separated values
 
-    :param output: Path to the output file.
-    :param results: List of dictionaries to export as rows.
-    :raises DataExportError: If the export fails.
+Parameters
+----------
+output : str | Path
+    Path to the output file.
+results : list[dict]
+    List of dictionaries to export as rows.
+
+Raises
+------
+    DataExportError
+        If the export fails.
     """
     if not results:
         logger.debug("No data to export.")

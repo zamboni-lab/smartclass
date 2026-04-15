@@ -38,8 +38,8 @@ jobs:
         run: |
           uv run coverage report
       - name: Build and deploy documentation
+        if: github.event_name == 'push'
         run: |
           uv sync --group docs
-          uv run sphinx-build -b html docs/source docs/_build/html
-          uv run ghp-import -n -p -f docs/_build/html
-        if: github.event_name == 'push'
+          uv run great-docs build
+          uv run ghp-import -n -p -f great-docs/_site

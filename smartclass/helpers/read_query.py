@@ -18,12 +18,22 @@ logger = get_logger(__name__)
 
 
 def read_query(query: str | Path) -> str:
-    """
-    Read a SPARQL query from a file path or URL.
+    """Read a SPARQL query from a file path or URL.
 
-    :param query: Path to local file or URL to fetch query from.
-    :returns: The SPARQL query string.
-    :raises DataLoadingError: If the query cannot be loaded.
+Parameters
+----------
+query : str | Path
+    URL to fetch query from.
+
+Returns
+-------
+str
+    SPARQL query string.
+
+Raises
+------
+    DataLoadingError
+        If the query cannot be loaded.
     """
     query_str = str(query)
 

@@ -12,14 +12,17 @@ __all__ = [
 
 
 def convert_smiles_to_inchi(smiles: str) -> str | None:
-    """
-    Convert a structure SMILES to InChI.
+    """Convert a structure SMILES to InChI.
 
-    :param smiles: A SMILES.
-    :type smiles: str
+Parameters
+----------
+smiles : str
+    SMILES.
 
-    :returns: An InChI.
-    :rtype: Union[str, None]
+Returns
+-------
+str | None
+    InChI.
     """
     mol = convert_smiles_to_mol(smiles)
     if mol is not None:

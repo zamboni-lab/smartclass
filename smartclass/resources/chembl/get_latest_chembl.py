@@ -24,20 +24,18 @@ def get_latest_chembl(
     report_interval: int = 50000,
     tautomer_fingerprints: bool = True,
 ) -> None:
-    """
-    Download and process the latest ChEMBL data.
+    """Download and process the latest ChEMBL data.
 
-    :param fp_len: Fingerprint length.
-    :type fp_len: int
-
-    :param max_atoms: Maximal number of atoms.
-    :type max_atoms: int
-
-    :param report_interval: Molecules processed before reporting.
-    :type report_interval: int
-
-    :param tautomer_fingerprints: Whether to use tautomer fingerprints.
-    :type tautomer_fingerprints: bool
+Parameters
+----------
+fp_len : int
+    Default is 2048.
+max_atoms : int
+    Default is 50.
+report_interval : int
+    Default is 50000.
+tautomer_fingerprints : bool
+    True. Default is True.
     """
     try:
         # Get paths and constants

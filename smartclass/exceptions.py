@@ -46,7 +46,20 @@ _MAX_SNIPPET_LENGTH = 1500
 
 
 def _truncate(text: str, max_length: int = _MAX_SNIPPET_LENGTH) -> str:
-    """Truncate text with ellipsis if too long."""
+    """Truncate text with ellipsis if it exceeds *max_length* characters.
+
+    Parameters
+    ----------
+    text : str
+        Input text to truncate.
+    max_length : int
+        Maximum allowed length before truncation. Default is _MAX_SNIPPET_LENGTH.
+
+    Returns
+    -------
+    str
+        Original text if within limit, otherwise truncated text ending with ``...``.
+    """
     if len(text) <= max_length:
         return text
     return f"{text[:max_length]}..."
@@ -57,22 +70,31 @@ class SmartclassError(Exception):
 
     All custom exceptions in smartclass inherit from this class,
     making it easy to catch all smartclass-specific errors.
-
-    Attributes:
-        message: Human-readable error description.
     """
 
     def __init__(self, message: str, *args: Any, **kwargs: Any) -> None:
         """Initialize with a descriptive message.
 
-        Args:
-            message: Human-readable error description.
+        Parameters
+        ----------
+        message : str
+            Human-readable error description.
+        *args : Any
+            Additional positional arguments forwarded to the base ``Exception``.
+        **kwargs : Any
+            Additional keyword arguments forwarded to the base ``Exception``.
         """
         self.message = message
         super().__init__(message, *args, **kwargs)
 
     def __str__(self) -> str:
-        """Return the error message."""
+        """Return the human-readable error message.
+
+        Returns
+        -------
+        str
+            The message passed at construction time.
+        """
         return self.message
 
 
@@ -80,8 +102,8 @@ class SmartclassError(Exception):
 class ChemicalConversionError(SmartclassError):
     """Error during chemical format conversion.
 
-    Raised when conversion between chemical representations fails
-    (e.g., SMILES to Mol, InChI to SMILES).
+    Raised when conversion between chemical representations fails,
+    e.g. SMILES to Mol or InChI to SMILES.
     """
 
     pass
@@ -91,10 +113,6 @@ class MoleculeParsingError(ChemicalConversionError):
     """Error parsing a molecule representation.
 
     Raised when RDKit fails to parse a molecular structure.
-
-    Attributes:
-        input_string: The string that failed to parse.
-        input_type: Type of input (SMILES, InChI, SMARTS, etc.).
     """
 
     def __init__(
@@ -106,9 +124,16 @@ class MoleculeParsingError(ChemicalConversionError):
     ) -> None:
         """Initialize with details about the failed parsing.
 
-        Args:
-            input_string: The string that failed to parse.
-            input_type: Type of input (SMILES, InChI, SMARTS, etc.).
+        Parameters
+        ----------
+        input_string : str
+            The string that failed to parse.
+        input_type : str
+            Format of the input string (e.g. SMILES, InChI, SMARTS). Default is 'unknown'.
+        *args : Any
+            Additional positional arguments forwarded to the parent exception.
+        **kwargs : Any
+            Additional keyword arguments forwarded to the parent exception.
         """
         self.input_string = input_string
         self.input_type = input_type
@@ -139,36 +164,35 @@ class InChIError(MoleculeParsingError):
 
 # Classification Errors
 class ClassificationError(SmartclassError):
-    """Error during chemical classification.
-
-    Raised when the classification process encounters an issue.
-    """
+    """Error during chemical classification."""
 
     pass
 
 
 # Configuration Errors
 class ConfigurationError(SmartclassError):
-    """Error in configuration settings.
-
-    Raised when configuration is invalid or missing required values.
-    """
+    """Error in configuration settings."""
 
     pass
 
 
 # Data I/O Errors
 class DataLoadingError(SmartclassError):
-    """Error loading data from a file or URL.
-
-    Raised when data cannot be loaded or parsed correctly.
-    """
+    """Error loading data from a file or URL."""
 
     def __init__(self, source: str, reason: str | None = None, *args, **kwargs) -> None:
         """Initialize with details about the failed loading.
 
-        :param source: Path or URL that failed to load.
-        :param reason: Optional reason for the failure.
+        Parameters
+        ----------
+        source : str
+            Path or URL that failed to load.
+        reason : str | None
+            Optional human-readable reason for the failure. Default is None.
+        *args : Any
+            Additional positional arguments forwarded to the base ``Exception``.
+        **kwargs : Any
+            Additional keyword arguments forwarded to the base ``Exception``.
         """
         self.source = source
         self.reason = reason
@@ -179,10 +203,7 @@ class DataLoadingError(SmartclassError):
 
 
 class DataExportError(SmartclassError):
-    """Error exporting data to a file.
-
-    Raised when data cannot be written to the specified destination.
-    """
+    """Error exporting data to a file."""
 
     def __init__(
         self,
@@ -193,8 +214,16 @@ class DataExportError(SmartclassError):
     ) -> None:
         """Initialize with details about the failed export.
 
-        :param destination: Path that failed to write.
-        :param reason: Optional reason for the failure.
+        Parameters
+        ----------
+        destination : str
+            Output path that failed to write.
+        reason : str | None
+            Optional human-readable reason for the failure. Default is None.
+        *args : Any
+            Additional positional arguments forwarded to the base ``Exception``.
+        **kwargs : Any
+            Additional keyword arguments forwarded to the base ``Exception``.
         """
         self.destination = destination
         self.reason = reason
@@ -206,10 +235,7 @@ class DataExportError(SmartclassError):
 
 # Input Validation Errors
 class InvalidInputError(SmartclassError):
-    """Error for invalid user input.
-
-    Raised when input validation fails.
-    """
+    """Error for invalid user input."""
 
     def __init__(
         self,
@@ -221,9 +247,18 @@ class InvalidInputError(SmartclassError):
     ) -> None:
         """Initialize with details about the invalid input.
 
-        :param parameter: Name of the parameter with invalid value.
-        :param value: The invalid value provided.
-        :param reason: Optional reason why the value is invalid.
+        Parameters
+        ----------
+        parameter : str
+            Name of the parameter with invalid value.
+        value : object
+            The invalid value provided.
+        reason : str | None
+            Optional human-readable reason why the value is invalid. Default is None.
+        *args : Any
+            Additional positional arguments forwarded to the base ``Exception``.
+        **kwargs : Any
+            Additional keyword arguments forwarded to the base ``Exception``.
         """
         self.parameter = parameter
         self.value = value
@@ -236,10 +271,7 @@ class InvalidInputError(SmartclassError):
 
 # Network Errors
 class NetworkError(SmartclassError):
-    """Error during network operations.
-
-    Raised when HTTP requests fail after retries.
-    """
+    """Error during network operations."""
 
     def __init__(
         self,
@@ -251,9 +283,18 @@ class NetworkError(SmartclassError):
     ) -> None:
         """Initialize with details about the network failure.
 
-        :param url: URL that failed.
-        :param status_code: HTTP status code if available.
-        :param reason: Optional reason for the failure.
+        Parameters
+        ----------
+        url : str
+            URL that failed.
+        status_code : int | None
+            HTTP status code if available. Default is None.
+        reason : str | None
+            Optional human-readable reason for the failure. Default is None.
+        *args : Any
+            Additional positional arguments forwarded to the base ``Exception``.
+        **kwargs : Any
+            Additional keyword arguments forwarded to the base ``Exception``.
         """
         self.url = url
         self.status_code = status_code

@@ -14,13 +14,16 @@ __all__ = [
 
 
 def convert_mol_to_inchi(mol: Mol) -> str:
-    """
-    Convert a structure MOL to InChI.
+    """Convert a structure MOL to InChI.
 
-    :param mol: A structure MOL.
-    :type mol: Mol
+Parameters
+----------
+mol : Mol
+    MOL.
 
-    :returns: An InChI.
-    :rtype: str
+Returns
+-------
+str
+    InChI.
     """
     return cast(str, MolToInchi(mol))

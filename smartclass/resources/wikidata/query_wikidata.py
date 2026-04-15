@@ -59,23 +59,20 @@ def query_wikidata(
     transform: str | None = None,
     url: str = "https://query.wikidata.org/sparql",
 ) -> None:
-    """
-    Execute a SPARQL query on Wikidata and export the results.
+    """Execute a SPARQL query on Wikidata and export the results.
 
-    :param query: Path to the SPARQL query file.
-    :type query: str
-
-    :param output: Path to the output file where results will be exported.
-    :type output: str
-
-    :param remove_prefix: Flag to remove wikidata prefix.
-    :type remove_prefix: bool
-
-    :param transform: The transform to apply
-    :type transform: Union[None,str]
-
-    :param url: URL of the Wikidata SPARQL endpoint.
-    :type url: str
+Parameters
+----------
+query : str
+    SPARQL query file.
+output : str
+    Path to the output file where results will be exported.
+remove_prefix : bool
+    True. Default is True.
+transform : str | None
+    None. Default is None.
+url : str
+    Default is 'https://query.wikidata.org/sparql'.
     """
     query_str = read_query(query)
 

@@ -6,17 +6,19 @@ from smartclass.chem.conversion.convert_inchi_to_mass import convert_inchi_to_ma
 
 
 def transform_inchi_mass_to_inchi_mass(result: dict, tol: float = 0.001) -> dict | None:
-    """
-    Transform InChI to mass.
+    """Transform InChI to mass.
 
-    :param result: A single query result (dictionary).
-    :type result: dict
+Parameters
+----------
+result : dict
+    A single query result (dictionary).
+tol : float
+    Tolerance (in dalton). Default is 0.001.
 
-    :param tol: Tolerance (in dalton).
-    :type tol: float
-
-    :returns: Transformed query result.
-    :rtype: Union[dict, None]
+Returns
+-------
+dict | None
+    Transformed query result.
     """
     mass = convert_inchi_to_mass(result.get("inchi", ""))
     mass_wd = float(result.get("mass", "").split("±")[0])

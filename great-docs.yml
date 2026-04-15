@@ -1,0 +1,210 @@
+# Great Docs Configuration
+# See https://posit-dev.github.io/great-docs/user-guide/03-configuration.html
+
+# Module Name (optional)
+# ----------------------
+# Set this if your importable module name differs from the project name.
+# Example: project 'py-yaml12' with module name 'yaml12'
+# module: yaml12
+
+# Docstring Parser
+# ----------------
+# The docstring format used in your package (numpy, google, or sphinx)
+parser: numpy
+
+# Dynamic Introspection
+# ---------------------
+# Use runtime introspection for more accurate documentation (default: true)
+# Set to false if your package has cyclic alias issues (e.g., PyO3/Rust bindings)
+dynamic: false
+
+# API Discovery Settings
+# ----------------------
+# Exclude items from auto-documentation
+# exclude:
+#   - InternalClass
+#   - helper_function
+
+# Logo & Favicon
+# ---------------
+# Point to a single logo file (replaces the text title in the navbar):
+# logo: assets/logo.svg
+#
+# For light/dark variants:
+# logo:
+#   light: assets/logo-light.svg
+#   dark: assets/logo-dark.svg
+#
+# To show the text title alongside the logo, add: show_title: true
+
+# Author Information
+# ------------------
+# Author metadata for display in the landing page sidebar
+# You can add additional fields: github, orcid, affiliation, homepage
+authors:
+  - name: Adriano Rutz
+    role: Maintainer
+    # affiliation: 
+    email: rutz@imsb.biol.ethz.ch
+    github: adafede
+    orcid: 0000-0003-0443-9902
+    # homepage: 
+
+# Funding / Copyright Holder
+# --------------------------
+# Credit the organization that funds or holds copyright for this package.
+# Displays in sidebar and footer. Homepage and ROR provide links.
+# funding:
+#   name: "Posit Software, PBC"
+#   roles:
+#     - Copyright holder
+#     - funder
+#   homepage: https://posit.co
+#   ror: https://ror.org/03wc8by49
+
+# API Reference Structure
+# -----------------------
+# Customize the sections below to organize your API documentation.
+# - Reorder items within a section to change their display order
+# - Move items between sections or create new sections
+# - Use 'members: false' to exclude methods from documentation
+# - Add 'desc:' to sections for descriptions
+
+reference:
+  - title: Classes
+    desc: Main classes provided by the package
+    contents:
+      - exceptions.ChemicalConversionError
+      - exceptions.ClassificationError
+      - exceptions.ConfigurationError
+      - exceptions.DataExportError
+      - exceptions.DataLoadingError
+      - exceptions.InChIError
+      - exceptions.InvalidInputError
+      - exceptions.MoleculeParsingError
+      - exceptions.NetworkError
+      - exceptions.SMARTSError
+      - exceptions.SMILESError
+
+  - title: Exceptions
+    desc: Exception classes
+    contents:
+      - SmartclassError
+
+  - title: Functions
+    desc: Utility functions
+    contents:
+      - bfs_search_classes_generator.tqdm_bfs_search_classes_generator
+      - calculate_mcs
+      - check_missing_stereochemistry
+      - check_smiles_contains_no_dot
+      - check_smiles_contains_no_isotope
+      - check_smiles_isomeric
+      - combine_csv_files
+      - configure_logging
+      - convert_chemical_formula
+      - convert_classyfire_dict
+      - convert_inchi_to_inchikey
+      - convert_inchi_to_mass
+      - convert_inchi_to_mol
+      - convert_inchi_to_smiles
+      - convert_list_of_dict
+      - convert_mol_to_cxsmiles
+      - convert_mol_to_inchi
+      - convert_mol_to_inchikey
+      - convert_mol_to_smarts
+      - convert_mol_to_smiles
+      - convert_molblock_to_mol
+      - convert_smarts_to_mol
+      - convert_smiles_to_canonical_smiles
+      - convert_smiles_to_formula
+      - convert_smiles_to_inchi
+      - convert_smiles_to_mass
+      - convert_smiles_to_mol
+      - download_file_if_not_exists
+      - enumerate_structures
+      - export_dict_to_json
+      - export_results
+      - fix_inchi_tautomerization
+      - get_config
+      - get_logger
+      - get_num_atoms_bonds
+      - get_num_matched_atoms_bonds
+      - get_request
+      - load_csv_from_path
+      - load_external_classes_file
+      - load_json_from_path
+      - load_json_from_url
+      - load_json_from_url_or_path
+      - load_pkg_bitter_smiles
+      - load_pkg_chemical_hierarchy
+      - load_pkg_classes
+      - load_pkg_data
+      - load_pkg_file
+      - load_pkg_mappings
+      - load_pkg_mia
+      - load_smiles
+      - load_tsv_from_path
+      - read_query
+      - resources.extract_chebi
+      - resources.get_chebi
+      - sample_list
+      - search_class.build_filter_catalog
+      - search_classes.tqdm_bfs_search_classes_generator
+      - split_csv
+      - standardize
+
+  - title: Constants
+    desc: Module-level constants and data
+    contents:
+      - bfs_search_classes_generator.ClassDict
+      - bfs_search_classes_generator.ClassHierarchy
+      - bfs_search_classes_generator.MatchResult
+      - bfs_search_classes_generator.c
+      - bfs_search_classes_generator.class_hierarchy
+      - bfs_search_classes_generator.classes
+      - bfs_search_classes_generator.logger
+      - bfs_search_classes_generator.params
+      - bfs_search_classes_generator.results_bfs
+      - bfs_search_classes_generator.structures
+      - search_class.logger
+      - search_classes.RESULT_FIELDS
+      - search_classes.logger
+
+  - title: Other
+    desc: Additional exports
+    contents:
+      - api
+      - chebi
+      - chem
+      - chembl
+      - chemont
+      - examples
+      - get_class_structures
+      - io
+      - schema
+      - testing
+      - wikidata
+
+# Site Settings
+# -------------
+# site:
+#   theme: flatly              # Quarto theme (default: flatly)
+#   toc: true                  # Show table of contents (default: true)
+#   toc-depth: 2               # TOC heading depth (default: 2)
+#   toc-title: On this page    # TOC title (default: "On this page")
+
+# Jupyter Kernel
+# --------------
+# Jupyter kernel to use for executing code cells in .qmd files.
+# This is set at the project level so it applies to all pages, including
+# auto-generated API reference pages. Can be overridden in individual .qmd
+# file frontmatter if needed for special cases.
+jupyter: python3
+
+# CLI Documentation
+# -----------------
+# cli:
+#   enabled: true              # Enable CLI documentation
+#   module: my_package.cli     # Module containing Click commands
+#   name: cli                  # Name of the Click command object

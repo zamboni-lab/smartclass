@@ -11,13 +11,16 @@ __all__ = [
 
 
 def load_tsv_from_path(path: str) -> DataFrame:
-    """
-    Load tsv from path.
+    """Load tsv from path.
 
-    :param path: Path of the file.
-    :type path: str
+Parameters
+----------
+path : str
+    Path of the file.
 
-    :returns: A Polars DataFrame.
-    :rtype: DataFrame
+Returns
+-------
+DataFrame
+    DataFrame.
     """
     return read_csv(path, separator="\t")

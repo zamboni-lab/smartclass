@@ -11,14 +11,17 @@ __all__ = [
 
 
 def convert_inchi_to_inchikey(inchi: str) -> str:
-    """
-    Convert a structure InChI to InChIKey.
+    """Convert a structure InChI to InChIKey.
 
-    :param inchi: An InChI.
-    :type inchi: str
+Parameters
+----------
+inchi : str
+    InChI.
 
-    :returns: An InChIKey.
-    :rtype: str
+Returns
+-------
+str
+    InChIKey.
     """
     return InchiToInchiKey(inchi)
 

@@ -11,14 +11,17 @@ __all__ = [
 
 
 def standardize(smiles: str) -> str | None:
-    """
-    Standardize.
+    """Standardize.
 
-    :param smiles: SMILES.
-    :type smiles: str
+Parameters
+----------
+smiles : str
+    SMILES.
 
-    :returns: SMILES.
-    :rtype: Union[str, None]
+Returns
+-------
+str | None
+    SMILES.
     """
     return StandardizeSmiles(smiles)
 

@@ -16,11 +16,12 @@ __all__ = ["load_pkg_data"]
 
 
 def load_pkg_data() -> tuple[DataFrame, DataFrame, DataFrame]:
-    """
-    Load the package data.
+    """Load the package data.
 
-    :returns: A tuple of Polars DataFrame containing the package data.
-    :rtype: tuple[DataFrame]
+Returns
+-------
+tuple[DataFrame, DataFrame, DataFrame]
+    DataFrame containing the package data.
     """
     classes = load_pkg_classes()
     mappings = load_pkg_mappings()

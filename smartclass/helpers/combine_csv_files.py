@@ -15,17 +15,16 @@ def combine_csv_files(
     output_file: str,
     separator="\t",
 ) -> None:
-    """
-    Combine multiple CSV files into a single CSV file.
+    """Combine multiple CSV files into a single CSV file.
 
-    :param input_files: List of input CSV file paths or a single input CSV file path.
-    :type input_files: Union[list[str], str]
-
-    :param output_file: Output CSV file path where the combined data will be saved.
-    :type output_file: str
-
-    :param separator: Separator used in the CSV files (default is 'tab').
-    :type separator: str
+Parameters
+----------
+input_files : list[str] | str
+    CSV file path.
+output_file : str
+    CSV file path where the combined data will be saved.
+separator : Any
+    CSV files (default is 'tab'). Default is ' '.
     """
     if isinstance(input_files, str):
         input_files = [input_files]  # Ensure input_files is a list

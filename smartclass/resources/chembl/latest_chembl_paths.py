@@ -16,15 +16,15 @@ __all__ = [
 def latest_chembl_paths() -> tuple:
     """Retrieve the latest ChEMBL version and generate file paths for data and library.
 
-Returns
--------
-tuple
-    ChEMBL version, data path, and library path.
+    Returns
+    -------
+    tuple
+        ChEMBL version, data path, and library path.
 
-Raises
-------
-    RuntimeError
-        If the ChEMBL version or file paths cannot be retrieved.
+    Raises
+    ------
+        RuntimeError
+            If the ChEMBL version or file paths cannot be retrieved.
     """
     try:
         # Get the latest ChEMBL version

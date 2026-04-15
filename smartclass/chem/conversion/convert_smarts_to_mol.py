@@ -15,15 +15,15 @@ __all__ = [
 def convert_smarts_to_mol(smarts: str) -> Mol | None:
     """Convert a structure SMARTS to MOL.
 
-Parameters
-----------
-smarts : str
-    SMARTS.
+    Parameters
+    ----------
+    smarts : str
+        SMARTS.
 
-Returns
--------
-Mol | None
-    MOL.
+    Returns
+    -------
+    Mol | None
+        MOL.
     """
     # Try SMARTS first; if that fails, fall back to SMILES/CXSMILES parsing.
     mol = MolFromSmarts(smarts)

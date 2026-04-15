@@ -76,8 +76,8 @@ dev = [
 docs = [
   "autodoc_pydantic>=2.2.0",
   "ghp-import>=2.1.0",
-  "pydantic-core>=2.46.0",
   "great-docs>=0.7",
+  "pydantic-core>=2.46.1",
 ]
 
 [build-system]

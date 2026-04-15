@@ -11,17 +11,17 @@ def transform_smiles_mass_to_smiles_mass(
 ) -> dict | None:
     """Transform SMILES to mass.
 
-Parameters
-----------
-result : dict
-    A single query result (dictionary).
-tol : float
-    Tolerance (in dalton). Default is 0.001.
+    Parameters
+    ----------
+    result : dict
+        A single query result (dictionary).
+    tol : float
+        Tolerance (in dalton). Default is 0.001.
 
-Returns
--------
-dict | None
-    Transformed query result.
+    Returns
+    -------
+    dict | None
+        Transformed query result.
     """
     mass = convert_smiles_to_mass(result.get("smiles", ""))
     mass_wd = float(result.get("mass", "").split("±")[0])

@@ -15,15 +15,15 @@ __all__ = [
 def convert_inchi_to_mol(inchi: str) -> Mol | None:
     """Convert a structure InChI to MOL.
 
-Parameters
-----------
-inchi : str
-    InChI.
+    Parameters
+    ----------
+    inchi : str
+        InChI.
 
-Returns
--------
-Mol | None
-    MOL.
+    Returns
+    -------
+    Mol | None
+        MOL.
     """
     mol = MolFromInchi(inchi)
 

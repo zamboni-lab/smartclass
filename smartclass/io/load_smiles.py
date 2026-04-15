@@ -24,24 +24,24 @@ def load_smiles(
 ) -> list[str]:
     """Load unique SMILES strings from a CSV or TSV file.
 
-Parameters
-----------
-input : str | Path
-    Path to the input file (CSV or TSV).
-column : str
-    Default is 'smiles'.
-limit : int | None
-    SMILES to return (for testing). Default is None.
+    Parameters
+    ----------
+    input : str | Path
+        Path to the input file (CSV or TSV).
+    column : str
+        Default is 'smiles'.
+    limit : int | None
+        SMILES to return (for testing). Default is None.
 
-Returns
--------
-list[str]
-    SMILES strings.
+    Returns
+    -------
+    list[str]
+        SMILES strings.
 
-Raises
-------
-    DataLoadingError
-        If the file cannot be read or column not found.
+    Raises
+    ------
+        DataLoadingError
+            If the file cannot be read or column not found.
     """
     input_path = Path(input)
 

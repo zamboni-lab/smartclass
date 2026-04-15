@@ -14,12 +14,12 @@ def get_chemont(
 ):
     """Get ChemOnt.
 
-Parameters
-----------
-url : str
-    Default is 'http://classyfire.wishartlab.com/system/downloads/1_0/chemont/ChemOnt_2_1.obo.zip'.
-output : str
-    Default is 'scratch/ChemOnt_2_1.obo.zip'.
+    Parameters
+    ----------
+    url : str
+        Default is 'http://classyfire.wishartlab.com/system/downloads/1_0/chemont/ChemOnt_2_1.obo.zip'.
+    output : str
+        Default is 'scratch/ChemOnt_2_1.obo.zip'.
     """
     download_file_if_not_exists(url=url, output=output)
 

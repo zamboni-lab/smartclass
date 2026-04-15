@@ -13,15 +13,15 @@ __all__ = [
 def standardize(smiles: str) -> str | None:
     """Standardize.
 
-Parameters
-----------
-smiles : str
-    SMILES.
+    Parameters
+    ----------
+    smiles : str
+        SMILES.
 
-Returns
--------
-str | None
-    SMILES.
+    Returns
+    -------
+    str | None
+        SMILES.
     """
     return StandardizeSmiles(smiles)
 

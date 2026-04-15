@@ -14,15 +14,15 @@ __all__ = [
 def convert_inchi_to_mass(inchi: str) -> float | None:
     """Convert a structure InChI to mass.
 
-Parameters
-----------
-inchi : str
-    InChI.
+    Parameters
+    ----------
+    inchi : str
+        InChI.
 
-Returns
--------
-float | None
-    A mass.
+    Returns
+    -------
+    float | None
+        A mass.
     """
     mol = convert_inchi_to_mol(inchi)
     if mol is not None:

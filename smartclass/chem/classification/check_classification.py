@@ -36,21 +36,21 @@ def process_classification(
 ) -> tuple[rdFMCS.MCSResult, int]:
     """Process a chemical classification group to find common substructure.
 
-Parameters
-----------
-classification : str
-    Chemical classification name.
-group : DataFrame
-    DataFrame group containing structures with 'smiles' column.
-max_samples : int
-    Default 1000.
-threshold : float | None
-    None. Default is None.
+    Parameters
+    ----------
+    classification : str
+        Chemical classification name.
+    group : DataFrame
+        DataFrame group containing structures with 'smiles' column.
+    max_samples : int
+        Default 1000.
+    threshold : float | None
+        None. Default is None.
 
-Returns
--------
-tuple[rdFMCS.MCSResult, int]
-    Tuple of (MCS result, number of molecules processed).
+    Returns
+    -------
+    tuple[rdFMCS.MCSResult, int]
+        Tuple of (MCS result, number of molecules processed).
     """
     config = get_config()
     threshold = threshold if threshold is not None else config.mcs_threshold
@@ -81,29 +81,29 @@ def check_classification(
     threshold: float | None = None,
 ) -> list[dict]:
     """Check classification rules by finding MCS for each class.
-    
-    Analyzes molecules belonging to each specified class and finds their
-    maximum common substructure, which can be used to validate or generate
-    SMARTS patterns for classification.
 
-Parameters
-----------
-classes : tuple[str, ...]
-    Tuple of class names to check. ...] : "4'-hydroxyflavonoids") : Default is ('Quassinoids', "4'-hydroxyflavonoids").
-classified_mols : str | Path
-    Must have 'ParentName' and 'smiles' columns. Default is 'scratch/chebi_matched_molecules.tsv'.
-threshold : float | None
-    None. Default is None.
+        Analyzes molecules belonging to each specified class and finds their
+        maximum common substructure, which can be used to validate or generate
+        SMARTS patterns for classification.
 
-Returns
--------
-list[dict]
-    MCS results for each class.
+    Parameters
+    ----------
+    classes : tuple[str, ...]
+        Tuple of class names to check. ...] : "4'-hydroxyflavonoids") : Default is ('Quassinoids', "4'-hydroxyflavonoids").
+    classified_mols : str | Path
+        Must have 'ParentName' and 'smiles' columns. Default is 'scratch/chebi_matched_molecules.tsv'.
+    threshold : float | None
+        None. Default is None.
 
-Raises
-------
-    DataLoadingError
-        If the classified molecules file cannot be loaded.
+    Returns
+    -------
+    list[dict]
+        MCS results for each class.
+
+    Raises
+    ------
+        DataLoadingError
+            If the classified molecules file cannot be loaded.
     """
     config = get_config()
     threshold = threshold if threshold is not None else config.mcs_threshold

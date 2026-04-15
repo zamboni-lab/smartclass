@@ -20,17 +20,17 @@ def check_smiles_isomeric(
 ) -> str | None:
     """Check isomeric smiles.
 
-Parameters
-----------
-smiles_isomeric : str
-    SMILES.
-transform_to_canonical : bool
-    False. Default is False.
+    Parameters
+    ----------
+    smiles_isomeric : str
+        SMILES.
+    transform_to_canonical : bool
+        False. Default is False.
 
-Returns
--------
-str | None
-    SMILES.
+    Returns
+    -------
+    str | None
+        SMILES.
     """
     # COMMENT this could be updated live using
     # """SELECT * WHERE { wd:P2017 wdt:P1793 ?reg. }"""

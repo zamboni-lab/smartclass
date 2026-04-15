@@ -26,16 +26,16 @@ def get_latest_chembl(
 ) -> None:
     """Download and process the latest ChEMBL data.
 
-Parameters
-----------
-fp_len : int
-    Default is 2048.
-max_atoms : int
-    Default is 50.
-report_interval : int
-    Default is 50000.
-tautomer_fingerprints : bool
-    True. Default is True.
+    Parameters
+    ----------
+    fp_len : int
+        Default is 2048.
+    max_atoms : int
+        Default is 50.
+    report_interval : int
+        Default is 50000.
+    tautomer_fingerprints : bool
+        True. Default is True.
     """
     try:
         # Get paths and constants

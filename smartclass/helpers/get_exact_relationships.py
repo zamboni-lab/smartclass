@@ -20,15 +20,15 @@ def get_exact_relationships(
 ) -> dict[str, list[tuple[str, str]]]:
     """Get exact relationships.
 
-Parameters
-----------
-obo_file_path : str
-    Path to the ChemOnt OBO zip file. Default is 'scratch/ChemOnt_2_1.obo.zip'.
+    Parameters
+    ----------
+    obo_file_path : str
+        Path to the ChemOnt OBO zip file. Default is 'scratch/ChemOnt_2_1.obo.zip'.
 
-Returns
--------
-dict[str, list[tuple[str, str]]]
-    Mapping from ChemOnt term ID to list of (synonym, ChEBI ID) pairs.
+    Returns
+    -------
+    dict[str, list[tuple[str, str]]]
+        Mapping from ChemOnt term ID to list of (synonym, ChEBI ID) pairs.
     """
     chebi_synonyms: dict[str, list[tuple[str, str]]] = {}
     with zipfile.ZipFile(obo_file_path, "r") as z:

@@ -13,29 +13,29 @@ __all__ = [
 def convert_chemical_formula(text: str) -> str:
     """Convert chemical formula.
 
-Parameters
-----------
-text : str
-    Text.
+    Parameters
+    ----------
+    text : str
+        Text.
 
-Returns
--------
-str
-    Modified text.
+    Returns
+    -------
+    str
+        Modified text.
     """
 
     def replace(match: re.Match) -> str:
         """Matches subscripts.
 
-Parameters
-----------
-match : re.Match
-    Match object.
+        Parameters
+        ----------
+        match : re.Match
+            Match object.
 
-Returns
--------
-str
-    Modified text.
+        Returns
+        -------
+        str
+            Modified text.
         """
         number, symbol = match.groups()
         subscript_map = {

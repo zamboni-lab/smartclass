@@ -14,10 +14,10 @@ __all__ = [
 def get_existing_classes(existing_classes: dict | None = None) -> None:
     """Get existing classes.
 
-Parameters
-----------
-existing_classes : dict | None
-    None. Default is None.
+    Parameters
+    ----------
+    existing_classes : dict | None
+        None. Default is None.
     """
     if existing_classes is None:
         existing_classes = load_pkg_file("existing_classes.json").to_dict(

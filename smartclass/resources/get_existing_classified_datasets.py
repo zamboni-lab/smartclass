@@ -18,10 +18,10 @@ def get_existing_classified_datasets(
 ) -> None:
     """Get existing classified datasets.
 
-Parameters
-----------
-existing_classified_datasets : dict | None
-    None. Default is None.
+    Parameters
+    ----------
+    existing_classified_datasets : dict | None
+        None. Default is None.
     """
     if existing_classified_datasets is None:
         existing_classified_datasets = load_pkg_file(

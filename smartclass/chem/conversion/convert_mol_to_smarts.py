@@ -13,14 +13,14 @@ __all__ = [
 def convert_mol_to_smarts(mol: Mol) -> str:
     """Convert a structure MOL to SMARTS.
 
-Parameters
-----------
-mol : Mol
-    MOL.
+    Parameters
+    ----------
+    mol : Mol
+        MOL.
 
-Returns
--------
-str
-    SMARTS.
+    Returns
+    -------
+    str
+        SMARTS.
     """
     return MolToSmarts(mol)

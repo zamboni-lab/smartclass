@@ -13,15 +13,15 @@ __all__ = [
 def convert_inchi_to_inchikey(inchi: str) -> str:
     """Convert a structure InChI to InChIKey.
 
-Parameters
-----------
-inchi : str
-    InChI.
+    Parameters
+    ----------
+    inchi : str
+        InChI.
 
-Returns
--------
-str
-    InChIKey.
+    Returns
+    -------
+    str
+        InChIKey.
     """
     return InchiToInchiKey(inchi)
 

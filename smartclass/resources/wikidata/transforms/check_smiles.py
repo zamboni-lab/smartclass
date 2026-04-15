@@ -8,15 +8,15 @@ from smartclass.chem.conversion.convert_smiles_to_mol import convert_smiles_to_m
 def check_smiles(result: dict) -> dict | None:
     """Check if the SMILES string is chemically valid (valence, charges, etc.)
 
-Parameters
-----------
-result : dict
-    A single query result (dictionary).
+    Parameters
+    ----------
+    result : dict
+        A single query result (dictionary).
 
-Returns
--------
-dict | None
-    Dictionary with full validity information.
+    Returns
+    -------
+    dict | None
+        Dictionary with full validity information.
     """
     smiles = result.get("smiles", "")
     qid = result.get("structure", "").replace("http://www.wikidata.org/entity/", "")

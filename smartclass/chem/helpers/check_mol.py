@@ -13,15 +13,15 @@ __all__ = [
 def check_mol(mol: Mol) -> tuple[Mol, list[str]]:
     """Perform chemical validity checks on an RDKit Mol object.
 
-Parameters
-----------
-mol : Mol
-    Molecule object.
+    Parameters
+    ----------
+    mol : Mol
+        Molecule object.
 
-Returns
--------
-tuple[Mol, list[str]]
-    Tuple of (mol, list of error strings if any).
+    Returns
+    -------
+    tuple[Mol, list[str]]
+        Tuple of (mol, list of error strings if any).
     """
     errors = []
 

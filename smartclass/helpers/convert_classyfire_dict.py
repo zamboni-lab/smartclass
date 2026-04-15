@@ -17,12 +17,12 @@ def convert_classyfire_dict(
 ) -> None:
     """Converts the classyfire json into a CHEMONTID dictionary.
 
-Parameters
-----------
-classyfire_json : str
-    Default is 'scratch/classyfire.json'.
-output : str
-    Default is 'scratch/chemontids.txt'.
+    Parameters
+    ----------
+    classyfire_json : str
+        Default is 'scratch/classyfire.json'.
+    output : str
+        Default is 'scratch/chemontids.txt'.
     """
     with open(classyfire_json) as json_file:
         data = json.load(json_file)

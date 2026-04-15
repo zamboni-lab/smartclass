@@ -26,16 +26,16 @@ def match_chebi(
 ) -> None:
     """Match ChEBI.
 
-Parameters
-----------
-ids_file_zip : str
-    Default is 'scratch/chebi_classyfire.csv.zip'.
-ids_file : str
-    Default is 'ChEBI_126_classyfire_21_annotations.csv'.
-chebi_sdf_file : str
-    Default is 'scratch/ChEBI_lite_3star.sdf.gz'.
-output : str
-    Default is 'scratch/chebi_matched_molecules.tsv'.
+    Parameters
+    ----------
+    ids_file_zip : str
+        Default is 'scratch/chebi_classyfire.csv.zip'.
+    ids_file : str
+        Default is 'ChEBI_126_classyfire_21_annotations.csv'.
+    chebi_sdf_file : str
+        Default is 'scratch/ChEBI_lite_3star.sdf.gz'.
+    output : str
+        Default is 'scratch/chebi_matched_molecules.tsv'.
     """
     # Polars cannot read it properly directly
     with ZipFile(ids_file_zip, "r") as zip_ref:

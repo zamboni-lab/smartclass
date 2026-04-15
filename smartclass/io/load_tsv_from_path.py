@@ -13,14 +13,14 @@ __all__ = [
 def load_tsv_from_path(path: str) -> DataFrame:
     """Load tsv from path.
 
-Parameters
-----------
-path : str
-    Path of the file.
+    Parameters
+    ----------
+    path : str
+        Path of the file.
 
-Returns
--------
-DataFrame
-    DataFrame.
+    Returns
+    -------
+    DataFrame
+        DataFrame.
     """
     return read_csv(path, separator="\t")

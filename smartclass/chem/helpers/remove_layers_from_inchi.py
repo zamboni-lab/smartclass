@@ -13,17 +13,17 @@ __all__ = [
 def remove_layers_from_inchi(inchi: str, layers: list) -> str:
     """Remove layers from InChI.
 
-Parameters
-----------
-inchi : str
-    InChI.
-layers : list
-    Layer(s) to remove should be in [c, h, q, p, b, t, m, s, i].
+    Parameters
+    ----------
+    inchi : str
+        InChI.
+    layers : list
+        Layer(s) to remove should be in [c, h, q, p, b, t, m, s, i].
 
-Returns
--------
-str
-    InChI.
+    Returns
+    -------
+    str
+        InChI.
     """
     for layer in layers:
         inchi = re.sub(rf"/{layer}.*?/", "/", inchi)

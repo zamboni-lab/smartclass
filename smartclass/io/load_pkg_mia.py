@@ -16,10 +16,10 @@ __all__ = ["load_pkg_mia"]
 def load_pkg_mia() -> DataFrame:
     """Load Mono Indole Alkaloids (MIA) data from the package file into a Polars DataFrame.
 
-Returns
--------
-DataFrame
-    MIA data.
+    Returns
+    -------
+    DataFrame
+        MIA data.
     """
     return load_pkg_file(file="mia_smarts.tsv")
 

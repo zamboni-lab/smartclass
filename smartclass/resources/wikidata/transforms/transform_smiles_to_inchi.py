@@ -8,15 +8,15 @@ from smartclass.chem.conversion.convert_smiles_to_inchi import convert_smiles_to
 def transform_smiles_to_inchi(result: dict) -> dict | None:
     """Transform SMILES to InChI.
 
-Parameters
-----------
-result : dict
-    A single query result (dictionary).
+    Parameters
+    ----------
+    result : dict
+        A single query result (dictionary).
 
-Returns
--------
-dict | None
-    Transformed query result.
+    Returns
+    -------
+    dict | None
+        Transformed query result.
     """
     inchi = convert_smiles_to_inchi(result.get("smiles", ""))
     inchi_wd = result.get("inchi")

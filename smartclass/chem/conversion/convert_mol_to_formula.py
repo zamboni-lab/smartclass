@@ -14,14 +14,14 @@ __all__ = [
 def convert_mol_to_formula(mol: Mol) -> str:
     """Convert a structure MOL to formula.
 
-Parameters
-----------
-mol : Mol
-    MOL.
+    Parameters
+    ----------
+    mol : Mol
+        MOL.
 
-Returns
--------
-str
-    A formula.
+    Returns
+    -------
+    str
+        A formula.
     """
     return CalcMolFormula(mol)

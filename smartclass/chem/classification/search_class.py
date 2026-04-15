@@ -35,20 +35,20 @@ def build_filter_catalog(
 ) -> tuple[FilterCatalog.FilterCatalog, list[tuple[str, Mol]]]:
     """Build a FilterCatalog from SMARTS patterns.
 
-    Pre-builds the catalog and enumerated patterns for reuse across
-    multiple structure queries.
+        Pre-builds the catalog and enumerated patterns for reuse across
+        multiple structure queries.
 
-Parameters
-----------
-class_id : str
-    Identifier for the chemical class.
-class_structures : list[str]
-    SMARTS patterns defining the class.
+    Parameters
+    ----------
+    class_id : str
+        Identifier for the chemical class.
+    class_structures : list[str]
+        SMARTS patterns defining the class.
 
-Returns
--------
-tuple[FilterCatalog.FilterCatalog, list[tuple[str, Mol]]]
-    Filter catalog together with `(original_smarts, compiled_pattern)` entries.
+    Returns
+    -------
+    tuple[FilterCatalog.FilterCatalog, list[tuple[str, Mol]]]
+        Filter catalog together with `(original_smarts, compiled_pattern)` entries.
     """
     catalog = FilterCatalog.FilterCatalog()
     pattern_info: list[tuple[str, Mol]] = []
@@ -81,19 +81,19 @@ def _find_matching_pattern(
 ) -> tuple[str, Mol] | None:
     """Return the first matching class pattern for a structure.
 
-Parameters
-----------
-structure : Mol
-    Structure to test.
-pattern_info : list[tuple[str, Mol]]
-    Sequence of `(class_smarts, compiled_pattern)` pairs.
-params : SubstructMatchParameters | None
-    Optional substructure match parameters.
+    Parameters
+    ----------
+    structure : Mol
+        Structure to test.
+    pattern_info : list[tuple[str, Mol]]
+        Sequence of `(class_smarts, compiled_pattern)` pairs.
+    params : SubstructMatchParameters | None
+        Optional substructure match parameters.
 
-Returns
--------
-tuple[str, Mol] | None
-    The first matching `(class_smarts, pattern)` pair, or `None`.
+    Returns
+    -------
+    tuple[str, Mol] | None
+        The first matching `(class_smarts, pattern)` pair, or `None`.
     """
     for class_smarts, pattern in pattern_info:
         if params is None:
@@ -112,23 +112,23 @@ def search_class(
 ) -> list[dict[str, str | int]]:
     """Search for a single class and return results as dictionaries.
 
-    Performs substructure matching between input structures and class
-    SMARTS patterns using RDKit's FilterCatalog for efficient batch
-    matching.
+        Performs substructure matching between input structures and class
+        SMARTS patterns using RDKit's FilterCatalog for efficient batch
+        matching.
 
-Parameters
-----------
-class_dict : dict[str, list[str]]
-    SMARTS patterns.
-structures : list[Mol]
-    Structures to classify.
-params : SubstructMatchParameters | None
-    None. Default is None.
+    Parameters
+    ----------
+    class_dict : dict[str, list[str]]
+        SMARTS patterns.
+    structures : list[Mol]
+        Structures to classify.
+    params : SubstructMatchParameters | None
+        None. Default is None.
 
-Returns
--------
-list[dict[str, str | int]]
-    Match dictionaries with fields: - class_id: Identifier of matched class - class_structure: SMARTS pattern that matched - structure_inchikey: InChIKey of matched structure - structure_smarts: SMARTS representation of structure - structure_ab: Total atoms + bonds in structure - matched_ab: Number of matched atoms + bonds
+    Returns
+    -------
+    list[dict[str, str | int]]
+        Match dictionaries with fields: - class_id: Identifier of matched class - class_structure: SMARTS pattern that matched - structure_inchikey: InChIKey of matched structure - structure_smarts: SMARTS representation of structure - structure_ab: Total atoms + bonds in structure - matched_ab: Number of matched atoms + bonds
     """
     results: list[dict[str, str | int]] = []
     structure_cache: dict[int, dict[str, str | int]] = {}

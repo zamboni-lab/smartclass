@@ -8,15 +8,15 @@ from smartclass.chem.conversion.convert_inchi_to_mass import convert_inchi_to_ma
 def transform_inchi_to_mass(result: dict) -> dict | None:
     """Transform InChI to mass.
 
-Parameters
-----------
-result : dict
-    A single query result (dictionary).
+    Parameters
+    ----------
+    result : dict
+        A single query result (dictionary).
 
-Returns
--------
-dict | None
-    Transformed query result.
+    Returns
+    -------
+    dict | None
+        Transformed query result.
     """
     mass = convert_inchi_to_mass(result.get("inchi", ""))
     if mass:

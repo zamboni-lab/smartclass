@@ -14,14 +14,14 @@ __all__ = [
 def convert_mol_to_mass(mol: Mol) -> float:
     """Convert a structure MOL to mass.
 
-Parameters
-----------
-mol : Mol
-    MOL.
+    Parameters
+    ----------
+    mol : Mol
+        MOL.
 
-Returns
--------
-float
-    A mass.
+    Returns
+    -------
+    float
+        A mass.
     """
     return ExactMolWt(mol)

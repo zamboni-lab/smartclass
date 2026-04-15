@@ -16,12 +16,12 @@ def extract_chebi(
 ):
     """Extract CHEBI.
 
-Parameters
-----------
-file_path : str
-    Default is 'scratch/chebi.obo'.
-output : str
-    Default is 'scratch/chebi_extracted.tsv'.
+    Parameters
+    ----------
+    file_path : str
+        Default is 'scratch/chebi.obo'.
+    output : str
+        Default is 'scratch/chebi_extracted.tsv'.
     """
     # Define regular expressions to match relevant lines in the OBO file
     term_start_pattern = re.compile(r"^\[Term\]")

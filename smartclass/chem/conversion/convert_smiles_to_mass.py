@@ -14,15 +14,15 @@ __all__ = [
 def convert_smiles_to_mass(smiles: str) -> float | None:
     """Convert a structure SMILES to an exact mass.
 
-Parameters
-----------
-smiles : str
-    SMILES.
+    Parameters
+    ----------
+    smiles : str
+        SMILES.
 
-Returns
--------
-float | None
-    An exact mass.
+    Returns
+    -------
+    float | None
+        An exact mass.
     """
     mol = convert_smiles_to_mol(smiles)
     if mol is not None:

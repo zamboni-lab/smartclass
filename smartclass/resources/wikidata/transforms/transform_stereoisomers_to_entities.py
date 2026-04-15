@@ -10,15 +10,15 @@ from smartclass.chem.helpers.check_missing_stereochemistry import (
 def transform_stereoisomers_to_entities(result: dict) -> dict | None:
     """Transform group of stereoisomers to chemical entities.
 
-Parameters
-----------
-result : dict
-    A single query result (dictionary).
+    Parameters
+    ----------
+    result : dict
+        A single query result (dictionary).
 
-Returns
--------
-dict | None
-    Transformed query result.
+    Returns
+    -------
+    dict | None
+        Transformed query result.
     """
     flag = check_missing_stereochemistry(result.get("smiles", ""))
     if flag is False:

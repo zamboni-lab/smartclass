@@ -10,15 +10,15 @@ from smartclass.chem.conversion.convert_inchi_to_inchikey import (
 def transform_inchi_to_inchikey(result: dict) -> dict | None:
     """Transform InChI to InChIKey.
 
-Parameters
-----------
-result : dict
-    A single query result (dictionary).
+    Parameters
+    ----------
+    result : dict
+        A single query result (dictionary).
 
-Returns
--------
-dict | None
-    Transformed query result.
+    Returns
+    -------
+    dict | None
+        Transformed query result.
     """
     inchikey = convert_inchi_to_inchikey(result.get("inchi", ""))
     if inchikey:

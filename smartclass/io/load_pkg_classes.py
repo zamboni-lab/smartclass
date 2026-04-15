@@ -16,10 +16,10 @@ __all__ = ["load_pkg_classes"]
 def load_pkg_classes() -> DataFrame:
     """Load chemical classes data from the package file into a Polars DataFrame.
 
-Returns
--------
-DataFrame
-    DataFrame containing chemical classes.
+    Returns
+    -------
+    DataFrame
+        DataFrame containing chemical classes.
     """
     return load_pkg_file(file="classes_smarts.tsv")
 

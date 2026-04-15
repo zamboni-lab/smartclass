@@ -19,15 +19,15 @@ __all__ = [
 def fix_inchi_tautomerization(smiles: str) -> str:
     """Fix InChI tautomerization.
 
-Parameters
-----------
-smiles : str
-    SMILES.
+    Parameters
+    ----------
+    smiles : str
+        SMILES.
 
-Returns
--------
-str
-    SMILES.
+    Returns
+    -------
+    str
+        SMILES.
     """
     #  Courtesy of Richy Leroy (via Jean-Marc Nuzillard)
     ####################################################

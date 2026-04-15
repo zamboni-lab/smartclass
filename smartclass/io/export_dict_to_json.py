@@ -14,12 +14,12 @@ __all__ = [
 def export_dict_to_json(dic: dict, output: str) -> None:
     """Export dict to json.
 
-Parameters
-----------
-dic : dict
-    A dictionary.
-output : str
-    Output path.
+    Parameters
+    ----------
+    dic : dict
+        A dictionary.
+    output : str
+        Output path.
     """
     with open(output, "w", encoding="utf-8") as f:
         json.dump(dic, f, ensure_ascii=False, indent=4)

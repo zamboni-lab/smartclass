@@ -11,15 +11,15 @@ from smartclass.helpers.convert_chemical_formula import convert_chemical_formula
 def transform_smiles_to_formula(result: dict) -> dict | None:
     """Transform SMILES to formula.
 
-Parameters
-----------
-result : dict
-    A single query result (dictionary).
+    Parameters
+    ----------
+    result : dict
+        A single query result (dictionary).
 
-Returns
--------
-dict | None
-    Transformed query result.
+    Returns
+    -------
+    dict | None
+        Transformed query result.
     """
     formula = convert_smiles_to_formula(result.get("smiles", ""))
     if formula:

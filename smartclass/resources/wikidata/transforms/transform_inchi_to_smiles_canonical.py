@@ -9,15 +9,15 @@ from smartclass.chem.helpers.fix_inchi_tautomerization import fix_inchi_tautomer
 def transform_inchi_to_smiles_canonical(result: dict) -> dict | None:
     """Transform InChI to SMILES.
 
-Parameters
-----------
-result : dict
-    A single query result (dictionary).
+    Parameters
+    ----------
+    result : dict
+        A single query result (dictionary).
 
-Returns
--------
-dict | None
-    Transformed query result.
+    Returns
+    -------
+    dict | None
+        Transformed query result.
     """
     smiles = convert_inchi_to_smiles(result.get("inchi", ""))
     if smiles:

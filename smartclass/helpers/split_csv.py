@@ -14,14 +14,14 @@ __all__ = [
 def split_csv(input_file: str, output_dir: str, lines_per_file: int = 5000) -> None:
     """Split a CSV file into multiple smaller CSV files.
 
-Parameters
-----------
-input_file : str
-    CSV file.
-output_dir : str
-    CSV files.
-lines_per_file : int
-    Default is 5000.
+    Parameters
+    ----------
+    input_file : str
+        CSV file.
+    output_dir : str
+        CSV files.
+    lines_per_file : int
+        Default is 5000.
     """
     # Ensure the output directory exists
     os.makedirs(output_dir, exist_ok=True)

@@ -24,15 +24,15 @@ JSON_DOWNLOADER = pooch.create(
 def load_json_from_url(url: str) -> dict[str, Any] | None:
     """Load JSON from URL.
 
-Parameters
-----------
-url : str
-    JSON file.
+    Parameters
+    ----------
+    url : str
+        JSON file.
 
-Returns
--------
-dict[str, Any] | None
-    None if loading fails.
+    Returns
+    -------
+    dict[str, Any] | None
+        None if loading fails.
     """
     try:
         fetcher = pooch.HTTPDownloader(timeout=60)

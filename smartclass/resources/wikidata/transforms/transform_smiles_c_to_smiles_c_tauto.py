@@ -8,15 +8,15 @@ from smartclass.chem.helpers.fix_inchi_tautomerization import fix_inchi_tautomer
 def transform_smiles_c_to_smiles_c_tauto(result: dict) -> dict | None:
     """Transform smiles_c to smiles_c_tauto.
 
-Parameters
-----------
-result : dict
-    A single query result (dictionary).
+    Parameters
+    ----------
+    result : dict
+        A single query result (dictionary).
 
-Returns
--------
-dict | None
-    Transformed query result.
+    Returns
+    -------
+    dict | None
+        Transformed query result.
     """
     s = result.get("smiles", "")
     smiles = fix_inchi_tautomerization(s)

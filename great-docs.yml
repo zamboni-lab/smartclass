@@ -16,7 +16,7 @@ parser: numpy
 # ---------------------
 # Use runtime introspection for more accurate documentation (default: true)
 # Set to false if your package has cyclic alias issues (e.g., PyO3/Rust bindings)
-dynamic: false
+dynamic: true
 
 # API Discovery Settings
 # ----------------------
@@ -44,11 +44,11 @@ dynamic: false
 authors:
   - name: Adriano Rutz
     role: Maintainer
-    # affiliation: 
+    affiliation: ETH Zurich
     email: rutz@imsb.biol.ethz.ch
     github: adafede
     orcid: 0000-0003-0443-9902
-    # homepage: 
+    # homepage:
 
 # Funding / Copyright Holder
 # --------------------------

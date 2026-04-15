@@ -42,21 +42,21 @@ def _search_single_class(
 ) -> Iterator[MatchResult]:
     """Search a single class against all structures.
 
-Parameters
-----------
-class_id : str
-    Identifier for the chemical class.
-class_structure : list[str]
-    SMARTS patterns for this class.
-structures : list[Mol]
-    Mol objects to search.
-params : SubstructMatchParameters
-    Substructure matching parameters.
+    Parameters
+    ----------
+    class_id : str
+        Identifier for the chemical class.
+    class_structure : list[str]
+        SMARTS patterns for this class.
+    structures : list[Mol]
+        Mol objects to search.
+    params : SubstructMatchParameters
+        Substructure matching parameters.
 
-Yields
-------
-MatchResult
-    Generated values.
+    Yields
+    ------
+    MatchResult
+        Generated values.
     """
     results = search_class(
         class_dict={class_id: class_structure},
@@ -72,17 +72,17 @@ def _get_hierarchical_classes(
 ) -> Generator[tuple[str, list[str]], None, set[str]]:
     """Traverse hierarchy using BFS and yield classes with their structures.
 
-Parameters
-----------
-class_hierarchy : ClassHierarchy
-    Parent-to-children mapping.
-class_structures : ClassDict
-    SMARTS patterns mapping.
+    Parameters
+    ----------
+    class_hierarchy : ClassHierarchy
+        Parent-to-children mapping.
+    class_structures : ClassDict
+        SMARTS patterns mapping.
 
-Yields
-------
-tuple[str
-    Generated values.
+    Yields
+    ------
+    tuple[str
+        Generated values.
     """
     searched: set[str] = set()
     queue: deque[str] = deque(class_hierarchy.keys())
@@ -118,26 +118,26 @@ def bfs_search_classes_generator(
     class_hierarchy: ClassHierarchy | None = None,
 ) -> Generator[MatchResult]:
     """Perform substructure search using Breadth-First Search traversal.
-    
-    When a class hierarchy is provided, classes are searched in BFS order
-    starting from root classes. This can improve efficiency by allowing
-    early termination when parent classes don't match.
 
-Parameters
-----------
-classes : list[ClassDict]
-    SMARTS patterns.
-structures : list[Mol]
-    Mol objects to classify.
-params : SubstructMatchParameters
-    Parameters for substructure matching.
-class_hierarchy : ClassHierarchy | None
-    Optional parent-to-children mapping for hierarchical search. Keys are parent class IDs, values are lists of child IDs. Default is None.
+        When a class hierarchy is provided, classes are searched in BFS order
+        starting from root classes. This can improve efficiency by allowing
+        early termination when parent classes don't match.
 
-Yields
-------
-MatchResult
-    Generated values.
+    Parameters
+    ----------
+    classes : list[ClassDict]
+        SMARTS patterns.
+    structures : list[Mol]
+        Mol objects to classify.
+    params : SubstructMatchParameters
+        Parameters for substructure matching.
+    class_hierarchy : ClassHierarchy | None
+        Optional parent-to-children mapping for hierarchical search. Keys are parent class IDs, values are lists of child IDs. Default is None.
+
+    Yields
+    ------
+    MatchResult
+        Generated values.
     """
     class_structures = get_class_structures(classes)
     searched_classes: set[str] = set()
@@ -197,23 +197,23 @@ def tqdm_bfs_search_classes_generator(
 ) -> Generator[MatchResult]:
     """BFS search with tqdm progress bar.
 
-    Wraps :func:`bfs_search_classes_generator` with a tqdm progress indicator.
+        Wraps :func:`bfs_search_classes_generator` with a tqdm progress indicator.
 
-Parameters
-----------
-classes : list[ClassDict]
-    List of dicts mapping class IDs to SMARTS patterns.
-structures : list[Mol]
-    RDKit Mol objects to classify.
-params : SubstructMatchParameters
-    Parameters forwarded to RDKit substructure matching.
-class_hierarchy : ClassHierarchy | None
-    Optional parent-to-children mapping for hierarchical BFS. Default is None.
+    Parameters
+    ----------
+    classes : list[ClassDict]
+        List of dicts mapping class IDs to SMARTS patterns.
+    structures : list[Mol]
+        RDKit Mol objects to classify.
+    params : SubstructMatchParameters
+        Parameters forwarded to RDKit substructure matching.
+    class_hierarchy : ClassHierarchy | None
+        Optional parent-to-children mapping for hierarchical BFS. Default is None.
 
-Yields
-------
-MatchResult
-    Match information dictionary for each structure-class pair found.
+    Yields
+    ------
+    MatchResult
+        Match information dictionary for each structure-class pair found.
     """
     with tqdm(desc="Searching classes", unit=" matches") as pbar:
         for result in bfs_search_classes_generator(

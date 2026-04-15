@@ -20,20 +20,20 @@ logger = get_logger(__name__)
 def read_query(query: str | Path) -> str:
     """Read a SPARQL query from a file path or URL.
 
-Parameters
-----------
-query : str | Path
-    URL to fetch query from.
+    Parameters
+    ----------
+    query : str | Path
+        URL to fetch query from.
 
-Returns
--------
-str
-    SPARQL query string.
+    Returns
+    -------
+    str
+        SPARQL query string.
 
-Raises
-------
-    DataLoadingError
-        If the query cannot be loaded.
+    Raises
+    ------
+        DataLoadingError
+            If the query cannot be loaded.
     """
     query_str = str(query)
 

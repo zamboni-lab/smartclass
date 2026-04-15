@@ -8,15 +8,15 @@ from smartclass.chem.conversion.convert_smiles_to_mass import convert_smiles_to_
 def transform_smiles_to_mass(result: dict) -> dict | None:
     """Transform SMILES to mass.
 
-Parameters
-----------
-result : dict
-    A single query result (dictionary).
+    Parameters
+    ----------
+    result : dict
+        A single query result (dictionary).
 
-Returns
--------
-dict | None
-    Transformed query result.
+    Returns
+    -------
+    dict | None
+        Transformed query result.
     """
     mass = convert_smiles_to_mass(result.get("smiles", ""))
     if mass:

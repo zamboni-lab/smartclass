@@ -18,15 +18,15 @@ def convert_name_and_molblock_to_cxsmiles(
 ) -> tuple[str, str | None]:
     """Convert a name and a structure MOLBLOCK to CXSMILES.
 
-Parameters
-----------
-args : tuple[str, str]
-    MOL. str] :
+    Parameters
+    ----------
+    args : tuple[str, str]
+        MOL. str] :
 
-Returns
--------
-tuple[str, str | None]
-    CXSMILES representation.
+    Returns
+    -------
+    tuple[str, str | None]
+        CXSMILES representation.
     """
     structure_name, structure_mol = args
 

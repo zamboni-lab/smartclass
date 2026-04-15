@@ -23,25 +23,25 @@ logger = get_logger(__name__)
 
 def load_pkg_file(file: str, directory: str = "smartclass.data") -> DataFrame:
     """Load data from a package-bundled file into a Polars DataFrame.
-    
-    Supports TSV, CSV, and JSON file formats.
 
-Parameters
-----------
-file : str
-    Name of the file to load (e.g., "classes_smarts.tsv").
-directory : str
-    Defaults to "smartclass.data".
+        Supports TSV, CSV, and JSON file formats.
 
-Returns
--------
-DataFrame
-    DataFrame containing the loaded data.
+    Parameters
+    ----------
+    file : str
+        Name of the file to load (e.g., "classes_smarts.tsv").
+    directory : str
+        Defaults to "smartclass.data".
 
-Raises
-------
-    DataLoadingError
-        If the file cannot be loaded or format is unsupported.
+    Returns
+    -------
+    DataFrame
+        DataFrame containing the loaded data.
+
+    Raises
+    ------
+        DataLoadingError
+            If the file cannot be loaded or format is unsupported.
     """
     try:
         ref = importlib_resources.files(directory) / file

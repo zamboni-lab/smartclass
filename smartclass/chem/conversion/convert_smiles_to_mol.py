@@ -17,21 +17,21 @@ logger = get_logger(__name__)
 
 def convert_smiles_to_mol(smiles: str | None, sanitize: bool = True) -> Mol | None:
     """Convert a SMILES string to an RDKit Mol object.
-    
-    Performs sanitization and validation of the molecule. Returns None
-    if the SMILES is invalid or the molecule fails validation.
 
-Parameters
-----------
-smiles : str | None
-    SMILES string to convert.
-sanitize : bool
-    True. Default is True.
+        Performs sanitization and validation of the molecule. Returns None
+        if the SMILES is invalid or the molecule fails validation.
 
-Returns
--------
-Mol | None
-    None if conversion fails.
+    Parameters
+    ----------
+    smiles : str | None
+        SMILES string to convert.
+    sanitize : bool
+        True. Default is True.
+
+    Returns
+    -------
+    Mol | None
+        None if conversion fails.
     """
     if not smiles or not isinstance(smiles, str):
         return None

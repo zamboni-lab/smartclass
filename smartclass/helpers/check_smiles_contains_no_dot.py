@@ -13,14 +13,14 @@ def check_smiles_contains_no_dot(
 ) -> bool:
     """Checks if SMILES contains no dot.
 
-Parameters
-----------
-smiles : str
-    SMILES.
+    Parameters
+    ----------
+    smiles : str
+        SMILES.
 
-Returns
--------
-bool
-    SMILES meets the given criteria.
+    Returns
+    -------
+    bool
+        SMILES meets the given criteria.
     """
     return "." not in smiles

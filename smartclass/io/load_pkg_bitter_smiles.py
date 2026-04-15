@@ -16,10 +16,10 @@ __all__ = ["load_pkg_bitter_smiles"]
 def load_pkg_bitter_smiles() -> DataFrame:
     """Load bitter SMILES data from the package file into a Polars DataFrame.
 
-Returns
--------
-DataFrame
-    SMILES.
+    Returns
+    -------
+    DataFrame
+        SMILES.
     """
     # Was obtained using
     # SELECT DISTINCT ?smiles WHERE {

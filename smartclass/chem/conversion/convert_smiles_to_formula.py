@@ -14,15 +14,15 @@ __all__ = [
 def convert_smiles_to_formula(smiles: str) -> str | None:
     """Convert a structure SMILES to a molecular formula.
 
-Parameters
-----------
-smiles : str
-    SMILES.
+    Parameters
+    ----------
+    smiles : str
+        SMILES.
 
-Returns
--------
-str | None
-    A molecular formula.
+    Returns
+    -------
+    str | None
+        A molecular formula.
     """
     mol = convert_smiles_to_mol(smiles)
     if mol is not None:

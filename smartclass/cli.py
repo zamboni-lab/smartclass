@@ -70,22 +70,22 @@ DEFAULT_CLASS_QUERY_BATCH: tuple[tuple[Path, Path], ...] = (
 )
 def main(verbose: int) -> None:
     """Smartclass - Classify chemical structures using SMARTS patterns.
-    
-    A tool for classifying chemical structures against SMARTS-based
-    chemical class definitions from Wikidata or custom sources.
-    
-    
-    Examples:
-        # Classify a single molecule
-        smartclass searchclasses -s "CCO" -c classes.tsv
-    
-        # Query Wikidata for chemical classes
-        smartclass querywikidata -q query.rq -o output.tsv
 
-Parameters
-----------
-verbose : int
-    Description.
+        A tool for classifying chemical structures against SMARTS-based
+        chemical class definitions from Wikidata or custom sources.
+
+        
+        Examples:
+            # Classify a single molecule
+            smartclass searchclasses -s "CCO" -c classes.tsv
+
+            # Query Wikidata for chemical classes
+            smartclass querywikidata -q query.rq -o output.tsv
+
+    Parameters
+    ----------
+    verbose : int
+        Description.
     """
     # Configure logging based on verbosity
     log_levels = {0: "WARNING", 1: "INFO", 2: "DEBUG"}
@@ -111,15 +111,15 @@ verbose : int
 )
 def combinecsvfiles(input_file: tuple[Path, ...], output: Path) -> None:
     """Combine multiple CSV/TSV files into one.
-    
-    Merges rows from multiple input files with the same schema.
 
-Parameters
-----------
-input_file : tuple[Path, ...]
-    ...] :
-output : Path
-    Description.
+        Merges rows from multiple input files with the same schema.
+
+    Parameters
+    ----------
+    input_file : tuple[Path, ...]
+        ...] :
+    output : Path
+        Description.
     """
     from smartclass.helpers import combine_csv_files
 
@@ -165,20 +165,20 @@ def getlatestchembl(
     tautomer_fingerprints: bool,
 ) -> None:
     """Download and process the latest ChEMBL database.
-    
-    Generates fingerprints for molecules in ChEMBL for use in
-    classification and similarity searches.
 
-Parameters
-----------
-fp_len : int
-    Description.
-max_atoms : int
-    Description.
-report_interval : int
-    Description.
-tautomer_fingerprints : bool
-    Description.
+        Generates fingerprints for molecules in ChEMBL for use in
+        classification and similarity searches.
+
+    Parameters
+    ----------
+    fp_len : int
+        Description.
+    max_atoms : int
+        Description.
+    report_interval : int
+        Description.
+    tautomer_fingerprints : bool
+        Description.
     """
     from smartclass.resources.chembl import get_latest_chembl
 
@@ -190,7 +190,7 @@ tautomer_fingerprints : bool
 @main.command()
 def loadpkgdata() -> None:
     """Load and display bundled package data.
-    
+
     Shows the chemical classes, mappings, and MIA data included
     with the smartclass package.
     """
@@ -269,32 +269,32 @@ def querywikidata(
     url: str,
 ) -> None:
     """Query Wikidata using SPARQL and export results.
-    
-    Execute a SPARQL query against Wikidata and optionally apply
-    chemical transformations to the results.
-    
-    Examples:
-    
-    
-        # Get chemical classes with SMARTS
-        smartclass querywikidata -q classes_smarts.rq -o classes.tsv
-    
-    
-        # Generate InChIKeys from InChI
-        smartclass querywikidata -q inchi.rq -t transform_inchi_to_inchikey -o keys.csv
 
-Parameters
-----------
-query : Path | None
-    Description.
-output : Path | None
-    Description.
-remove_prefix : bool
-    Description.
-transform : str | None
-    Description.
-url : str
-    Description.
+        Execute a SPARQL query against Wikidata and optionally apply
+        chemical transformations to the results.
+
+        Examples:
+
+        
+            # Get chemical classes with SMARTS
+            smartclass querywikidata -q classes_smarts.rq -o classes.tsv
+
+        
+            # Generate InChIKeys from InChI
+            smartclass querywikidata -q inchi.rq -t transform_inchi_to_inchikey -o keys.csv
+
+    Parameters
+    ----------
+    query : Path | None
+        Description.
+    output : Path | None
+        Description.
+    remove_prefix : bool
+        Description.
+    transform : str | None
+        Description.
+    url : str
+        Description.
     """
     from smartclass.resources.wikidata import query_wikidata
 
@@ -400,41 +400,41 @@ def searchclasses(
     smiles: tuple[str, ...],
 ) -> None:
     """Classify chemical structures against SMARTS-based classes.
-    
-    Match input SMILES strings against chemical class definitions
-    using substructure searching. Results include the matched class
-    and structural similarity metrics.
-    
-    Examples:
-    
-    
-        # Classify a single molecule
-        smartclass searchclasses -s "CCO" -c classes.tsv -v
-    
-    
-        # Classify molecules from a file
-        smartclass searchclasses -i molecules.tsv -c classes.tsv
-    
-    
-        # Get all matches, not just closest
-        smartclass searchclasses -s "CCO" -c classes.tsv --all-matches
 
-Parameters
-----------
-classes_file : Path | None
-    Description.
-classes_name_id : str
-    Description.
-classes_name_smarts : str
-    Description.
-closest_only : bool
-    Description.
-include_hierarchy : bool
-    Description.
-input_smiles : Path | None
-    Description.
-smiles : tuple[str, ...]
-    ...] :
+        Match input SMILES strings against chemical class definitions
+        using substructure searching. Results include the matched class
+        and structural similarity metrics.
+
+        Examples:
+
+        
+            # Classify a single molecule
+            smartclass searchclasses -s "CCO" -c classes.tsv -v
+
+        
+            # Classify molecules from a file
+            smartclass searchclasses -i molecules.tsv -c classes.tsv
+
+        
+            # Get all matches, not just closest
+            smartclass searchclasses -s "CCO" -c classes.tsv --all-matches
+
+    Parameters
+    ----------
+    classes_file : Path | None
+        Description.
+    classes_name_id : str
+        Description.
+    classes_name_smarts : str
+        Description.
+    closest_only : bool
+        Description.
+    include_hierarchy : bool
+        Description.
+    input_smiles : Path | None
+        Description.
+    smiles : tuple[str, ...]
+        ...] :
     """
     from smartclass.chem.classification import search_classes
 
@@ -519,28 +519,28 @@ def searchclasses_all_sources(
     output_dir: Path | None,
 ) -> None:
     """Classify structures against SMARTS, SMILES, and CXSMILES class sources.
-    
-    This command runs three classification passes and combines the results,
-    adding a `class_source` field (`smarts`, `smiles`, `cxsmiles`).
 
-Parameters
-----------
-classes_smarts_file : Path
-    Description.
-classes_smiles_file : Path
-    Description.
-classes_cxsmiles_file : Path
-    Description.
-closest_only : bool
-    Description.
-include_hierarchy : bool
-    Description.
-input_smiles : Path | None
-    Description.
-smiles : tuple[str, ...]
-    ...] :
-output_dir : Path | None
-    Description.
+        This command runs three classification passes and combines the results,
+        adding a `class_source` field (`smarts`, `smiles`, `cxsmiles`).
+
+    Parameters
+    ----------
+    classes_smarts_file : Path
+        Description.
+    classes_smiles_file : Path
+        Description.
+    classes_cxsmiles_file : Path
+        Description.
+    closest_only : bool
+        Description.
+    include_hierarchy : bool
+        Description.
+    input_smiles : Path | None
+        Description.
+    smiles : tuple[str, ...]
+        ...] :
+    output_dir : Path | None
+        Description.
     """
     from smartclass.chem.classification import search_classes
     from smartclass.config import get_config

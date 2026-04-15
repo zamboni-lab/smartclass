@@ -14,15 +14,15 @@ __all__ = [
 def convert_smiles_to_inchi(smiles: str) -> str | None:
     """Convert a structure SMILES to InChI.
 
-Parameters
-----------
-smiles : str
-    SMILES.
+    Parameters
+    ----------
+    smiles : str
+        SMILES.
 
-Returns
--------
-str | None
-    InChI.
+    Returns
+    -------
+    str | None
+        InChI.
     """
     mol = convert_smiles_to_mol(smiles)
     if mol is not None:

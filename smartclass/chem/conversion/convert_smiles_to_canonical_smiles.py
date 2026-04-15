@@ -16,15 +16,15 @@ __all__ = [
 def convert_smiles_to_canonical_smiles(smiles: str) -> str | None:
     """Convert a structure SMILES to canonical SMILES.
 
-Parameters
-----------
-smiles : str
-    SMILES.
+    Parameters
+    ----------
+    smiles : str
+        SMILES.
 
-Returns
--------
-str | None
-    SMILES.
+    Returns
+    -------
+    str | None
+        SMILES.
     """
     mol = convert_smiles_to_mol(smiles)
     if mol is not None:

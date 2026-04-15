@@ -15,15 +15,15 @@ __all__ = [
 def convert_molblock_to_mol(molblock: str) -> Mol | None:
     """Convert a structure MOLBlock to MOL.
 
-Parameters
-----------
-molblock : str
-    MOLBlock.
+    Parameters
+    ----------
+    molblock : str
+        MOLBlock.
 
-Returns
--------
-Mol | None
-    MOL.
+    Returns
+    -------
+    Mol | None
+        MOL.
     """
     mol = MolFromMolBlock(molblock)
 

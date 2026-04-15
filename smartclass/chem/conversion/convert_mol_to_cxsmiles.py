@@ -13,14 +13,14 @@ __all__ = [
 def convert_mol_to_cxsmiles(mol: str) -> str:
     """Convert a structure MOL to CXSMILES.
 
-Parameters
-----------
-mol : str
-    MOL.
+    Parameters
+    ----------
+    mol : str
+        MOL.
 
-Returns
--------
-str
-    CXSMILES.
+    Returns
+    -------
+    str
+        CXSMILES.
     """
     return MolToCXSmiles(mol)

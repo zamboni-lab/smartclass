@@ -15,14 +15,14 @@ def get_num_atoms_bonds(
 ) -> int:
     """Get number of atoms and bonds.
 
-Parameters
-----------
-mol : Mol
-    MOL.
+    Parameters
+    ----------
+    mol : Mol
+        MOL.
 
-Returns
--------
-int
-    Number of atoms and bonds.
+    Returns
+    -------
+    int
+        Number of atoms and bonds.
     """
     return mol.GetNumAtoms() + mol.GetNumBonds()

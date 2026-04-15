@@ -30,7 +30,7 @@ jobs:
 
       - name: Build docs
         run: |
-          uv sync --group dev
+          uv sync --group docs
           uv run great-docs build
 
       - name: Save docs artifact

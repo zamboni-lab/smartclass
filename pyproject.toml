@@ -50,7 +50,7 @@ dependencies = [
   "pystow>=0.8.12",
   "rdcanon>=0.1.2",
   "rdkit>=2026.3.1",
-  "requests>=2.33.1",
+  "requests>=2.34.0",
   "tqdm>=4.67.3",
 ]
 

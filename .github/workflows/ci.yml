@@ -26,7 +26,7 @@ jobs:
           uv sync --group dev
           uv run pytest --cov-config=.coveragerc --cov=.
           uv run coverage xml
-      - uses: orgoro/coverage@v3.1
+      - uses: orgoro/coverage@ca0c362dc1a4f100447309405e6dfea47e251495
         if: github.event_name == 'pull_request'
         with:
           coverageFile: coverage.xml

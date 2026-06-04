@@ -45,9 +45,9 @@ dependencies = [
   "click>=8.4.1",
   "importlib-resources>=7.1.0",
   "myopic-mces>=1.1.0",
-  "polars>=1.41.1",
+  "polars>=1.41.2",
   "pooch>=1.9.0",
-  "pystow>=0.8.14",
+  "pystow>=0.8.15",
   "rdcanon>=0.1.2",
   "rdkit>=2026.3.2",
   "requests>=2.34.2",
@@ -65,7 +65,7 @@ smartclass = "smartclass.cli:main"
 [dependency-groups]
 dev = [
   "coverage>=7.14.1",
-  "prek>=0.4.3",
+  "prek>=0.4.4",
   "pytest>=9.0.3",
   "pytest-asyncio>=1.4.0",
   "pytest-cov>=7.1.0",
@@ -75,7 +75,7 @@ dev = [
 ]
 docs = [
   "autodoc_pydantic>=2.2.0",
-  "great-docs>=0.12.0",
+  "great-docs>=0.13.0",
   "pydantic-core>=2.46.4",
 ]
 

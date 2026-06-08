@@ -44,14 +44,14 @@ dependencies = [
   "chembl-downloader>=0.5.2",
   "click>=8.4.1",
   "importlib-resources>=7.1.0",
-  "myopic-mces>=1.1.0",
+  "myopic-mces>=1.1.1",
   "polars>=1.41.2",
   "pooch>=1.9.0",
   "pystow>=0.8.15",
   "rdcanon>=0.1.2",
-  "rdkit>=2026.3.2",
+  "rdkit>=2026.3.3",
   "requests>=2.34.2",
-  "tqdm>=4.67.3",
+  "tqdm>=4.68.1",
 ]
 
 [project.urls]

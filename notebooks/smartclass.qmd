@@ -35,15 +35,20 @@ TODO Short intro
 
 ### Install
 
-```{bash Install}
+```{bash}
+#| label: Install
+
 uv sync
 ```
 
 ### Get some classes
 
-This queries Wikidata for chemical classes defined with SMARTS and exports the results.
+This queries Wikidata for chemical classes defined with SMARTS and exports the
+results.
 
-```{bash Get classes}
+```{bash}
+#| label: Get classes
+
 uv run smartclass querywikidata -q smartclass/data/queries/classes_smarts.rq -o scratch/wikidata_classes_smarts.tsv
 ```
 
@@ -51,30 +56,38 @@ uv run smartclass querywikidata -q smartclass/data/queries/classes_smarts.rq -o 
 
 #### Help
 
-```{bash Classification help}
+```{bash}
+#| label: Classification help
+
 uv run smartclass searchclasses --help
 ```
 
 #### Single structure (closest class only)
 
-```{bash Classification single SMILES}
+```{bash}
+#| label: Classification single SMILES
+
 uv run smartclass searchclasses -s "O=C1OC2CC3C(C=C(OC)C(=O)C3(C)C4C(=O)C(OC)=C(C)C(C1)C24C)C" -c scratch/wikidata_classes_smarts.tsv --verbose
 ```
 
 #### Single structure (all classes)
 
-```{bash Classification single SMILES all classes}
+```{bash}
+#| label: Classification single SMILES all classes
+
 uv run smartclass searchclasses -s "O=C1OC2CC3C(C=C(OC)C(=O)C3(C)C4C(=O)C(OC)=C(C)C(C1)C24C)C" -c scratch/wikidata_classes_smarts.tsv --closest-only False --verbose
 ```
 
 #### File containing multiple structures
 
-```{bash Classification file of SMILES}
+```{bash}
+#| label: Classification file of SMILES
+
 uv run smartclass searchclasses -i smartclass/data/bitter_smiles.tsv -c scratch/wikidata_classes_smarts.tsv
 ```
 
 (Results are saved in different formats in `scratch/results...`)
 
-````{r, output=TRUE}
+```{r, output=TRUE}
 message("Development follows...")
-````
+```

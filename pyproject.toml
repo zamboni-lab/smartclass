@@ -44,14 +44,14 @@ dependencies = [
   "chembl-downloader>=0.5.2",
   "click>=8.4.2",
   "importlib-resources>=7.1.0",
-  "myopic-mces>=1.2.0",
+  "myopic-mces>=1.2.2",
   "polars>=1.42.1",
   "pooch>=1.9.0",
   "pystow>=0.8.21",
   "rdcanon>=0.1.2",
   "rdkit>=2026.3.3",
   "requests>=2.34.2",
-  "tqdm>=4.68.3",
+  "tqdm>=4.68.4",
 ]
 
 [project.urls]
@@ -64,8 +64,8 @@ smartclass = "smartclass.cli:main"
 
 [dependency-groups]
 dev = [
-  "coverage>=7.15.0",
-  "prek>=0.4.8",
+  "coverage>=7.15.1",
+  "prek>=0.4.9",
   "pytest>=9.1.1",
   "pytest-asyncio>=1.4.0",
   "pytest-cov>=7.1.0",
@@ -75,13 +75,13 @@ dev = [
 ]
 docs = [
   "autodoc_pydantic>=2.2.0",
-  "great-docs>=0.14.1",
+  "great-docs>=0.15.0",
   "pydantic-core>=2.46.4",
 ]
 
 [build-system]
-requires = ["pdm-backend"]
-build-backend = "pdm.backend"
+requires = ["uv_build>=0.11.0,<0.12.0"]
+build-backend = "uv_build"
 
 [tool.coverage.report]
 skip_empty = true
@@ -101,3 +101,7 @@ py-modules = ["smartclass"]
 
 [tool.ty.rules]
 unresolved-import = "ignore"
+
+[tool.uv.build-backend]
+module-root = "."
+module-name = ["smartclass"]

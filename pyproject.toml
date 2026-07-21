@@ -44,13 +44,13 @@ dependencies = [
   "click>=8.4.2",
   "importlib-resources>=7.1.0",
   "myopic-mces>=1.2.2",
-  "polars>=1.42.1",
+  "polars>=1.43.0",
   "pooch>=1.9.0",
   "pystow>=0.8.21",
   "rdcanon>=0.1.2",
-  "rdkit>=2026.3.3",
+  "rdkit>=2026.3.4",
   "requests>=2.34.2",
-  "tqdm>=4.68.4",
+  "tqdm>=4.69.0",
 ]
 
 [project.urls]
@@ -63,8 +63,8 @@ smartclass = "smartclass.cli:main"
 
 [dependency-groups]
 dev = [
-  "coverage>=7.15.1",
-  "prek>=0.4.9",
+  "coverage>=7.15.2",
+  "prek>=0.4.10",
   "pytest>=9.1.1",
   "pytest-asyncio>=1.4.0",
   "pytest-cov>=7.1.0",

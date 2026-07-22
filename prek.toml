@@ -77,7 +77,7 @@ hooks = [{ id = "typos" }]
 
 [[repos]]
 repo = "https://github.com/astral-sh/uv-pre-commit"
-rev = "0.11.30"
+rev = "0.11.31"
 hooks = [{ id = "uv-lock" }]
 
 [[repos]]
@@ -95,7 +95,7 @@ hooks = [
 
 [[repos]]
 repo = "https://github.com/zizmorcore/zizmor-pre-commit"
-rev = "v1.27.0"
+rev = "v1.28.0"
 hooks = [{ id = "zizmor", entry = "zizmor --fix=all ." }]
 
 [[repos]]

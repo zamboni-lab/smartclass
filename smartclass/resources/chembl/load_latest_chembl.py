@@ -10,7 +10,6 @@ from typing import TYPE_CHECKING
 from smartclass.resources.chembl.get_latest_chembl import get_latest_chembl
 from smartclass.resources.chembl.latest_chembl_paths import latest_chembl_paths
 
-
 if TYPE_CHECKING:
     from rdkit.Chem import rdSubstructLibrary
 

@@ -12,7 +12,6 @@ from rdkit.Chem import ForwardSDMolSupplier
 from smartclass.chem.conversion.convert_mol_to_smiles import convert_mol_to_smiles
 from smartclass.io.load_csv_from_path import load_csv_from_path  # noqa:F401
 
-
 __all__ = [
     "match_chebi",
 ]
@@ -38,9 +37,8 @@ def match_chebi(
         Default is 'scratch/chebi_matched_molecules.tsv'.
     """
     # Polars cannot read it properly directly
-    with ZipFile(ids_file_zip, "r") as zip_ref:
-        with zip_ref.open(ids_file) as csv_file:
-            csv_content = csv_file.read().decode("utf-8")
+    with ZipFile(ids_file_zip, "r") as zip_ref, zip_ref.open(ids_file) as csv_file:
+        csv_content = csv_file.read().decode("utf-8")
     csv_reader = csv.DictReader(csv_content.splitlines())
     ids_df = (
         DataFrame(list(csv_reader))

@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-
 __all__ = [
     "check_smiles_contains_no_dot",
 ]

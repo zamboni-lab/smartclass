@@ -6,7 +6,6 @@ from typing import TYPE_CHECKING
 
 from smartclass.io.load_pkg_file import load_pkg_file
 
-
 if TYPE_CHECKING:
     from polars import DataFrame
 

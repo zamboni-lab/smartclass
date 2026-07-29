@@ -4,7 +4,6 @@ from __future__ import annotations
 
 from rdkit.Chem import MolToCXSmiles
 
-
 __all__ = [
     "convert_mol_to_cxsmiles",
 ]

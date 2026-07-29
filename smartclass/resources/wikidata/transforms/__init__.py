@@ -1,5 +1,4 @@
 """Wikidata transform functions for chemical data."""
-# ruff: noqa: E501
 # Long module paths are unavoidable due to package structure
 
 from __future__ import annotations
@@ -53,7 +52,6 @@ from smartclass.resources.wikidata.transforms.transform_smiles_to_mass import (
 from smartclass.resources.wikidata.transforms.transform_stereoisomers_to_entities import (
     transform_stereoisomers_to_entities,
 )
-
 
 __all__ = [
     "check_smiles",

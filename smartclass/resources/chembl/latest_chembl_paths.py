@@ -7,7 +7,6 @@ import logging
 from chembl_downloader import latest
 from pystow import join
 
-
 __all__ = [
     "latest_chembl_paths",
 ]

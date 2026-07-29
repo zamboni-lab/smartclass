@@ -17,13 +17,12 @@ from smartclass.chem.helpers.enumerate_structures import enumerate_structures
 from smartclass.chem.helpers.get_num_atoms_bonds import get_num_atoms_bonds
 from smartclass.logging import get_logger
 
-
 if TYPE_CHECKING:
     from rdkit.Chem import Mol
 
 __all__ = [
-    "search_class",
     "build_filter_catalog",
+    "search_class",
 ]
 
 logger = get_logger(__name__)

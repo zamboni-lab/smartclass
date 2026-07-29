@@ -7,7 +7,6 @@ from rdkit.Chem import Mol, MolFromSmiles
 from smartclass.chem.helpers.check_mol import check_mol
 from smartclass.logging import get_logger
 
-
 __all__ = [
     "convert_smiles_to_mol",
 ]

@@ -12,7 +12,6 @@ from smartclass.config import get_config
 from smartclass.exceptions import NetworkError
 from smartclass.logging import get_logger
 
-
 __all__ = ["get_request"]
 
 logger = get_logger(__name__)

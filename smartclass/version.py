@@ -9,7 +9,6 @@ import logging
 import os
 from subprocess import CalledProcessError, check_output
 
-
 __all__ = [
     "VERSION",
     "get_git_hash",

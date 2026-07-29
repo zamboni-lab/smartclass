@@ -68,11 +68,11 @@ class TestConvertMolToSmiles(unittest.TestCase):
 
     def test_mol_to_smiles(self):
         """Test conversion from Mol to SMILES."""
-        from smartclass.chem.conversion.convert_smiles_to_mol import (
-            convert_smiles_to_mol,
-        )
         from smartclass.chem.conversion.convert_mol_to_smiles import (
             convert_mol_to_smiles,
+        )
+        from smartclass.chem.conversion.convert_smiles_to_mol import (
+            convert_smiles_to_mol,
         )
 
         mol = convert_smiles_to_mol("CCO")
@@ -88,11 +88,11 @@ class TestConvertMolToInchikey(unittest.TestCase):
 
     def test_mol_to_inchikey(self):
         """Test conversion from Mol to InChIKey."""
-        from smartclass.chem.conversion.convert_smiles_to_mol import (
-            convert_smiles_to_mol,
-        )
         from smartclass.chem.conversion.convert_mol_to_inchikey import (
             convert_mol_to_inchikey,
+        )
+        from smartclass.chem.conversion.convert_smiles_to_mol import (
+            convert_smiles_to_mol,
         )
 
         mol = convert_smiles_to_mol("CCO")
@@ -138,14 +138,14 @@ class TestRoundTripConversions(unittest.TestCase):
 
     def test_smiles_to_mol_to_smiles(self):
         """Test SMILES -> Mol -> SMILES preserves structure."""
-        from smartclass.chem.conversion.convert_smiles_to_mol import (
-            convert_smiles_to_mol,
+        from smartclass.chem.conversion.convert_mol_to_inchikey import (
+            convert_mol_to_inchikey,
         )
         from smartclass.chem.conversion.convert_mol_to_smiles import (
             convert_mol_to_smiles,
         )
-        from smartclass.chem.conversion.convert_mol_to_inchikey import (
-            convert_mol_to_inchikey,
+        from smartclass.chem.conversion.convert_smiles_to_mol import (
+            convert_smiles_to_mol,
         )
 
         original_smiles = "c1ccccc1"  # Benzene

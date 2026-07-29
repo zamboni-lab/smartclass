@@ -7,7 +7,6 @@ import os
 
 import pooch
 
-
 __all__ = [
     "download_file_if_not_exists",
 ]

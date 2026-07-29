@@ -6,7 +6,6 @@ import re
 
 from smartclass.io import export_results
 
-
 __all__ = ["extract_chebi"]
 
 

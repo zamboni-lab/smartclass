@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import re
 
-
 __all__ = [
     "remove_layers_from_inchi",
 ]

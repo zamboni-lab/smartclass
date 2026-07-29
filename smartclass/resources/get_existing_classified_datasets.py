@@ -7,7 +7,6 @@ import os
 from smartclass.helpers.download_file_if_not_exists import download_file_if_not_exists
 from smartclass.io.load_pkg_file import load_pkg_file
 
-
 __all__ = [
     "get_existing_classified_datasets",
 ]

@@ -4,7 +4,6 @@ from __future__ import annotations
 
 from rdkit.Chem import Mol, rdRascalMCES
 
-
 opts = rdRascalMCES.RascalOptions()
 opts.returnEmptyMCES = True
 opts.similarityThreshold = -1

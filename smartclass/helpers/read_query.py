@@ -9,7 +9,6 @@ import requests
 from smartclass.exceptions import DataLoadingError
 from smartclass.logging import get_logger
 
-
 __all__ = [
     "read_query",
 ]

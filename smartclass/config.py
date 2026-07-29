@@ -11,7 +11,6 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import ClassVar
 
-
 __all__ = [
     "Config",
     "get_config",

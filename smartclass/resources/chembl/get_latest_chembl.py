@@ -12,7 +12,6 @@ from rdkit.Chem import rdSubstructLibrary
 
 from smartclass.resources.chembl.latest_chembl_paths import latest_chembl_paths
 
-
 __all__ = [
     "get_latest_chembl",
 ]

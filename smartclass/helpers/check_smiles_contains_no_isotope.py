@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import re
 
-
 __all__ = [
     "check_smiles_contains_no_isotope",
 ]

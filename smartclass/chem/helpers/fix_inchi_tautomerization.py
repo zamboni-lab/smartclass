@@ -10,7 +10,6 @@ from smartclass.helpers.check_smiles_contains_no_isotope import (
     check_smiles_contains_no_isotope,
 )
 
-
 __all__ = [
     "fix_inchi_tautomerization",
 ]

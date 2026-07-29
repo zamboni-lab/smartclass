@@ -14,9 +14,9 @@ from smartclass.exceptions import (
     InvalidInputError,
     MoleculeParsingError,
     NetworkError,
+    SmartclassError,
     SMARTSError,
     SMILESError,
-    SmartclassError,
 )
 
 

@@ -5,7 +5,6 @@ from __future__ import annotations
 from rdkit.Chem import Mol
 from rdkit.Chem.rdMolDescriptors import CalcMolFormula
 
-
 __all__ = [
     "convert_mol_to_formula",
 ]

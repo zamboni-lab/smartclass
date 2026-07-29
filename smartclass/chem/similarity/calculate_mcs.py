@@ -6,7 +6,6 @@ from rdkit.Chem import rdFMCS
 
 from smartclass.config import get_config
 
-
 __all__ = [
     "calculate_mcs",
 ]

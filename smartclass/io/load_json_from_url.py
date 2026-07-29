@@ -8,7 +8,6 @@ from typing import Any
 
 import pooch
 
-
 __all__ = [
     "load_json_from_url",
 ]

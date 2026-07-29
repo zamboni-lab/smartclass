@@ -4,7 +4,6 @@ from __future__ import annotations
 
 from polars import DataFrame, read_csv
 
-
 __all__ = [
     "load_csv_from_path",
 ]

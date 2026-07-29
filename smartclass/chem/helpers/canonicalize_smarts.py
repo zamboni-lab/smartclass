@@ -6,7 +6,6 @@ import logging
 
 from rdcanon import canon_smarts
 
-
 __all__ = [
     "canonicalize_smarts",
 ]

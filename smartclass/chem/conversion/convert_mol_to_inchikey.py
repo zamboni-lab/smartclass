@@ -4,7 +4,6 @@ from __future__ import annotations
 
 from rdkit.Chem import Mol, MolToInchiKey
 
-
 __all__ = [
     "convert_mol_to_inchikey",
 ]

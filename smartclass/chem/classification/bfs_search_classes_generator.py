@@ -16,7 +16,6 @@ from smartclass.chem.classification.get_class_structures import get_class_struct
 from smartclass.chem.classification.search_class import search_class
 from smartclass.logging import get_logger
 
-
 if TYPE_CHECKING:
     from rdkit.Chem import Mol, SubstructMatchParameters
 

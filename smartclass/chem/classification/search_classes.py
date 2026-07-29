@@ -26,7 +26,6 @@ from smartclass.io import (
 from smartclass.logging import get_logger
 from smartclass.resources.chembl import load_latest_chembl
 
-
 if TYPE_CHECKING:
     from rdkit.Chem import Mol
 

@@ -5,7 +5,6 @@ from __future__ import annotations
 from smartclass.io.load_json_from_url_or_path import load_json_from_url_or_path
 from smartclass.io.load_pkg_file import load_pkg_file
 
-
 __all__ = [
     "get_existing_classes",
 ]

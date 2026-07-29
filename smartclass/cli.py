@@ -20,7 +20,6 @@ import click
 
 from smartclass.logging import configure_logging, get_logger
 
-
 __all__ = [
     "main",
 ]
@@ -74,7 +73,7 @@ def main(verbose: int) -> None:
         A tool for classifying chemical structures against SMARTS-based
         chemical class definitions from Wikidata or custom sources.
 
-        
+        \b
         Examples:
             # Classify a single molecule
             smartclass searchclasses -s "CCO" -c classes.tsv
@@ -275,11 +274,11 @@ def querywikidata(
 
         Examples:
 
-        
+        \b
             # Get chemical classes with SMARTS
             smartclass querywikidata -q classes_smarts.rq -o classes.tsv
 
-        
+        \b
             # Generate InChIKeys from InChI
             smartclass querywikidata -q inchi.rq -t transform_inchi_to_inchikey -o keys.csv
 
@@ -407,15 +406,15 @@ def searchclasses(
 
         Examples:
 
-        
+        \b
             # Classify a single molecule
             smartclass searchclasses -s "CCO" -c classes.tsv -v
 
-        
+        \b
             # Classify molecules from a file
             smartclass searchclasses -i molecules.tsv -c classes.tsv
 
-        
+        \b
             # Get all matches, not just closest
             smartclass searchclasses -s "CCO" -c classes.tsv --all-matches
 

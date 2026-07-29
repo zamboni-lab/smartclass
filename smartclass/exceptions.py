@@ -22,23 +22,22 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-
 if TYPE_CHECKING:
     from typing import Any
 
 __all__ = [
-    "SmartclassError",
     "ChemicalConversionError",
     "ClassificationError",
     "ConfigurationError",
-    "DataLoadingError",
     "DataExportError",
+    "DataLoadingError",
+    "InChIError",
     "InvalidInputError",
-    "NetworkError",
     "MoleculeParsingError",
+    "NetworkError",
     "SMARTSError",
     "SMILESError",
-    "InChIError",
+    "SmartclassError",
 ]
 
 # Maximum length for error message snippets
@@ -106,8 +105,6 @@ class ChemicalConversionError(SmartclassError):
     e.g. SMILES to Mol or InChI to SMILES.
     """
 
-    pass
-
 
 class MoleculeParsingError(ChemicalConversionError):
     """Error parsing a molecule representation.
@@ -166,14 +163,10 @@ class InChIError(MoleculeParsingError):
 class ClassificationError(SmartclassError):
     """Error during chemical classification."""
 
-    pass
-
 
 # Configuration Errors
 class ConfigurationError(SmartclassError):
     """Error in configuration settings."""
-
-    pass
 
 
 # Data I/O Errors

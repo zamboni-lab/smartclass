@@ -22,7 +22,6 @@ from smartclass.helpers.read_query import read_query
 from smartclass.helpers.sample_list import sample_list
 from smartclass.helpers.split_csv import split_csv
 
-
 __all__ = [
     "check_smiles_contains_no_dot",
     "check_smiles_contains_no_isotope",

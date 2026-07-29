@@ -4,7 +4,6 @@ from __future__ import annotations
 
 from rdkit.Chem.MolStandardize.rdMolStandardize import StandardizeSmiles
 
-
 __all__ = [
     "standardize",
 ]

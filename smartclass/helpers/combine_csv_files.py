@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import polars
 
-
 __all__ = [
     "combine_csv_files",
 ]

@@ -5,7 +5,6 @@ from __future__ import annotations
 from random import sample
 from typing import TypeVar
 
-
 __all__ = ["sample_list"]
 
 T = TypeVar("T")

@@ -18,10 +18,7 @@ jobs:
           fetch-depth: 0 # Full history for accurate page timestamps
           persist-credentials: false
 
-      - uses: astral-sh/setup-uv@11f9893b081a58869d3b5fccaea48c9e9e46f990
-        with:
-          enable-cache: true
-          cache-dependency-glob: "uv.lock"
+      - uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9
 
       - name: Install package and dependencies
         run: |

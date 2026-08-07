@@ -63,7 +63,7 @@ smartclass = "smartclass.cli:main"
 
 [dependency-groups]
 dev = [
-  "coverage>=7.15.3",
+  "coverage>=7.15.4",
   "prek>=0.4.12",
   "pytest>=9.1.1",
   "pytest-asyncio>=1.4.0",

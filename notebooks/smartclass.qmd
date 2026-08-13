@@ -47,7 +47,7 @@ This queries Wikidata for chemical classes defined with SMARTS and exports the
 results.
 
 ```{bash}
-#| label: Get classes
+#| label: Get_classes
 
 uv run smartclass querywikidata -q smartclass/data/queries/classes_smarts.rq -o scratch/wikidata_classes_smarts.tsv
 ```
@@ -57,7 +57,7 @@ uv run smartclass querywikidata -q smartclass/data/queries/classes_smarts.rq -o 
 #### Help
 
 ```{bash}
-#| label: Classification help
+#| label: Classification_help
 
 uv run smartclass searchclasses --help
 ```
@@ -65,7 +65,7 @@ uv run smartclass searchclasses --help
 #### Single structure (closest class only)
 
 ```{bash}
-#| label: Classification single SMILES
+#| label: Classification_single_SMILES
 
 uv run smartclass searchclasses -s "O=C1OC2CC3C(C=C(OC)C(=O)C3(C)C4C(=O)C(OC)=C(C)C(C1)C24C)C" -c scratch/wikidata_classes_smarts.tsv --verbose
 ```
@@ -73,7 +73,7 @@ uv run smartclass searchclasses -s "O=C1OC2CC3C(C=C(OC)C(=O)C3(C)C4C(=O)C(OC)=C(
 #### Single structure (all classes)
 
 ```{bash}
-#| label: Classification single SMILES all classes
+#| label: Classification_single_SMILES_all_classes
 
 uv run smartclass searchclasses -s "O=C1OC2CC3C(C=C(OC)C(=O)C3(C)C4C(=O)C(OC)=C(C)C(C1)C24C)C" -c scratch/wikidata_classes_smarts.tsv --closest-only False --verbose
 ```
@@ -81,7 +81,7 @@ uv run smartclass searchclasses -s "O=C1OC2CC3C(C=C(OC)C(=O)C3(C)C4C(=O)C(OC)=C(
 #### File containing multiple structures
 
 ```{bash}
-#| label: Classification file of SMILES
+#| label: Classification_file_of_SMILES
 
 uv run smartclass searchclasses -i smartclass/data/bitter_smiles.tsv -c scratch/wikidata_classes_smarts.tsv
 ```
@@ -89,5 +89,7 @@ uv run smartclass searchclasses -i smartclass/data/bitter_smiles.tsv -c scratch/
 (Results are saved in different formats in `scratch/results...`)
 
 ```{r, output=TRUE}
+#| label: WIP
+
 message("Development follows...")
 ```

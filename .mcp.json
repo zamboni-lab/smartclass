@@ -1,13 +1,19 @@
 {
   "mcpServers": {
     "code-review-graph": {
+      "args": [
+        "serve"
+      ],
       "command": "code-review-graph",
-      "args": ["serve"],
       "type": "stdio"
     },
     "graphify": {
+      "args": [
+        "-m",
+        "graphify.serve",
+        "graphify-out/graph.json"
+      ],
       "command": "python",
-      "args": ["-m", "graphify.serve", "graphify-out/graph.json"],
       "type": "stdio"
     }
   }

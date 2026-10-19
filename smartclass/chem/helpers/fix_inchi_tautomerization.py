@@ -67,31 +67,30 @@ def fix_inchi_tautomerization(smiles: str) -> str:
     if not check_smiles_contains_no_isotope(smiles):
         return smiles
 
+    mol = Chem.MolFromSmiles(smiles)
+    if mol is None:
+        return smiles
+
+    changes_count = 0
+    changed = True
+    while changed:
+        changed = False
+        for data in transformations.values():
+            target = Chem.MolFromSmarts(data["SMARTS"])
+            if mol.HasSubstructMatch(target):
+                rxn = rdChemReactions.ReactionFromSmarts(data["Reaction"])
+                reactants = (mol,)
+                mol = rxn.RunReactants(reactants)
+                mol = mol[0][0]
+                Chem.SanitizeMol(mol)
+                Chem.AssignStereochemistry(mol, force=True, cleanIt=True)
+                changed = True
+                changes_count += 1
+                break
+    if changes_count > 0:
+        return Chem.MolToSmiles(mol)
     else:
-        mol = Chem.MolFromSmiles(smiles)
-        if mol is not None:
-            changes_count = 0
-            changed = True
-            while changed:
-                changed = False
-                for _, data in transformations.items():
-                    target = Chem.MolFromSmarts(data["SMARTS"])
-                    if mol.HasSubstructMatch(target):
-                        rxn = rdChemReactions.ReactionFromSmarts(data["Reaction"])
-                        reactants = (mol,)
-                        mol = rxn.RunReactants(reactants)
-                        mol = mol[0][0]
-                        Chem.SanitizeMol(mol)
-                        Chem.AssignStereochemistry(mol, force=True, cleanIt=True)
-                        changed = True
-                        changes_count += 1
-                        break
-            if changes_count > 0:
-                return Chem.MolToSmiles(mol)
-            else:
-                return smiles
-        else:
-            return smiles
+        return smiles
 
 
 if __name__ == "__main__":

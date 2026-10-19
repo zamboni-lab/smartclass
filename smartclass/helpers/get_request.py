@@ -94,7 +94,9 @@ def get_request(
             return results
 
         except RequestException as e:
-            status_code = getattr(response, "status_code", None) if response else None
+            # NOTE: `requests.Response.__bool__` is False for 4xx/5xx responses,
+            # so test for None explicitly instead of truthiness.
+            status_code = response.status_code if response is not None else None
             retriable_codes = {429, 503}
 
             if status_code in retriable_codes and attempt < max_retries - 1:

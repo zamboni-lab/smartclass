@@ -2,13 +2,15 @@
 
 from __future__ import annotations
 
+from typing import cast
+
 from myopic_mces.myopic_mces import MCES
 
 
 def calculate_myopic_mces(
     s_1: str,
     s_2: str,
-    the: int = -1,
+    threshold: int = -1,
 ) -> tuple[int, float, float, int]:
     """Calculate myopic MCES.
 
@@ -18,12 +20,18 @@ def calculate_myopic_mces(
         SMILES 1.
     s_2 : str
         SMILES 2.
-    the : int
-        Default is -1.
+    threshold : int
+        Threshold for the MCES calculation. Default is -1.
 
     Returns
     -------
     tuple[int, float, float, int]
-        Tuple of (Index, Distance, Time, Distance Type). Distance Type values: - 1: Exact Distance - 2: Lower bound (distance above threshold) - 4: Lower bound (second bound used)
+        Tuple of (Index, Distance, Time, Distance Type). Distance Type values:
+        - 1: Exact Distance
+        - 2: Lower bound (distance above threshold)
+        - 4: Lower bound (second bound used)
     """
-    return MCES(smiles1=s_1, smiles2=s_2, threshold=the, i=0, solver="default")
+    return cast(
+        "tuple[int, float, float, int]",
+        MCES(smiles1=s_1, smiles2=s_2, threshold=threshold, i=0, solver="default"),
+    )

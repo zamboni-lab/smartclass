@@ -3,11 +3,14 @@
 from __future__ import annotations
 
 import json
-import logging
+
+from smartclass.logging import get_logger
 
 __all__ = [
     "export_dict_to_json",
 ]
+
+logger = get_logger(__name__)
 
 
 def export_dict_to_json(dic: dict, output: str) -> None:
@@ -22,4 +25,4 @@ def export_dict_to_json(dic: dict, output: str) -> None:
     """
     with open(output, "w", encoding="utf-8") as f:
         json.dump(dic, f, ensure_ascii=False, indent=4)
-        logging.debug(f"Saved dict to {output}")
+        logger.debug(f"Saved dict to {output}")

@@ -39,20 +39,21 @@ def load_pkg_file(file: str, directory: str = "smartclass.data") -> DataFrame:
 
     Raises
     ------
-        DataLoadingError
-            If the file cannot be loaded or format is unsupported.
+    DataLoadingError
+        If the file cannot be loaded or format is unsupported.
     """
     try:
         ref = importlib_resources.files(directory) / file
         with importlib_resources.as_file(ref) as path:
+            path_str = str(path)
             if file.endswith(".tsv"):
-                return load_tsv_from_path(path)
+                return load_tsv_from_path(path_str)
             elif file.endswith(".csv"):
-                return load_csv_from_path(path)
+                return load_csv_from_path(path_str)
             elif file.endswith(".json"):
                 from polars import DataFrame
 
-                return DataFrame(load_json_from_path(path))
+                return DataFrame(load_json_from_path(path_str))
             else:
                 raise DataLoadingError(
                     file,

@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import logging
 import pickle
 import time
 
@@ -10,11 +9,14 @@ import chembl_downloader
 from rdkit import Chem
 from rdkit.Chem import rdSubstructLibrary
 
+from smartclass.logging import get_logger
 from smartclass.resources.chembl.latest_chembl_paths import latest_chembl_paths
 
 __all__ = [
     "get_latest_chembl",
 ]
+
+logger = get_logger(__name__)
 
 
 def get_latest_chembl(
@@ -49,7 +51,7 @@ def get_latest_chembl(
             for i, mol in enumerate(suppl):
                 if not ((i + 1) % report_interval):
                     elapsed_time = time.time() - t1
-                    logging.debug(
+                    logger.debug(
                         f"Processed {i + 1} molecules in {elapsed_time:.1f} seconds",
                     )
 
@@ -79,15 +81,15 @@ def get_latest_chembl(
         library = rdSubstructLibrary.SubstructLibrary(mols, fps)
 
         elapsed_time = time.time() - t1
-        logging.debug(
+        logger.debug(
             f"Processed ChEMBL in {elapsed_time:.2f}s. "
             f"Library has {len(library)} molecules.",
         )
 
         with open(lib_path, "wb") as file:
             pickle.dump(library, file)
-    except Exception as e:
-        logging.exception(f"Failed to process ChEMBL data: {e!s}")
+    except Exception:
+        logger.exception("Failed to process ChEMBL data")
 
 
 if __name__ == "__main__":

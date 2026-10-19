@@ -70,21 +70,15 @@ DEFAULT_CLASS_QUERY_BATCH: tuple[tuple[Path, Path], ...] = (
 def main(verbose: int) -> None:
     """Smartclass - Classify chemical structures using SMARTS patterns.
 
-        A tool for classifying chemical structures against SMARTS-based
-        chemical class definitions from Wikidata or custom sources.
+    A tool for classifying chemical structures against SMARTS-based
+    chemical class definitions from Wikidata or custom sources.
 
-        \b
-        Examples:
-            # Classify a single molecule
-            smartclass searchclasses -s "CCO" -c classes.tsv
-
-            # Query Wikidata for chemical classes
-            smartclass querywikidata -q query.rq -o output.tsv
-
-    Parameters
-    ----------
-    verbose : int
-        Description.
+    \b
+    Examples:
+        # Classify a single molecule
+        smartclass searchclasses -s "CCO" -c classes.tsv
+        # Query Wikidata for chemical classes
+        smartclass querywikidata -q query.rq -o output.tsv
     """
     # Configure logging based on verbosity
     log_levels = {0: "WARNING", 1: "INFO", 2: "DEBUG"}
@@ -111,14 +105,7 @@ def main(verbose: int) -> None:
 def combinecsvfiles(input_file: tuple[Path, ...], output: Path) -> None:
     """Combine multiple CSV/TSV files into one.
 
-        Merges rows from multiple input files with the same schema.
-
-    Parameters
-    ----------
-    input_file : tuple[Path, ...]
-        ...] :
-    output : Path
-        Description.
+    Merges rows from multiple input files with the same schema.
     """
     from smartclass.helpers import combine_csv_files
 
@@ -165,19 +152,8 @@ def getlatestchembl(
 ) -> None:
     """Download and process the latest ChEMBL database.
 
-        Generates fingerprints for molecules in ChEMBL for use in
-        classification and similarity searches.
-
-    Parameters
-    ----------
-    fp_len : int
-        Description.
-    max_atoms : int
-        Description.
-    report_interval : int
-        Description.
-    tautomer_fingerprints : bool
-        Description.
+    Generates fingerprints for molecules in ChEMBL for use in
+    classification and similarity searches.
     """
     from smartclass.resources.chembl import get_latest_chembl
 
@@ -269,31 +245,15 @@ def querywikidata(
 ) -> None:
     """Query Wikidata using SPARQL and export results.
 
-        Execute a SPARQL query against Wikidata and optionally apply
-        chemical transformations to the results.
+    Execute a SPARQL query against Wikidata and optionally apply
+    chemical transformations to the results.
 
-        Examples:
-
-        \b
-            # Get chemical classes with SMARTS
-            smartclass querywikidata -q classes_smarts.rq -o classes.tsv
-
-        \b
-            # Generate InChIKeys from InChI
-            smartclass querywikidata -q inchi.rq -t transform_inchi_to_inchikey -o keys.csv
-
-    Parameters
-    ----------
-    query : Path | None
-        Description.
-    output : Path | None
-        Description.
-    remove_prefix : bool
-        Description.
-    transform : str | None
-        Description.
-    url : str
-        Description.
+    \b
+    Examples:
+        # Get chemical classes with SMARTS
+        smartclass querywikidata -q classes_smarts.rq -o classes.tsv
+        # Generate InChIKeys from InChI
+        smartclass querywikidata -q inchi.rq -t transform_inchi_to_inchikey -o keys.csv
     """
     from smartclass.resources.wikidata import query_wikidata
 
@@ -400,40 +360,18 @@ def searchclasses(
 ) -> None:
     """Classify chemical structures against SMARTS-based classes.
 
-        Match input SMILES strings against chemical class definitions
-        using substructure searching. Results include the matched class
-        and structural similarity metrics.
+    Match input SMILES strings against chemical class definitions
+    using substructure searching. Results include the matched class
+    and structural similarity metrics.
 
-        Examples:
-
-        \b
-            # Classify a single molecule
-            smartclass searchclasses -s "CCO" -c classes.tsv -v
-
-        \b
-            # Classify molecules from a file
-            smartclass searchclasses -i molecules.tsv -c classes.tsv
-
-        \b
-            # Get all matches, not just closest
-            smartclass searchclasses -s "CCO" -c classes.tsv --all-matches
-
-    Parameters
-    ----------
-    classes_file : Path | None
-        Description.
-    classes_name_id : str
-        Description.
-    classes_name_smarts : str
-        Description.
-    closest_only : bool
-        Description.
-    include_hierarchy : bool
-        Description.
-    input_smiles : Path | None
-        Description.
-    smiles : tuple[str, ...]
-        ...] :
+    \b
+    Examples:
+        # Classify a single molecule
+        smartclass searchclasses -s "CCO" -c classes.tsv -v
+        # Classify molecules from a file
+        smartclass searchclasses -i molecules.tsv -c classes.tsv
+        # Get all matches, not just closest
+        smartclass searchclasses -s "CCO" -c classes.tsv --all-matches
     """
     from smartclass.chem.classification import search_classes
 
@@ -519,27 +457,8 @@ def searchclasses_all_sources(
 ) -> None:
     """Classify structures against SMARTS, SMILES, and CXSMILES class sources.
 
-        This command runs three classification passes and combines the results,
-        adding a `class_source` field (`smarts`, `smiles`, `cxsmiles`).
-
-    Parameters
-    ----------
-    classes_smarts_file : Path
-        Description.
-    classes_smiles_file : Path
-        Description.
-    classes_cxsmiles_file : Path
-        Description.
-    closest_only : bool
-        Description.
-    include_hierarchy : bool
-        Description.
-    input_smiles : Path | None
-        Description.
-    smiles : tuple[str, ...]
-        ...] :
-    output_dir : Path | None
-        Description.
+    Runs three classification passes and combines the results,
+    adding a `class_source` field (`smarts`, `smiles`, `cxsmiles`).
     """
     from smartclass.chem.classification import search_classes
     from smartclass.config import get_config

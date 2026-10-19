@@ -2,19 +2,19 @@
 
 from __future__ import annotations
 
-from rdkit.Chem import MolToCXSmiles
+from rdkit.Chem import Mol, MolToCXSmiles
 
 __all__ = [
     "convert_mol_to_cxsmiles",
 ]
 
 
-def convert_mol_to_cxsmiles(mol: str) -> str:
+def convert_mol_to_cxsmiles(mol: Mol) -> str:
     """Convert a structure MOL to CXSMILES.
 
     Parameters
     ----------
-    mol : str
+    mol : Mol
         MOL.
 
     Returns

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import csv
+import itertools
 import os
 
 __all__ = [
@@ -16,12 +17,15 @@ def split_csv(input_file: str, output_dir: str, lines_per_file: int = 5000) -> N
     Parameters
     ----------
     input_file : str
-        CSV file.
+        Path to the CSV file to split.
     output_dir : str
-        CSV files.
+        Directory where the split CSV files are written.
     lines_per_file : int
-        Default is 5000.
+        Maximum number of data rows per output file. Default is 5000.
     """
+    if lines_per_file <= 0:
+        raise ValueError("lines_per_file must be a positive integer")
+
     # Ensure the output directory exists
     os.makedirs(output_dir, exist_ok=True)
 
@@ -30,25 +34,13 @@ def split_csv(input_file: str, output_dir: str, lines_per_file: int = 5000) -> N
         header = next(reader)  # Read and save the header
 
         file_count = 1
-        line_count = 0
-        output_file = None
-
-        for row in reader:
-            if line_count % lines_per_file == 0:
-                # Close the current file if it's open
-                if output_file:
-                    output_file.close()
-                output_file_path = os.path.join(output_dir, f"split_{file_count}.csv")
-                file_count += 1
-                output_file = open(output_file_path, "w", newline="")
+        for chunk in iter(lambda: list(itertools.islice(reader, lines_per_file)), []):
+            output_file_path = os.path.join(output_dir, f"split_{file_count}.csv")
+            file_count += 1
+            with open(output_file_path, "w", newline="") as output_file:
                 writer = csv.writer(output_file)
                 writer.writerow(header)
-            writer.writerow(row)
-            line_count += 1
-
-        # Close the last output file
-        if output_file:
-            output_file.close()
+                writer.writerows(chunk)
 
 
 # Example usage:

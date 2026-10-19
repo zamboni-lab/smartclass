@@ -2,14 +2,15 @@
 
 from __future__ import annotations
 
-import logging
-
 from smartclass.chem.conversion.convert_mol_to_cxsmiles import convert_mol_to_cxsmiles
 from smartclass.chem.conversion.convert_molblock_to_mol import convert_molblock_to_mol
+from smartclass.logging import get_logger
 
 __all__ = [
     "convert_name_and_molblock_to_cxsmiles",
 ]
+
+logger = get_logger(__name__)
 
 
 def convert_name_and_molblock_to_cxsmiles(
@@ -20,12 +21,13 @@ def convert_name_and_molblock_to_cxsmiles(
     Parameters
     ----------
     args : tuple[str, str]
-        MOL. str] :
+        Tuple of (structure name, MOL block).
 
     Returns
     -------
     tuple[str, str | None]
-        CXSMILES representation.
+        Tuple of (structure name, CXSMILES representation) where the CXSMILES
+        is ``None`` if the MOL block could not be parsed.
     """
     structure_name, structure_mol = args
 
@@ -35,7 +37,7 @@ def convert_name_and_molblock_to_cxsmiles(
     if structure is not None:
         cxsmiles = convert_mol_to_cxsmiles(structure)
     else:
-        logging.warning(f"Warning: {structure_name} could not be parsed.")
+        logger.warning(f"Warning: {structure_name} could not be parsed.")
         cxsmiles = None
 
     return structure_name, cxsmiles

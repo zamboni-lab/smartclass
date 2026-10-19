@@ -4,29 +4,36 @@ from __future__ import annotations
 
 import polars
 
+from smartclass.logging import get_logger
+
 __all__ = [
     "combine_csv_files",
 ]
+
+logger = get_logger(__name__)
 
 
 def combine_csv_files(
     input_files: list[str] | str,
     output_file: str,
-    separator="\t",
+    separator: str = "\t",
 ) -> None:
     """Combine multiple CSV files into a single CSV file.
 
     Parameters
     ----------
     input_files : list[str] | str
-        CSV file path.
+        One or more paths to delimited files to combine.
     output_file : str
-        CSV file path where the combined data will be saved.
-    separator : Any
-        CSV files (default is 'tab'). Default is ' '.
+        Path where the combined data will be saved.
+    separator : str
+        Field separator used for both reading and writing (default is a tab).
     """
     if isinstance(input_files, str):
         input_files = [input_files]  # Ensure input_files is a list
+
+    if not input_files:
+        raise ValueError("input_files must contain at least one file path")
 
     # Create an empty list to store DataFrames
     dfs = []
@@ -48,10 +55,6 @@ def combine_csv_files(
 
 
 if __name__ == "__main__":
-    import logging
-
-    logging.basicConfig(level=logging.INFO)
-
     input_files = [
         "scratch/wikidata_classes_cxsmiles.tsv",
         "scratch/wikidata_classes_smarts.tsv",
@@ -61,4 +64,4 @@ if __name__ == "__main__":
     output_file = "scratch/wikidata_classes_full.tsv"
 
     combine_csv_files(input_files, output_file)
-    logging.info(output_file)
+    logger.info(output_file)

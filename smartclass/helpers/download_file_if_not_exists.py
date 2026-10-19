@@ -2,14 +2,19 @@
 
 from __future__ import annotations
 
-import logging
 import os
+import shutil
+from typing import Any, cast
 
 import pooch
+
+from smartclass.logging import get_logger
 
 __all__ = [
     "download_file_if_not_exists",
 ]
+
+logger = get_logger(__name__)
 
 # Create a pooch instance for file downloads
 FILE_DOWNLOADER = pooch.create(
@@ -30,18 +35,20 @@ def download_file_if_not_exists(url: str, output: str) -> None:
         Output file path.
     """
     if os.path.exists(output):
-        logging.info(f"File already exists at {output}")
+        logger.info(f"File already exists at {output}")
         return
 
     try:
         fetcher = pooch.HTTPDownloader(timeout=60)
-        downloaded_file = FILE_DOWNLOADER.fetch(url, downloader=fetcher)
+        downloaded_file = FILE_DOWNLOADER.fetch(
+            url,
+            downloader=cast(Any, fetcher),
+        )
 
         # Copy the downloaded file to the desired output location
         if downloaded_file != output:
-            with open(downloaded_file, "rb") as src, open(output, "wb") as dst:
-                dst.write(src.read())
+            shutil.copyfile(downloaded_file, output)
 
-        logging.info(f"File downloaded and saved to {output}")
-    except Exception as e:
-        logging.exception(f"Failed to download the file: {e}")
+        logger.info(f"File downloaded and saved to {output}")
+    except (OSError, ValueError):
+        logger.exception("Failed to download the file")

@@ -5,15 +5,18 @@ Run with ``python -m smartclass.version``
 
 from __future__ import annotations
 
-import logging
 import os
 from subprocess import CalledProcessError, check_output
+
+from smartclass.logging import get_logger
 
 __all__ = [
     "VERSION",
     "get_git_hash",
     "get_version",
 ]
+
+logger = get_logger(__name__)
 
 VERSION = "0.0.1-dev"
 
@@ -39,16 +42,21 @@ def get_git_hash() -> str:
             return ret.strip().decode("utf-8")[:8]
 
 
-def get_version(with_git_hash: bool = False):
+def get_version(with_git_hash: bool = False) -> str:
     """Get the :mod:`smartclass` version string, including a git hash.
 
     Parameters
     ----------
     with_git_hash : bool
-        False. Default is False.
+        Whether to append the current git hash. Default is False.
+
+    Returns
+    -------
+    str
+        Version string.
     """
     return f"{VERSION}-{get_git_hash()}" if with_git_hash else VERSION
 
 
 if __name__ == "__main__":
-    logging.debug(get_version(with_git_hash=True))
+    logger.debug(get_version(with_git_hash=True))

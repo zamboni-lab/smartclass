@@ -29,8 +29,8 @@ def check_mol(mol: Mol) -> tuple[Mol, list[str]]:
     except KekulizeException as e:
         errors.append(f"Kekulization error: {e}")
     except ValueError as e:
+        # All other RDKit sanitization failures (valence, aromaticity, ...)
+        # derive from ValueError.
         errors.append(f"Sanitization error: {e}")
-    except Exception as e:
-        errors.append(f"Unknown sanitization error: {e}")
 
     return mol, errors

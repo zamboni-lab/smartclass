@@ -35,21 +35,22 @@ def configure_logging(
 ) -> None:
     """Configure logging for the smartclass package.
 
-        This should be called once at application startup. Subsequent calls
-        will be ignored unless `force=True`.
+    This should be called once at application startup. Subsequent calls
+    will be ignored unless ``force=True``.
 
     Parameters
     ----------
     level : int | str
-        Logging level (e.g., logging.DEBUG, logging.INFO, "DEBUG", "INFO"). Default is logging.INFO.
+        Logging level (e.g. logging.DEBUG, logging.INFO, "DEBUG", "INFO").
+        Default is logging.INFO.
     format_string : str
-        DEFAULT_FORMAT. Default is DEFAULT_FORMAT.
+        Format string for log records. Default is DEFAULT_FORMAT.
     date_format : str
-        DEFAULT_DATE_FORMAT. Default is DEFAULT_DATE_FORMAT.
+        Date format for log records. Default is DEFAULT_DATE_FORMAT.
     log_file : Path | str | None
-        None. Default is None.
+        Optional path to also write logs to a file. Default is None.
     force : bool
-        False. Default is False.
+        Reconfigure even if logging was already configured. Default is False.
     """
     global _logging_configured
 
@@ -96,9 +97,9 @@ def configure_logging(
 def get_logger(name: str) -> logging.Logger:
     """Get a logger for the given module name.
 
-        This is the preferred way to obtain a logger in smartclass modules.
-        The logger will be a child of the 'smartclass' logger, inheriting
-        its configuration.
+    This is the preferred way to obtain a logger in smartclass modules.
+    The logger will be a child of the 'smartclass' logger, inheriting
+    its configuration.
 
     Parameters
     ----------
@@ -108,7 +109,13 @@ def get_logger(name: str) -> logging.Logger:
     Returns
     -------
     logging.Logger
-        Example: >>> from smartclass.logging import get_logger >>> logger = get_logger(__name__) >>> logger.info("Processing started")
+        Logger instance.
+
+    Examples
+    --------
+    >>> from smartclass.logging import get_logger
+    >>> logger = get_logger(__name__)
+    >>> logger.info("Processing started")
     """
     # Ensure logging is configured with defaults if not already
     if not _logging_configured:

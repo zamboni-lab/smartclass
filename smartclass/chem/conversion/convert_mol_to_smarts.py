@@ -1,4 +1,4 @@
-"""Convert a structure MOL to SMILES."""
+"""Convert a structure MOL to SMARTS."""
 
 from __future__ import annotations
 

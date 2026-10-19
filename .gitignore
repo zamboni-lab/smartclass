@@ -11,3 +11,6 @@ _output/
 .DS_Store
 output/
 .smartclass_cache/
+
+# Knowledge graph outputs (rebuild with: uv run graphify .)
+graphify-out/

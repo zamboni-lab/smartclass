@@ -59,8 +59,8 @@ Classify compounds
 
     uv run smartclass searchclasses --help
     # uv run smartclass searchclasses
-    uv run smartclass searchclasses -s "O=C1OC2CC3C(C=C(OC)C(=O)C3(C)C4C(=O)C(OC)=C(C)C(C1)C24C)C" -c scratch/wikidata_classes_smarts.tsv --verbose
-    uv run smartclass searchclasses -s "O=C1OC2CC3C(C=C(OC)C(=O)C3(C)C4C(=O)C(OC)=C(C)C(C1)C24C)C" -c scratch/wikidata_classes_smarts.tsv --all-matches --verbose
+    uv run smartclass -v searchclasses -s "O=C1OC2CC3C(C=C(OC)C(=O)C3(C)C4C(=O)C(OC)=C(C)C(C1)C24C)C" -c scratch/wikidata_classes_smarts.tsv
+    uv run smartclass -v searchclasses -s "O=C1OC2CC3C(C=C(OC)C(=O)C3(C)C4C(=O)C(OC)=C(C)C(C1)C24C)C" -c scratch/wikidata_classes_smarts.tsv --all-matches
     uv run smartclass searchclasses -i smartclass/data/bitter_smiles.tsv -c scratch/wikidata_classes_smarts.tsv
     # uv run smartclass searchclasses -i scratch/wikidata_chemicals_smiles.tsv -c scratch/wikidata_classes_smarts.tsv --all-matches
 
@@ -79,8 +79,9 @@ Measure substructures distances
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 .. code-block:: sh
 
-    uv run python3 smartclass/measure_mhfp.py -i scratch/wikidata_classes_smarts.tsv -o scratch/distances_wikidata.tsv
-    uv run python3 smartclass/measure_mhfp.py -i data/mia_smarts.tsv -o scratch/distances_mia.tsv
+    # NOTE: measure_mhfp.py is currently a stub (all code commented out)
+    # uv run python3 smartclass/chem/similarity/measure_mhfp.py -i scratch/wikidata_classes_smarts.tsv -o scratch/distances_wikidata.tsv
+    # uv run python3 smartclass/chem/similarity/measure_mhfp.py -i smartclass/data/mia_smarts.tsv -o scratch/distances_mia.tsv
 
 🛠️ Wikidata maintenance
 -----------------------

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import os
 import shutil
+from typing import Any, cast
 
 import pooch
 
@@ -39,7 +40,10 @@ def download_file_if_not_exists(url: str, output: str) -> None:
 
     try:
         fetcher = pooch.HTTPDownloader(timeout=60)
-        downloaded_file = FILE_DOWNLOADER.fetch(url, downloader=fetcher)
+        downloaded_file = FILE_DOWNLOADER.fetch(
+            url,
+            downloader=cast(Any, fetcher),
+        )
 
         # Copy the downloaded file to the desired output location
         if downloaded_file != output:

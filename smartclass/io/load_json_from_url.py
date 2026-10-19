@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import json
-from typing import Any
+from typing import Any, cast
 
 import pooch
 
@@ -38,7 +38,7 @@ def load_json_from_url(url: str) -> dict[str, Any] | None:
     """
     try:
         fetcher = pooch.HTTPDownloader(timeout=60)
-        data_file = JSON_DOWNLOADER.fetch(url, downloader=fetcher)
+        data_file = JSON_DOWNLOADER.fetch(url, downloader=cast(Any, fetcher))
 
         with open(data_file) as f:
             data = json.load(f)

@@ -126,4 +126,4 @@ if __name__ == "__main__":
 
     for query, output in queries:
         query_wikidata(query, output)
-    logger.info(output)
+        logger.info(f"Results saved to: {output}")

@@ -3,7 +3,8 @@
 from __future__ import annotations
 
 from rdkit.Chem import Mol
-from rdkit.Chem.Descriptors import ExactMolWt
+from rdkit.Chem import Mol
+from rdkit.Chem.Descriptors import ExactMolWt  # type: ignore[reportAttributeAccessIssue]
 
 __all__ = [
     "convert_mol_to_mass",

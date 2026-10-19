@@ -21,6 +21,8 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y build-essential libfreetype6-dev libjpeg-turbo8-dev liblapack-dev libopenblas-dev libpng-dev libtiff-dev
       - uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884
+      - name: Check formatting and linting
+        run: uv run prek run --all-files
       - name: Run tests for PR
         run: |
           uv sync --group dev

@@ -67,7 +67,7 @@ uv run smartclass searchclasses --help
 ```{bash}
 #| label: Classification_single_SMILES
 
-uv run smartclass searchclasses -s "O=C1OC2CC3C(C=C(OC)C(=O)C3(C)C4C(=O)C(OC)=C(C)C(C1)C24C)C" -c scratch/wikidata_classes_smarts.tsv --verbose
+uv run smartclass -v searchclasses -s "O=C1OC2CC3C(C=C(OC)C(=O)C3(C)C4C(=O)C(OC)=C(C)C(C1)C24C)C" -c scratch/wikidata_classes_smarts.tsv
 ```
 
 #### Single structure (all classes)
@@ -75,7 +75,7 @@ uv run smartclass searchclasses -s "O=C1OC2CC3C(C=C(OC)C(=O)C3(C)C4C(=O)C(OC)=C(
 ```{bash}
 #| label: Classification_single_SMILES_all_classes
 
-uv run smartclass searchclasses -s "O=C1OC2CC3C(C=C(OC)C(=O)C3(C)C4C(=O)C(OC)=C(C)C(C1)C24C)C" -c scratch/wikidata_classes_smarts.tsv --closest-only False --verbose
+uv run smartclass -v searchclasses -s "O=C1OC2CC3C(C=C(OC)C(=O)C3(C)C4C(=O)C(OC)=C(C)C(C1)C24C)C" -c scratch/wikidata_classes_smarts.tsv --all-matches
 ```
 
 #### File containing multiple structures

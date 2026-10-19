@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
+import tempfile
 import unittest
+from pathlib import Path
 
 
 class TestSampleList(unittest.TestCase):
@@ -90,6 +92,67 @@ class TestConvertListOfDict(unittest.TestCase):
         result = convert_list_of_dict([], key="a", value="b")
 
         self.assertEqual(result, {})
+
+
+class TestSplitCsv(unittest.TestCase):
+    """Test split_csv function."""
+
+    def test_splits_into_chunks_with_header(self):
+        """Each output chunk keeps the header and respects lines_per_file."""
+        from smartclass.helpers.split_csv import split_csv
+
+        with tempfile.TemporaryDirectory() as tmp:
+            input_file = Path(tmp) / "input.csv"
+            input_file.write_text("a,b\n1,2\n3,4\n5,6\n", encoding="utf-8")
+
+            output_dir = Path(tmp) / "out"
+            split_csv(str(input_file), str(output_dir), lines_per_file=2)
+
+            chunks = sorted(output_dir.glob("split_*.csv"))
+            self.assertEqual(len(chunks), 2)
+            for chunk in chunks:
+                first_line = chunk.read_text(encoding="utf-8").splitlines()[0]
+                self.assertEqual(first_line, "a,b")
+
+    def test_rejects_non_positive_lines_per_file(self):
+        """lines_per_file must be positive."""
+        from smartclass.helpers.split_csv import split_csv
+
+        with tempfile.TemporaryDirectory() as tmp:
+            input_file = Path(tmp) / "input.csv"
+            input_file.write_text("a\n1\n", encoding="utf-8")
+
+            with self.assertRaises(ValueError):
+                split_csv(str(input_file), str(Path(tmp) / "out"), lines_per_file=0)
+
+
+class TestCombineCsvFiles(unittest.TestCase):
+    """Test combine_csv_files function."""
+
+    def test_combines_files(self):
+        """Rows from all input files are concatenated."""
+        import polars
+
+        from smartclass.helpers.combine_csv_files import combine_csv_files
+
+        with tempfile.TemporaryDirectory() as tmp:
+            file_a = Path(tmp) / "a.tsv"
+            file_b = Path(tmp) / "b.tsv"
+            file_a.write_text("x\n1\n", encoding="utf-8")
+            file_b.write_text("x\n2\n", encoding="utf-8")
+            output = Path(tmp) / "combined.tsv"
+
+            combine_csv_files([str(file_a), str(file_b)], str(output))
+
+            df = polars.read_csv(output, separator="\t")
+            self.assertEqual(df["x"].to_list(), [1, 2])
+
+    def test_rejects_empty_input(self):
+        """An empty input list is rejected with a clear error."""
+        from smartclass.helpers.combine_csv_files import combine_csv_files
+
+        with self.assertRaises(ValueError):
+            combine_csv_files([], "out.tsv")
 
 
 class TestConvertChemicalFormula(unittest.TestCase):

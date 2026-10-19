@@ -33,8 +33,9 @@ acceptance and merge into the main branch. This has several benefits:
 
 ### Code Style
 
-This project uses [static typing](https://docs.python.org/3/library/typing.html).
-It uses [`ty`](https://github.com/astral-sh/ty) as a type checker (configured in
+This project uses [static
+typing](https://docs.python.org/3/library/typing.html). It uses
+[`ty`](https://github.com/astral-sh/ty) as a type checker (configured in
 `pyproject.toml` under `[tool.ty.rules]`). You can check your code with:
 
 ```sh
@@ -58,8 +59,8 @@ uv run ruff format .
 
 ### Logging
 
-Python's builtin `print()` should not be used (except when writing to files).
-In a command line setting or `main()` function for a module, you can use
+Python's builtin `print()` should not be used (except when writing to files). In
+a command line setting or `main()` function for a module, you can use
 `click.echo()`. Otherwise, you should use the centralized logging module:
 
 ```python
@@ -112,8 +113,8 @@ def classify_smiles(smiles: str, closest_only: bool = True) -> list[dict]:
     """
 ```
 
-Documentation is built with [`great-docs`](https://github.com/posit-dev/great-docs).
-Build locally with:
+Documentation is built with
+[`great-docs`](https://github.com/posit-dev/great-docs). Build locally with:
 
 ```sh
 uv sync --group docs

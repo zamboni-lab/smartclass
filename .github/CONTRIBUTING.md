@@ -33,34 +33,34 @@ acceptance and merge into the main branch. This has several benefits:
 
 ### Code Style
 
-This project encourages the use of optional static typing. It uses
-[`mypy`](http://mypy-lang.org/) as a type checker and
-[`sphinx_autodoc_typehints`](https://github.com/agronholm/sphinx-autodoc-typehints)
-to automatically generate documentation based on type hints. You can check if
-your code passes `mypy` with `tox -e mypy`.
+This project uses [static typing](https://docs.python.org/3/library/typing.html).
+It uses [`ty`](https://github.com/astral-sh/ty) as a type checker (configured in
+`pyproject.toml` under `[tool.ty.rules]`). You can check your code with:
 
-This project uses [`black`](https://github.com/psf/black) to automatically
-enforce a consistent code style. You can apply `black` and other pre-configured
-linters with `tox -e lint`.
+```sh
+uv run prek run ty-check --all-files
+```
 
-This project uses [`flake8`](https://flake8.pycqa.org) and several plugins for
-additional checks of documentation style, security issues, good variable
-nomenclature, and more ( see [`tox.ini`](tox.ini) for a list of flake8 plugins).
-You can check if your code passes `flake8` with `tox -e flake8`.
+This project uses [`ruff`](https://github.com/astral-sh/ruff) for linting and
+formatting (configured in `pyproject.toml` under `[tool.ruff]`). Run the
+following commands to check and fix code style issues:
 
-Each of these checks are run on each commit using GitHub Actions as a continuous
-integration service. Passing all of them is required for accepting a
-contribution. If you're unsure how to address the feedback from one of these
-tools, please say so either in the description of your pull request or in a
-comment, and we will help you.
+```sh
+# Check for lint issues
+uv run ruff check .
+
+# Auto-fix lint issues
+uv run ruff check --fix .
+
+# Format code
+uv run ruff format .
+```
 
 ### Logging
 
-Python's builtin `print()` should not be used (except when writing to files),
-it's checked by the [`flake8-print`](https://github.com/jbkahn/flake8-print)
-plugin to `flake8`. If you're in a command line setting or `main()` function for
-a module, you can use `click.echo()`. Otherwise, you should use the centralized
-logging module:
+Python's builtin `print()` should not be used (except when writing to files).
+In a command line setting or `main()` function for a module, you can use
+`click.echo()`. Otherwise, you should use the centralized logging module:
 
 ```python
 from smartclass.logging import get_logger
@@ -69,64 +69,71 @@ logger = get_logger(__name__)
 logger.info("Processing started")
 ```
 
-### Code Quality
+### Pre-commit Hooks
 
-This project uses [`ruff`](https://github.com/astral-sh/ruff) for linting and
-formatting. Run the following commands to check and fix code style issues:
+All checks (ruff, ty, typos, tombi, deptry, zizmor, and more) are run via
+[`prek`](https://prek.j178.dev) before each commit. To install the hooks:
 
-```shell
-# Check for issues
-uv run ruff check .
+```sh
+uv run prek install
+```
 
-# Auto-fix issues
-uv run ruff check --fix .
+To run all checks manually:
 
-# Format code
-uv run ruff format .
+```sh
+uv run prek run --all-files
 ```
 
 ### Documentation
 
 All public functions (i.e., not starting with an underscore `_`) must be
-documented using Google-style docstrings. Example:
+documented using numpy-style docstrings. Example:
 
 ```python
 def classify_smiles(smiles: str, closest_only: bool = True) -> list[dict]:
     """Classify a SMILES string against chemical classes.
 
-    Args:
-        smiles: The SMILES string to classify.
-        closest_only: If True, return only the closest match.
+    Parameters
+    ----------
+    smiles : str
+        The SMILES string to classify.
+    closest_only : bool
+        If True, return only the closest match. Default is True.
 
-    Returns:
+    Returns
+    -------
+    list[dict]
         List of classification results.
 
-    Raises:
-        SMILESError: If the SMILES cannot be parsed.
+    Raises
+    ------
+    SMILESError
+        If the SMILES cannot be parsed.
     """
 ```
 
-This project uses [`sphinx`](https://www.sphinx-doc.org) to automatically build
-documentation. You can build it locally with:
+Documentation is built with [`great-docs`](https://github.com/posit-dev/great-docs).
+Build locally with:
 
-```shell
-uv run sphinx-build docs docs/_build
+```sh
+uv sync --group docs
+uv run great-docs build
 ```
 
 ### Testing
 
-Functions in this repository should be unit tested. Tests are written using the
-`unittest` framework in the `tests/` directory. Run tests with:
+Tests are written using the `unittest` framework (executed via pytest) in the
+`tests/` directory. Run tests with:
 
-```shell
+```sh
 # Run all tests
-uv run pytest
+uv run pytest tests/
 
 # Run with coverage
-uv run pytest --cov=smartclass --cov-report=html
+uv run pytest tests/ --cov=smartclass --cov-report=term-missing
 
 # Run specific test file
-uv run pytest tests/test_api.py -v
+uv run pytest tests/test_conversions.py -v
 ```
 
 All tests must pass before a contribution can be accepted.
@@ -137,7 +144,7 @@ If other code is updated before your contribution gets merged, you might need to
 resolve conflicts against the main branch. After cloning, you should add the
 upstream repository with:
 
-```shell
+```sh
 git remote add upstream https://github.com/zamboni-lab/smartclass.git
 git fetch upstream
 git merge upstream/main
@@ -145,8 +152,7 @@ git merge upstream/main
 
 ### Python Version Compatibility
 
-This project supports Python 3.11 and later. We aim to support all versions of
-Python that have not passed their end-of-life dates.
+This project supports Python 3.12 and later.
 
 See https://endoflife.date/python for a timeline of Python release and
 end-of-life dates.

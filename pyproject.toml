@@ -92,15 +92,15 @@ source = ["smartclass"]
 # Pyright / basedpyright configuration.
 # Scopes type checking to the package (mirroring ty, which ignores
 # unresolved third-party imports such as rdkit/pooch). The generated
-# great-docs build artifacts and venv are excluded.
+# great-docs build artifacts and venv are excluded as they are not
+# part of the published package.
 [tool.pyright]
 include = ["smartclass", "tests"]
 exclude = ["great-docs", ".venv", "build", "dist", ".coverage", ".ruff_cache"]
-# rdkit (via rdkit-stubs) and pooch types are incomplete; ty already ignores
-# unresolved imports for these. Keep pyright consistent with the project's
-# chosen checker and avoid false positives on third-party stubs.
+# rdkit (via rdkit-stubs) and pooch types are partially typed; ty already
+# ignores unresolved imports for these. Keep pyright consistent with the
+# project's chosen checker; remaining per-symbol gaps use targeted ignores.
 reportMissingImports = "none"
-reportMissingModuleSource = "none"
 typeCheckingMode = "standard"
 
 [tool.ruff]

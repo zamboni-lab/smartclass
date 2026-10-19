@@ -10,7 +10,7 @@ from myopic_mces.myopic_mces import MCES
 def calculate_myopic_mces(
     s_1: str,
     s_2: str,
-    the: int = -1,
+    threshold: int = -1,
 ) -> tuple[int, float, float, int]:
     """Calculate myopic MCES.
 
@@ -20,7 +20,7 @@ def calculate_myopic_mces(
         SMILES 1.
     s_2 : str
         SMILES 2.
-    the : int
+    threshold : int
         Threshold for the MCES calculation. Default is -1.
 
     Returns
@@ -33,5 +33,5 @@ def calculate_myopic_mces(
     """
     return cast(
         "tuple[int, float, float, int]",
-        MCES(smiles1=s_1, smiles2=s_2, threshold=the, i=0, solver="default"),
+        MCES(smiles1=s_1, smiles2=s_2, threshold=threshold, i=0, solver="default"),
     )

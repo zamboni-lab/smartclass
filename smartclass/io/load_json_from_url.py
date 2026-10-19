@@ -3,14 +3,17 @@
 from __future__ import annotations
 
 import json
-import logging
 from typing import Any
 
 import pooch
 
+from smartclass.logging import get_logger
+
 __all__ = [
     "load_json_from_url",
 ]
+
+logger = get_logger(__name__)
 
 # Create a pooch instance for JSON loading
 JSON_DOWNLOADER = pooch.create(
@@ -39,8 +42,8 @@ def load_json_from_url(url: str) -> dict[str, Any] | None:
 
         with open(data_file) as f:
             data = json.load(f)
-        logging.debug(f"Got {url} successfully.")
+        logger.debug(f"Got {url} successfully.")
         return data
-    except Exception as e:
-        logging.debug(f"Failed to get {url}: {e}")
+    except (OSError, ValueError) as e:
+        logger.debug(f"Failed to get {url}: {e}")
         return None

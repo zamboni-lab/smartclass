@@ -2,13 +2,15 @@
 
 from __future__ import annotations
 
-import logging
-
 from rdcanon import canon_smarts
+
+from smartclass.logging import get_logger
 
 __all__ = [
     "canonicalize_smarts",
 ]
+
+logger = get_logger(__name__)
 
 
 def canonicalize_smarts(smarts: str, return_mapping: bool = False) -> str | None:
@@ -29,7 +31,7 @@ def canonicalize_smarts(smarts: str, return_mapping: bool = False) -> str | None
     try:
         return canon_smarts(smarts, return_mapping)
     except Exception:
-        logging.exception(f"Error canonicalizing SMARTS: {smarts}")
+        logger.exception(f"Error canonicalizing SMARTS: {smarts}")
         return None
 
 

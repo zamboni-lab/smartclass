@@ -8,6 +8,7 @@ from tqdm import tqdm
 
 from smartclass.helpers import get_request, read_query
 from smartclass.io import export_results
+from smartclass.logging import get_logger
 from smartclass.resources.wikidata.transforms import (
     check_smiles,
     transform_entities_to_stereoisomers,
@@ -29,6 +30,8 @@ from smartclass.resources.wikidata.transforms import (
 )
 
 __all__ = ["query_wikidata"]
+
+logger = get_logger(__name__)
 
 TRANSFORM_FUNCTIONS: dict[str, Callable] = {
     "check_smiles": check_smiles,
@@ -86,23 +89,18 @@ def query_wikidata(
                 if isinstance(value, str) and value.startswith(prefix):
                     record[key] = value[prefix_len:]
 
-    if transform is not None:
-        if transform in TRANSFORM_FUNCTIONS:
-            transformed_results = []
-            for item in tqdm(results, desc=f"Transforming with {transform}"):
-                transformed = TRANSFORM_FUNCTIONS[transform](item)
-                if transformed is not None:
-                    transformed_results.append(transformed)
-            results = transformed_results
+    if transform is not None and transform in TRANSFORM_FUNCTIONS:
+        transformed_results = []
+        for item in tqdm(results, desc=f"Transforming with {transform}"):
+            transformed = TRANSFORM_FUNCTIONS[transform](item)
+            if transformed is not None:
+                transformed_results.append(transformed)
+        results = transformed_results
 
     export_results(output=output, results=results)
 
 
 if __name__ == "__main__":
-    import logging
-
-    logging.basicConfig(level=logging.INFO)
-
     queries = [
         (
             "smartclass/data/queries/classes_cxsmiles.rq",
@@ -128,4 +126,4 @@ if __name__ == "__main__":
 
     for query, output in queries:
         query_wikidata(query, output)
-    logging.info(output)
+    logger.info(output)

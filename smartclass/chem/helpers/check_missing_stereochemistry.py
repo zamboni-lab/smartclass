@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-import logging
-
 from rdkit import Chem
 from rdkit.Chem import Mol
 from rdkit.Chem.EnumerateStereoisomers import (
@@ -11,9 +9,13 @@ from rdkit.Chem.EnumerateStereoisomers import (
     StereoEnumerationOptions,
 )
 
+from smartclass.logging import get_logger
+
 __all__ = [
     "check_missing_stereochemistry",
 ]
+
+logger = get_logger(__name__)
 
 
 def check_missing_stereochemistry(smiles: str, use_legacy: bool = False) -> bool | None:
@@ -29,7 +31,9 @@ def check_missing_stereochemistry(smiles: str, use_legacy: bool = False) -> bool
     Returns
     -------
     bool | None
-        None] flag.
+        ``True`` if stereochemistry is ambiguous (multiple possible
+        stereoisomers), ``False`` if fully defined, or ``None`` if the SMILES
+        could not be parsed.
     """
     # See https://github.com/rdkit/rdkit/issues/6217
     Chem.SetAllowNontetrahedralChirality(False)
@@ -84,9 +88,9 @@ def count_multiple_stereoisomers(
     Returns
     -------
     bool
-        bool bool flag.
+        ``True`` if more than one stereoisomer is possible, ``False`` otherwise.
     """
-    if (
+    return (
         GetStereoisomerCount(
             mol,
             options=StereoEnumerationOptions(
@@ -95,13 +99,8 @@ def count_multiple_stereoisomers(
                 tryEmbedding=True,
             ),
         )
-        == 1
-    ):
-        # logging.warning(GetStereoisomerCount(mol, options=options))
-        return False
-    else:
-        # logging.warning(GetStereoisomerCount(mol, options=options))
-        return True
+        != 1
+    )
 
 
 if __name__ == "__main__":
@@ -131,12 +130,12 @@ if __name__ == "__main__":
             Use legacy stereochemistry perception. Default is use_legacy.
         """
         if expectation is None:
-            logging.info("\033[33m" + smiles)
+            logger.info("\033[33m" + smiles)
         elif check_missing_stereochemistry(smiles, use_legacy) == expectation:
-            logging.info("\033[32m" + smiles)
+            logger.info("\033[32m" + smiles)
         else:
-            logging.info("\033[31m" + smiles)
-        logging.info("\033[0m")
+            logger.info("\033[31m" + smiles)
+        logger.info("\033[0m")
 
     smiles_undefined_to_test = [
         "CCOC(=O)C=C(CC(=O)O)C(=O)O",
@@ -167,16 +166,16 @@ if __name__ == "__main__":
         "C1CN2CCC1[C@H](C2)OC(=O)N3CCC4=CC=CC=C4[C@@H]3C5=CC=CC=C5",
     ]
 
-    logging.info("Undefined:")
+    logger.info("Undefined:")
     for smiles in smiles_undefined_to_test:
         check_expectations(smiles, True)
-    logging.info("")
+    logger.info("")
 
-    logging.info("Defined:")
+    logger.info("Defined:")
     for smiles in smiles_defined_to_test:
         check_expectations(smiles, False)
-    logging.info("")
+    logger.info("")
 
-    logging.info("Unclear:")
+    logger.info("Unclear:")
     for smiles in smiles_unclear_to_test:
         check_expectations(smiles, None)

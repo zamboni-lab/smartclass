@@ -3,25 +3,22 @@
 from __future__ import annotations
 
 from random import sample
-from typing import TypeVar
 
 __all__ = ["sample_list"]
 
-T = TypeVar("T")
 
-
-def sample_list(items: list[T], max_samples: int = 1000) -> list[T]:
+def sample_list[T](items: list[T], max_samples: int = 1000) -> list[T]:
     """Randomly sample items from a list.
 
-        Returns at most `max_samples` items. If the list has fewer items
-        than `max_samples`, returns all items in random order.
+    Returns at most ``max_samples`` items. If the list has fewer items
+    than ``max_samples``, returns all items in random order.
 
     Parameters
     ----------
     items : list[T]
         List of items to sample from.
     max_samples : int
-        Default is 1000.
+        Maximum number of items to return. Default is 1000.
 
     Returns
     -------

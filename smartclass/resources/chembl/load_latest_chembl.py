@@ -2,11 +2,11 @@
 
 from __future__ import annotations
 
-import logging
 import os
 import pickle
 from typing import TYPE_CHECKING
 
+from smartclass.logging import get_logger
 from smartclass.resources.chembl.get_latest_chembl import get_latest_chembl
 from smartclass.resources.chembl.latest_chembl_paths import latest_chembl_paths
 
@@ -16,6 +16,8 @@ if TYPE_CHECKING:
 __all__ = [
     "load_latest_chembl",
 ]
+
+logger = get_logger(__name__)
 
 
 def load_latest_chembl() -> rdSubstructLibrary.SubstructLibrary:
@@ -28,35 +30,33 @@ def load_latest_chembl() -> rdSubstructLibrary.SubstructLibrary:
 
     Raises
     ------
-        Exception
-            If the download of the file failed.
+    Exception
+        If the download of the file failed.
     """
     # Get the latest ChEMBL version and paths
-    version, data_path, lib_path = latest_chembl_paths()
+    _, _, lib_path = latest_chembl_paths()
 
     try:
         # Attempt to open and load the SubstructLibrary from the library path
         with open(lib_path, "rb") as inf:
             sslib = pickle.load(inf)
-        logging.info(f"SubstructLibrary loaded with {len(sslib)} molecules")
-    except (FileNotFoundError, pickle.PickleError) as e:
+        logger.info(f"SubstructLibrary loaded with {len(sslib)} molecules")
+    except (FileNotFoundError, pickle.PickleError):
         # If loading fails or library doesn't exist, download latest ChEMBL
         if os.path.exists(lib_path):
             os.remove(lib_path)  # Delete the corrupted library file
 
-        logging.exception(f"Error loading library: {e!s}")
-        logging.info("Downloading the latest ChEMBL data...")
+        logger.exception("Error loading library")
+        logger.info("Downloading the latest ChEMBL data...")
 
         try:
             get_latest_chembl()  # Try to download the latest ChEMBL data
             with open(lib_path, "rb") as inf:
                 sslib = pickle.load(inf)
-            logging.info(f"SubstructLibrary loaded with {len(sslib)} molecules")
-        except Exception as download_error:
-            logging.exception(
-                f"Failed to download or load ChEMBL data: {download_error!s}",
-            )
-            raise download_error  # Raise the error to notify the caller
+            logger.info(f"SubstructLibrary loaded with {len(sslib)} molecules")
+        except Exception:
+            logger.exception("Failed to download or load ChEMBL data")
+            raise
 
     return sslib
 

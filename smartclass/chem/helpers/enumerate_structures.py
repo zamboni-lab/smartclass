@@ -16,8 +16,8 @@ logger = get_logger(__name__)
 def enumerate_structures(mol: Mol) -> list[Mol]:
     """Enumerate structural variants of a molecule.
 
-        Uses RDKit's MolEnumerator to generate structural variants
-        (e.g., for handling tautomers or stereoisomers in queries).
+    Uses RDKit's MolEnumerator to generate structural variants
+    (e.g., for handling tautomers or stereoisomers in queries).
 
     Parameters
     ----------
@@ -31,7 +31,7 @@ def enumerate_structures(mol: Mol) -> list[Mol]:
     """
     try:
         enumerated_mols = rdMolEnumerator.Enumerate(mol)
-    except Exception as e:
+    except Exception as e:  # noqa: BLE001 - enumeration must never fail hard
         logger.debug(f"Enumeration failed: {e}")
         return [mol]
 

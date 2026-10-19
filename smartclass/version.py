@@ -18,7 +18,7 @@ __all__ = [
 
 logger = get_logger(__name__)
 
-VERSION = "0.0.1-dev"
+VERSION = "0.1.0"
 
 
 def get_git_hash() -> str:

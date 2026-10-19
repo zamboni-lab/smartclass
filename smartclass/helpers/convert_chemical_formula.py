@@ -8,6 +8,34 @@ __all__ = [
     "convert_chemical_formula",
 ]
 
+_SUBSCRIPT_MAP = {
+    "0": "₀",
+    "1": "₁",
+    "2": "₂",
+    "3": "₃",
+    "4": "₄",
+    "5": "₅",
+    "6": "₆",
+    "7": "₇",
+    "8": "₈",
+    "9": "₉",
+}
+
+_SUPERSCRIPT_MAP = {
+    "0": "⁰",
+    "1": "¹",
+    "2": "²",
+    "3": "³",
+    "4": "⁴",
+    "5": "⁵",
+    "6": "⁶",
+    "7": "⁷",
+    "8": "⁸",
+    "9": "⁹",
+    "+": "⁺",
+    "-": "⁻",
+}
+
 
 def convert_chemical_formula(text: str) -> str:
     """Convert chemical formula.
@@ -37,42 +65,16 @@ def convert_chemical_formula(text: str) -> str:
             Modified text.
         """
         number, symbol = match.groups()
-        subscript_map = {
-            "0": "₀",
-            "1": "₁",
-            "2": "₂",
-            "3": "₃",
-            "4": "₄",
-            "5": "₅",
-            "6": "₆",
-            "7": "₇",
-            "8": "₈",
-            "9": "₉",
-        }
-        superscript_map = {
-            "0": "⁰",
-            "1": "¹",
-            "2": "²",
-            "3": "³",
-            "4": "⁴",
-            "5": "⁵",
-            "6": "⁶",
-            "7": "⁷",
-            "8": "⁸",
-            "9": "⁹",
-            "+": "⁺",
-            "-": "⁻",
-        }
 
         if number:
             # Check if the number is preceded by `+` or `-`
             prev_char = text[match.start(1) - 1 : match.start(1)]
             if prev_char in "+-":
-                return "".join(superscript_map[char] for char in number)
+                return "".join(_SUPERSCRIPT_MAP[char] for char in number)
             else:
-                return "".join(subscript_map[char] for char in number)
+                return "".join(_SUBSCRIPT_MAP[char] for char in number)
         elif symbol:
-            return "".join(superscript_map[char] for char in symbol)
+            return "".join(_SUPERSCRIPT_MAP[char] for char in symbol)
         return ""
 
     pattern = re.compile(r"(\d+)|([+-])")

@@ -1,8 +1,3 @@
-[paths]
-source =
-    src/smartclass
-    .tox/*/lib/python*/site-packages/smartclass
-
 [run]
 branch = true
 source = smartclass

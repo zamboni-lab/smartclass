@@ -134,8 +134,8 @@ _config: Config | None = None
 def get_config() -> Config:
     """Get the global configuration instance.
 
-        Creates a new Config instance on first call, then returns the same
-        instance on subsequent calls.
+    Creates a new Config instance on first call, then returns the same
+    instance on subsequent calls.
 
     Returns
     -------

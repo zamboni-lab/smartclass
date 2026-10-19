@@ -4,8 +4,8 @@ This package provides tools for classifying chemical structures
 using SMARTS patterns against defined chemical classes.
 
 Example:
-    >>> from smartclass.api import classify_smiles
-    >>> results = classify_smiles("CCO")  # Classify ethanol
+    >>> from smartclass.chem.classification import search_classes
+    >>> results = search_classes(smiles="CCO")  # Classify ethanol
 """
 
 from __future__ import annotations

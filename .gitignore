@@ -8,3 +8,6 @@ scratch/
 _output/
 *.iml
 *.xml
+.DS_Store
+output/
+.smartclass_cache/
